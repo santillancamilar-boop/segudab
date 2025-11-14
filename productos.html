@@ -82,11 +82,6 @@
       gap: 16px;
     }
 
-    .header-right a {
-      font-size: 13px;
-      text-transform: uppercase;
-    }
-
     /* Botón carrito */
     .cart-button {
       display: inline-flex;
@@ -197,19 +192,15 @@
       text-transform: uppercase;
       border: none;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
     .btn-primary {
       background: var(--color-primary);
       color: #fff;
-      box-shadow: 0 4px 10px rgba(224,0,0,0.4);
     }
 
     .btn-primary:hover {
       background: var(--color-primary-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(224,0,0,0.5);
     }
 
     .product-tag {
@@ -217,7 +208,7 @@
       color: #777;
     }
 
-    /* Cart panel */
+    /* Carrito */
     .cart-panel-backdrop {
       position: fixed;
       inset: 0;
@@ -229,7 +220,6 @@
 
     .cart-panel {
       width: 320px;
-      max-width: 90%;
       background: #111;
       color: #fff;
       height: 100%;
@@ -277,13 +267,8 @@
       border-bottom: 1px solid #222;
     }
 
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-
     .cart-item-name {
       font-weight: 600;
-      font-size: 13px;
     }
 
     .cart-item-meta {
@@ -307,7 +292,6 @@
       color: #fff;
       cursor: pointer;
       font-size: 13px;
-      line-height: 1;
     }
 
     .qty-value {
@@ -360,338 +344,263 @@
       border-color: #fff;
     }
 
-    .cart-empty {
-      font-size: 13px;
-      color: #bbb;
-      text-align: center;
-      padding: 16px 0;
-    }
-
-    /* Enlace volver */
-    .back-link {
-      display: inline-block;
-      margin-top: 26px;
-      font-size: 13px;
-      text-transform: uppercase;
-    }
-
-    .back-link span {
-      margin-right: 4px;
-    }
-
-    /* Responsive */
     @media (max-width: 700px) {
-      .header-inner {
-        flex-direction: row;
-        justify-content: space-between;
-      }
       .header-right a {
-        display: none; /* si querés, en mobile solo que se vea el carrito */
+        display: none;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-box"></div>
-        <div class="logo-text">
-          <strong>SEGUDAB</strong>
-          <span>Seguridad policial y privada</span>
-        </div>
-      </a>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-box"></div>
+      <div class="logo-text">
+        <strong>SEGUDAB</strong>
+        <span>Seguridad policial y privada</span>
+      </div>
+    </a>
 
-      <div class="header-right">
-        <a href="index.html">Inicio</a>
-        <button class="cart-button" id="cart-toggle">
-          🛒 Carrito
-          <span class="cart-count" id="cart-count">0</span>
-        </button>
+    <div class="header-right">
+      <a href="index.html">Inicio</a>
+      <button class="cart-button" id="cart-toggle">
+        🛒 Carrito <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- CARRITO -->
+<div class="cart-panel-backdrop" id="cart-backdrop">
+  <aside class="cart-panel">
+    <div class="cart-header">
+      <div class="cart-title">Carrito</div>
+      <button class="cart-close" id="cart-close">✕</button>
+    </div>
+
+    <div class="cart-items" id="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn btn-primary" id="cart-checkout">Finalizar compra</button>
+        <button class="btn btn-outline-light" id="cart-clear">Vaciar carrito</button>
       </div>
     </div>
-  </header>
+  </aside>
+</div>
 
-  <!-- PANEL CARRITO -->
-  <div class="cart-panel-backdrop" id="cart-backdrop">
-    <aside class="cart-panel">
-      <div class="cart-header">
-        <div class="cart-title">Carrito</div>
-        <button class="cart-close" id="cart-close">✕</button>
-      </div>
+<main class="container">
+  <h1 class="page-title">Catálogo completo</h1>
+  <p class="page-subtitle">Agregá al carrito y finalizá tu compra por WhatsApp.</p>
 
-      <div class="cart-items" id="cart-items">
-        <!-- Items aquí por JS -->
-      </div>
+  <section class="product-grid" id="product-grid"></section>
 
-      <div class="cart-footer">
-        <div class="cart-total-row">
-          <span>Total</span>
-          <span id="cart-total">$0</span>
+  <a href="index.html" class="back-link">← Volver al inicio</a>
+</main>
+
+<script>
+  const products = [
+    {
+      id: "bota-tactica",
+      name: "Bota táctica",
+      price: 25000,
+      img: "bota-tactica.jpg",
+      desc: "Suela antideslizante • Cuero reforzado • Uso intensivo",
+      tag: "Talles 37–45"
+    },
+    {
+      id: "funda-pistola",
+      name: "Funda para pistola",
+      price: 7500,
+      img: "funda-pistola.jpg",
+      desc: "Diseño ergonómico • Ajuste seguro",
+      tag: "Modelos derecha e izquierda"
+    },
+    {
+      id: "porta-credencial",
+      name: "Porta-credencial",
+      price: 4800,
+      img: "porta-credencial.jpg",
+      desc: "Para credencial y placa • Cuero sintético",
+      tag: "Diseños por institución"
+    },
+    {
+      id: "uniforme-tactico",
+      name: "Uniforme táctico",
+      price: 18500,
+      img: "uniforme-tactico.jpg",
+      desc: "Tejido resistente • Ideal para servicio diario",
+      tag: "Modelos hombre y mujer"
+    }
+  ];
+
+  let cart = {};
+
+  const productGridEl = document.getElementById("product-grid");
+  const cartBackdropEl = document.getElementById("cart-backdrop");
+  const cartItemsEl = document.getElementById("cart-items");
+  const cartCountEl = document.getElementById("cart-count");
+  const cartTotalEl = document.getElementById("cart-total");
+  const cartToggleBtn = document.getElementById("cart-toggle");
+  const cartCloseBtn = document.getElementById("cart-close");
+  const cartCheckoutBtn = document.getElementById("cart-checkout");
+  const cartClearBtn = document.getElementById("cart-clear");
+
+  function renderProducts() {
+    productGridEl.innerHTML = "";
+    products.forEach(p => {
+      const card = document.createElement("article");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${p.img}" class="product-image" />
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-price">$${p.price}</div>
+        <div class="product-footer">
+          <button class="btn btn-primary" data-id="${p.id}">Agregar</button>
+          <div class="product-tag">${p.tag}</div>
         </div>
-        <div class="cart-actions">
-          <button class="btn btn-primary" id="cart-checkout">Finalizar compra</button>
-          <button class="btn btn-outline-light" id="cart-clear">Vaciar carrito</button>
-        </div>
-      </div>
-    </aside>
-  </div>
+      `;
+      card.querySelector("button").addEventListener("click", () => addToCart(p.id));
+      productGridEl.appendChild(card);
+    });
+  }
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="container">
-    <h1 class="page-title">Catálogo completo</h1>
-    <p class="page-subtitle">
-      Seleccioná los productos que necesitás, agregalos al carrito y finalizá tu compra por WhatsApp.
-    </p>
+  function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+    if (!cart[id]) cart[id] = { product, qty: 1 };
+    else cart[id].qty++;
+    updateCartUI();
+  }
 
-    <section class="product-grid" id="product-grid">
-      <!-- Productos generados por JavaScript -->
-    </section>
+  function changeQty(id, delta) {
+    if (!cart[id]) return;
+    cart[id].qty += delta;
+    if (cart[id].qty <= 0) delete cart[id];
+    updateCartUI();
+  }
 
-    <a href="index.html" class="back-link">
-      <span>←</span> Volver al inicio
-    </a>
-  </main>
+  function removeItem(id) {
+    delete cart[id];
+    updateCartUI();
+  }
 
-  <script>
-    // Lista de productos (podés agregar más)
-    const products = [
-      {
-        id: "bota-tactica",
-        name: "Bota táctica",
-        price: 25000,
-        img: "bota-tactica.jpg",
-        desc: "Suela antideslizante • Cuero reforzado • Uso intensivo",
-        tag: "Talles 37–45"
-      },
-      {
-        id: "funda-pistola",
-        name: "Funda para pistola",
-        price: 7500,
-        img: "funda-pistola.jpg",
-        desc: "Diseño ergonómico • Ajuste seguro",
-        tag: "Modelos derecha e izquierda"
-      },
-      {
-        id: "porta-credencial",
-        name: "Porta-credencial",
-        price: 4800,
-        img: "porta-credencial.jpg",
-        desc: "Para credencial y placa • Cuero sintético",
-        tag: "Diseños por institución"
-      },
-      {
-        id: "uniforme-tactico",
-        name: "Uniforme táctico",
-        price: 18500,
-        img: "uniforme-tactico.jpg",
-        desc: "Tejido resistente • Ideal para servicio diario",
-        tag: "Modelos hombre y mujer"
-      }
-      // Agregá más objetos acá si querés
-    ];
+  function getCartSummary() {
+    let totalItems = 0;
+    let totalPrice = 0;
+    for (const id in cart) {
+      const item = cart[id];
+      totalItems += item.qty;
+      totalPrice += item.product.price * item.qty;
+    }
+    return { totalItems, totalPrice };
+  }
 
-    // Estado del carrito
-    let cart = {}; // { idProducto: { product, qty } }
+  function updateCartUI() {
+    const { totalItems, totalPrice } = getCartSummary();
+    cartCountEl.textContent = totalItems;
 
-    // Referencias al DOM
-    const productGridEl = document.getElementById("product-grid");
-    const cartBackdropEl = document.getElementById("cart-backdrop");
-    const cartItemsEl = document.getElementById("cart-items");
-    const cartCountEl = document.getElementById("cart-count");
-    const cartTotalEl = document.getElementById("cart-total");
-    const cartToggleBtn = document.getElementById("cart-toggle");
-    const cartCloseBtn = document.getElementById("cart-close");
-    const cartCheckoutBtn = document.getElementById("cart-checkout");
-    const cartClearBtn = document.getElementById("cart-clear");
+    cartItemsEl.innerHTML = "";
 
-    // Renderizar productos
-    function renderProducts() {
-      productGridEl.innerHTML = "";
-      products.forEach(p => {
-        const card = document.createElement("article");
-        card.className = "product-card";
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.name}" class="product-image" />
-          <div class="product-name">${p.name}</div>
-          <div class="product-desc">${p.desc}</div>
-          <div class="product-price">$${p.price.toLocaleString("es-AR")}</div>
-          <div class="product-footer">
-            <button class="btn btn-primary" data-id="${p.id}">Agregar al carrito</button>
-            <div class="product-tag">${p.tag || ""}</div>
+    if (totalItems === 0) {
+      cartItemsEl.innerHTML = `<div class="cart-empty">Tu carrito está vacío.</div>`;
+    } else {
+      for (const id in cart) {
+        const { product, qty } = cart[id];
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+          <div>
+            <div class="cart-item-name">${product.name}</div>
+            <div class="cart-item-meta">$${product.price} c/u</div>
+            <div class="cart-item-controls">
+              <button class="qty-btn" data-id="${id}" data-delta="-1">-</button>
+              <span class="qty-value">${qty}</span>
+              <button class="qty-btn" data-id="${id}" data-delta="1">+</button>
+            </div>
+          </div>
+          <div>
+            <div class="cart-item-price">$${product.price * qty}</div>
+            <span class="cart-item-remove" data-id="${id}">Eliminar</span>
           </div>
         `;
-        const btn = card.querySelector("button");
-        btn.addEventListener("click", () => addToCart(p.id));
-        productGridEl.appendChild(card);
-      });
-    }
-
-    // Agregar al carrito
-    function addToCart(productId) {
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
-      if (!cart[productId]) {
-        cart[productId] = { product, qty: 1 };
-      } else {
-        cart[productId].qty++;
-      }
-      updateCartUI();
-    }
-
-    // Cambiar cantidad
-    function changeQty(productId, delta) {
-      if (!cart[productId]) return;
-      cart[productId].qty += delta;
-      if (cart[productId].qty <= 0) {
-        delete cart[productId];
-      }
-      updateCartUI();
-    }
-
-    // Eliminar ítem
-    function removeItem(productId) {
-      if (cart[productId]) {
-        delete cart[productId];
-        updateCartUI();
+        cartItemsEl.appendChild(row);
       }
     }
 
-    // Calcular totales
-    function getCartSummary() {
-      let totalItems = 0;
-      let totalPrice = 0;
-      for (const key in cart) {
-        const item = cart[key];
-        totalItems += item.qty;
-        totalPrice += item.product.price * item.qty;
-      }
-      return { totalItems, totalPrice };
+    cartTotalEl.textContent = `$${totalPrice}`;
+
+    try {
+      localStorage.setItem("segudab_cart", JSON.stringify(cart));
+    } catch {}
+  }
+
+  function openCart() {
+    cartBackdropEl.style.display = "flex";
+  }
+
+  function closeCart() {
+    cartBackdropEl.style.display = "none";
+  }
+
+  function clearCart() {
+    cart = {};
+    updateCartUI();
+  }
+
+  function checkoutCart() {
+    const { totalItems, totalPrice } = getCartSummary();
+    if (totalItems === 0) return alert("Tu carrito está vacío.");
+
+    let message = "Hola, quiero comprar:%0A%0A";
+    for (const id in cart) {
+      const { product, qty } = cart[id];
+      message += `- ${product.name} x${qty}%0A`;
     }
+    message += `%0ATotal estimado: $${totalPrice}`;
 
-    // Actualizar UI del carrito
-    function updateCartUI() {
-      const { totalItems, totalPrice } = getCartSummary();
+    const phone = "5491137286846";
+    const url = `https://wa.me/${phone}?text=${message}`;
+    window.open(url, "_blank");
+  }
 
-      // Contador
-      cartCountEl.textContent = totalItems;
+  cartToggleBtn.addEventListener("click", openCart);
+  cartCloseBtn.addEventListener("click", closeCart);
+  cartBackdropEl.addEventListener("click", (e) => {
+    if (e.target === cartBackdropEl) closeCart();
+  });
+  cartClearBtn.addEventListener("click", clearCart);
+  cartCheckoutBtn.addEventListener("click", checkoutCart);
 
-      // Lista
-      cartItemsEl.innerHTML = "";
-
-      if (totalItems === 0) {
-        cartItemsEl.innerHTML = `<div class="cart-empty">Tu carrito está vacío.</div>`;
-      } else {
-        for (const key in cart) {
-          const { product, qty } = cart[key];
-          const row = document.createElement("div");
-          row.className = "cart-item";
-          row.innerHTML = `
-            <div>
-              <div class="cart-item-name">${product.name}</div>
-              <div class="cart-item-meta">$${product.price.toLocaleString("es-AR")} c/u</div>
-              <div class="cart-item-controls">
-                <button class="qty-btn" data-id="${product.id}" data-delta="-1">-</button>
-                <span class="qty-value">${qty}</span>
-                <button class="qty-btn" data-id="${product.id}" data-delta="1">+</button>
-              </div>
-            </div>
-            <div>
-              <div class="cart-item-price">$${(product.price * qty).toLocaleString("es-AR")}</div>
-              <span class="cart-item-remove" data-id="${product.id}">Eliminar</span>
-            </div>
-          `;
-          cartItemsEl.appendChild(row);
-        }
-      }
-
-      // Total
-      cartTotalEl.textContent = `$${totalPrice.toLocaleString("es-AR")}`;
-
-      // Guardar en localStorage (opcional)
-      try {
-        localStorage.setItem("segudab_cart", JSON.stringify(cart));
-      } catch (e) {}
+  cartItemsEl.addEventListener("click", (e) => {
+    if (e.target.classList.contains("qty-btn")) {
+      const id = e.target.dataset.id;
+      const delta = parseInt(e.target.dataset.delta);
+      changeQty(id, delta);
     }
-
-    // Mostrar/ocultar carrito
-    function openCart() {
-      cartBackdropEl.style.display = "flex";
+    if (e.target.classList.contains("cart-item-remove")) {
+      removeItem(e.target.dataset.id);
     }
+  });
 
-    function closeCart() {
-      cartBackdropEl.style.display = "none";
-    }
+  function loadCartFromStorage() {
+    try {
+      cart = JSON.parse(localStorage.getItem("segudab_cart")) || {};
+    } catch { cart = {}; }
+    updateCartUI();
+  }
 
-    // Vaciar carrito
-    function clearCart() {
-      cart = {};
-      updateCartUI();
-    }
+  renderProducts();
+  loadCartFromStorage();
+</script>
 
-    // Finalizar compra (WhatsApp)
-    function checkoutCart() {
-      const { totalItems, totalPrice } = getCartSummary();
-      if (totalItems === 0) {
-        alert("Tu carrito está vacío.");
-        return;
-      }
-
-      let message = "Hola, quiero realizar una compra en Segudab.%0A%0AProductos:%0A";
-      for (const key in cart) {
-        const { product, qty } = cart[key];
-        message += `- ${product.name} x${qty} — $${(product.price * qty).toLocaleString("es-AR")}%0A`;
-      }
-      message += `%0ATotal aproximado: $${totalPrice.toLocaleString("es-AR")}%0A%0A¿Me podés informar disponibilidad y formas de pago?`;
-
-      // WhatsApp (reemplazá con tu número con código país, sin + ni espacios)
-      const phone = "5491137286846"; // ej: 54 (Argentina) + 9 + 11... ajustalo si hace falta
-      const url = `https://wa.me/${phone}?text=${message}`;
-      window.open(url, "_blank");
-    }
-
-    // Cargar carrito desde localStorage
-    function loadCartFromStorage() {
-      try {
-        const saved = localStorage.getItem("segudab_cart");
-        if (saved) {
-          cart = JSON.parse(saved) || {};
-        }
-      } catch (e) {
-        cart = {};
-      }
-      updateCartUI();
-    }
-
-    // Listeners
-    cartToggleBtn.addEventListener("click", openCart);
-    cartCloseBtn.addEventListener("click", closeCart);
-    cartBackdropEl.addEventListener("click", (e) => {
-      if (e.target === cartBackdropEl) {
-        closeCart();
-      }
-    });
-    cartClearBtn.addEventListener("click", clearCart);
-    cartCheckoutBtn.addEventListener("click", checkoutCart);
-
-    // Delegación de eventos dentro del carrito (botones +/- y eliminar)
-    cartItemsEl.addEventListener("click", (e) => {
-      const target = e.target;
-      if (target.classList.contains("qty-btn")) {
-        const id = target.getAttribute("data-id");
-        const delta = parseInt(target.getAttribute("data-delta"), 10);
-        changeQty(id, delta);
-      } else if (target.classList.contains("cart-item-remove")) {
-        const id = target.getAttribute("data-id");
-        removeItem(id);
-      }
-    });
-
-    // Inicialización
-    renderProducts();
-    loadCartFromStorage();
-  </script>
 </body>
 </html>
