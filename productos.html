@@ -6,67 +6,218 @@
   <title>Segudab — Catálogo completo</title>
 
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background:#f5f5f5; }
-    header { background:#000; color:#fff; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; }
-    header a { color:#fff; text-decoration:none; margin-left:14px; }
-    .container { max-width:1200px; margin:40px auto; padding:20px; }
-    h1 { text-transform:uppercase; font-size:30px; margin-bottom:10px; }
-    .product-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
-    .product-card { background:#fff; border-radius:12px; padding:16px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-    .product-card img { width:100%; height:200px; object-fit:cover; border-radius:8px; }
-    .product-title { font-size:18px; font-weight:bold; margin-top:8px; }
-    .product-price { color:#e00000; font-size:20px; font-weight:bold; margin:6px 0; }
-    .btn-volver { display:inline-block; margin-top:20px; background:#e00000; padding:10px 20px; color:#fff; border-radius:6px; text-decoration:none; }
-  </style>
+    :root {
+      --color-primary: #e00000;
+      --color-primary-dark: #b30000;
+      --max-width: 1200px;
+    }
 
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, sans-serif; background:#f5f5f5; color:#111; }
+
+    /* Header */
+    header {
+      background:#000; color:#fff;
+      padding:14px 20px;
+      display:flex; justify-content:space-between; align-items:center;
+      position:sticky; top:0; z-index:999;
+    }
+
+    header nav a {
+      color:#fff; text-decoration:none; margin-left:18px; text-transform:uppercase;
+      padding-bottom:3px; border-bottom:2px solid transparent;
+      transition:.2s;
+    }
+
+    header nav a:hover { border-color: var(--color-primary); color:#f4c542; }
+
+    /* Título */
+    .container {
+      max-width: var(--max-width);
+      margin:40px auto;
+      padding:20px;
+    }
+
+    h1 {
+      font-size:32px; text-transform:uppercase;
+      margin-bottom:6px; font-weight:800;
+    }
+
+    .subtitle {
+      font-size:14px; color:#666; margin-bottom:30px;
+    }
+
+    /* Grid de productos */
+    .product-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:24px;
+    }
+
+    .product-card {
+      background:#fff;
+      border-radius:16px;
+      padding:16px;
+      box-shadow:0 6px 14px rgba(0,0,0,0.12);
+      transition:.2s;
+      display:flex; flex-direction:column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow:0 12px 26px rgba(0,0,0,0.18);
+    }
+
+    .product-card img {
+      width:100%; height:210px; object-fit:cover;
+      border-radius:10px; background:#ddd;
+    }
+
+    .product-title {
+      font-size:17px; font-weight:600; margin-top:12px;
+      text-transform:uppercase;
+    }
+
+    .product-meta {
+      font-size:12px; color:#777; margin-top:4px;
+    }
+
+    .product-price {
+      margin-top:8px; font-size:20px;
+      font-weight:700; color: var(--color-primary);
+    }
+
+    .btn-volver {
+      display:inline-block;
+      margin-top:30px;
+      background: var(--color-primary);
+      padding:10px 22px;
+      color:#fff; border-radius:8px;
+      text-decoration:none; text-transform:uppercase;
+      font-weight:600;
+      transition:.15s;
+    }
+
+    .btn-volver:hover { background: var(--color-primary-dark); }
+
+    /* Responsive */
+    @media(max-width:700px){
+      header nav { display:none; }
+    }
+  </style>
 </head>
+
 <body>
 
+  <!-- HEADER -->
   <header>
-    <div style="font-size:20px; font-weight:bold;">SEGUDAB</div>
+    <div style="font-size:22px; font-weight:bold;">SEGUDAB</div>
     <nav>
       <a href="index.html">Inicio</a>
       <a href="productos.html">Productos</a>
     </nav>
   </header>
 
+  <!-- CONTENIDO -->
   <div class="container">
 
     <h1>Catálogo completo</h1>
-    <p>Aquí podés ver todos los productos disponibles.</p>
+    <p class="subtitle">Todos los productos disponibles para venta minorista y mayorista.</p>
 
+    <!-- PRODUCT GRID -->
     <div class="product-grid">
 
+      <!-- PRODUCTOS NUEVOS + ORIGINALES -->
+
       <div class="product-card">
-        <img src="bota-tactica.jpg" />
-        <div class="product-title">Bota táctica</div>
+        <img src="bota-tactica.jpg">
+        <div class="product-title">Bota táctica premium</div>
+        <div class="product-meta">Cuero reforzado • Suela antideslizante</div>
         <div class="product-price">$25.000</div>
       </div>
 
       <div class="product-card">
-        <img src="funda-pistola.jpg" />
+        <img src="borcegui-negro.jpg">
+        <div class="product-title">Borceguí negro reforzado</div>
+        <div class="product-meta">Industria argentina • Talles 37–45</div>
+        <div class="product-price">$28.500</div>
+      </div>
+
+      <div class="product-card">
+        <img src="botas-tacticas.jpg">
+        <div class="product-title">Bota táctica liviana</div>
+        <div class="product-meta">Material respirable • Ultra liviana</div>
+        <div class="product-price">$22.000</div>
+      </div>
+
+      <div class="product-card">
+        <img src="funda-pistola.jpg">
         <div class="product-title">Funda para pistola</div>
+        <div class="product-meta">Diseño ergonómico • Ajuste seguro</div>
         <div class="product-price">$7.500</div>
       </div>
 
       <div class="product-card">
-        <img src="porta-credencial.jpg" />
-        <div class="product-title">Porta-credencial</div>
+        <img src="porta-credencial.jpg">
+        <div class="product-title">Porta credencial de cuero</div>
+        <div class="product-meta">Modelos por institución</div>
         <div class="product-price">$4.800</div>
       </div>
 
       <div class="product-card">
-        <img src="uniforme-tactico.jpg" />
-        <div class="product-title">Uniforme táctico</div>
+        <img src="porta-placa.jpg">
+        <div class="product-title">Porta placa metálica</div>
+        <div class="product-meta">Incluye cadena • Varios modelos</div>
+        <div class="product-price">$5.600</div>
+      </div>
+
+      <div class="product-card">
+        <img src="uniforme-tactico.jpg">
+        <div class="product-title">Uniforme táctico completo</div>
+        <div class="product-meta">Resistente • Costuras reforzadas</div>
         <div class="product-price">$18.500</div>
+      </div>
+
+      <div class="product-card">
+        <img src="pantalon-tactico.jpg">
+        <div class="product-title">Pantalón táctico</div>
+        <div class="product-meta">Tela ripstop • Cierres reforzados</div>
+        <div class="product-price">$12.900</div>
+      </div>
+
+      <div class="product-card">
+        <img src="camisa-tactica.jpg">
+        <div class="product-title">Camisa táctica</div>
+        <div class="product-meta">Secado rápido • Antidesgarro</div>
+        <div class="product-price">$10.800</div>
+      </div>
+
+      <div class="product-card">
+        <img src="chaleco-portaequipo.jpg">
+        <div class="product-title">Chaleco porta-equipos</div>
+        <div class="product-meta">Molle • Ajustable</div>
+        <div class="product-price">$19.900</div>
+      </div>
+
+      <div class="product-card">
+        <img src="portacargadores.jpg">
+        <div class="product-title">Porta cargadores doble</div>
+        <div class="product-meta">Rígido • Universal</div>
+        <div class="product-price">$6.300</div>
+      </div>
+
+      <div class="product-card">
+        <img src="cinturon-tactico.jpg">
+        <div class="product-title">Cinturón táctico reforzado</div>
+        <div class="product-meta">Hebilla metálica • Super resistente</div>
+        <div class="product-price">$8.200</div>
       </div>
 
     </div>
 
-    <a href="index.html" class="btn-volver">← Volver al inicio</a>
+    <a class="btn-volver" href="index.html">← Volver al inicio</a>
 
   </div>
 
 </body>
 </html>
-
