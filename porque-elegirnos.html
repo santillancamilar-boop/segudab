@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segudab — ¿Por qué elegirnos?</title>
+
+  <style>
+    :root {
+      --color-bg-light: #f5f5f5;
+      --color-primary: #e00000;
+      --color-primary-dark: #b30000;
+      --color-accent: #f4c542;
+      --color-black: #000;
+      --max-width: 1200px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--color-bg-light);
+      font-family: system-ui, sans-serif;
+      color: #111;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Top bar (igual que productos) */
+    .top-bar {
+      background: #000;
+      color: #fff;
+      font-size: 13px;
+      padding: 6px 16px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    /* Header (sin carrito) */
+    header {
+      background: #000;
+      color: #fff;
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background: #333; /* acá va tu logo */
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .logo-text strong {
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: #fff;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      border-color: var(--color-primary);
+      color: var(--color-accent);
+    }
+
+    /* Contenido principal */
+    .container {
+      max-width: var(--max-width);
+      margin: 40px auto 50px;
+      padding: 0 20px;
+    }
+
+    .page-title {
+      text-transform: uppercase;
+      font-size: 28px;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 26px;
+      max-width: 600px;
+    }
+
+    /* Faja como la de productos pero adaptada */
+    .strip {
+      background: #fff;
+      border-top: 3px solid #000;
+      border-bottom: 3px solid #000;
+      padding: 28px 20px 30px;
+      margin-bottom: 32px;
+    }
+
+    .strip-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .strip-title {
+      text-transform: uppercase;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .strip-subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 18px;
+    }
+
+    .strip-badges {
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .strip-badges span {
+      color: var(--color-primary);
+    }
+
+    /* Grid de razones (similar a cards de productos) */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .reason-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .reason-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .reason-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .reason-text {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .reason-tag {
+      font-size: 11px;
+      color: #777;
+      margin-top: auto;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Bloque final */
+    .cta-block {
+      margin-top: 34px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: #111;
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cta-block-text {
+      font-size: 14px;
+      max-width: 520px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(224,0,0,0.4);
+      transition: 0.15s;
+    }
+
+    .cta-btn:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(224,0,0,0.5);
+    }
+
+    @media (max-width: 800px) {
+      header {
+        padding: 10px 16px;
+      }
+
+      nav {
+        display: none; /* si querés ocultar menú en mobile */
+      }
+
+      .cta-block {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span>☎ 011-4759-1224</span>
+    <span>WhatsApp 11 3728-6846</span>
+    <span>Industria argentina</span>
+  </div>
+
+  <!-- HEADER (misma estética que productos, sin carrito) -->
+  <header>
+    <a href="index.html" class="logo">
+      <div class="logo-img"></div>
+      <div class="logo-text">
+        <strong>SEGUDAB</strong>
+        <span>Seguridad policial y privada</span>
+      </div>
+    </a>
+
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos</a>
+      <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container">
+    <h1 class="page-title">¿Por qué elegir segudab?</h1>
+    <p class="page-subtitle">
+      Acompañamos a fuerzas de seguridad y empresas privadas con equipamiento confiable, resistente y pensado para el trabajo diario.
+    </p>
+
+    <!-- Faja central tipo “calidad / resistencia / confianza” -->
+    <section class="strip">
+      <div class="strip-inner">
+        <h2 class="strip-title">Experiencia, calidad y respaldo</h2>
+        <p class="strip-subtitle">
+          No se trata solo de vender productos: se trata de garantizar que cada jornada de trabajo cuente con el equipamiento adecuado.
+        </p>
+        <div class="strip-badges">
+          <span>Calidad</span> · <span>Resistencia</span> · <span>Confianza</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Razones en formato tarjetas -->
+    <section class="reasons-grid">
+      <article class="reason-card">
+        <div class="reason-icon">🏭</div>
+        <div class="reason-title">Industria argentina</div>
+        <div class="reason-text">
+          Trabajamos con producción nacional y proveedores de confianza, adaptándonos a las necesidades del mercado local.
+        </div>
+        <div class="reason-tag">Producción propia</div>
+      </article>
+
+      <article class="reason-card">
+        <div class="reason-icon">🛡️</div>
+        <div class="reason-title">Pensado para la fuerza</div>
+        <div class="reason-text">
+          Cada producto está diseñado para soportar el uso intensivo de policías, fuerzas especiales y seguridad privada.
+        </div>
+        <div class="reason-tag">Diseño táctico</div>
+      </article>
+
+      <article class="reason-card">
+        <div class="reason-icon">🤝</div>
+        <div class="reason-title">Atención directa</div>
+        <div class="reason-text">
+          Asesoramiento personalizado: coordinamos talles, modelos y tiempos de entrega según el tipo de servicio que realizás.
+        </div>
+        <div class="reason-tag">Sin intermediarios</div>
+      </article>
+
+      <article class="reason-card">
+        <div class="reason-icon">📦</div>
+        <div class="reason-title">Stock y envíos</div>
+        <div class="reason-text">
+          Mantenemos stock en productos clave y realizamos envíos a todo el país con las principales empresas de transporte.
+        </div>
+        <div class="reason-tag">Envíos a todo el país</div>
+      </article>
+    </section>
+
+    <!-- Bloque final de llamada a la acción -->
+    <section class="cta-block">
+      <div class="cta-block-text">
+        ¿Necesitás equipar a tu equipo completo o renovar tus borceguíes, porta-credenciales y uniformes?
+        Escribinos y armamos una propuesta según tu necesidad.
+      </div>
+      <a href="https://wa.me/5491137286846" target="_blank" class="cta-btn">
+        Consultar por WhatsApp
+      </a>
+    </section>
+  </main>
+
+</body>
+</html>
