@@ -7,19 +7,25 @@
 
   <style>
     :root {
+      --color-bg-dark: #050505;
       --color-bg-light: #f5f5f5;
       --color-primary: #e00000;
       --color-primary-dark: #b30000;
       --color-accent: #f4c542;
-      --color-black: #000;
+      --color-text: #111111;
       --max-width: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       margin: 0;
       background: var(--color-bg-light);
-      font-family: system-ui, sans-serif;
-      color: #111;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--color-text);
+      line-height: 1.5;
     }
 
     a {
@@ -27,7 +33,7 @@
       text-decoration: none;
     }
 
-    /* Top bar (igual que productos) */
+    /* Top bar (igual que index) */
     .top-bar {
       background: #000;
       color: #fff;
@@ -35,65 +41,123 @@
       padding: 6px 16px;
       display: flex;
       justify-content: center;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    /* Header (sin carrito) */
+    .top-bar span {
+      white-space: nowrap;
+    }
+
+    /* Header / navegación (igual que index) */
     header {
-      background: #000;
-      color: #fff;
-      padding: 12px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       position: sticky;
       top: 0;
       z-index: 999;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      background: #000;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .logo-img {
-      width: 48px;
-      height: 48px;
+      height: 52px;
+      width: 52px;
+      background: #333;
       border-radius: 6px;
-      background: #333; /* acá va tu logo */
     }
 
     .logo-text {
       display: flex;
       flex-direction: column;
-      text-transform: uppercase;
       font-size: 13px;
+      text-transform: uppercase;
     }
 
     .logo-text strong {
-      font-size: 20px;
+      font-size: 22px;
       letter-spacing: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
     nav {
       display: flex;
-      gap: 20px;
-      text-transform: uppercase;
+      align-items: center;
+      gap: 18px;
       font-size: 14px;
+      text-transform: uppercase;
     }
 
     nav a {
-      color: #fff;
       padding-bottom: 3px;
       border-bottom: 2px solid transparent;
-      transition: 0.2s;
+      transition: border-color 0.2s ease, color 0.2s ease;
+      color: #fff;
     }
 
     nav a:hover {
       border-color: var(--color-primary);
       color: var(--color-accent);
+    }
+
+    .nav-cta {
+      background: var(--color-primary);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      background: var(--color-primary-dark);
+    }
+
+    /* Botón carrito (igual que index/productos) */
+    .cart-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-primary);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .cart-button:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .cart-count {
+      background: #fff;
+      color: #000;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
     }
 
     /* Contenido principal */
@@ -117,7 +181,7 @@
       max-width: 600px;
     }
 
-    /* Faja como la de productos pero adaptada */
+    /* Faja central */
     .strip {
       background: #fff;
       border-top: 3px solid #000;
@@ -156,7 +220,7 @@
       color: var(--color-primary);
     }
 
-    /* Grid de razones (similar a cards de productos) */
+    /* Grid de razones */
     .reasons-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -247,13 +311,172 @@
       box-shadow: 0 6px 14px rgba(224,0,0,0.5);
     }
 
+    /* Panel carrito (igual que index/productos) */
+    .cart-panel-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: flex-end;
+      z-index: 1000;
+    }
+
+    .cart-panel {
+      width: 320px;
+      max-width: 90%;
+      background: #111;
+      color: #fff;
+      height: 100%;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .cart-title {
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .cart-close {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      font-size: 13px;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      padding: 10px 0;
+      margin: 4px 0 10px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+      padding: 6px 0;
+      border-bottom: 1px solid #222;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .cart-item-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .qty-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: none;
+      background: #222;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .qty-value {
+      min-width: 20px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .cart-item-price {
+      text-align: right;
+      font-size: 13px;
+    }
+
+    .cart-item-remove {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #f88;
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: right;
+    }
+
+    .cart-footer {
+      font-size: 13px;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .cart-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      color: #fff;
+      border: 1px solid #666;
+    }
+
+    .btn-outline-light:hover {
+      border-color: #fff;
+    }
+
+    .cart-empty {
+      font-size: 13px;
+      color: #bbb;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      color: #888;
+      font-size: 12px;
+      text-align: center;
+      padding: 14px 10px;
+    }
+
     @media (max-width: 800px) {
       header {
         padding: 10px 16px;
       }
 
       nav {
-        display: none; /* si querés ocultar menú en mobile */
+        display: none;
       }
 
       .cta-block {
@@ -272,22 +495,31 @@
     <span>Industria argentina</span>
   </div>
 
-  <!-- HEADER (misma estética que productos, sin carrito) -->
+  <!-- HEADER (igual que index, con carrito) -->
   <header>
-    <a href="index.html" class="logo">
-      <div class="logo-img"></div>
-      <div class="logo-text">
-        <strong>SEGUDAB</strong>
-        <span>Seguridad policial y privada</span>
-      </div>
-    </a>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-img"></div>
+        <div class="logo-text">
+          <strong>SEGUDAB</strong>
+          <span>Seguridad policial y privada</span>
+        </div>
+      </a>
 
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="productos.html">Productos</a>
-      <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
-      <a href="index.html#contacto">Contacto</a>
-    </nav>
+      <div class="header-right">
+        <nav>
+          <a href="index.html#inicio">Inicio</a>
+          <a href="productos.html">Productos</a>
+          <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
+          <a href="index.html#contacto">Contacto</a>
+        </nav>
+
+        <button class="cart-button" id="cart-toggle">
+          🛒 Carrito
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
@@ -297,7 +529,7 @@
       Acompañamos a fuerzas de seguridad y empresas privadas con equipamiento confiable, resistente y pensado para el trabajo diario.
     </p>
 
-    <!-- Faja central tipo “calidad / resistencia / confianza” -->
+    <!-- Faja central -->
     <section class="strip">
       <div class="strip-inner">
         <h2 class="strip-title">Experiencia, calidad y respaldo</h2>
@@ -310,7 +542,7 @@
       </div>
     </section>
 
-    <!-- Razones en formato tarjetas -->
+    <!-- Razones en tarjetas -->
     <section class="reasons-grid">
       <article class="reason-card">
         <div class="reason-icon">🏭</div>
@@ -349,7 +581,7 @@
       </article>
     </section>
 
-    <!-- Bloque final de llamada a la acción -->
+    <!-- Bloque final CTA -->
     <section class="cta-block">
       <div class="cta-block-text">
         ¿Necesitás equipar a tu equipo completo o renovar tus borceguíes, porta-credenciales y uniformes?
@@ -360,6 +592,182 @@
       </a>
     </section>
   </main>
+
+  <!-- PANEL CARRITO (compartido con index/productos) -->
+  <div class="cart-panel-backdrop" id="cart-backdrop">
+    <aside class="cart-panel">
+      <div class="cart-header">
+        <div class="cart-title">Carrito</div>
+        <button class="cart-close" id="cart-close">✕</button>
+      </div>
+
+      <div class="cart-items" id="cart-items">
+        <!-- Items desde localStorage -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span id="cart-total">$0</span>
+        </div>
+        <div class="cart-actions">
+          <button class="btn btn-primary" id="cart-checkout">Finalizar compra</button>
+          <button class="btn btn-outline-light" id="cart-clear">Vaciar carrito</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    © <span id="year"></span> Segudab. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    // Año automático
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- CARRITO COMPARTIDO ---
+
+    let cart = {};
+
+    const cartBackdropEl = document.getElementById("cart-backdrop");
+    const cartItemsEl = document.getElementById("cart-items");
+    const cartCountEl = document.getElementById("cart-count");
+    const cartTotalEl = document.getElementById("cart-total");
+    const cartToggleBtn = document.getElementById("cart-toggle");
+    const cartCloseBtn = document.getElementById("cart-close");
+    const cartClearBtn = document.getElementById("cart-clear");
+    const cartCheckoutBtn = document.getElementById("cart-checkout");
+
+    function getCartSummary() {
+      let totalItems = 0;
+      let totalPrice = 0;
+      for (const key in cart) {
+        const item = cart[key];
+        totalItems += item.qty;
+        totalPrice += item.product.price * item.qty;
+      }
+      return { totalItems, totalPrice };
+    }
+
+    function updateCartUI() {
+      const { totalItems, totalPrice } = getCartSummary();
+
+      cartCountEl.textContent = totalItems;
+      cartItemsEl.innerHTML = "";
+
+      if (totalItems === 0) {
+        cartItemsEl.innerHTML = `<div class="cart-empty">Tu carrito está vacío.</div>`;
+      } else {
+        for (const key in cart) {
+          const { product, qty } = cart[key];
+          cartItemsEl.innerHTML += `
+            <div class="cart-item">
+              <div>
+                <div class="cart-item-name">${product.name}</div>
+                <div class="cart-item-meta">$${product.price.toLocaleString("es-AR")} c/u</div>
+                <div class="cart-item-controls">
+                  <button class="qty-btn" onclick="changeQty('${product.id}', -1)">-</button>
+                  <span class="qty-value">${qty}</span>
+                  <button class="qty-btn" onclick="changeQty('${product.id}', 1)">+</button>
+                </div>
+              </div>
+              <div>
+                <div class="cart-item-price">$${(product.price * qty).toLocaleString("es-AR")}</div>
+                <span class="cart-item-remove" onclick="removeItem('${product.id}')">Eliminar</span>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      cartTotalEl.textContent = `$${totalPrice.toLocaleString("es-AR")}`;
+
+      try {
+        localStorage.setItem("segudab_cart", JSON.stringify(cart));
+      } catch (e) {}
+    }
+
+    function changeQty(id, delta) {
+      if (!cart[id]) return;
+      cart[id].qty += delta;
+      if (cart[id].qty <= 0) {
+        delete cart[id];
+      }
+      updateCartUI();
+    }
+
+    function removeItem(id) {
+      if (cart[id]) {
+        delete cart[id];
+      }
+      updateCartUI();
+    }
+
+    function clearCart() {
+      cart = {};
+      updateCartUI();
+    }
+
+    function checkoutCart() {
+      const { totalItems, totalPrice } = getCartSummary();
+      if (totalItems === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+
+      let message = "Hola, quiero realizar una compra en Segudab.%0A%0AProductos:%0A";
+      for (const key in cart) {
+        const { product, qty } = cart[key];
+        message += `- ${product.name} x${qty} — $${(product.price * qty).toLocaleString("es-AR")}%0A`;
+      }
+      message += `%0ATotal aproximado: $${totalPrice.toLocaleString("es-AR")}%0A%0A¿Me podés informar disponibilidad y formas de pago?`;
+
+      const phone = "5491137286846";
+      const url = `https://wa.me/${phone}?text=${message}`;
+      window.open(url, "_blank");
+    }
+
+    function openCart() {
+      cartBackdropEl.style.display = "flex";
+    }
+
+    function closeCart() {
+      cartBackdropEl.style.display = "none";
+    }
+
+    function loadCartFromStorage() {
+      try {
+        const saved = localStorage.getItem("segudab_cart");
+        if (saved) {
+          cart = JSON.parse(saved) || {};
+        }
+      } catch (e) {
+        cart = {};
+      }
+      updateCartUI();
+    }
+
+    // Exponer funciones para botones inline
+    window.changeQty = changeQty;
+    window.removeItem = removeItem;
+
+    // Listeners
+    cartToggleBtn.addEventListener("click", openCart);
+    cartCloseBtn.addEventListener("click", closeCart);
+    cartBackdropEl.addEventListener("click", (e) => {
+      if (e.target === cartBackdropEl) {
+        closeCart();
+      }
+    });
+    cartClearBtn.addEventListener("click", clearCart);
+    cartCheckoutBtn.addEventListener("click", checkoutCart);
+
+    // Inicializar carrito desde localStorage
+    loadCartFromStorage();
+  </script>
+</body>
+</html>
 
 </body>
 </html>
