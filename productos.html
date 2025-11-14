@@ -310,6 +310,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
       position: sticky;
       top: 90px;
+      font-size: 14px;
     }
 
     .cart-title {
@@ -319,7 +320,7 @@
     }
 
     .cart-items {
-      max-height: 260px;
+      max-height: 220px;
       overflow-y: auto;
       margin-bottom: 10px;
       border-top: 1px solid #eee;
@@ -353,6 +354,21 @@
       font-size: 11px;
       color: #777;
       margin-bottom: 10px;
+    }
+
+    .checkout-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .checkout-inputs input {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      width: 100%;
     }
 
     .btn-cart {
@@ -464,6 +480,7 @@
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
+        <a href="contacto.html">Contacto</a>
         <a href="contacto.html" class="nav-cta">Consultar ahora</a>
       </nav>
     </div>
@@ -627,23 +644,79 @@
         </div>
 
         <div class="cart-note">
-          Este carrito es orientativo. Para confirmar precios y stock, enviá tu consulta por WhatsApp o por el formulario de contacto.
+          Este carrito es orientativo. Para confirmar precios y stock, completá tus datos y envianos el pedido por WhatsApp.
         </div>
 
-        <button class="btn-cart" onclick="enviarConsulta()">
-          Enviar consulta con este listado
+        <div class="checkout-inputs">
+          <input id="checkout-nombre" type="text" placeholder="Nombre y apellido" />
+          <input id="checkout-telefono" type="text" placeholder="Teléfono" />
+          <input id="checkout-email" type="email" placeholder="Correo (opcional)" />
+        </div>
+
+        <button class="btn-cart" onclick="finalizarCompraWhatsApp()">
+          Finalizar compra por WhatsApp
         </button>
       </aside>
     </div>
   </section>
 
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section class="section" id="por-que">
+    <div class="section-inner">
+      <h2 class="section-title">¿Por qué elegir Segudab?</h2>
+      <p class="section-subtitle">Calidad real para trabajo real.</p>
+
+      <div class="why-wrap">
+
+        <div class="why-item">
+          🔧 Materiales seleccionados para uso intensivo.
+        </div>
+
+        <div class="why-item">
+          🛠️ Fabricación nacional con control de calidad.
+        </div>
+
+        <div class="why-item">
+          📦 Stock permanente en los productos clave.
+        </div>
+
+        <div class="why-item">
+          💬 Atención personalizada por WhatsApp.
+        </div>
+
+        <div class="why-item">
+          💼 Precios mayoristas disponibles.
+        </div>
+
+        <div class="why-item">
+          🔒 Confianza y trayectoria en el rubro policial.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO (simple) -->
+  <section class="section" id="contacto">
+    <div class="section-inner">
+      <h2 class="section-title">Contacto</h2>
+
+      <form>
+        <input type="text" placeholder="Nombre" />
+        <input type="text" placeholder="Teléfono" />
+        <textarea placeholder="Consulta"></textarea>
+
+        <button>Enviar consulta</button>
+      </form>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO -->
+  <!-- SCRIPT CARRITO + WHATSAPP -->
   <script>
     const cart = [];
 
@@ -699,18 +772,42 @@
       });
     });
 
-    function enviarConsulta() {
+    function finalizarCompraWhatsApp() {
       if (cart.length === 0) {
         alert('Primero agregá productos al carrito.');
         return;
       }
 
-      // Texto simple para copiar/pegar o usar con WhatsApp
-      let mensaje = 'Hola Segudab, me gustaría solicitar presupuesto por:\n\n';
+      const nombre = document.getElementById('checkout-nombre').value.trim();
+      const telefono = document.getElementById('checkout-telefono').value.trim();
+      const email = document.getElementById('checkout-email').value.trim();
+
+      if (!nombre || !telefono) {
+        alert('Por favor completá nombre y teléfono para enviar el pedido.');
+        return;
+      }
+
+      let texto = 'Hola Segudab, quiero hacer un pedido desde la web:%0A%0A';
+      texto += 'Nombre: ' + nombre + '%0A';
+      texto += 'Teléfono: ' + telefono + '%0A';
+      if (email) {
+        texto += 'Email: ' + email + '%0A';
+      }
+      texto += '%0AProductos:%0A';
+
+      let total = 0;
       cart.forEach(item => {
-        mensaje += `- ${item.qty} x ${item.name}\n`;
+        total += item.price * item.qty;
+        texto += '- ' + item.qty + ' x ' + item.name + '%0A';
       });
-      alert('Podés copiar este texto para enviar tu consulta:\n\n' + mensaje);
+
+      texto += '%0ATotal estimado: $' + total.toLocaleString('es-AR') + '%0A';
+      texto += '%0A¿Me podrían confirmar stock, precio final y formas de pago?';
+
+      const numero = '5491137286846'; // WhatsApp de Segudab
+      const url = 'https://wa.me/' + numero + '?text=' + texto;
+
+      window.open(url, '_blank');
     }
   </script>
 
