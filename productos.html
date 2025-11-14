@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Segudab — Catálogo de productos</title>
-
+  <title>Segudab — Equipamiento táctico de confianza</title>
   <style>
     :root {
       --color-bg-dark: #050505;
@@ -16,13 +15,16 @@
       --max-width: 1200px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--color-bg-light);
       color: var(--color-text);
+      line-height: 1.5;
     }
 
     a {
@@ -30,7 +32,7 @@
       text-decoration: none;
     }
 
-    /* TOP BAR – igual que index */
+    /* Top bar */
     .top-bar {
       background: #000;
       color: #fff;
@@ -38,41 +40,45 @@
       padding: 6px 16px;
       display: flex;
       justify-content: center;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    /* HEADER – igual que index */
+    .top-bar span {
+      white-space: nowrap;
+    }
+
+    /* Header / navegación */
     header {
-      background: #000;
-      color: #fff;
-      padding: 12px 30px;
       position: sticky;
       top: 0;
       z-index: 999;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      background: #000;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     }
 
     .nav-inner {
       max-width: var(--max-width);
       margin: 0 auto;
+      padding: 10px 16px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 24px;
     }
 
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #fff;
     }
 
     .logo-img {
-      width: 48px;
-      height: 48px;
+      height: 52px;
+      width: 52px;
+      background: #333;
       border-radius: 6px;
-      background: #333; /* acá va tu logo si querés */
     }
 
     .logo-text {
@@ -83,23 +89,28 @@
     }
 
     .logo-text strong {
-      font-size: 20px;
+      font-size: 22px;
       letter-spacing: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
     nav {
       display: flex;
-      gap: 20px;
+      align-items: center;
+      gap: 18px;
       font-size: 14px;
       text-transform: uppercase;
-      align-items: center;
     }
 
     nav a {
-      color: #fff;
       padding-bottom: 3px;
       border-bottom: 2px solid transparent;
-      transition: 0.2s;
+      transition: border-color 0.2s ease, color 0.2s ease;
     }
 
     nav a:hover {
@@ -114,7 +125,11 @@
       font-weight: 600;
     }
 
-    /* Botón carrito (extra) */
+    .nav-cta:hover {
+      background: var(--color-primary-dark);
+    }
+
+    /* Botón carrito (igual que productos.html) */
     .cart-button {
       display: inline-flex;
       align-items: center;
@@ -143,90 +158,77 @@
       font-weight: 700;
     }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    /* Hero */
+    .hero {
+      background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
+      color: #fff;
+      padding: 56px 16px 72px;
     }
 
-    /* CONTENIDO PRINCIPAL */
-    .container {
+    .hero-inner {
       max-width: var(--max-width);
-      margin: 40px auto 50px;
-      padding: 0 20px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
     }
 
-    .page-title {
+    .hero-title {
+      font-size: clamp(28px, 4vw, 40px);
       text-transform: uppercase;
-      font-size: 26px;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
     }
 
-    .page-subtitle {
+    .hero-subtitle {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #ddd;
+      margin-bottom: 16px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero-tag span:first-child {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+
+    .hero-text {
       font-size: 14px;
-      color: #555;
+      max-width: 420px;
+      color: #e0e0e0;
       margin-bottom: 24px;
     }
 
-    /* GRID PRODUCTOS */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-    }
-
-    .product-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 14px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    .hero-actions {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .product-image {
-      width: 100%;
-      height: 190px;
-      border-radius: 10px;
-      object-fit: cover;
-      background: #e1e1e1;
-    }
-
-    .product-name {
-      font-size: 15px;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-
-    .product-desc {
-      font-size: 12px;
-      color: #777;
-      min-height: 32px;
-    }
-
-    .product-price {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--color-primary);
-    }
-
-    .product-footer {
-      margin-top: auto;
-      display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
       align-items: center;
-      gap: 6px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 18px;
+      padding: 12px 22px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       text-transform: uppercase;
       border: none;
@@ -237,36 +239,287 @@
     .btn-primary {
       background: var(--color-primary);
       color: #fff;
-      box-shadow: 0 4px 10px rgba(224,0,0,0.4);
+      box-shadow: 0 6px 16px rgba(224, 0, 0, 0.5);
     }
 
     .btn-primary:hover {
       background: var(--color-primary-dark);
       transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(224,0,0,0.5);
+      box-shadow: 0 8px 20px rgba(224, 0, 0, 0.6);
     }
 
-    .product-tag {
-      font-size: 11px;
-      color: #777;
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid #666;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 26px;
+    .btn-outline:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    .hero-badge {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+    }
+
+    .hero-image {
+      position: relative;
+      min-height: 260px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: url('hero-botas.jpg') center/cover no-repeat, radial-gradient(circle at top left, #333, #000);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), transparent 60%);
+    }
+
+    .hero-label {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-label span:first-child {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0f0;
+    }
+
+    /* Aviso insignias */
+    .notice-bar {
+      background: var(--color-primary);
+      color: #fff;
       font-size: 13px;
+      text-align: center;
+      padding: 8px 12px;
+    }
+
+    /* Secciones generales */
+    .section {
+      padding: 40px 16px;
+    }
+
+    .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    /* Categorías */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card-category {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #000;
+      color: #fff;
+      min-height: 170px;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card-category::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 50%);
+      z-index: 1;
+    }
+
+    .card-category img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-category-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-category h3 {
+      margin: 0;
+      font-size: 18px;
       text-transform: uppercase;
     }
 
-    .back-link span {
-      margin-right: 4px;
+    .card-category span {
+      display: block;
+      font-size: 12px;
+      color: #ddd;
+      margin-top: 4px;
     }
 
-    /* PANEL CARRITO */
+    .card-category:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Por qué elegirnos */
+    .why-section {
+      background: #ffffff;
+      border-top: 3px solid #000;
+      border-bottom: 3px solid #000;
+    }
+
+    .why-badges {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .why-badges span {
+      color: var(--color-primary);
+    }
+
+    .why-industry {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .why-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 22px;
+      font-size: 13px;
+      color: #444;
+    }
+
+    .why-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 260px;
+    }
+
+    .why-icon-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-primary);
+    }
+
+    /* Contacto */
+    .contact-section {
+      background: #111;
+      color: #fff;
+      padding: 36px 16px 32px;
+    }
+
+    .contact-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 28px;
+    }
+
+    .contact-title {
+      font-size: 20px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .contact-text {
+      font-size: 14px;
+      color: #ddd;
+      margin-bottom: 16px;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+    }
+
+    input, textarea {
+      border-radius: 8px;
+      border: 1px solid #444;
+      padding: 8px 10px;
+      font-size: 14px;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #888;
+    }
+
+    .contact-info-item {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .contact-info-item strong {
+      color: var(--color-accent);
+    }
+
+    /* Panel carrito (mismo que productos.html) */
     .cart-panel-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0, 0, 0, 0.4);
       display: none;
       justify-content: flex-end;
       z-index: 1000;
@@ -412,23 +665,28 @@
       padding: 16px 0;
     }
 
-    /* FOOTER – igual estilo que index */
+    /* Footer */
     footer {
       background: #000;
       color: #888;
-      padding: 14px;
+      font-size: 12px;
       text-align: center;
-      font-size: 13px;
-      margin-top: 30px;
+      padding: 14px 10px;
     }
 
-    /* RESPONSIVE */
+    /* Responsivo */
     @media (max-width: 800px) {
-      header {
-        padding: 10px 16px;
-      }
       nav {
-        display: none; /* mismo comportamiento que podrías usar en index si lo adaptás */
+        display: none;
+      }
+
+      .hero-inner,
+      .contact-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        order: -1;
       }
     }
   </style>
@@ -455,13 +713,14 @@
 
       <div class="header-right">
         <nav>
-          <a href="index.html">Inicio</a>
+          <a href="#inicio">Inicio</a>
           <a href="productos.html">Productos</a>
-          <a href="index.html#por-que">¿Por qué elegirnos?</a>
-          <a href="index.html#contacto">Contacto</a>
-          <a href="index.html#contacto" class="nav-cta">Consultar ahora</a>
+          <a href="#por-que">¿Por qué elegirnos?</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#contacto" class="nav-cta">Consultar ahora</a>
         </nav>
 
+        <!-- MISMO BOTÓN QUE EN productos.html -->
         <button class="cart-button" id="cart-toggle">
           🛒 Carrito
           <span class="cart-count" id="cart-count">0</span>
@@ -470,7 +729,149 @@
     </div>
   </header>
 
-  <!-- PANEL CARRITO -->
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">
+          <span></span>
+          <span>Equipamiento táctico profesional</span>
+        </div>
+        <h1 class="hero-title">Equipamiento táctico de confianza</h1>
+        <p class="hero-subtitle">Botas, uniformes e insumos para seguridad</p>
+        <p class="hero-text">
+          Fabricación nacional, materiales de alto rendimiento y diseños pensados para el trabajo diario de fuerzas de seguridad y empresas privadas.
+        </p>
+        <div class="hero-actions">
+          <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
+          <a href="#contacto" class="btn btn-outline">Consultar por mayorista</a>
+        </div>
+        <div class="hero-badges">
+          <span class="hero-badge">✔ Garantía de fábrica</span>
+          <span class="hero-badge">✔ Envíos a todo el país</span>
+          <span class="hero-badge">✔ Atención personalizada</span>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="hero-image-overlay"></div>
+        <div class="hero-label">
+          <span></span>
+          <span>Borceguíes tácticos listos para entrega</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVISO INSIGNIAS -->
+  <div class="notice-bar">
+    Insignias: todo lo que lleve logotipo de la policía se vende únicamente a personal de la fuerza con identificación personal.
+  </div>
+
+  <!-- CATEGORÍAS -->
+  <section class="section" id="catalogo">
+    <div class="section-inner">
+      <h2 class="section-title">Categorías principales</h2>
+      <p class="section-subtitle">Encontrá rápido lo que necesitás para tu servicio.</p>
+
+      <div class="grid">
+        <a href="productos.html" class="card-category">
+          <img src="botas-tacticas.jpg" alt="Botas tácticas" />
+          <div class="card-category-content">
+            <h3>Botas tácticas</h3>
+            <span>Borceguíes, botas livianas y antideslizantes.</span>
+          </div>
+        </a>
+
+        <a href="productos.html" class="card-category">
+          <img src="cinturones-fundas.jpg" alt="Cinturones y fundas" />
+          <div class="card-category-content">
+            <h3>Cinturones y fundas</h3>
+            <span>Porta armamento, porta cargadores y accesorios.</span>
+          </div>
+        </a>
+
+        <a href="productos.html" class="card-category">
+          <img src="credenciales-porta.jpg" alt="Credenciales y porta-documentos" />
+          <div class="card-category-content">
+            <h3>Credenciales y porta-documentos</h3>
+            <span>Modelos personalizados para cada fuerza.</span>
+          </div>
+        </a>
+
+        <a href="productos.html" class="card-category">
+          <img src="uniformes.jpg" alt="Uniformes" />
+          <div class="card-category-content">
+            <h3>Uniformes</h3>
+            <span>Camperas, pantalones y camisas tácticas.</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section class="section why-section" id="por-que">
+    <div class="section-inner">
+      <h2 class="section-title">¿Por qué elegir Segudab?</h2>
+      <p class="section-subtitle">Calidad, resistencia y confianza para el trabajo diario.</p>
+
+      <div class="why-badges">
+        <span>Calidad</span> · <span>Resistencia</span> · <span>Confianza</span>
+      </div>
+      <div class="why-industry">100% industria argentina</div>
+
+      <div class="why-icons">
+        <div class="why-icon">
+          <span class="why-icon-dot"></span>
+          <span>Materiales seleccionados para uso intensivo en servicio diario.</span>
+        </div>
+        <div class="why-icon">
+          <span class="why-icon-dot"></span>
+          <span>Atención directa con fábrica: sin intermediarios.</span>
+        </div>
+        <div class="why-icon">
+          <span class="why-icon-dot"></span>
+          <span>Stock permanente en productos clave (borceguíes, cintos, porta-credenciales).</span>
+        </div>
+        <div class="why-icon">
+          <span class="why-icon-dot"></span>
+          <span>Descuentos especiales para compras mayoristas y fuerzas de seguridad.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact-section" id="contacto">
+    <div class="contact-inner">
+      <div>
+        <h3 class="contact-title">Hacenos tu consulta</h3>
+        <p class="contact-text">
+          Contanos qué tipo de equipamiento necesitás (botas, uniformes, porta-credenciales, etc.) y te respondemos con modelos, talles y tiempos de entrega.
+        </p>
+        <form>
+          <input type="text" name="nombre" placeholder="Nombre y apellido" required />
+          <input type="text" name="telefono" placeholder="Teléfono / WhatsApp" required />
+          <textarea name="mensaje" placeholder="¿Qué productos necesitás?" required></textarea>
+          <button type="submit" class="btn btn-primary">Enviar consulta</button>
+        </form>
+      </div>
+      <div>
+        <h3 class="contact-title">Dónde estamos</h3>
+        <p class="contact-text">
+          Podés visitarnos en nuestro local o coordinar tu pedido por teléfono o WhatsApp.
+        </p>
+        <p class="contact-info-item"><strong>Dirección:</strong> Completar con dirección del local.</p>
+        <p class="contact-info-item"><strong>Teléfono:</strong> 011-4759-1224</p>
+        <p class="contact-info-item"><strong>WhatsApp:</strong> 11 3728-6846</p>
+        <p class="contact-info-item"><strong>Horarios de atención:</strong> Lunes a viernes, 9 a 18 hs.</p>
+        <p class="contact-info-item"><strong>Email:</strong> info@segudabindumentariapolicial.com</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL CARRITO (MISMO QUE EN productos.html) -->
   <div class="cart-panel-backdrop" id="cart-backdrop">
     <aside class="cart-panel">
       <div class="cart-header">
@@ -479,7 +880,7 @@
       </div>
 
       <div class="cart-items" id="cart-items">
-        <!-- Items aquí por JS -->
+        <!-- Items cargados desde localStorage -->
       </div>
 
       <div class="cart-footer">
@@ -495,163 +896,28 @@
     </aside>
   </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="container">
-    <h1 class="page-title">Catálogo completo</h1>
-    <p class="page-subtitle">
-      Seleccioná los productos que necesitás, agregalos al carrito y finalizá tu compra por WhatsApp.
-    </p>
-
-    <section class="product-grid" id="product-grid">
-      <!-- Productos generados por JavaScript -->
-    </section>
-
-    <a href="index.html" class="back-link">
-      <span>←</span> Volver al inicio
-    </a>
-  </main>
-
+  <!-- FOOTER -->
   <footer>
-    © 2025 Segudab — Todos los derechos reservados.
+    © <span id="year"></span> Segudab. Todos los derechos reservados.
   </footer>
 
   <script>
-    // Lista de productos
-    const products = [
-      {
-        id: "bota-tactica",
-        name: "Bota táctica",
-        price: 25000,
-        img: "bota-tactica.jpg",
-        desc: "Suela antideslizante • Cuero reforzado • Uso intensivo",
-        tag: "Talles 37–45"
-      },
-      {
-        id: "funda-pistola",
-        name: "Funda para pistola",
-        price: 7500,
-        img: "funda-pistola.jpg",
-        desc: "Diseño ergonómico • Ajuste seguro",
-        tag: "Modelos derecha e izquierda"
-      },
-      {
-        id: "porta-credencial",
-        name: "Porta-credencial",
-        price: 4800,
-        img: "porta-credencial.jpg",
-        desc: "Para credencial y placa • Cuero sintético",
-        tag: "Diseños por institución"
-      },
-      {
-        id: "uniforme-tactico",
-        name: "Uniforme táctico",
-        price: 18500,
-        img: "uniforme-tactico.jpg",
-        desc: "Tejido resistente • Ideal para servicio diario",
-        tag: "Modelos hombre y mujer"
-      },
-      {
-        id: "cinturon-tactico",
-        name: "Cinturón táctico",
-        price: 9000,
-        img: "cinturon-tactico.jpg",
-        desc: "Ajuste firme • Múltiples anclajes",
-        tag: "Talles S–XL"
-      },
-      {
-        id: "guantes-tacticos",
-        name: "Guantes tácticos",
-        price: 5500,
-        img: "guantes-tacticos.jpg",
-        desc: "Refuerzo en nudillos • Buen agarre",
-        tag: "Talles M–XL"
-      },
-      {
-        id: "gorra-policial",
-        name: "Gorra policial",
-        price: 3200,
-        img: "gorra-policial.jpg",
-        desc: "Visera rígida • Modelos por fuerza",
-        tag: "Diseños por institución"
-      },
-      {
-        id: "chaleco-tactico",
-        name: "Chaleco táctico",
-        price: 30000,
-        img: "chaleco-tactico.jpg",
-        desc: "Múltiples bolsillos • Ajuste regulable",
-        tag: "Talle único regulable"
-      }
-    ];
+    // Año automático
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Estado del carrito
-    let cart = {}; // { idProducto: { product, qty } }
+    // --- CARRITO COMPARTIDO CON productos.html ---
 
-    // Referencias al DOM
-    const productGridEl   = document.getElementById("product-grid");
-    const cartBackdropEl  = document.getElementById("cart-backdrop");
-    const cartItemsEl     = document.getElementById("cart-items");
-    const cartCountEl     = document.getElementById("cart-count");
-    const cartTotalEl     = document.getElementById("cart-total");
-    const cartToggleBtn   = document.getElementById("cart-toggle");
-    const cartCloseBtn    = document.getElementById("cart-close");
+    let cart = {};
+
+    const cartBackdropEl = document.getElementById("cart-backdrop");
+    const cartItemsEl = document.getElementById("cart-items");
+    const cartCountEl = document.getElementById("cart-count");
+    const cartTotalEl = document.getElementById("cart-total");
+    const cartToggleBtn = document.getElementById("cart-toggle");
+    const cartCloseBtn = document.getElementById("cart-close");
+    const cartClearBtn = document.getElementById("cart-clear");
     const cartCheckoutBtn = document.getElementById("cart-checkout");
-    const cartClearBtn    = document.getElementById("cart-clear");
 
-    // Renderizar productos
-    function renderProducts() {
-      productGridEl.innerHTML = "";
-      products.forEach(p => {
-        const card = document.createElement("article");
-        card.className = "product-card";
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.name}" class="product-image" />
-          <div class="product-name">${p.name}</div>
-          <div class="product-desc">${p.desc}</div>
-          <div class="product-price">$${p.price.toLocaleString("es-AR")}</div>
-          <div class="product-footer">
-            <button class="btn btn-primary" data-id="${p.id}">Agregar al carrito</button>
-            <div class="product-tag">${p.tag || ""}</div>
-          </div>
-        `;
-        const btn = card.querySelector("button");
-        btn.addEventListener("click", () => addToCart(p.id));
-        productGridEl.appendChild(card);
-      });
-    }
-
-    // Agregar al carrito
-    function addToCart(productId) {
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
-      if (!cart[productId]) {
-        cart[productId] = { product, qty: 1 };
-      } else {
-        cart[productId].qty++;
-      }
-      updateCartUI();
-      openCart();
-    }
-
-    // Cambiar cantidad
-    function changeQty(productId, delta) {
-      if (!cart[productId]) return;
-      cart[productId].qty += delta;
-      if (cart[productId].qty <= 0) {
-        delete cart[productId];
-      }
-      updateCartUI();
-    }
-
-    // Eliminar ítem
-    function removeItem(productId) {
-      if (cart[productId]) {
-        delete cart[productId];
-        updateCartUI();
-      }
-    }
-
-    // Resumen carrito
     function getCartSummary() {
       let totalItems = 0;
       let totalPrice = 0;
@@ -663,7 +929,6 @@
       return { totalItems, totalPrice };
     }
 
-    // Actualizar UI
     function updateCartUI() {
       const { totalItems, totalPrice } = getCartSummary();
 
@@ -675,24 +940,23 @@
       } else {
         for (const key in cart) {
           const { product, qty } = cart[key];
-          const row = document.createElement("div");
-          row.className = "cart-item";
-          row.innerHTML = `
-            <div>
-              <div class="cart-item-name">${product.name}</div>
-              <div class="cart-item-meta">$${product.price.toLocaleString("es-AR")} c/u</div>
-              <div class="cart-item-controls">
-                <button class="qty-btn" data-id="${product.id}" data-delta="-1">-</button>
-                <span class="qty-value">${qty}</span>
-                <button class="qty-btn" data-id="${product.id}" data-delta="1">+</button>
+          cartItemsEl.innerHTML += `
+            <div class="cart-item">
+              <div>
+                <div class="cart-item-name">${product.name}</div>
+                <div class="cart-item-meta">$${product.price.toLocaleString("es-AR")} c/u</div>
+                <div class="cart-item-controls">
+                  <button class="qty-btn" onclick="changeQty('${product.id}', -1)">-</button>
+                  <span class="qty-value">${qty}</span>
+                  <button class="qty-btn" onclick="changeQty('${product.id}', 1)">+</button>
+                </div>
+              </div>
+              <div>
+                <div class="cart-item-price">$${(product.price * qty).toLocaleString("es-AR")}</div>
+                <span class="cart-item-remove" onclick="removeItem('${product.id}')">Eliminar</span>
               </div>
             </div>
-            <div>
-              <div class="cart-item-price">$${(product.price * qty).toLocaleString("es-AR")}</div>
-              <span class="cart-item-remove" data-id="${product.id}">Eliminar</span>
-            </div>
           `;
-          cartItemsEl.appendChild(row);
         }
       }
 
@@ -703,7 +967,47 @@
       } catch (e) {}
     }
 
-    // Abrir/cerrar carrito
+    function changeQty(id, delta) {
+      if (!cart[id]) return;
+      cart[id].qty += delta;
+      if (cart[id].qty <= 0) {
+        delete cart[id];
+      }
+      updateCartUI();
+    }
+
+    function removeItem(id) {
+      if (cart[id]) {
+        delete cart[id];
+      }
+      updateCartUI();
+    }
+
+    function clearCart() {
+      cart = {};
+      updateCartUI();
+    }
+
+    // WhatsApp checkout (lee lo que haya en el carrito)
+    function checkoutCart() {
+      const { totalItems, totalPrice } = getCartSummary();
+      if (totalItems === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+
+      let message = "Hola, quiero realizar una compra en Segudab.%0A%0AProductos:%0A";
+      for (const key in cart) {
+        const { product, qty } = cart[key];
+        message += `- ${product.name} x${qty} — $${(product.price * qty).toLocaleString("es-AR")}%0A`;
+      }
+      message += `%0ATotal aproximado: $${totalPrice.toLocaleString("es-AR")}%0A%0A¿Me podés informar disponibilidad y formas de pago?`;
+
+      const phone = "5491137286846";
+      const url = `https://wa.me/${phone}?text=${message}`;
+      window.open(url, "_blank");
+    }
+
     function openCart() {
       cartBackdropEl.style.display = "flex";
     }
@@ -712,33 +1016,6 @@
       cartBackdropEl.style.display = "none";
     }
 
-    // Vaciar carrito
-    function clearCart() {
-      cart = {};
-      updateCartUI();
-    }
-
-    // Checkout por WhatsApp
-    function checkoutCart() {
-      const { totalItems, totalPrice } = getCartSummary();
-      if (totalItems === 0) {
-        alert("Tu carrito está vacío.");
-        return;
-      }
-
-      let message = "Hola, quiero realizar una compra en Segudab.\n\nProductos:\n";
-      for (const key in cart) {
-        const { product, qty } = cart[key];
-        message += `- ${product.name} x${qty} — $${(product.price * qty).toLocaleString("es-AR")}\n`;
-      }
-      message += `\nTotal aproximado: $${totalPrice.toLocaleString("es-AR")}\n\n¿Me podés informar disponibilidad y formas de pago?`;
-
-      const phone = "5491137286846"; // tu número sin +
-      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      window.open(url, "_blank");
-    }
-
-    // Cargar carrito de localStorage
     function loadCartFromStorage() {
       try {
         const saved = localStorage.getItem("segudab_cart");
@@ -751,31 +1028,26 @@
       updateCartUI();
     }
 
-    // Event listeners
+    // Exponer algunas funciones para los botones inline
+    window.changeQty = changeQty;
+    window.removeItem = removeItem;
+
+    // Listeners
     cartToggleBtn.addEventListener("click", openCart);
     cartCloseBtn.addEventListener("click", closeCart);
     cartBackdropEl.addEventListener("click", (e) => {
-      if (e.target === cartBackdropEl) closeCart();
+      if (e.target === cartBackdropEl) {
+        closeCart();
+      }
     });
     cartClearBtn.addEventListener("click", clearCart);
     cartCheckoutBtn.addEventListener("click", checkoutCart);
 
-    cartItemsEl.addEventListener("click", (e) => {
-      const target = e.target;
-      if (target.classList.contains("qty-btn")) {
-        const id = target.getAttribute("data-id");
-        const delta = parseInt(target.getAttribute("data-delta"), 10);
-        changeQty(id, delta);
-      } else if (target.classList.contains("cart-item-remove")) {
-        const id = target.getAttribute("data-id");
-        removeItem(id);
-      }
-    });
-
-    // Init
-    renderProducts();
+    // Inicialización
     loadCartFromStorage();
   </script>
 </body>
+</html>
+
 </html>
 
