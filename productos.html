@@ -63,7 +63,7 @@
       color: #fff;
       text-decoration: none;
     }
-    
+
     .logo-img {
       width: 48px;
       height: 48px;
@@ -168,27 +168,8 @@
       background: var(--color-primary-dark);
     }
 
-    /* contenedor para el botón de mayorista en el hero */
     .hero-buttons {
       margin-top: 12px;
-    }
-
-    .hero-image {
-      height: 280px;
-      background: url('hero-botas.jpg') center/cover;
-      border-radius: 18px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-      position: relative;
-    }
-
-    .hero-label {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      background: rgba(0,0,0,0.75);
-      padding: 8px 14px;
-      border-radius: 14px;
-      font-size: 12px;
     }
 
     /* Aviso */
@@ -321,7 +302,7 @@
       align-items: stretch;
     }
 
-    /* FILTROS (dentro de la sidebar) */
+    /* FILTROS */
     .filters {
       background: #fff;
       padding: 16px 18px;
@@ -337,19 +318,31 @@
       text-transform: uppercase;
     }
 
-    .filters-row {
+    .filter-buttons {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
     }
 
-    .filters select {
-      padding: 8px 10px;
-      border-radius: 8px;
+    .filter-btn {
+      border-radius: 999px;
       border: 1px solid #ccc;
-      font-size: 14px;
-      width: 100%;
-      max-width: 220px;
+      background: #f7f7f7;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .filter-btn:hover {
+      background: #eee;
+    }
+
+    .filter-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
     }
 
     /* Carrito */
@@ -502,26 +495,6 @@
       background: var(--color-primary-dark);
     }
 
-    /* BOTÓN MAYORISTA DESTACADO */
-    .btn-cart-secondary {
-      width: 100%;
-      text-align: center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 2px solid var(--color-primary);
-      background: #fff;
-      color: var(--color-primary);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 8px;
-      text-transform: uppercase;
-    }
-
-    .btn-cart-secondary:hover {
-      background: #ffecec;
-    }
-
     /* Footer */
     footer {
       background: #000;
@@ -586,14 +559,13 @@
     <div class="hero-inner">
       <div>
         <h1 class="hero-title">Catálogo de productos</h1>
-        <p class="hero-subtitle">Botas, cinturones, fundas y más</p>
+        <p class="hero-subtitle">Botas, cinturones, fundas, credenciales e indumentaria</p>
 
         <p class="hero-text">
           Seleccioná los productos que necesitás y armá tu pedido. Luego podés enviarnos la consulta con el detalle
           para coordinar stock y formas de pago.
         </p>
 
-        <!-- botón de consulta mayorista en el hero -->
         <div class="hero-buttons">
           <a
             href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
@@ -605,6 +577,7 @@
           </a>
         </div>
       </div>
+    </div>
   </section>
 
   <!-- AVISO -->
@@ -623,13 +596,13 @@
       <!-- PRODUCTOS -->
       <div class="product-grid">
 
-        <!-- Producto 1 -->
+        <!-- BOTAS TÁCTICAS -->
         <div class="product-card"
-             data-category="calzado"
+             data-category="botas"
              data-price="45000">
-          <div class="product-image" style="background-image:url('borceguies-negros.jpg');"></div>
+          <div class="product-image" style="background-image:url('borcegui-negro-1.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Calzado táctico</div>
+            <div class="product-tag">Botas tácticas</div>
             <div class="product-name">Borceguí táctico negro</div>
             <div class="product-desc">
               Suela antideslizante, costura reforzada y caña media. Ideal servicio diario.
@@ -645,13 +618,12 @@
           </div>
         </div>
 
-        <!-- Producto 2 -->
         <div class="product-card"
-             data-category="calzado"
+             data-category="botas"
              data-price="48000">
-          <div class="product-image" style="background-image:url('borceguies-arena.jpg');"></div>
+          <div class="product-image" style="background-image:url('borcegui-arena.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Calzado táctico</div>
+            <div class="product-tag">Botas tácticas</div>
             <div class="product-name">Borceguí color arena</div>
             <div class="product-desc">
               Capellada respirable, plantillas confort y cordones reforzados.
@@ -667,16 +639,37 @@
           </div>
         </div>
 
-        <!-- Producto 3 -->
         <div class="product-card"
-             data-category="cinturones"
-             data-price="39000">
-          <div class="product-image" style="background-image:url('cinturon-policial.jpg');"></div>
+             data-category="botas"
+             data-price="52000">
+          <div class="product-image" style="background-image:url('borcegui-cierre-lateral.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Cinturones</div>
+            <div class="product-tag">Botas tácticas</div>
+            <div class="product-name">Borceguí con cierre lateral</div>
+            <div class="product-desc">
+              Caña alta, cierre lateral y puntera reforzada para uso intensivo.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$52.000</span>
+              <button class="btn-small"
+                      data-name="Borceguí con cierre lateral"
+                      data-price="52000">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CINTURONES Y FUNDAS -->
+        <div class="product-card"
+             data-category="cinturones-fundas"
+             data-price="39000">
+          <div class="product-image" style="background-image:url('cinturon-policial-completo.jpg');"></div>
+          <div class="product-body">
+            <div class="product-tag">Cinturones y fundas</div>
             <div class="product-name">Cinturón policial completo</div>
             <div class="product-desc">
-              Incluye porta arma, porta cargador doble y funda porta esposas.
+              Incluye porta arma, porta cargador doble, porta esposas y porta bastón.
             </div>
             <div class="product-footer">
               <span class="product-price">$39.000</span>
@@ -689,16 +682,36 @@
           </div>
         </div>
 
-        <!-- Producto 4 -->
         <div class="product-card"
-             data-category="fundas"
-             data-price="28000">
-          <div class="product-image" style="background-image:url('funda-pechera.jpg');"></div>
+             data-category="cinturones-fundas"
+             data-price="26000">
+          <div class="product-image" style="background-image:url('cinturon-simple.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Fundas y pecheras</div>
+            <div class="product-tag">Cinturones y fundas</div>
+            <div class="product-name">Cinturón táctico simple</div>
+            <div class="product-desc">
+              Cinta de alta resistencia con hebilla rápida. Compatible con fundas modulares.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$26.000</span>
+              <button class="btn-small"
+                      data-name="Cinturón táctico simple"
+                      data-price="26000">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="cinturones-fundas"
+             data-price="28000">
+          <div class="product-image" style="background-image:url('pechera-porta-radio.jpg');"></div>
+          <div class="product-body">
+            <div class="product-tag">Cinturones y fundas</div>
             <div class="product-name">Pechera porta radio y credencial</div>
             <div class="product-desc">
-              Regulable, resistente y con compartimentos múltiples.
+              Regulable, resistente y con compartimentos múltiples para radio, credencial y lapiceras.
             </div>
             <div class="product-footer">
               <span class="product-price">$28.000</span>
@@ -711,16 +724,16 @@
           </div>
         </div>
 
-        <!-- Producto 5 -->
+        <!-- CREDENCIALES -->
         <div class="product-card"
              data-category="credenciales"
              data-price="12000">
-          <div class="product-image" style="background-image:url('credencial-policia.jpg');"></div>
+          <div class="product-image" style="background-image:url('credencial-carpeta.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Credenciales</div>
             <div class="product-name">Carpeta porta credencial</div>
             <div class="product-desc">
-              Modelo para distintas fuerzas. Incluye espacio para placa.
+              Modelo para distintas fuerzas. Incluye espacio para placa y DNI.
             </div>
             <div class="product-footer">
               <span class="product-price">$12.000</span>
@@ -733,22 +746,85 @@
           </div>
         </div>
 
-        <!-- Producto 6 -->
         <div class="product-card"
-             data-category="uniformes"
-             data-price="32000">
-          <div class="product-image" style="background-image:url('uniforme-pantalon.jpg');"></div>
+             data-category="credenciales"
+             data-price="13500">
+          <div class="product-image" style="background-image:url('credencial-billetera.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Uniformes</div>
+            <div class="product-tag">Credenciales</div>
+            <div class="product-name">Billetera porta credencial</div>
+            <div class="product-desc">
+              Formato billetera, cuero sintético reforzado y compartimentos para tarjetas.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$13.500</span>
+              <button class="btn-small"
+                      data-name="Billetera porta credencial"
+                      data-price="13500">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- INDUMENTARIA -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="32000">
+          <div class="product-image" style="background-image:url('pantalon-tactico.jpg');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
             <div class="product-name">Pantalón táctico reforzado</div>
             <div class="product-desc">
-              Tela ripstop, bolsillos cargo y refuerzo en rodillas.
+              Tela ripstop, bolsillos cargo y refuerzo en rodillas para uso intensivo.
             </div>
             <div class="product-footer">
               <span class="product-price">$32.000</span>
               <button class="btn-small"
                       data-name="Pantalón táctico reforzado"
                       data-price="32000">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="34000">
+          <div class="product-image" style="background-image:url('camisa-tactica.jpg');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Camisa táctica negra</div>
+            <div class="product-desc">
+              Tejido respirable, mangas largas y porta lapicera en brazo.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$34.000</span>
+              <button class="btn-small"
+                      data-name="Camisa táctica negra"
+                      data-price="34000">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="58000">
+          <div class="product-image" style="background-image:url('campera-softshell.jpg');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Campera softshell táctica</div>
+            <div class="product-desc">
+              Impermeable, abrigada y con múltiples bolsillos. Ideal guardias nocturnas.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$58.000</span>
+              <button class="btn-small"
+                      data-name="Campera softshell táctica"
+                      data-price="58000">
                 Agregar
               </button>
             </div>
@@ -762,22 +838,12 @@
         <!-- FILTROS -->
         <div class="filters">
           <h3>Filtrar productos</h3>
-          <div class="filters-row">
-            <select id="filter-category">
-              <option value="all">Todas las categorías</option>
-              <option value="calzado">Calzado táctico</option>
-              <option value="cinturones">Cinturones</option>
-              <option value="fundas">Fundas y pecheras</option>
-              <option value="credenciales">Credenciales</option>
-              <option value="uniformes">Uniformes</option>
-            </select>
-
-            <select id="filter-price">
-              <option value="all">Todos los precios</option>
-              <option value="low">Menos de $20.000</option>
-              <option value="mid">Entre $20.000 y $40.000</option>
-              <option value="high">Más de $40.000</option>
-            </select>
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-category="all">Todos</button>
+            <button class="filter-btn" data-category="botas">Botas tácticas</button>
+            <button class="filter-btn" data-category="cinturones-fundas">Cinturones y fundas</button>
+            <button class="filter-btn" data-category="credenciales">Credenciales</button>
+            <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
           </div>
         </div>
 
@@ -817,7 +883,7 @@
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO + LOCALSTORAGE + WHATSAPP + FILTROS -->
+  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS -->
   <script>
     const CART_KEY = 'segudab_cart';
     let cart = [];
@@ -827,9 +893,7 @@
       if (!stored) return;
       try {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          cart = parsed;
-        }
+        if (Array.isArray(parsed)) cart = parsed;
       } catch (e) {
         console.error('Error leyendo carrito de localStorage', e);
       }
@@ -896,9 +960,7 @@
       const item = cart.find(p => p.name === name);
       if (!item) return;
       item.qty += delta;
-      if (item.qty < 1) {
-        item.qty = 1; // para llevarlo a 0 que use eliminar
-      }
+      if (item.qty < 1) item.qty = 1;
       saveCart();
       renderCart();
     }
@@ -912,7 +974,7 @@
       }
     }
 
-    // Botones "Agregar" de productos
+    // Botones "Agregar"
     document.querySelectorAll('.btn-small').forEach(btn => {
       btn.addEventListener('click', () => {
         const name = btn.getAttribute('data-name');
@@ -957,9 +1019,7 @@
       let texto = 'Hola Segudab, quiero hacer un pedido desde la web:%0A%0A';
       texto += 'Nombre: ' + nombre + '%0A';
       texto += 'Teléfono: ' + telefono + '%0A';
-      if (email) {
-        texto += 'Email: ' + email + '%0A';
-      }
+      if (email) texto += 'Email: ' + email + '%0A';
       texto += '%0AProductos:%0A';
 
       let total = 0;
@@ -971,50 +1031,32 @@
       texto += '%0ATotal estimado: $' + total.toLocaleString('es-AR') + '%0A';
       texto += '%0A¿Me podrían confirmar stock, precio final y formas de pago?';
 
-      const numero = '5491137286846'; // WhatsApp de Segudab
+      const numero = '5491137286846';
       const url = 'https://wa.me/' + numero + '?text=' + texto;
 
       window.open(url, '_blank');
     }
 
-    // Botón para consulta mayorista
-    function consultarMayorista() {
-      const texto = 'Hola Segudab, quiero consultar por compras mayoristas (precios y condiciones).';
-      const numero = '5491137286846';
-      const url = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(texto);
-      window.open(url, '_blank');
-    }
-
-    // FILTROS
-    const filterCategory = document.getElementById('filter-category');
-    const filterPrice = document.getElementById('filter-price');
+    /* FILTROS POR BOTONES */
+    let currentCategory = 'all';
+    const filterButtons = document.querySelectorAll('.filter-btn');
 
     function applyFilters() {
-      const cat = filterCategory.value;
-      const price = filterPrice.value;
-
       document.querySelectorAll('.product-card').forEach(card => {
-        const category = card.dataset.category;
-        const priceValue = Number(card.dataset.price);
-
-        let show = true;
-
-        if (cat !== 'all' && category !== cat) {
-          show = false;
-        }
-
-        if (price !== 'all') {
-          if (price === 'low' && priceValue >= 20000) show = false;
-          if (price === 'mid' && (priceValue < 20000 || priceValue > 40000)) show = false;
-          if (price === 'high' && priceValue <= 40000) show = false;
-        }
-
+        const cardCat = card.dataset.category;
+        const show = (currentCategory === 'all' || cardCat === currentCategory);
         card.style.display = show ? 'block' : 'none';
       });
     }
 
-    filterCategory.addEventListener('change', applyFilters);
-    filterPrice.addEventListener('change', applyFilters);
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.category;
+        applyFilters();
+      });
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
       loadCart();
@@ -1025,5 +1067,3 @@
 
 </body>
 </html>
-
-
