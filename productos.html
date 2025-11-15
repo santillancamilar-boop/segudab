@@ -204,7 +204,7 @@
     .section-inner {
       max-width: var(--max-width);
       margin: 0 auto;
-      text-align: center;
+      text-align: left;
     }
 
     .section-title {
@@ -316,7 +316,7 @@
       align-items: stretch;
     }
 
-    /* FILTROS (ahora dentro de la sidebar) */
+    /* FILTROS (dentro de la sidebar) */
     .filters {
       background: #fff;
       padding: 16px 18px;
@@ -580,7 +580,7 @@
 
   <!-- SECCIÓN CATÁLOGO -->
   <section class="section">
-    <div class="section-inner" style="text-align:left;">
+    <div class="section-inner">
       <h2 class="section-title">Productos destacados</h2>
       <p class="section-subtitle">
         Catálogo orientativo. Los precios pueden variar según talle, modelo y cantidad. Consultá para presupuesto final.
@@ -775,17 +775,17 @@
           <button class="btn-cart" onclick="finalizarCompraWhatsApp()">
             Finalizar compra por WhatsApp
           </button>
+
+          <!-- Botón mayorista dentro del carrito -->
+          <button class="btn-cart" type="button"
+                  style="margin-top:6px; background:#111;"
+                  onclick="consultarMayorista()">
+            Consultar por mayorista
+          </button>
         </aside>
       </div>
     </div>
   </section>
-
-  <p style="font-size:12px; color:#555; margin-top:6px;">
-  ¿Sos empresa o necesitás equipar una fuerza completa?  
-  <a href="#" onclick="window.open('https://wa.me/5491137286846?text=Hola%20Segudab,%20quiero%20consultar%20por%20compras%20mayoristas', '_blank'); return false;" style="color:#e00000; font-weight:600;">
-    Consultá por mayorista
-  </a>
-</p>
 
   <!-- FOOTER -->
   <footer>
@@ -949,6 +949,14 @@
       const numero = '5491137286846'; // WhatsApp de Segudab
       const url = 'https://wa.me/' + numero + '?text=' + texto;
 
+      window.open(url, '_blank');
+    }
+
+    // Botón para consulta mayorista
+    function consultarMayorista() {
+      const texto = 'Hola Segudab, quiero consultar por compras mayoristas (precios y condiciones).';
+      const numero = '5491137286846';
+      const url = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(texto);
       window.open(url, '_blank');
     }
 
