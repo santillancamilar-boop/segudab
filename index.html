@@ -16,6 +16,10 @@
       --max-width: 1200px;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
@@ -244,50 +248,97 @@
       text-shadow: 0 2px 4px #000;
     }
 
-    /* FAQ / Por qué elegirnos */
-    .why-wrap {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
+    /* NUEVO: Pasos para comprar */
+    .steps-grid {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      justify-content: center;
       text-align: left;
     }
 
-    .why-item {
+    .step-card {
       background: #fff;
+      border-radius: 14px;
       padding: 18px 20px;
-      border-left: 4px solid var(--color-primary);
-      border-radius: 8px;
-      width: 260px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     }
 
-    /* Contacto */
-    form {
-      max-width: 450px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .step-number {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    input, textarea {
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+    .step-title {
+      font-weight: 700;
+      margin-bottom: 6px;
       font-size: 15px;
     }
 
-    button {
-      padding: 12px 18px;
-      background: var(--color-primary);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
+    .step-text {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* NUEVO: Servicio a fuerzas y empresas */
+    .service-layout {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 30px;
+      text-align: left;
+      align-items: start;
+    }
+
+    .service-text {
+      font-size: 14px;
+      color: #444;
+      background: #fff;
+      padding: 20px 22px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .service-text h3 {
+      margin-top: 0;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    .service-text ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .service-text li {
+      margin-bottom: 6px;
+    }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .service-card {
+      background: #fff;
+      padding: 14px 16px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      font-size: 13px;
+    }
+
+    .service-card strong {
+      display: block;
+      margin-bottom: 4px;
     }
 
     /* Footer */
@@ -301,7 +352,12 @@
     }
 
     @media (max-width: 800px) {
-      .hero-inner { grid-template-columns: 1fr; }
+      .hero-inner { 
+        grid-template-columns: 1fr; 
+      }
+      .service-layout {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -318,7 +374,7 @@
   <!-- HEADER -->
   <header>
     <div class="nav-inner">
-      <a href="#" class="logo">
+      <a href="index.html" class="logo">
         <div class="logo-img"></div>
         <div class="logo-text">
           <strong>SEGUDAB</strong>
@@ -400,54 +456,91 @@
     </div>
   </section>
 
-  <!-- POR QUÉ ELEGIRNOS -->
-  <section class="section" id="por-que">
+  <!-- CÓMO HACER TU PEDIDO -->
+  <section class="section">
     <div class="section-inner">
-      <h2 class="section-title">¿Por qué elegir Segudab?</h2>
-      <p class="section-subtitle">Calidad real para trabajo real.</p>
+      <h2 class="section-title">Cómo hacer tu pedido</h2>
+      <p class="section-subtitle">
+        En pocos pasos podés armar tu equipamiento completo y coordinar la entrega.
+      </p>
+    </div>
 
-      <div class="why-wrap">
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-number">Paso 1</span>
+        <div class="step-title">Elegí los productos</div>
+        <p class="step-text">
+          Ingresá al catálogo, seleccioná borceguíes, cinturones, fundas, uniformes y agregalos al carrito
+          según la cantidad aproximada que necesites.
+        </p>
+      </div>
 
-        <div class="why-item">
-          🔧 Materiales seleccionados para uso intensivo.
-        </div>
+      <div class="step-card">
+        <span class="step-number">Paso 2</span>
+        <div class="step-title">Enviá tu pedido</div>
+        <p class="step-text">
+          Desde el carrito, completá tus datos y enviá el detalle por WhatsApp. Te respondemos con la
+          confirmación de stock, talles y precios finales.
+        </p>
+      </div>
 
-        <div class="why-item">
-          🛠️ Fabricación nacional con control de calidad.
-        </div>
-
-        <div class="why-item">
-          📦 Stock permanente en los productos clave.
-        </div>
-
-        <div class="why-item">
-          💬 Atención personalizada por WhatsApp.
-        </div>
-
-        <div class="why-item">
-          💼 Precios mayoristas disponibles.
-        </div>
-
-        <div class="why-item">
-          🔒 Confianza y trayectoria en el rubro policial.
-        </div>
-
+      <div class="step-card">
+        <span class="step-number">Paso 3</span>
+        <div class="step-title">Coordiná entrega o retiro</div>
+        <p class="step-text">
+          Podés retirar en nuestro local de Caseros o coordinar envíos a tu empresa, dependencia o domicilio,
+          según la zona y el volumen del pedido.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO -->
-  <section class="section" id="contacto">
+  <!-- SERVICIO A FUERZAS Y EMPRESAS -->
+  <section class="section">
     <div class="section-inner">
-      <h2 class="section-title">Contacto</h2>
+      <h2 class="section-title">Servicio a fuerzas y empresas</h2>
+      <p class="section-subtitle">
+        Pensado para personal policial, empresas de seguridad privada y dependencias que necesitan equipar equipos completos.
+      </p>
+    </div>
 
-      <form>
-        <input type="text" placeholder="Nombre" />
-        <input type="text" placeholder="Teléfono" />
-        <textarea placeholder="Consulta"></textarea>
+    <div class="service-layout">
+      <div class="service-text">
+        <h3>Equipamiento para equipos completos</h3>
+        <p>
+          Si necesitás uniformar a una fuerza, empresa o equipo de trabajo, podemos armar
+          propuestas integrales de equipamiento con distintas combinaciones de productos.
+        </p>
+        <ul>
+          <li>Pack borceguí + cinturón completo + funda o pechera.</li>
+          <li>Opciones por rangos de precio para diferentes jerarquías.</li>
+          <li>Asesoramiento sobre talles y modelos según tipo de servicio.</li>
+          <li>Posibilidad de repetir pedidos con el mismo estándar de equipamiento.</li>
+        </ul>
+        <p style="margin-top:10px;">
+          Para consultas más detalladas podés escribirnos desde la sección
+          <strong>Contacto</strong> o iniciar directo por WhatsApp desde cualquier página.
+        </p>
+      </div>
 
-        <button>Enviar consulta</button>
-      </form>
+      <div class="service-cards">
+        <div class="service-card">
+          <strong>Compras mayoristas</strong>
+          Condiciones especiales para compras en volumen. Preparación de presupuestos formales
+          y detalle de productos para licitaciones internas.
+        </div>
+
+        <div class="service-card">
+          <strong>Stock en productos clave</strong>
+          Priorizamos los modelos más usados por fuerzas y empresas para reducir tiempos de espera
+          y poder responder mejor a pedidos urgentes.
+        </div>
+
+        <div class="service-card">
+          <strong>Atención personalizada</strong>
+          Un mismo canal de contacto para seguimiento del pedido, cambios de talles y futuras reposiciones.
+        </div>
+      </div>
     </div>
   </section>
 
@@ -458,3 +551,4 @@
 
 </body>
 </html>
+
