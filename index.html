@@ -120,7 +120,6 @@
       overflow: hidden;
     }
 
-    /* capa oscura para que se lean bien las letras */
     .hero::after {
       content: "";
       position: absolute;
@@ -133,7 +132,7 @@
     .hero-inner {
       max-width: var(--max-width);
       margin: 0 auto;
-      position: relative;   /* para quedar por encima del fondo */
+      position: relative;
       z-index: 1;
     }
 
@@ -161,7 +160,6 @@
       text-shadow: 0 2px 4px rgba(0,0,0,0.7);
     }
 
-    /* Botones hero */
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -234,8 +232,6 @@
       gap: 20px;
     }
 
-    /* === AQUÍ VIENE EL NUEVO ESTILO DE LAS TARJETAS === */
-
     .card-category {
       height: 180px;
       border-radius: 16px;
@@ -246,7 +242,6 @@
       transition: transform .15s ease, box-shadow .15s ease;
     }
 
-    /* Marco interior blanco que cambia a rojo en hover */
     .card-category::before {
       content: "";
       position: absolute;
@@ -258,7 +253,6 @@
       transition: inset .15s ease, border-color .15s ease;
     }
 
-    /* Oscurecer parte baja para que el texto se lea bien */
     .card-category::after {
       content: "";
       position: absolute;
@@ -293,7 +287,7 @@
     .card-category-content {
       position: absolute;
       left: 22px;
-      bottom: 26px;       /* más arriba para que quede mejor centrado en Y */
+      bottom: 26px;
       z-index: 3;
       color: #fff;
       text-shadow: 0 2px 4px rgba(0,0,0,0.9);
@@ -390,7 +384,6 @@
       line-height: 1.55;
     }
 
-    /* Footer */
     footer {
       background: #000;
       color: #888;
@@ -444,7 +437,7 @@
     </div>
   </header>
 
-  <!-- HERO (texto delante de la foto) -->
+  <!-- HERO -->
   <section class="hero" id="hero-section">
     <div class="hero-inner">
       <h1 class="hero-title">Equipamiento táctico de confianza</h1>
@@ -479,7 +472,8 @@
       <p class="section-subtitle">Encontrá rápido lo que necesitás.</p>
 
       <div class="grid">
-        <a href="productos.html" class="card-category">
+        <!-- Botas tácticas -->
+        <a href="productos.html?cat=botas" class="card-category">
           <img src="categoria-1.png" />
           <div class="card-category-content">
             <h3>Botas tácticas</h3>
@@ -487,7 +481,8 @@
           </div>
         </a>
 
-        <a href="productos.html" class="card-category">
+        <!-- Cinturones y fundas -->
+        <a href="productos.html?cat=cinturones-fundas" class="card-category">
           <img src="categoria-2.png" />
           <div class="card-category-content">
             <h3>Cinturones y fundas</h3>
@@ -495,7 +490,8 @@
           </div>
         </a>
 
-        <a href="productos.html" class="card-category">
+        <!-- Credenciales -->
+        <a href="productos.html?cat=credenciales" class="card-category">
           <img src="categoria-3.png" />
           <div class="card-category-content">
             <h3>Credenciales</h3>
@@ -503,7 +499,8 @@
           </div>
         </a>
 
-        <a href="productos.html" class="card-category">
+        <!-- Indumentaria -->
+        <a href="productos.html?cat=indumentaria" class="card-category">
           <img src="categoria-4.png" />
           <div class="card-category-content">
             <h3>Indumentaria</h3>
@@ -564,9 +561,7 @@
 
     <div class="service-layout">
 
-      <!-- Tarjetas pequeñas -->
       <div class="service-cards">
-
         <div class="service-card">
           <strong>Asesoramiento personalizado</strong><br>
           Te ayudamos a elegir talles, combinaciones y cantidades según la necesidad operativa.
@@ -583,7 +578,6 @@
         </div>
       </div>
 
-      <!-- Texto más largo -->
       <div class="service-text">
         <h3 style="margin-top:0; font-size:18px; text-transform:uppercase;">
           Cómo trabajamos
@@ -617,7 +611,6 @@
 
   <!-- SLIDESHOW HERO -->
   <script>
-    // Cambiá estos nombres por los de tus fotos reales
     const heroPhotos = [
       'fondo-1.png',
       'fondo-2.png'
@@ -634,11 +627,10 @@
       currentHero = (currentHero + 1) % heroPhotos.length;
     }
 
-    // Primera carga
     updateHeroBackground();
-    // Cambiar cada 5 segundos (5000 ms)
     setInterval(updateHeroBackground, 5000);
   </script>
 
 </body>
 </html>
+
