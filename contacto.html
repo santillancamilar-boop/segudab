@@ -15,6 +15,10 @@
       --max-width: 1200px;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
@@ -170,24 +174,29 @@
       margin-bottom: 30px;
     }
 
-    /* TARJETA DATOS + MAPA */
-    .contact-info-wrapper {
-      max-width: 1000px;
-      margin: 0 auto 30px;
-      padding: 0 16px;
+    /* LAYOUT DOS COLUMNAS (datos+mapa / formulario) */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 26px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px; /* margen interno para que no toque el borde de la pantalla */
+      align-items: flex-start;
     }
 
-    .contact-card {
+    .contact-box {
       background: #fff;
-      padding: 20px 24px;
-      border-radius: 14px;
+      padding: 20px 24px 24px;
+      border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       text-align: left;
+      width: 100%;
     }
 
-    .contact-card h3 {
+    .contact-box h3 {
       margin-top: 0;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
       font-size: 20px;
       text-transform: uppercase;
     }
@@ -201,35 +210,7 @@
       color: var(--color-primary);
     }
 
-    .map {
-      margin-top: 20px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    /* TARJETA FORMULARIO */
-    .form-wrapper {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    .form-card {
-      background: #fff;
-      padding: 20px 24px 24px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      text-align: left;
-    }
-
-    .form-card h3 {
-      margin-top: 0;
-      margin-bottom: 14px;
-      font-size: 20px;
-      text-transform: uppercase;
-    }
-
+    /* FORM */
     form {
       display: flex;
       flex-direction: column;
@@ -253,11 +234,19 @@
       cursor: pointer;
       font-weight: 600;
       font-size: 15px;
-      width: 100%;
+      width: 100%; /* botón ocupa el ancho de la tarjeta, pero con padding a los costados */
     }
 
     button:hover {
       background: var(--color-primary-dark);
+    }
+
+    /* MAPA */
+    .map {
+      margin-top: 20px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     /* FOOTER */
@@ -272,6 +261,9 @@
 
     @media (max-width: 900px) {
       .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .contact-layout {
         grid-template-columns: 1fr;
       }
     }
@@ -333,9 +325,10 @@
       </p>
     </div>
 
-    <!-- TARJETA DATOS + MAPA -->
-    <div class="contact-info-wrapper">
-      <div class="contact-card">
+    <div class="contact-layout">
+
+      <!-- DATOS + MAPA -->
+      <div class="contact-box">
         <h3>Datos de contacto</h3>
 
         <div class="contact-item">
@@ -370,11 +363,9 @@
           </iframe>
         </div>
       </div>
-    </div>
 
-    <!-- TARJETA FORMULARIO -->
-    <div class="form-wrapper">
-      <div class="form-card">
+      <!-- FORMULARIO -->
+      <div class="contact-box">
         <h3>Enviá tu consulta</h3>
 
         <form id="contact-form">
@@ -386,8 +377,8 @@
           <button type="submit">Enviar por WhatsApp</button>
         </form>
       </div>
-    </div>
 
+    </div>
   </section>
 
   <!-- FOOTER -->
