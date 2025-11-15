@@ -86,29 +86,90 @@
       gap: 20px;
       font-size: 14px;
       text-transform: uppercase;
+      align-items: center;
     }
 
-    nav a {
+    /* enlaces principales del nav */
+    .nav-link {
       color: #fff;
       padding-bottom: 3px;
       border-bottom: 2px solid transparent;
       transition: .2s;
       text-decoration: none;
+      position: relative;
+      display: inline-block;
     }
 
-    nav a:hover {
+    .nav-link:hover {
       border-color: var(--color-primary);
       color: var(--color-accent);
     }
 
+    /* item que tiene dropdown */
+    .nav-item {
+      position: relative;
+    }
+
+    /* flechita ▼ chica */
+    .nav-link .caret {
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    /* DROPDOWN */
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #000;
+      min-width: 200px;
+      padding: 10px 0;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .15s ease, transform .15s ease;
+      z-index: 9999;
+      border-top: 2px solid var(--color-accent);
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .dropdown a:hover {
+      background: #111;
+      color: var(--color-accent);
+    }
+
+    /* botón de contacto */
     .nav-cta {
       background: var(--color-primary);
       padding: 8px 16px;
       border-radius: 999px;
       font-weight: 600;
+      border-bottom: none;
     }
 
-    /* HERO: ahora la foto está de fondo y el texto encima */
+    .nav-cta:hover {
+      background: var(--color-primary-dark);
+      color: #fff;
+    }
+
+    /* HERO */
     .hero {
       position: relative;
       color: #fff;
@@ -166,7 +227,6 @@
       gap: 10px;
     }
 
-    /* BOTONES GENERALES */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -429,10 +489,23 @@
       </a>
 
       <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
-        <a href="contacto.html" class="nav-cta">Consultar ahora</a>
+        <a href="index.html" class="nav-link">Inicio</a>
+
+        <!-- ITEM CON DROPDOWN -->
+        <div class="nav-item">
+          <a href="productos.html" class="nav-link">
+            Productos <span class="caret">▼</span>
+          </a>
+          <div class="dropdown">
+            <a href="productos.html?cat=botas">Calzado</a>
+            <a href="productos.html?cat=cinturones-fundas">Correjajes</a>
+            <a href="productos.html?cat=credenciales">Accesorios</a>
+            <a href="productos.html?cat=indumentaria">Indumentaria</a>
+          </div>
+        </div>
+
+        <a href="porque-elegirnos.html" class="nav-link">¿Por qué elegirnos?</a>
+        <a href="contacto.html" class="nav-link nav-cta">Consultar ahora</a>
       </nav>
     </div>
   </header>
@@ -472,7 +545,6 @@
       <p class="section-subtitle">Encontrá rápido lo que necesitás.</p>
 
       <div class="grid">
-        <!-- Botas tácticas -->
         <a href="productos.html?cat=botas" class="card-category">
           <img src="categoria-1.png" />
           <div class="card-category-content">
@@ -481,7 +553,6 @@
           </div>
         </a>
 
-        <!-- Cinturones y fundas -->
         <a href="productos.html?cat=cinturones-fundas" class="card-category">
           <img src="categoria-2.png" />
           <div class="card-category-content">
@@ -490,7 +561,6 @@
           </div>
         </a>
 
-        <!-- Credenciales -->
         <a href="productos.html?cat=credenciales" class="card-category">
           <img src="categoria-3.png" />
           <div class="card-category-content">
@@ -499,7 +569,6 @@
           </div>
         </a>
 
-        <!-- Indumentaria -->
         <a href="productos.html?cat=indumentaria" class="card-category">
           <img src="categoria-4.png" />
           <div class="card-category-content">
@@ -633,4 +702,3 @@
 
 </body>
 </html>
-
