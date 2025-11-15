@@ -219,38 +219,6 @@
       margin-bottom: 30px;
     }
 
-    /* FILTROS */
-    .filters {
-      background: #fff;
-      padding: 18px 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      text-align: left;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .filters h3 {
-      margin: 0 0 10px;
-      font-size: 16px;
-      text-transform: uppercase;
-    }
-
-    .filters-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .filters select {
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
     /* --- CATÁLOGO & CARRITO --- */
 
     .catalog-layout {
@@ -340,6 +308,45 @@
       background: var(--color-primary-dark);
     }
 
+    /* Columna derecha: filtros + carrito */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    /* FILTROS (ahora dentro de la sidebar) */
+    .filters {
+      background: #fff;
+      padding: 16px 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align: left;
+      width: 100%;
+    }
+
+    .filters h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filters select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      width: 100%;
+      max-width: 220px;
+    }
+
     /* Carrito */
     .cart-panel {
       background: #fff;
@@ -353,6 +360,7 @@
       width: 100%;
       justify-self: center;
       text-align: left;
+      align-self: flex-start;
     }
 
     .cart-title {
@@ -489,52 +497,6 @@
       background: var(--color-primary-dark);
     }
 
-    /* POR QUÉ ELEGIRNOS / CONTACTO (simple) */
-    .why-wrap {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      text-align: left;
-    }
-
-    .why-item {
-      background: #fff;
-      padding: 18px 20px;
-      border-left: 4px solid var(--color-primary);
-      border-radius: 8px;
-      width: 260px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    form {
-      max-width: 450px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    input,
-    textarea {
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-    }
-
-    button {
-      padding: 12px 18px;
-      background: var(--color-primary);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
     /* Footer */
     footer {
       background: #000;
@@ -554,6 +516,12 @@
       }
       .cart-panel {
         position: static;
+        max-width: none;
+      }
+      .sidebar {
+        max-width: 480px;
+        width: 100%;
+        margin: 0 auto;
       }
     }
   </style>
@@ -617,28 +585,6 @@
       <p class="section-subtitle">
         Catálogo orientativo. Los precios pueden variar según talle, modelo y cantidad. Consultá para presupuesto final.
       </p>
-    </div>
-
-    <!-- FILTROS -->
-    <div class="filters">
-      <h3>Filtrar productos</h3>
-      <div class="filters-row">
-        <select id="filter-category">
-          <option value="all">Todas las categorías</option>
-          <option value="calzado">Calzado táctico</option>
-          <option value="cinturones">Cinturones</option>
-          <option value="fundas">Fundas y pecheras</option>
-          <option value="credenciales">Credenciales</option>
-          <option value="uniformes">Uniformes</option>
-        </select>
-
-        <select id="filter-price">
-          <option value="all">Todos los precios</option>
-          <option value="low">Menos de $20.000</option>
-          <option value="mid">Entre $20.000 y $40.000</option>
-          <option value="high">Más de $40.000</option>
-        </select>
-      </div>
     </div>
 
     <div class="catalog-layout">
@@ -779,36 +725,60 @@
 
       </div>
 
-      <!-- CARRITO -->
-      <aside class="cart-panel">
-        <div class="cart-title">Carrito de compras (<span id="cart-count">0</span>)</div>
+      <!-- SIDEBAR: FILTROS + CARRITO -->
+      <div class="sidebar">
+        <!-- FILTROS -->
+        <div class="filters">
+          <h3>Filtrar productos</h3>
+          <div class="filters-row">
+            <select id="filter-category">
+              <option value="all">Todas las categorías</option>
+              <option value="calzado">Calzado táctico</option>
+              <option value="cinturones">Cinturones</option>
+              <option value="fundas">Fundas y pecheras</option>
+              <option value="credenciales">Credenciales</option>
+              <option value="uniformes">Uniformes</option>
+            </select>
 
-        <div id="cart-items" class="cart-items">
-          <div class="cart-empty">Todavía no agregaste productos.</div>
+            <select id="filter-price">
+              <option value="all">Todos los precios</option>
+              <option value="low">Menos de $20.000</option>
+              <option value="mid">Entre $20.000 y $40.000</option>
+              <option value="high">Más de $40.000</option>
+            </select>
+          </div>
         </div>
 
-        <div class="cart-total">
-          <span>Total estimado:</span>
-          <span id="cart-total">$0</span>
-        </div>
+        <!-- CARRITO -->
+        <aside class="cart-panel">
+          <div class="cart-title">Carrito de compras (<span id="cart-count">0</span>)</div>
 
-        <div class="cart-note">
-          Este carrito es orientativo. Para confirmar precios y stock, completá tus datos y envianos el pedido por WhatsApp.
-        </div>
+          <div id="cart-items" class="cart-items">
+            <div class="cart-empty">Todavía no agregaste productos.</div>
+          </div>
 
-        <div class="checkout-inputs">
-          <input id="checkout-nombre" type="text" placeholder="Nombre y apellido" />
-          <input id="checkout-telefono" type="text" placeholder="Teléfono" />
-          <input id="checkout-email" type="email" placeholder="Correo (opcional)" />
-        </div>
+          <div class="cart-total">
+            <span>Total estimado:</span>
+            <span id="cart-total">$0</span>
+          </div>
 
-        <button class="btn-cart" onclick="finalizarCompraWhatsApp()">
-          Finalizar compra por WhatsApp
-        </button>
-      </aside>
+          <div class="cart-note">
+            Este carrito es orientativo. Para confirmar precios y stock, completá tus datos y envianos el pedido por WhatsApp.
+          </div>
+
+          <div class="checkout-inputs">
+            <input id="checkout-nombre" type="text" placeholder="Nombre y apellido" />
+            <input id="checkout-telefono" type="text" placeholder="Teléfono" />
+            <input id="checkout-email" type="email" placeholder="Correo (opcional)" />
+          </div>
+
+          <button class="btn-cart" onclick="finalizarCompraWhatsApp()">
+            Finalizar compra por WhatsApp
+          </button>
+        </aside>
+      </div>
     </div>
   </section>
-
 
   <!-- FOOTER -->
   <footer>
@@ -1009,7 +979,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       loadCart();
       renderCart();
-      applyFilters(); // por si querés estado inicial limpio
+      applyFilters();
     });
   </script>
 
