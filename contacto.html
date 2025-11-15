@@ -172,11 +172,12 @@
 
     .contact-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
       gap: 30px;
-      max-width: var(--max-width);
+      max-width: 1000px;
       margin: 0 auto;
       align-items: flex-start;
+      padding: 0 10px; /* margen interno para que no se pegue al borde */
     }
 
     .contact-box {
@@ -185,6 +186,9 @@
       border-radius: 14px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       text-align: left;
+      max-width: 480px;   /* ancho máximo de la tarjeta */
+      width: 100%;
+      justify-self: center; /* la centra en su columna */
     }
 
     .contact-box h3 {
@@ -396,7 +400,6 @@
         return;
       }
 
-      // Texto del mensaje
       let texto = 'Hola Segudab, quiero hacer una consulta:%0A%0A';
       texto += 'Nombre: ' + nombre + '%0A';
       texto += 'Teléfono: ' + telefono + '%0A';
@@ -405,7 +408,6 @@
       }
       texto += '%0AMensaje:%0A' + consulta;
 
-      // Número de WhatsApp en formato internacional (Argentina móvil con 9): 54911...
       const numero = '5491137286846';
       const url = 'https://wa.me/' + numero + '?text=' + texto;
 
