@@ -248,32 +248,7 @@
       text-shadow: 0 2px 4px #000;
     }
 
-    /* NUEVO: Franjas rojas de separación */
-    .band {
-      background: var(--color-primary);
-      color: #fff;
-      padding: 14px 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-    }
-
-    .band-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      font-size: 14px;
-      flex-wrap: wrap;
-    }
-
-    .band-strong {
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* NUEVO: Pasos para comprar */
+    /* CÓMO HACER TU PEDIDO */
     .steps-grid {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -312,58 +287,54 @@
       color: #555;
     }
 
-    /* NUEVO: Servicio a fuerzas y empresas */
+    /* SERVICIO A FUERZAS Y EMPRESAS */
+
+    .service-section {
+      background: #EEEEEE;
+      padding: 60px 20px;
+    }
+
     .service-layout {
       max-width: var(--max-width);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 30px;
-      text-align: left;
-      align-items: start;
-    }
-
-    .service-text {
-      font-size: 14px;
-      color: #444;
-      background: #fff;
-      padding: 20px 22px;
-      border-radius: 14px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .service-text h3 {
-      margin-top: 0;
-      text-transform: uppercase;
-      font-size: 18px;
-    }
-
-    .service-text ul {
-      margin: 10px 0 0;
-      padding-left: 18px;
-    }
-
-    .service-text li {
-      margin-bottom: 6px;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 28px;
+      align-items: flex-start;
     }
 
     .service-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .service-card {
-      background: #fff;
-      padding: 14px 16px;
-      border-radius: 14px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      font-size: 13px;
+      background: #ffffff;
+      padding: 18px 20px;
+      border-radius: 16px;
+      border: 1px solid #dcdcdc;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.10);
+      font-size: 14px;
+      color: #444;
     }
 
-    .service-card strong {
-      display: block;
-      margin-bottom: 4px;
+    .service-text {
+      background: #ffffff;
+      padding: 24px 26px;
+      border-radius: 16px;
+      border: 1px solid #dcdcdc;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      font-size: 14px;
+      color: #333;
+      line-height: 1.55;
+    }
+
+    .service-card:hover,
+    .service-text:hover {
+      transform: translateY(-3px);
+      transition: .2s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.14);
     }
 
     /* Footer */
@@ -481,14 +452,6 @@
     </div>
   </section>
 
-  <!-- FRANJA ROJA 1 -->
-  <section class="band">
-    <div class="band-inner">
-      <span class="band-strong">Venta mayorista y minorista</span>
-      <span>Asesoramiento para fuerzas de seguridad, empresas y particulares.</span>
-    </div>
-  </section>
-
   <!-- CÓMO HACER TU PEDIDO -->
   <section class="section">
     <div class="section-inner">
@@ -528,60 +491,60 @@
     </div>
   </section>
 
-  <!-- FRANJA ROJA 2 -->
-  <section class="band">
-    <div class="band-inner">
-      <span class="band-strong">Equipamiento para equipos completos</span>
-      <span>Consultanos por packs especiales para fuerzas y empresas de seguridad.</span>
-    </div>
-  </section>
-
   <!-- SERVICIO A FUERZAS Y EMPRESAS -->
-  <section class="section">
+  <section class="section service-section">
     <div class="section-inner">
       <h2 class="section-title">Servicio a fuerzas y empresas</h2>
       <p class="section-subtitle">
-        Pensado para personal policial, empresas de seguridad privada y dependencias que necesitan equipar equipos completos.
+        Equipamiento confiable, asesoramiento profesional y entregas rápidas.
       </p>
     </div>
 
     <div class="service-layout">
-      <div class="service-text">
-        <h3>Equipamiento para equipos completos</h3>
-        <p>
-          Si necesitás uniformar a una fuerza, empresa o equipo de trabajo, podemos armar
-          propuestas integrales de equipamiento con distintas combinaciones de productos.
-        </p>
-        <ul>
-          <li>Pack borceguí + cinturón completo + funda o pechera.</li>
-          <li>Opciones por rangos de precio para diferentes jerarquías.</li>
-          <li>Asesoramiento sobre talles y modelos según tipo de servicio.</li>
-          <li>Posibilidad de repetir pedidos con el mismo estándar de equipamiento.</li>
-        </ul>
-        <p style="margin-top:10px;">
-          Para consultas más detalladas podés escribirnos desde la sección
-          <strong>Contacto</strong> o iniciar directo por WhatsApp desde cualquier página.
-        </p>
-      </div>
 
+      <!-- Tarjetas pequeñas -->
       <div class="service-cards">
+
         <div class="service-card">
-          <strong>Compras mayoristas</strong>
-          Condiciones especial(es) para compras en volumen. Preparación de presupuestos formales
-          y detalle de productos para licitaciones internas.
+          <strong>Asesoramiento personalizado</strong><br>
+          Te ayudamos a elegir talles, combinaciones y cantidades según la necesidad operativa.
         </div>
 
         <div class="service-card">
-          <strong>Stock en productos clave</strong>
-          Priorizamos los modelos más usados por fuerzas y empresas para reducir tiempos de espera
-          y poder responder mejor a pedidos urgentes.
+          <strong>Stock permanente</strong><br>
+          Disponibilidad en los modelos y talles más solicitados por fuerzas.
         </div>
 
         <div class="service-card">
-          <strong>Atención personalizada</strong>
-          Un mismo canal de contacto para seguimiento del pedido, cambios de talles y futuras reposiciones.
+          <strong>Precios mayoristas</strong><br>
+          Tarifas especiales para empresas de seguridad y compras institucionales.
         </div>
       </div>
+
+      <!-- Texto más largo -->
+      <div class="service-text">
+        <h3 style="margin-top:0; font-size:18px; text-transform:uppercase;">
+          Cómo trabajamos
+        </h3>
+
+        <p>
+          En Segudab entendemos la importancia de contar con equipamiento confiable todos los días.
+          Probamos nuestros modelos con usuarios reales, revisamos costuras y materiales y elegimos
+          insumos nacionales que respondan a uso intensivo.
+        </p>
+
+        <ul style="padding-left:18px;">
+          <li>Probamos calces y refuerzos con personal operativo.</li>
+          <li>Control de calidad antes de cada entrega.</li>
+          <li>Opciones de personalización para empresas y cuerpos de seguridad.</li>
+        </ul>
+
+        <p>
+          Si necesitás equipar a un equipo completo, te armamos un presupuesto a medida con
+          diferentes combinaciones de borceguíes, cinturones, fundas y uniformes.
+        </p>
+      </div>
+
     </div>
   </section>
 
@@ -592,5 +555,4 @@
 
 </body>
 </html>
-
 
