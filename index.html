@@ -144,7 +144,7 @@
       font-size: 15px;
     }
 
-    /* Botones hero (igual que contacto) */
+    /* Botones hero */
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -177,21 +177,26 @@
       background: var(--color-primary-dark);
     }
 
-    /* Hero image con logo (como en contacto) */
+    /* Hero image ahora como slideshow de fondo */
     .hero-image {
       height: 260px;
       border-radius: 18px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
       background: radial-gradient(circle at top left, #222 0, #000 60%, #050505 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-image img {
-      max-width: 70%;
-      max-height: 70%;
-      object-fit: contain;
+    /* Opcional: oscurecer un poquito para que se vea más pro */
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(0,0,0,0.4) 0, rgba(0,0,0,0.8) 60%);
+      pointer-events: none;
     }
 
     /* Aviso */
@@ -367,6 +372,7 @@
   <div class="top-bar">
     <span>☎ 011-4759-1224</span>
     <span>WhatsApp 11 3728-6846</span>
+    <span>segudab@hotmail.com</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
   </div>
 
@@ -413,10 +419,8 @@
         </div>
       </div>
 
-      <div class="hero-image">
-        <!-- mismo logo que en el header -->
-        <img src="logo.png" alt="Logo Segudab" />
-      </div>
+      <!-- Panel negro con slideshow de 2 fotos -->
+      <div class="hero-image" id="hero-slider"></div>
     </div>
   </section>
 
@@ -476,7 +480,7 @@
       </p>
     </div>
 
-  <div class="steps-grid">
+    <div class="steps-grid">
       <div class="step-card">
         <span class="step-number">Paso 1</span>
         <div class="step-title">Elegí los productos</div>
@@ -516,7 +520,10 @@
     </div>
 
     <div class="service-layout">
+
+      <!-- Tarjetas pequeñas -->
       <div class="service-cards">
+
         <div class="service-card">
           <strong>Asesoramiento personalizado</strong><br>
           Te ayudamos a elegir talles, combinaciones y cantidades según la necesidad operativa.
@@ -533,6 +540,7 @@
         </div>
       </div>
 
+      <!-- Texto más largo -->
       <div class="service-text">
         <h3 style="margin-top:0; font-size:18px; text-transform:uppercase;">
           Cómo trabajamos
@@ -563,6 +571,31 @@
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
+
+  <!-- SLIDESHOW HERO -->
+  <script>
+    // Cambiá estos nombres por los de tus fotos reales
+    const heroPhotos = [
+      'foto 1.png',
+      'foto 2.png'
+    ];
+
+    const slider = document.getElementById('hero-slider');
+    let currentHero = 0;
+
+    function updateHeroBackground() {
+      if (!slider) return;
+      const img = heroPhotos[currentHero];
+      slider.style.backgroundImage =
+        "radial-gradient(circle at top left, #222 0, #000 60%, #050505 100%), url('" + img + "')";
+      currentHero = (currentHero + 1) % heroPhotos.length;
+    }
+
+    // Primera carga
+    updateHeroBackground();
+    // Cambiar cada 5 segundos (5000 ms)
+    setInterval(updateHeroBackground, 5000);
+  </script>
 
 </body>
 </html>
