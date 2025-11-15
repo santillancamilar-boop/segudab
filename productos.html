@@ -16,9 +16,7 @@
       --max-width: 1200px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -168,9 +166,7 @@
       background: var(--color-primary-dark);
     }
 
-    .hero-buttons {
-      margin-top: 12px;
-    }
+    .hero-buttons { margin-top: 12px; }
 
     /* Aviso */
     .notice-bar {
@@ -183,9 +179,7 @@
     }
 
     /* Section */
-    .section {
-      padding: 50px 20px;
-    }
+    .section { padding: 50px 20px; }
 
     .section-inner {
       max-width: var(--max-width);
@@ -322,7 +316,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .filter-btn {
@@ -335,14 +329,34 @@
       text-transform: uppercase;
     }
 
-    .filter-btn:hover {
-      background: #eee;
-    }
+    .filter-btn:hover { background: #eee; }
 
     .filter-btn.active {
       background: var(--color-primary);
       border-color: var(--color-primary);
       color: #fff;
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .filters-row label {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .filters select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      width: 100%;
+      max-width: 220px;
     }
 
     /* Carrito */
@@ -383,9 +397,7 @@
       border-bottom: 1px dashed #eee;
     }
 
-    .cart-item:last-child {
-      border-bottom: none;
-    }
+    .cart-item:last-child { border-bottom: none; }
 
     .cart-item-main {
       display: flex;
@@ -394,9 +406,7 @@
       margin-bottom: 4px;
     }
 
-    .cart-item-name {
-      font-weight: 600;
-    }
+    .cart-item-name { font-weight: 600; }
 
     .cart-item-subtotal {
       font-weight: 600;
@@ -420,9 +430,7 @@
       background: #eee;
     }
 
-    .qty-btn:hover {
-      background: #ddd;
-    }
+    .qty-btn:hover { background: #ddd; }
 
     .remove-btn {
       background: #f8d7da;
@@ -430,9 +438,7 @@
       margin-left: auto;
     }
 
-    .remove-btn:hover {
-      background: #f1b0b7;
-    }
+    .remove-btn:hover { background: #f1b0b7; }
 
     .cart-item-qty {
       min-width: 18px;
@@ -491,9 +497,7 @@
       margin-top: 4px;
     }
 
-    .btn-cart:hover {
-      background: var(--color-primary-dark);
-    }
+    .btn-cart:hover { background: var(--color-primary-dark); }
 
     /* Footer */
     footer {
@@ -506,16 +510,9 @@
     }
 
     @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
-      .catalog-layout {
-        grid-template-columns: 1fr;
-      }
-      .cart-panel {
-        position: static;
-        max-width: none;
-      }
+      .hero-inner { grid-template-columns: 1fr; }
+      .catalog-layout { grid-template-columns: 1fr; }
+      .cart-panel { position: static; max-width: none; }
       .sidebar {
         max-width: 480px;
         width: 100%;
@@ -838,12 +835,25 @@
         <!-- FILTROS -->
         <div class="filters">
           <h3>Filtrar productos</h3>
+
+          <!-- Filtro por categoría -->
           <div class="filter-buttons">
             <button class="filter-btn active" data-category="all">Todos</button>
             <button class="filter-btn" data-category="botas">Botas tácticas</button>
             <button class="filter-btn" data-category="cinturones-fundas">Cinturones y fundas</button>
             <button class="filter-btn" data-category="credenciales">Credenciales</button>
             <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
+          </div>
+
+          <!-- Filtro por precio (aparte) -->
+          <div class="filters-row">
+            <label for="filter-price">Filtrar por precio:</label>
+            <select id="filter-price">
+              <option value="all">Todos los precios</option>
+              <option value="low">Menos de $20.000</option>
+              <option value="mid">Entre $20.000 y $40.000</option>
+              <option value="high">Más de $40.000</option>
+            </select>
           </div>
         </div>
 
@@ -1037,14 +1047,32 @@
       window.open(url, '_blank');
     }
 
-    /* FILTROS POR BOTONES */
+    /* FILTROS */
     let currentCategory = 'all';
     const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterPrice = document.getElementById('filter-price');
 
     function applyFilters() {
+      const priceFilter = filterPrice.value;
+
       document.querySelectorAll('.product-card').forEach(card => {
         const cardCat = card.dataset.category;
-        const show = (currentCategory === 'all' || cardCat === currentCategory);
+        const priceValue = Number(card.dataset.price);
+
+        let show = true;
+
+        // por categoría
+        if (currentCategory !== 'all' && cardCat !== currentCategory) {
+          show = false;
+        }
+
+        // por precio
+        if (priceFilter !== 'all') {
+          if (priceFilter === 'low' && priceValue >= 20000) show = false;
+          if (priceFilter === 'mid' && (priceValue < 20000 || priceValue > 40000)) show = false;
+          if (priceFilter === 'high' && priceValue <= 40000) show = false;
+        }
+
         card.style.display = show ? 'block' : 'none';
       });
     }
@@ -1057,6 +1085,8 @@
         applyFilters();
       });
     });
+
+    filterPrice.addEventListener('change', applyFilters);
 
     document.addEventListener('DOMContentLoaded', () => {
       loadCart();
