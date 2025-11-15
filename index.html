@@ -168,7 +168,7 @@
       background: var(--color-primary-dark);
     }
 
-    /* fila de botones */
+    /* fila de botones + logo */
     .hero-actions {
       display: flex;
       align-items: center;
@@ -177,25 +177,29 @@
       margin-top: 8px;
     }
 
+    .hero-logo-box {
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    .hero-logo-box img {
+      max-width: 80%;
+      max-height: 80%;
+      display: block;
+    }
+
     .hero-image {
       height: 300px;
       background: url('hero-botas.jpg') center/cover;
       border-radius: 18px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
       position: relative;
-    }
-
-    /* LOGO flotando arriba a la derecha del hero */
-    .hero-logo-floating {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      width: 85px;
-      height: 85px;
-      border-radius: 16px;
-      background: #000 url('logo-segudab-grande.png') center/contain no-repeat;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.6);
-      opacity: 0.95;
     }
 
     .hero-label {
@@ -427,13 +431,16 @@
           >
             Consulta mayorista
           </a>
+
+          <!-- logo al costado -->
+          <div class="hero-logo-box">
+            <img src="logo-segudab-grande.png" alt="Logo Segudab">
+          </div>
         </div>
       </div>
 
       <div class="hero-image">
-        <!-- logo flotando en el panel derecho -->
-        <div class="hero-logo-floating"></div>
-
+        <div class="hero-label">Borceguíes tácticos listos para entrega</div>
       </div>
     </div>
   </section>
