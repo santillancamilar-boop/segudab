@@ -86,6 +86,7 @@
       gap: 20px;
       font-size: 14px;
       text-transform: uppercase;
+      align-items: center;
     }
 
     nav a {
@@ -106,6 +107,54 @@
       padding: 8px 16px;
       border-radius: 999px;
       font-weight: 600;
+    }
+
+    /* === DROPDOWN PRODUCTOS === */
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link .caret {
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #000;
+      min-width: 200px;
+      padding: 10px 0;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .15s ease, transform .15s ease;
+      z-index: 9999;
+      border-top: 2px solid var(--color-accent);
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .dropdown a:hover {
+      background: #111;
+      color: var(--color-accent);
     }
 
     /* Hero */
@@ -497,16 +546,6 @@
 
     .btn-cart:hover { background: var(--color-primary-dark); }
 
-    /* Footer */
-    footer {
-      background: #000;
-      color: #888;
-      padding: 14px;
-      text-align: center;
-      font-size: 13px;
-      margin-top: 40px;
-    }
-
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; }
       .catalog-layout { grid-template-columns: 1fr; }
@@ -541,10 +580,22 @@
       </a>
 
       <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
-        <a href="contacto.html" class="nav-cta">Consultar ahora</a>
+        <a href="index.html" class="nav-link">Inicio</a>
+
+        <div class="nav-item">
+          <a href="productos.html" class="nav-link">
+            Productos <span class="caret">▼</span>
+          </a>
+          <div class="dropdown">
+            <a href="productos.html?cat=botas">Calzado</a>
+            <a href="productos.html?cat=correajes">Correajes</a>
+            <a href="productos.html?cat=accesorios">Accesorios</a>
+            <a href="productos.html?cat=indumentaria">Indumentaria</a>
+          </div>
+        </div>
+
+        <a href="porque-elegirnos.html" class="nav-link">¿Por qué elegirnos?</a>
+        <a href="contacto.html" class="nav-link nav-cta">Consultar ahora</a>
       </nav>
     </div>
   </header>
@@ -554,7 +605,7 @@
     <div class="hero-inner">
       <div>
         <h1 class="hero-title">Catálogo de productos</h1>
-        <p class="hero-subtitle">Botas, cinturones, fundas, credenciales e indumentaria</p>
+        <p class="hero-subtitle">Botas, correajes, accesorios e indumentaria</p>
 
         <p class="hero-text">
           Seleccioná los productos que necesitás y armá tu pedido. Luego podés enviarnos la consulta con el detalle
@@ -655,13 +706,13 @@
           </div>
         </div>
 
-        <!-- CINTURONES Y FUNDAS -->
+        <!-- CORREAJES -->
         <div class="product-card"
-             data-category="cinturones-fundas"
+             data-category="correajes"
              data-price="39000">
           <div class="product-image" style="background-image:url('cinturon-policial-completo.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Correaje</div>
+            <div class="product-tag">Correajes</div>
             <div class="product-name">Cinturón policial completo</div>
             <div class="product-desc">
               Incluye porta arma, porta cargador doble, porta esposas y porta bastón.
@@ -678,11 +729,11 @@
         </div>
 
         <div class="product-card"
-             data-category="cinturones-fundas"
+             data-category="correajes"
              data-price="26000">
           <div class="product-image" style="background-image:url('cinturon-simple.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Correaje</div>
+            <div class="product-tag">Correajes</div>
             <div class="product-name">Cinturón táctico simple</div>
             <div class="product-desc">
               Cinta de alta resistencia con hebilla rápida. Compatible con fundas modulares.
@@ -699,11 +750,11 @@
         </div>
 
         <div class="product-card"
-             data-category="cinturones-fundas"
+             data-category="correajes"
              data-price="28000">
           <div class="product-image" style="background-image:url('pechera-porta-radio.jpg');"></div>
           <div class="product-body">
-            <div class="product-tag">Correaje</div>
+            <div class="product-tag">Correajes</div>
             <div class="product-name">Pechera porta radio y credencial</div>
             <div class="product-desc">
               Regulable, resistente y con compartimentos múltiples para radio, credencial y lapiceras.
@@ -719,9 +770,9 @@
           </div>
         </div>
 
-        <!-- CREDENCIALES -->
+        <!-- ACCESORIOS -->
         <div class="product-card"
-             data-category="credenciales"
+             data-category="accesorios"
              data-price="12000">
           <div class="product-image" style="background-image:url('credencial-carpeta.jpg');"></div>
           <div class="product-body">
@@ -742,7 +793,7 @@
         </div>
 
         <div class="product-card"
-             data-category="credenciales"
+             data-category="accesorios"
              data-price="13500">
           <div class="product-image" style="background-image:url('credencial-billetera.jpg');"></div>
           <div class="product-body">
@@ -838,8 +889,8 @@
           <div class="filter-buttons">
             <button class="filter-btn active" data-category="all">Todos</button>
             <button class="filter-btn" data-category="botas">Botas tácticas</button>
-            <button class="filter-btn" data-category="cinturones-fundas">Cinturones y fundas</button>
-            <button class="filter-btn" data-category="credenciales">Credenciales</button>
+            <button class="filter-btn" data-category="correajes">Correajes</button>
+            <button class="filter-btn" data-category="accesorios">Accesorios</button>
             <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
           </div>
 
@@ -852,6 +903,10 @@
               <option value="mid">Entre $20.000 y $40.000</option>
               <option value="high">Más de $40.000</option>
             </select>
+
+            <button id="clear-filters" type="button" class="filter-btn">
+              Limpiar filtros
+            </button>
           </div>
         </div>
 
@@ -1049,11 +1104,12 @@
     let currentCategory = 'all';
     const filterButtons = document.querySelectorAll('.filter-btn');
     const filterPrice = document.getElementById('filter-price');
+    const clearFiltersBtn = document.getElementById('clear-filters');
 
     // Detectar categoría desde la URL
     function loadCategoryFromURL() {
       const params = new URLSearchParams(window.location.search);
-      const cat = params.get('cat'); // ej: botas, cintorunes-fundas, etc.
+      const cat = params.get('cat'); // ej: botas, correajes, accesorios...
 
       if (!cat) return;
 
@@ -1091,6 +1147,9 @@
     }
 
     filterButtons.forEach(btn => {
+      const cat = btn.dataset.category;
+      if (!cat || cat === 'all') return; // el de "Todos" también lo manejamos, pero igual aplica
+
       btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1099,7 +1158,31 @@
       });
     });
 
+    // que también funcione el botón "Todos"
+    const allBtn = document.querySelector('.filter-btn[data-category="all"]');
+    if (allBtn) {
+      allBtn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        allBtn.classList.add('active');
+        currentCategory = 'all';
+        applyFilters();
+      });
+    }
+
     filterPrice.addEventListener('change', applyFilters);
+
+    // Botón "Limpiar filtros"
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', () => {
+        currentCategory = 'all';
+        if (allBtn) {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          allBtn.classList.add('active');
+        }
+        filterPrice.value = 'all';
+        applyFilters();
+      });
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
       loadCart();
