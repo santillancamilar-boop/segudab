@@ -284,9 +284,7 @@
       font-weight: 600;
     }
 
-    .btn-small:hover {
-      background: var(--color-primary-dark);
-    }
+    .btn-small:hover { background: var(--color-primary-dark); }
 
     /* Columna derecha: filtros + carrito */
     .sidebar {
@@ -1052,6 +1050,21 @@
     const filterButtons = document.querySelectorAll('.filter-btn');
     const filterPrice = document.getElementById('filter-price');
 
+    // Detectar categoría desde la URL
+    function loadCategoryFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('cat'); // ej: botas, cintorunes-fundas, etc.
+
+      if (!cat) return;
+
+      const btn = document.querySelector(`.filter-btn[data-category="${cat}"]`);
+      if (btn) {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = cat;
+      }
+    }
+
     function applyFilters() {
       const priceFilter = filterPrice.value;
 
@@ -1091,6 +1104,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       loadCart();
       renderCart();
+      loadCategoryFromURL(); // lee ?cat= desde la URL
       applyFilters();
     });
   </script>
