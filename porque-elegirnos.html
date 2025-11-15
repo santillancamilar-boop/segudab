@@ -110,7 +110,7 @@
       font-weight: 600;
     }
 
-    /* Hero (NO tocamos su estructura, solo def ya existentes) */
+    /* Hero */
     .hero {
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
       color: #fff;
@@ -181,6 +181,7 @@
       cursor: pointer;
       transition: .15s;
       text-decoration: none;
+      font-size: 14px;
     }
 
     .btn-primary {
@@ -191,6 +192,14 @@
 
     .btn-primary:hover {
       background: var(--color-primary-dark);
+    }
+
+    /* contenedor de botones como en contacto */
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     /* Aviso */
@@ -399,7 +408,7 @@
     </div>
   </header>
 
-  <!-- HERO (panel negro que no tocamos de contenido) -->
+  <!-- HERO -->
   <section class="hero" id="por-que">
     <div class="hero-inner">
       <div>
@@ -417,8 +426,17 @@
           <li>Atención personalizada por WhatsApp y en local.</li>
         </ul>
 
-        <br />
-        <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
+        <!-- BOTONES como en contacto -->
+        <div class="hero-buttons">
+          <a href="productos.html" class="btn btn-primary">
+            Ver catálogo completo
+          </a>
+
+          <a href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
+             class="btn btn-primary" target="_blank" rel="noopener">
+            Consulta mayorista
+          </a>
+        </div>
       </div>
 
       <div class="hero-image">
