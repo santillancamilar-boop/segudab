@@ -158,11 +158,22 @@
       justify-content: center;
     }
 
-    .hero-image img {
-      max-width: 70%;
-      max-height: 70%;
-      object-fit: contain;
-    }
+  .hero-image {
+  height: 260px;              /* podés subirlo si querés más alto */
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  background: #000;           /* opcional, para que no se vea el radial */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;           /* IMPORTANTÍSIMO para que respete los bordes redondeados */
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* llena todo el cuadro sin deformarse */
+}
 
     /* BOTONES HERO */
     .btn {
