@@ -219,6 +219,38 @@
       margin-bottom: 30px;
     }
 
+    /* FILTROS */
+    .filters {
+      background: #fff;
+      padding: 18px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align: left;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .filters h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filters select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
     /* --- CATÁLOGO & CARRITO --- */
 
     .catalog-layout {
@@ -228,7 +260,7 @@
       grid-template-columns: minmax(0, 3fr) minmax(0, 1.3fr);
       gap: 24px;
       align-items: flex-start;
-      padding: 0 10px; /* margen interno para que nada se corte en los bordes */
+      padding: 0 10px;
       justify-content: center;
     }
 
@@ -319,7 +351,7 @@
       font-size: 14px;
       max-width: 360px;
       width: 100%;
-      justify-self: center; /* lo centra en su columna */
+      justify-self: center;
       text-align: left;
     }
 
@@ -457,8 +489,7 @@
       background: var(--color-primary-dark);
     }
 
-    /* POR QUÉ ELEGIRNOS / CONTACTO (simple, como en index) */
-
+    /* POR QUÉ ELEGIRNOS / CONTACTO (simple) */
     .why-wrap {
       max-width: 900px;
       margin: auto;
@@ -551,8 +582,7 @@
       <nav>
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
-        <a href="por-que-elegirnos.html">¿Por qué elegirnos?</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
         <a href="contacto.html" class="nav-cta">Consultar ahora</a>
       </nav>
     </div>
@@ -580,7 +610,7 @@
   <!-- AVISO -->
   <div class="notice-bar">Insignias policiales se venden únicamente a personal de fuerzas con identificación.</div>
 
-  <!-- CATÁLOGO + CARRITO -->
+  <!-- SECCIÓN CATÁLOGO -->
   <section class="section">
     <div class="section-inner" style="text-align:left;">
       <h2 class="section-title">Productos destacados</h2>
@@ -589,12 +619,36 @@
       </p>
     </div>
 
+    <!-- FILTROS -->
+    <div class="filters">
+      <h3>Filtrar productos</h3>
+      <div class="filters-row">
+        <select id="filter-category">
+          <option value="all">Todas las categorías</option>
+          <option value="calzado">Calzado táctico</option>
+          <option value="cinturones">Cinturones</option>
+          <option value="fundas">Fundas y pecheras</option>
+          <option value="credenciales">Credenciales</option>
+          <option value="uniformes">Uniformes</option>
+        </select>
+
+        <select id="filter-price">
+          <option value="all">Todos los precios</option>
+          <option value="low">Menos de $20.000</option>
+          <option value="mid">Entre $20.000 y $40.000</option>
+          <option value="high">Más de $40.000</option>
+        </select>
+      </div>
+    </div>
+
     <div class="catalog-layout">
       <!-- PRODUCTOS -->
       <div class="product-grid">
 
         <!-- Producto 1 -->
-        <div class="product-card">
+        <div class="product-card"
+             data-category="calzado"
+             data-price="45000">
           <div class="product-image" style="background-image:url('borceguies-negros.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Calzado táctico</div>
@@ -604,7 +658,9 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$45.000</span>
-              <button class="btn-small" data-name="Borceguí táctico negro" data-price="45000">
+              <button class="btn-small"
+                      data-name="Borceguí táctico negro"
+                      data-price="45000">
                 Agregar
               </button>
             </div>
@@ -612,7 +668,9 @@
         </div>
 
         <!-- Producto 2 -->
-        <div class="product-card">
+        <div class="product-card"
+             data-category="calzado"
+             data-price="48000">
           <div class="product-image" style="background-image:url('borceguies-arena.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Calzado táctico</div>
@@ -622,7 +680,9 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$48.000</span>
-              <button class="btn-small" data-name="Borceguí color arena" data-price="48000">
+              <button class="btn-small"
+                      data-name="Borceguí color arena"
+                      data-price="48000">
                 Agregar
               </button>
             </div>
@@ -630,7 +690,9 @@
         </div>
 
         <!-- Producto 3 -->
-        <div class="product-card">
+        <div class="product-card"
+             data-category="cinturones"
+             data-price="39000">
           <div class="product-image" style="background-image:url('cinturon-policial.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Cinturones</div>
@@ -640,7 +702,9 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$39.000</span>
-              <button class="btn-small" data-name="Cinturón policial completo" data-price="39000">
+              <button class="btn-small"
+                      data-name="Cinturón policial completo"
+                      data-price="39000">
                 Agregar
               </button>
             </div>
@@ -648,7 +712,9 @@
         </div>
 
         <!-- Producto 4 -->
-        <div class="product-card">
+        <div class="product-card"
+             data-category="fundas"
+             data-price="28000">
           <div class="product-image" style="background-image:url('funda-pechera.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Fundas y pecheras</div>
@@ -658,7 +724,9 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$28.000</span>
-              <button class="btn-small" data-name="Pechera porta radio y credencial" data-price="28000">
+              <button class="btn-small"
+                      data-name="Pechera porta radio y credencial"
+                      data-price="28000">
                 Agregar
               </button>
             </div>
@@ -666,7 +734,9 @@
         </div>
 
         <!-- Producto 5 -->
-        <div class="product-card">
+        <div class="product-card"
+             data-category="credenciales"
+             data-price="12000">
           <div class="product-image" style="background-image:url('credencial-policia.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Credenciales</div>
@@ -676,7 +746,9 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$12.000</span>
-              <button class="btn-small" data-name="Carpeta porta credencial" data-price="12000">
+              <button class="btn-small"
+                      data-name="Carpeta porta credencial"
+                      data-price="12000">
                 Agregar
               </button>
             </div>
@@ -684,7 +756,9 @@
         </div>
 
         <!-- Producto 6 -->
-        <div class="product-card">
+        <div class="product-card"
+             data-category="uniformes"
+             data-price="32000">
           <div class="product-image" style="background-image:url('uniforme-pantalon.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Uniformes</div>
@@ -694,7 +768,9 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$32.000</span>
-              <button class="btn-small" data-name="Pantalón táctico reforzado" data-price="32000">
+              <button class="btn-small"
+                      data-name="Pantalón táctico reforzado"
+                      data-price="32000">
                 Agregar
               </button>
             </div>
@@ -739,7 +815,7 @@
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO + LOCALSTORAGE + WHATSAPP -->
+  <!-- SCRIPT CARRITO + LOCALSTORAGE + WHATSAPP + FILTROS -->
   <script>
     const CART_KEY = 'segudab_cart';
     let cart = [];
@@ -834,7 +910,7 @@
       }
     }
 
-    // Botones "Agregar"
+    // Botones "Agregar" de productos
     document.querySelectorAll('.btn-small').forEach(btn => {
       btn.addEventListener('click', () => {
         const name = btn.getAttribute('data-name');
@@ -899,12 +975,43 @@
       window.open(url, '_blank');
     }
 
+    // FILTROS
+    const filterCategory = document.getElementById('filter-category');
+    const filterPrice = document.getElementById('filter-price');
+
+    function applyFilters() {
+      const cat = filterCategory.value;
+      const price = filterPrice.value;
+
+      document.querySelectorAll('.product-card').forEach(card => {
+        const category = card.dataset.category;
+        const priceValue = Number(card.dataset.price);
+
+        let show = true;
+
+        if (cat !== 'all' && category !== cat) {
+          show = false;
+        }
+
+        if (price !== 'all') {
+          if (price === 'low' && priceValue >= 20000) show = false;
+          if (price === 'mid' && (priceValue < 20000 || priceValue > 40000)) show = false;
+          if (price === 'high' && priceValue <= 40000) show = false;
+        }
+
+        card.style.display = show ? 'block' : 'none';
+      });
+    }
+
+    filterCategory.addEventListener('change', applyFilters);
+    filterPrice.addEventListener('change', applyFilters);
+
     document.addEventListener('DOMContentLoaded', () => {
       loadCart();
       renderCart();
+      applyFilters(); // por si querés estado inicial limpio
     });
   </script>
 
 </body>
 </html>
-
