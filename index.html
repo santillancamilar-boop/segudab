@@ -168,9 +168,29 @@
       background: var(--color-primary-dark);
     }
 
+    /* botón secundario (mayorista) */
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: #ffecec;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     .hero-image {
       height: 300px;
-      background: url('hero-botas.jpg') center/cover;
+      background:
+        #000
+        url('logo-segudab-grande.png') center/contain no-repeat;
       border-radius: 18px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
       position: relative;
@@ -288,7 +308,6 @@
     }
 
     /* SERVICIO A FUERZAS Y EMPRESAS */
-
     .service-section {
       background: #EEEEEE;
       padding: 60px 20px;
@@ -391,11 +410,21 @@
           Materiales de alto rendimiento y fabricación nacional pensados para el trabajo diario de fuerzas de seguridad.
         </p>
 
-        <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
+        <div class="hero-buttons">
+          <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
+          <a
+            href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
+            class="btn btn-secondary"
+            target="_blank"
+            rel="noopener"
+          >
+            Consulta mayorista
+          </a>
+        </div>
       </div>
 
       <div class="hero-image">
-        <div class="hero-label">Borceguíes tácticos listos para entrega</div>
+        <div class="hero-label">Industria argentina — Venta mayorista y minorista</div>
       </div>
     </div>
   </section>
