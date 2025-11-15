@@ -16,9 +16,7 @@
       --max-width: 1200px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -149,6 +147,7 @@
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       padding: 12px 24px;
       border-radius: 999px;
       text-transform: uppercase;
@@ -156,6 +155,7 @@
       cursor: pointer;
       transition: .15s;
       text-decoration: none;
+      border: none;
     }
 
     .btn-primary {
@@ -168,29 +168,26 @@
       background: var(--color-primary-dark);
     }
 
-    /* botón secundario (mayorista) */
-    .btn-secondary {
-      background: transparent;
-      color: var(--color-primary);
-      border: 2px solid var(--color-primary);
-      box-shadow: none;
-    }
-
-    .btn-secondary:hover {
-      background: #ffecec;
-    }
-
-    .hero-buttons {
+    /* fila de botones + logo (como en contacto) */
+    .hero-actions {
       display: flex;
+      align-items: center;
+      gap: 14px;
       flex-wrap: wrap;
-      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .hero-logo-box {
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      background: #111 url('logo-segudab-grande.png') center/contain no-repeat;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
     }
 
     .hero-image {
       height: 300px;
-      background:
-        #000
-        url('logo-segudab-grande.png') center/contain no-repeat;
+      background: url('hero-botas.jpg') center/cover;
       border-radius: 18px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
       position: relative;
@@ -224,7 +221,7 @@
     .section-inner {
       max-width: var(--max-width);
       margin: 0 auto;
-      text-align: center;
+      text-align:center;
     }
 
     .section-title {
@@ -366,6 +363,9 @@
       .service-layout {
         grid-template-columns: 1fr;
       }
+      .hero-actions {
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
@@ -410,21 +410,26 @@
           Materiales de alto rendimiento y fabricación nacional pensados para el trabajo diario de fuerzas de seguridad.
         </p>
 
-        <div class="hero-buttons">
+        <div class="hero-actions">
           <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
+
+          <!-- botón rojo para mayorista -->
           <a
-            href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
-            class="btn btn-secondary"
+            href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quiero%20consultar%20por%20compras%20mayoristas"
+            class="btn btn-primary"
             target="_blank"
             rel="noopener"
           >
             Consulta mayorista
           </a>
+
+          <!-- logo al costado -->
+          <div class="hero-logo-box"></div>
         </div>
       </div>
 
       <div class="hero-image">
-        <div class="hero-label">Industria argentina — Venta mayorista y minorista</div>
+        <div class="hero-label">Borceguíes tácticos listos para entrega</div>
       </div>
     </div>
   </section>
@@ -577,4 +582,3 @@
 
 </body>
 </html>
-
