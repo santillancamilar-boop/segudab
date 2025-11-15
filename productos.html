@@ -497,6 +497,26 @@
       background: var(--color-primary-dark);
     }
 
+    /* BOTÓN MAYORISTA DESTACADO */
+    .btn-cart-secondary {
+      width: 100%;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 2px solid var(--color-primary);
+      background: #fff;
+      color: var(--color-primary);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    .btn-cart-secondary:hover {
+      background: #ffecec;
+    }
+
     /* Footer */
     footer {
       background: #000;
@@ -776,10 +796,8 @@
             Finalizar compra por WhatsApp
           </button>
 
-          <!-- Botón mayorista dentro del carrito -->
-          <button class="btn-cart" type="button"
-                  style="margin-top:6px; background:#111;"
-                  onclick="consultarMayorista()">
+          <!-- Botón mayorista bien destacado -->
+          <button class="btn-cart-secondary" type="button" onclick="consultarMayorista()">
             Consultar por mayorista
           </button>
         </aside>
@@ -1000,3 +1018,4 @@
 
 </body>
 </html>
+
