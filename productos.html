@@ -306,11 +306,15 @@
     .cart-panel {
       background: #fff;
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: 16px 18px 18px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
       position: sticky;
       top: 90px;
       font-size: 14px;
+      max-width: 360px;
+      width: 100%;
+      justify-self: center;
+      text-align: left;
     }
 
     .cart-title {
@@ -330,9 +334,65 @@
     }
 
     .cart-item {
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #eee;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-main {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 6px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+    }
+
+    .cart-item-subtotal {
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .qty-btn, .remove-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 2px 7px;
+      cursor: pointer;
+      font-size: 12px;
+      background: #eee;
+    }
+
+    .qty-btn:hover {
+      background: #ddd;
+    }
+
+    .remove-btn {
+      background: #f8d7da;
+      color: #900;
+      margin-left: auto;
+    }
+
+    .remove-btn:hover {
+      background: #f1b0b7;
+    }
+
+    .cart-item-qty {
+      min-width: 18px;
+      text-align: center;
+      font-weight: 600;
     }
 
     .cart-empty {
@@ -348,6 +408,7 @@
       align-items: center;
       font-weight: 700;
       margin-bottom: 10px;
+      margin-top: 4px;
     }
 
     .cart-note {
@@ -382,6 +443,7 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
+      margin-top: 4px;
     }
 
     .btn-cart:hover {
@@ -480,7 +542,6 @@
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
-        <a href="contacto.html">Contacto</a>
         <a href="contacto.html" class="nav-cta">Consultar ahora</a>
       </nav>
     </div>
@@ -717,99 +778,177 @@
   </footer>
 
   <!-- SCRIPT CARRITO + WHATSAPP -->
-  <script>
-    const cart = [];
+<script>
+  // Clave que vamos a usar en localStorage
+  const CART_KEY = 'segudab_cart';
 
-    function renderCart() {
-      const cartItemsContainer = document.getElementById('cart-items');
-      const cartCount = document.getElementById('cart-count');
-      const cartTotal = document.getElementById('cart-total');
+  // Carrito en memoria
+  let cart = [];
 
-      cartItemsContainer.innerHTML = '';
-
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<div class="cart-empty">Todavía no agregaste productos.</div>';
-        cartCount.textContent = '0';
-        cartTotal.textContent = '$0';
-        return;
+  // Cargar carrito desde localStorage
+  function loadCart() {
+    const stored = localStorage.getItem(CART_KEY);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        cart = parsed;
       }
+    } catch (e) {
+      console.error('Error leyendo carrito de localStorage', e);
+    }
+  }
 
-      let total = 0;
-      let count = 0;
+  // Guardar carrito en localStorage
+  function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
 
-      cart.forEach(item => {
-        total += item.price * item.qty;
-        count += item.qty;
+  function renderCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
 
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        div.innerHTML = `
-          <span>${item.qty}× ${item.name}</span>
-          <span>$${(item.price * item.qty).toLocaleString('es-AR')}</span>
-        `;
-        cartItemsContainer.appendChild(div);
-      });
+    cartItemsContainer.innerHTML = '';
 
-      cartCount.textContent = count;
-      cartTotal.textContent = '$' + total.toLocaleString('es-AR');
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<div class="cart-empty">Todavía no agregaste productos.</div>';
+      cartCount.textContent = '0';
+      cartTotal.textContent = '$0';
+      return;
     }
 
-    function addToCart(name, price) {
-      const existing = cart.find(p => p.name === name);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({ name, price: Number(price), qty: 1 });
-      }
-      renderCart();
-    }
+    let total = 0;
+    let count = 0;
 
-    document.querySelectorAll('.btn-small').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const name = btn.getAttribute('data-name');
-        const price = btn.getAttribute('data-price');
-        addToCart(name, price);
-      });
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      count += item.qty;
+
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-main">
+          <span class="cart-item-name">${item.name}</span>
+          <span class="cart-item-subtotal">$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+        </div>
+        <div class="cart-item-actions">
+          <button class="qty-btn" data-action="decrease" data-name="${item.name}">−</button>
+          <span class="cart-item-qty">${item.qty}</span>
+          <button class="qty-btn" data-action="increase" data-name="${item.name}">+</button>
+          <button class="remove-btn" data-action="remove" data-name="${item.name}">✕</button>
+        </div>
+      `;
+      cartItemsContainer.appendChild(div);
     });
 
-    function finalizarCompraWhatsApp() {
-      if (cart.length === 0) {
-        alert('Primero agregá productos al carrito.');
-        return;
-      }
+    cartCount.textContent = count;
+    cartTotal.textContent = '$' + total.toLocaleString('es-AR');
+  }
 
-      const nombre = document.getElementById('checkout-nombre').value.trim();
-      const telefono = document.getElementById('checkout-telefono').value.trim();
-      const email = document.getElementById('checkout-email').value.trim();
-
-      if (!nombre || !telefono) {
-        alert('Por favor completá nombre y teléfono para enviar el pedido.');
-        return;
-      }
-
-      let texto = 'Hola Segudab, quiero hacer un pedido desde la web:%0A%0A';
-      texto += 'Nombre: ' + nombre + '%0A';
-      texto += 'Teléfono: ' + telefono + '%0A';
-      if (email) {
-        texto += 'Email: ' + email + '%0A';
-      }
-      texto += '%0AProductos:%0A';
-
-      let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.qty;
-        texto += '- ' + item.qty + ' x ' + item.name + '%0A';
-      });
-
-      texto += '%0ATotal estimado: $' + total.toLocaleString('es-AR') + '%0A';
-      texto += '%0A¿Me podrían confirmar stock, precio final y formas de pago?';
-
-      const numero = '5491137286846'; // WhatsApp de Segudab
-      const url = 'https://wa.me/' + numero + '?text=' + texto;
-
-      window.open(url, '_blank');
+  function addToCart(name, price) {
+    const existing = cart.find(p => p.name === name);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ name, price: Number(price), qty: 1 });
     }
-  </script>
+    saveCart();
+    renderCart();
+  }
+
+  function updateItemQty(name, delta) {
+    const item = cart.find(p => p.name === name);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty < 1) {
+      item.qty = 1; // si quiere 0 que use eliminar
+    }
+    saveCart();
+    renderCart();
+  }
+
+  function removeFromCart(name) {
+    const index = cart.findIndex(p => p.name === name);
+    if (index !== -1) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
+    }
+  }
+
+  // Botones "Agregar" en las tarjetas
+  document.querySelectorAll('.btn-small').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.getAttribute('data-name');
+      const price = btn.getAttribute('data-price');
+      addToCart(name, price);
+    });
+  });
+
+  // Eventos dentro del carrito (sumar, restar, eliminar)
+  document.getElementById('cart-items').addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+
+    const action = btn.dataset.action;
+    const name = btn.dataset.name;
+    if (!action || !name) return;
+
+    if (action === 'increase') {
+      updateItemQty(name, 1);
+    } else if (action === 'decrease') {
+      updateItemQty(name, -1);
+    } else if (action === 'remove') {
+      removeFromCart(name);
+    }
+  });
+
+  function finalizarCompraWhatsApp() {
+    if (cart.length === 0) {
+      alert('Primero agregá productos al carrito.');
+      return;
+    }
+
+    const nombre = document.getElementById('checkout-nombre').value.trim();
+    const telefono = document.getElementById('checkout-telefono').value.trim();
+    const email = document.getElementById('checkout-email').value.trim();
+
+    if (!nombre || !telefono) {
+      alert('Por favor completá nombre y teléfono para enviar el pedido.');
+      return;
+    }
+
+    let texto = 'Hola Segudab, quiero hacer un pedido desde la web:%0A%0A';
+    texto += 'Nombre: ' + nombre + '%0A';
+    texto += 'Teléfono: ' + telefono + '%0A';
+    if (email) {
+      texto += 'Email: ' + email + '%0A';
+    }
+    texto += '%0AProductos:%0A';
+
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      texto += '- ' + item.qty + ' x ' + item.name + '%0A';
+    });
+
+    texto += '%0ATotal estimado: $' + total.toLocaleString('es-AR') + '%0A';
+    texto += '%0A¿Me podrían confirmar stock, precio final y formas de pago?';
+
+    const numero = '5491137286846'; // WhatsApp de Segudab
+    const url = 'https://wa.me/' + numero + '?text=' + texto;
+
+    window.open(url, '_blank');
+  }
+
+  // Al cargar la página: levantar carrito guardado y pintarlo
+  document.addEventListener('DOMContentLoaded', () => {
+    loadCart();
+    renderCart();
+  });
+</script>
+
 
 </body>
 </html>
