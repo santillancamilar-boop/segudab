@@ -16,9 +16,7 @@
       --max-width: 1200px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -63,7 +61,7 @@
       color: #fff;
       text-decoration: none;
     }
-    
+
     .logo-img {
       width: 48px;
       height: 48px;
@@ -88,6 +86,7 @@
       gap: 20px;
       font-size: 14px;
       text-transform: uppercase;
+      align-items: center;
     }
 
     nav a {
@@ -108,6 +107,54 @@
       padding: 8px 16px;
       border-radius: 999px;
       font-weight: 600;
+    }
+
+    /* === DROPDOWN PRODUCTOS === */
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link .caret {
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #000;
+      min-width: 200px;
+      padding: 10px 0;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .15s ease, transform .15s ease;
+      z-index: 9999;
+      border-top: 2px solid var(--color-accent);
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .dropdown a:hover {
+      background: #111;
+      color: var(--color-accent);
     }
 
     /* Hero */
@@ -194,7 +241,6 @@
       background: var(--color-primary-dark);
     }
 
-    /* contenedor de botones como en contacto */
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -373,7 +419,7 @@
         grid-template-columns: 1fr;
       }
       .why-text-block {
-        order: -1; /* texto largo arriba en móvil */
+        order: -1;
       }
     }
   </style>
@@ -400,10 +446,22 @@
       </a>
 
       <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="porque-elegirnos.html">¿Por qué elegirnos?</a>
-        <a href="contacto.html" class="nav-cta">Consultar ahora</a>
+        <a href="index.html" class="nav-link">Inicio</a>
+
+        <div class="nav-item">
+          <a href="productos.html" class="nav-link">
+            Productos <span class="caret">▼</span>
+          </a>
+          <div class="dropdown">
+            <a href="productos.html?cat=botas">Calzado</a>
+            <a href="productos.html?cat=correajes">Correajes</a>
+            <a href="productos.html?cat=accesorios">Accesorios</a>
+            <a href="productos.html?cat=indumentaria">Indumentaria</a>
+          </div>
+        </div>
+
+        <a href="porque-elegirnos.html" class="nav-link">¿Por qué elegirnos?</a>
+        <a href="contacto.html" class="nav-link nav-cta">Consultar ahora</a>
       </nav>
     </div>
   </header>
@@ -426,7 +484,6 @@
           <li>Atención personalizada por WhatsApp y en local.</li>
         </ul>
 
-        <!-- BOTONES como en contacto -->
         <div class="hero-buttons">
           <a href="productos.html" class="btn btn-primary">
             Ver catálogo completo
@@ -438,6 +495,13 @@
           </a>
         </div>
       </div>
+
+      <div class="hero-image">
+        <div class="hero-label">
+          Equipamiento probado en servicio real
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- AVISO -->
