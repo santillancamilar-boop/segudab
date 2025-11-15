@@ -248,6 +248,31 @@
       text-shadow: 0 2px 4px #000;
     }
 
+    /* NUEVO: Franjas rojas de separación */
+    .band {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 14px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    .band-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .band-strong {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     /* NUEVO: Pasos para comprar */
     .steps-grid {
       max-width: var(--max-width);
@@ -456,6 +481,14 @@
     </div>
   </section>
 
+  <!-- FRANJA ROJA 1 -->
+  <section class="band">
+    <div class="band-inner">
+      <span class="band-strong">Venta mayorista y minorista</span>
+      <span>Asesoramiento para fuerzas de seguridad, empresas y particulares.</span>
+    </div>
+  </section>
+
   <!-- CÓMO HACER TU PEDIDO -->
   <section class="section">
     <div class="section-inner">
@@ -495,6 +528,14 @@
     </div>
   </section>
 
+  <!-- FRANJA ROJA 2 -->
+  <section class="band">
+    <div class="band-inner">
+      <span class="band-strong">Equipamiento para equipos completos</span>
+      <span>Consultanos por packs especiales para fuerzas y empresas de seguridad.</span>
+    </div>
+  </section>
+
   <!-- SERVICIO A FUERZAS Y EMPRESAS -->
   <section class="section">
     <div class="section-inner">
@@ -526,7 +567,7 @@
       <div class="service-cards">
         <div class="service-card">
           <strong>Compras mayoristas</strong>
-          Condiciones especiales para compras en volumen. Preparación de presupuestos formales
+          Condiciones especial(es) para compras en volumen. Preparación de presupuestos formales
           y detalle de productos para licitaciones internas.
         </div>
 
@@ -551,4 +592,5 @@
 
 </body>
 </html>
+
 
