@@ -170,28 +170,22 @@
       margin-bottom: 30px;
     }
 
-    .contact-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 30px;
+    /* TARJETA DATOS + MAPA */
+    .contact-info-wrapper {
       max-width: 1000px;
-      margin: 0 auto;
-      align-items: flex-start;
-      padding: 0 10px; /* margen interno para que no se pegue al borde */
+      margin: 0 auto 30px;
+      padding: 0 16px;
     }
 
-    .contact-box {
+    .contact-card {
       background: #fff;
       padding: 20px 24px;
       border-radius: 14px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       text-align: left;
-      max-width: 480px;   /* ancho máximo de la tarjeta */
-      width: 100%;
-      justify-self: center; /* la centra en su columna */
     }
 
-    .contact-box h3 {
+    .contact-card h3 {
       margin-top: 0;
       margin-bottom: 10px;
       font-size: 20px;
@@ -207,7 +201,35 @@
       color: var(--color-primary);
     }
 
-    /* FORM */
+    .map {
+      margin-top: 20px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* TARJETA FORMULARIO */
+    .form-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .form-card {
+      background: #fff;
+      padding: 20px 24px 24px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: left;
+    }
+
+    .form-card h3 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
     form {
       display: flex;
       flex-direction: column;
@@ -231,18 +253,11 @@
       cursor: pointer;
       font-weight: 600;
       font-size: 15px;
+      width: 100%;
     }
 
     button:hover {
       background: var(--color-primary-dark);
-    }
-
-    /* MAPA */
-    .map {
-      margin-top: 20px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     /* FOOTER */
@@ -257,9 +272,6 @@
 
     @media (max-width: 900px) {
       .hero-inner {
-        grid-template-columns: 1fr;
-      }
-      .contact-layout {
         grid-template-columns: 1fr;
       }
     }
@@ -321,10 +333,9 @@
       </p>
     </div>
 
-    <div class="contact-layout">
-
-      <!-- DATOS -->
-      <div class="contact-box">
+    <!-- TARJETA DATOS + MAPA -->
+    <div class="contact-info-wrapper">
+      <div class="contact-card">
         <h3>Datos de contacto</h3>
 
         <div class="contact-item">
@@ -347,7 +358,6 @@
           <strong>Dirección:</strong> Av. San Martín 1668, Caseros, Buenos Aires
         </div>
 
-        <!-- MAPA EXACTO -->
         <div class="map">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.447453815018!2d-58.57355682360992!3d-34.61539465881379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb86acba48b4b%3A0x1724f75c92c93bfb!2sAv.%20San%20Mart%C3%ADn%201668%2C%20B1678%20Caseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1731624797000!5m2!1ses-419!2sar" 
@@ -359,11 +369,12 @@
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
-
       </div>
+    </div>
 
-      <!-- FORMULARIO -->
-      <div class="contact-box">
+    <!-- TARJETA FORMULARIO -->
+    <div class="form-wrapper">
+      <div class="form-card">
         <h3>Enviá tu consulta</h3>
 
         <form id="contact-form">
@@ -374,10 +385,9 @@
 
           <button type="submit">Enviar por WhatsApp</button>
         </form>
-
       </div>
-
     </div>
+
   </section>
 
   <!-- FOOTER -->
@@ -417,3 +427,4 @@
 
 </body>
 </html>
+
