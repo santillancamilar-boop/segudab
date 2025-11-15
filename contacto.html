@@ -15,9 +15,7 @@
       --max-width: 1200px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -141,14 +139,55 @@
     .hero-text {
       color: #ddd;
       font-size: 15px;
-      margin-bottom: 10px;
+      margin-bottom: 18px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .hero-image {
       height: 260px;
-      background: url('contacto-seguridad.jpg') center/cover;
       border-radius: 18px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      background: radial-gradient(circle at top left, #222 0, #000 60%, #050505 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      max-width: 70%;
+      max-height: 70%;
+      object-fit: contain;
+    }
+
+    /* BOTONES HERO */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: .15s;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(224,0,0,0.5);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-dark);
     }
 
     /* AVISO ROJO */
@@ -191,7 +230,7 @@
       gap: 26px;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 16px; /* margen interno para que no toque el borde de la pantalla */
+      padding: 0 16px;
       align-items: flex-start;
     }
 
@@ -276,6 +315,9 @@
       .contact-layout {
         grid-template-columns: 1fr;
       }
+      .hero-image {
+        margin-top: 20px;
+      }
     }
   </style>
 </head>
@@ -320,9 +362,23 @@
           Consultanos por disponibilidad, talles, precios, pedidos mayoristas o cualquier duda
           sobre nuestros productos. Respondemos rápido por WhatsApp y correo.
         </p>
+
+        <div class="hero-buttons">
+          <a href="productos.html" class="btn btn-primary">
+            Ver catálogo completo
+          </a>
+
+          <a href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
+             class="btn btn-primary" target="_blank" rel="noopener">
+            Consulta mayorista
+          </a>
+        </div>
       </div>
 
-      <div class="hero-image"></div>
+      <div class="hero-image">
+        <!-- Cambiá el src por el archivo de tu logo en blanco -->
+        <img src="logo-segudab-blanco.png" alt="Logo Segudab" />
+      </div>
     </div>
   </section>
 
