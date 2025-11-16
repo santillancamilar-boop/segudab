@@ -949,9 +949,10 @@
         </div>
 
         <div class="product-card"
-             data-category="indumentaria"
-             data-price="34000">
-          <div class="product-image" style="background-image:url('productos/indumentaria/camisa-manga-larga.png');"></div>
+     data-category="indumentaria"
+     data-price="58000">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/indumentaria/camisa-manga-larga.png');"></div>
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Camisa táctica negra</div>
@@ -965,23 +966,26 @@
           </div>
         </div>
 
-        <div class="product-card"
-             data-category="indumentaria"
-             data-price="58000">
-          <div class="product-image" style="background-image:url('productos/Indumentaria/Camisa-manga-larga.png');"></div>
-          <div class="product-body">
-            <div class="product-tag">Indumentaria</div>
-            <div class="product-name">Camisa manga larga</div>
-            <div class="product-desc">
-             Camisa azul en ripstop y negra en batista, resistente y cómoda para uso laboral.
-Talles: 34 al 60.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$58.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+      <div class="product-card"
+     data-category="indumentaria"
+     data-price="58000"
+     data-size-options="35,36,37,38,39,40,41,42,43,44,45,46">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/indumentaria/camisa-manga-larga.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Camisa manga larga</div>
+    <div class="product-desc">
+      Camisa azul en ripstop y negra en batista, resistente y cómoda para uso laboral.
+      Talles: 35 al 46.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$58.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
+
 
       </div>
 
@@ -1230,15 +1234,26 @@ Talles: 34 al 60.
       detailDesc.textContent = desc;
       detailPrice.textContent = '$' + formatPrice(price);
 
-      // Rellenar talles según categoría
-      detailSize.innerHTML = '';
-      const options = sizeOptionsByCategory[cat] || ['A coordinar'];
-      options.forEach(talle => {
-        const opt = document.createElement('option');
-        opt.value = talle;
-        opt.textContent = talle;
-        detailSize.appendChild(opt);
-      });
+
+      // Rellenar talles: primero miro si el producto tiene talles propios
+detailSize.innerHTML = '';
+
+const customSizes = card.dataset.sizeOptions; // ej: "35,36,37,38..."
+let options;
+
+if (customSizes) {
+  options = customSizes.split(',').map(s => s.trim()).filter(Boolean);
+} else {
+  options = sizeOptionsByCategory[cat] || ['A coordinar'];
+}
+
+options.forEach(talle => {
+  const opt = document.createElement('option');
+  opt.value = talle;
+  opt.textContent = talle;
+  detailSize.appendChild(opt);
+});
+
 
       detailQty.value = 1;
 
