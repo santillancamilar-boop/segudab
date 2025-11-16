@@ -274,6 +274,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
 
     .product-image {
@@ -460,6 +461,12 @@
       color: var(--color-primary);
     }
 
+    .cart-item-meta {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
     .cart-item-actions {
       display: flex;
       align-items: center;
@@ -546,6 +553,135 @@
 
     .btn-cart:hover { background: var(--color-primary-dark); }
 
+    /* === DETALLE DE PRODUCTO (overlay) === */
+    .product-detail-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .product-detail {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 880px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 24px;
+      padding: 22px 24px 24px;
+      position: relative;
+    }
+
+    .detail-image {
+      border-radius: 14px;
+      background-size: cover;
+      background-position: center;
+      min-height: 260px;
+    }
+
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .detail-tag {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #eee;
+      align-self: flex-start;
+    }
+
+    .detail-name {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .detail-desc {
+      margin: 4px 0 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .detail-stock {
+      font-size: 13px;
+      color: #008000;
+    }
+
+    .detail-price-row {
+      margin-top: 8px;
+      margin-bottom: 6px;
+    }
+
+    .detail-price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .detail-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 8px 0 4px;
+    }
+
+    .detail-form label {
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .detail-form select,
+    .detail-form input[type="number"] {
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      min-width: 100px;
+    }
+
+    .detail-actions {
+      margin-top: 4px;
+    }
+
+    .detail-add-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 20px;
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .detail-add-btn:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .detail-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; }
       .catalog-layout { grid-template-columns: 1fr; }
@@ -554,6 +690,12 @@
         max-width: 480px;
         width: 100%;
         margin: 0 auto;
+      }
+      .product-detail {
+        grid-template-columns: 1fr;
+      }
+      .detail-image {
+        min-height: 200px;
       }
     }
   </style>
@@ -646,7 +788,7 @@
         <div class="product-card"
              data-category="botas"
              data-price="45000">
-          <div class="product-image" style="background-image:url('borcegui-negro-1.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/botas/borcegui-negro-1.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Botas tácticas</div>
             <div class="product-name">Borceguí táctico negro</div>
@@ -655,11 +797,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$45.000</span>
-              <button class="btn-small"
-                      data-name="Borceguí táctico negro"
-                      data-price="45000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -667,7 +805,7 @@
         <div class="product-card"
              data-category="botas"
              data-price="48000">
-          <div class="product-image" style="background-image:url('borcegui-arena.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/botas/borcegui-arena.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Botas tácticas</div>
             <div class="product-name">Borceguí color arena</div>
@@ -676,11 +814,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$48.000</span>
-              <button class="btn-small"
-                      data-name="Borceguí color arena"
-                      data-price="48000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -688,7 +822,7 @@
         <div class="product-card"
              data-category="botas"
              data-price="52000">
-          <div class="product-image" style="background-image:url('borcegui-cierre-lateral.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/botas/borcegui-cierre-lateral.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Botas tácticas</div>
             <div class="product-name">Borceguí con cierre lateral</div>
@@ -697,11 +831,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$52.000</span>
-              <button class="btn-small"
-                      data-name="Borceguí con cierre lateral"
-                      data-price="52000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -710,7 +840,7 @@
         <div class="product-card"
              data-category="correajes"
              data-price="39000">
-          <div class="product-image" style="background-image:url('cinturon-policial-completo.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/correajes/cinturon-policial-completo.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Correajes</div>
             <div class="product-name">Cinturón policial completo</div>
@@ -719,11 +849,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$39.000</span>
-              <button class="btn-small"
-                      data-name="Cinturón policial completo"
-                      data-price="39000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -731,7 +857,7 @@
         <div class="product-card"
              data-category="correajes"
              data-price="26000">
-          <div class="product-image" style="background-image:url('cinturon-simple.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/correajes/cinturon-simple.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Correajes</div>
             <div class="product-name">Cinturón táctico simple</div>
@@ -740,11 +866,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$26.000</span>
-              <button class="btn-small"
-                      data-name="Cinturón táctico simple"
-                      data-price="26000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -752,7 +874,7 @@
         <div class="product-card"
              data-category="correajes"
              data-price="28000">
-          <div class="product-image" style="background-image:url('pechera-porta-radio.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/correajes/pechera-porta-radio.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Correajes</div>
             <div class="product-name">Pechera porta radio y credencial</div>
@@ -761,11 +883,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$28.000</span>
-              <button class="btn-small"
-                      data-name="Pechera porta radio y credencial"
-                      data-price="28000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -774,7 +892,7 @@
         <div class="product-card"
              data-category="accesorios"
              data-price="12000">
-          <div class="product-image" style="background-image:url('credencial-carpeta.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/accesorios/credencial-carpeta.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Carpeta porta credencial</div>
@@ -783,11 +901,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$12.000</span>
-              <button class="btn-small"
-                      data-name="Carpeta porta credencial"
-                      data-price="12000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -795,7 +909,7 @@
         <div class="product-card"
              data-category="accesorios"
              data-price="13500">
-          <div class="product-image" style="background-image:url('credencial-billetera.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/accesorios/credencial-billetera.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Billetera porta credencial</div>
@@ -804,11 +918,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$13.500</span>
-              <button class="btn-small"
-                      data-name="Billetera porta credencial"
-                      data-price="13500">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -817,7 +927,7 @@
         <div class="product-card"
              data-category="indumentaria"
              data-price="32000">
-          <div class="product-image" style="background-image:url('pantalon-tactico.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/indumentaria/pantalon-tactico.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Pantalón táctico reforzado</div>
@@ -826,11 +936,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$32.000</span>
-              <button class="btn-small"
-                      data-name="Pantalón táctico reforzado"
-                      data-price="32000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -838,7 +944,7 @@
         <div class="product-card"
              data-category="indumentaria"
              data-price="34000">
-          <div class="product-image" style="background-image:url('camisa-tactica.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/indumentaria/camisa-manga-larga.png');"></div>
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Camisa táctica negra</div>
@@ -847,11 +953,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$34.000</span>
-              <button class="btn-small"
-                      data-name="Camisa táctica negra"
-                      data-price="34000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -859,7 +961,7 @@
         <div class="product-card"
              data-category="indumentaria"
              data-price="58000">
-          <div class="product-image" style="background-image:url('campera-softshell.jpg');"></div>
+          <div class="product-image" style="background-image:url('productos/indumentaria/campera-softshell.jpg');"></div>
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Campera softshell táctica</div>
@@ -868,11 +970,7 @@
             </div>
             <div class="product-footer">
               <span class="product-price">$58.000</span>
-              <button class="btn-small"
-                      data-name="Campera softshell táctica"
-                      data-price="58000">
-                Agregar
-              </button>
+              <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
         </div>
@@ -941,15 +1039,51 @@
     </div>
   </section>
 
+  <!-- DETALLE DE PRODUCTO (OVERLAY) -->
+  <div class="product-detail-overlay" id="product-detail-overlay">
+    <div class="product-detail">
+      <button class="detail-close" type="button" id="detail-close-btn">×</button>
+      <div class="detail-image" id="detail-image"></div>
+      <div class="detail-info">
+        <div class="detail-tag" id="detail-tag"></div>
+        <h3 class="detail-name" id="detail-name"></h3>
+        <p class="detail-desc" id="detail-desc"></p>
+        <p class="detail-stock" id="detail-stock">Stock a confirmar según talle y cantidad.</p>
+
+        <div class="detail-price-row">
+          <span class="detail-price" id="detail-price"></span>
+        </div>
+
+        <div class="detail-form">
+          <label>
+            Talle
+            <select id="detail-size"></select>
+          </label>
+          <label>
+            Cantidad
+            <input type="number" id="detail-qty" min="1" value="1" />
+          </label>
+        </div>
+
+        <div class="detail-actions">
+          <button class="detail-add-btn" type="button" id="detail-add-btn">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS -->
+  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE -->
   <script>
     const CART_KEY = 'segudab_cart';
     let cart = [];
+    let currentProduct = null; // para el detalle
 
     function loadCart() {
       const stored = localStorage.getItem(CART_KEY);
@@ -964,6 +1098,10 @@
 
     function saveCart() {
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
+    function formatPrice(value) {
+      return value.toLocaleString('es-AR');
     }
 
     function renderCart() {
@@ -992,35 +1130,38 @@
         div.innerHTML = `
           <div class="cart-item-main">
             <span class="cart-item-name">${item.name}</span>
-            <span class="cart-item-subtotal">$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+            <span class="cart-item-subtotal">$${formatPrice(item.price * item.qty)}</span>
+          </div>
+          <div class="cart-item-meta">
+            Talle: ${item.size || 'A coordinar'}
           </div>
           <div class="cart-item-actions">
-            <button class="qty-btn" data-action="decrease" data-name="${item.name}">−</button>
+            <button class="qty-btn" data-action="decrease" data-name="${item.name}" data-size="${item.size}">−</button>
             <span class="cart-item-qty">${item.qty}</span>
-            <button class="qty-btn" data-action="increase" data-name="${item.name}">+</button>
-            <button class="remove-btn" data-action="remove" data-name="${item.name}">✕</button>
+            <button class="qty-btn" data-action="increase" data-name="${item.name}" data-size="${item.size}">+</button>
+            <button class="remove-btn" data-action="remove" data-name="${item.name}" data-size="${item.size}">✕</button>
           </div>
         `;
         cartItemsContainer.appendChild(div);
       });
 
       cartCount.textContent = count;
-      cartTotal.textContent = '$' + total.toLocaleString('es-AR');
+      cartTotal.textContent = '$' + formatPrice(total);
     }
 
-    function addToCart(name, price) {
-      const existing = cart.find(p => p.name === name);
+    function addToCart(name, price, size = 'A coordinar', qty = 1) {
+      const existing = cart.find(p => p.name === name && p.size === size);
       if (existing) {
-        existing.qty += 1;
+        existing.qty += qty;
       } else {
-        cart.push({ name, price: Number(price), qty: 1 });
+        cart.push({ name, price: Number(price), qty: qty, size });
       }
       saveCart();
       renderCart();
     }
 
-    function updateItemQty(name, delta) {
-      const item = cart.find(p => p.name === name);
+    function updateItemQty(name, size, delta) {
+      const item = cart.find(p => p.name === name && p.size === size);
       if (!item) return;
       item.qty += delta;
       if (item.qty < 1) item.qty = 1;
@@ -1028,8 +1169,8 @@
       renderCart();
     }
 
-    function removeFromCart(name) {
-      const index = cart.findIndex(p => p.name === name);
+    function removeFromCart(name, size) {
+      const index = cart.findIndex(p => p.name === name && p.size === size);
       if (index !== -1) {
         cart.splice(index, 1);
         saveCart();
@@ -1037,14 +1178,70 @@
       }
     }
 
-    // Botones "Agregar"
-    document.querySelectorAll('.btn-small').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const name = btn.getAttribute('data-name');
-        const price = btn.getAttribute('data-price');
-        addToCart(name, price);
+    // ---------- DETALLE DE PRODUCTO ----------
+    const sizeOptionsByCategory = {
+      botas: ['38', '39', '40', '41', '42', '43', '44', '45'],
+      correajes: ['S', 'M', 'L', 'XL'],
+      accesorios: ['Único'],
+      indumentaria: ['S', 'M', 'L', 'XL', 'XXL']
+    };
+
+    function openProductDetail(card) {
+      const overlay = document.getElementById('product-detail-overlay');
+      const nameEl = card.querySelector('.product-name');
+      const descEl = card.querySelector('.product-desc');
+      const tagEl  = card.querySelector('.product-tag');
+      const imgEl  = card.querySelector('.product-image');
+
+      const name = nameEl ? nameEl.textContent.trim() : '';
+      const desc = descEl ? descEl.textContent.trim() : '';
+      const tag  = tagEl ? tagEl.textContent.trim() : '';
+      const cat  = card.dataset.category || '';
+      const price = Number(card.dataset.price || 0);
+
+      // Imagen
+      let bg = imgEl ? imgEl.style.backgroundImage : '';
+      let imageUrl = '';
+      if (bg && bg.startsWith('url')) {
+        imageUrl = bg.slice(4, -1).replace(/["']/g, '');
+      }
+
+      currentProduct = { name, price, category: cat, imageUrl, tag, desc };
+
+      const detailImage = document.getElementById('detail-image');
+      const detailTag   = document.getElementById('detail-tag');
+      const detailName  = document.getElementById('detail-name');
+      const detailDesc  = document.getElementById('detail-desc');
+      const detailPrice = document.getElementById('detail-price');
+      const detailSize  = document.getElementById('detail-size');
+      const detailQty   = document.getElementById('detail-qty');
+
+      detailImage.style.backgroundImage = imageUrl ? `url('${imageUrl}')` : 'none';
+      detailTag.textContent = tag;
+      detailName.textContent = name;
+      detailDesc.textContent = desc;
+      detailPrice.textContent = '$' + formatPrice(price);
+
+      // Rellenar talles según categoría
+      detailSize.innerHTML = '';
+      const options = sizeOptionsByCategory[cat] || ['A coordinar'];
+      options.forEach(talle => {
+        const opt = document.createElement('option');
+        opt.value = talle;
+        opt.textContent = talle;
+        detailSize.appendChild(opt);
       });
-    });
+
+      detailQty.value = 1;
+
+      overlay.style.display = 'flex';
+    }
+
+    function closeProductDetail() {
+      const overlay = document.getElementById('product-detail-overlay');
+      overlay.style.display = 'none';
+      currentProduct = null;
+    }
 
     // Botones dentro del carrito
     document.getElementById('cart-items').addEventListener('click', (e) => {
@@ -1053,14 +1250,15 @@
 
       const action = btn.dataset.action;
       const name = btn.dataset.name;
+      const size = btn.dataset.size;
       if (!action || !name) return;
 
       if (action === 'increase') {
-        updateItemQty(name, 1);
+        updateItemQty(name, size, 1);
       } else if (action === 'decrease') {
-        updateItemQty(name, -1);
+        updateItemQty(name, size, -1);
       } else if (action === 'remove') {
-        removeFromCart(name);
+        removeFromCart(name, size);
       }
     });
 
@@ -1088,10 +1286,10 @@
       let total = 0;
       cart.forEach(item => {
         total += item.price * item.qty;
-        texto += '- ' + item.qty + ' x ' + item.name + '%0A';
+        texto += '- ' + item.qty + ' x ' + item.name + ' (Talle: ' + (item.size || 'A coordinar') + ')%0A';
       });
 
-      texto += '%0ATotal estimado: $' + total.toLocaleString('es-AR') + '%0A';
+      texto += '%0ATotal estimado: $' + formatPrice(total) + '%0A';
       texto += '%0A¿Me podrían confirmar stock, precio final y formas de pago?';
 
       const numero = '5491137286846';
@@ -1109,7 +1307,7 @@
     // Detectar categoría desde la URL
     function loadCategoryFromURL() {
       const params = new URLSearchParams(window.location.search);
-      const cat = params.get('cat'); // ej: botas, correajes, accesorios...
+      const cat = params.get('cat');
 
       if (!cat) return;
 
@@ -1148,7 +1346,7 @@
 
     filterButtons.forEach(btn => {
       const cat = btn.dataset.category;
-      if (!cat || cat === 'all') return; // el de "Todos" también lo manejamos, pero igual aplica
+      if (!cat) return;
 
       btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
@@ -1158,23 +1356,13 @@
       });
     });
 
-    // que también funcione el botón "Todos"
-    const allBtn = document.querySelector('.filter-btn[data-category="all"]');
-    if (allBtn) {
-      allBtn.addEventListener('click', () => {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        allBtn.classList.add('active');
-        currentCategory = 'all';
-        applyFilters();
-      });
-    }
-
     filterPrice.addEventListener('change', applyFilters);
 
     // Botón "Limpiar filtros"
     if (clearFiltersBtn) {
       clearFiltersBtn.addEventListener('click', () => {
         currentCategory = 'all';
+        const allBtn = document.querySelector('.filter-btn[data-category="all"]');
         if (allBtn) {
           filterButtons.forEach(b => b.classList.remove('active'));
           allBtn.classList.add('active');
@@ -1184,11 +1372,74 @@
       });
     }
 
+    // Configurar eventos de detalle
+    function setupProductDetailEvents() {
+      const cards = document.querySelectorAll('.product-card');
+
+      cards.forEach(card => {
+        // click en toda la tarjeta
+        card.addEventListener('click', () => {
+          openProductDetail(card);
+        });
+
+        // que el botón no dispare doble
+        const btn = card.querySelector('.btn-small');
+        if (btn) {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openProductDetail(card);
+          });
+        }
+      });
+
+      const overlay = document.getElementById('product-detail-overlay');
+      const closeBtn = document.getElementById('detail-close-btn');
+      const addBtn = document.getElementById('detail-add-btn');
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          closeProductDetail();
+        });
+      }
+
+      // cerrar al clickear fuera del recuadro
+      if (overlay) {
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) {
+            closeProductDetail();
+          }
+        });
+      }
+
+      // ESC para cerrar
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeProductDetail();
+        }
+      });
+
+      // Agregar al carrito desde el detalle
+      if (addBtn) {
+        addBtn.addEventListener('click', () => {
+          if (!currentProduct) return;
+          const detailSize = document.getElementById('detail-size');
+          const detailQty  = document.getElementById('detail-qty');
+
+          const size = detailSize ? (detailSize.value || 'A coordinar') : 'A coordinar';
+          const qty = detailQty ? Math.max(1, parseInt(detailQty.value || '1', 10)) : 1;
+
+          addToCart(currentProduct.name, currentProduct.price, size, qty);
+          closeProductDetail();
+        });
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       loadCart();
       renderCart();
-      loadCategoryFromURL(); // lee ?cat= desde la URL
+      loadCategoryFromURL();
       applyFilters();
+      setupProductDetailEvents();
     });
   </script>
 
