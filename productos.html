@@ -283,6 +283,14 @@
       background-position: center;
     }
 
+    /* Para que ciertas fotos se vean completas */
+    .product-image.product-image-contain {
+      background-size: contain;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-color: #fff;
+    }
+
     .product-body {
       padding: 14px 16px 16px;
       text-align: left;
@@ -923,7 +931,7 @@
           </div>
         </div>
 
-              <!-- INDUMENTARIA -->
+        <!-- INDUMENTARIA -->
         <div class="product-card"
              data-category="indumentaria"
              data-price="32000">
@@ -941,7 +949,7 @@
           </div>
         </div>
 
-        <!-- CAMISA TÁCTICA NEGRA (igual que antes, con su foto clásica) -->
+        <!-- CAMISA TÁCTICA NEGRA -->
         <div class="product-card"
              data-category="indumentaria"
              data-price="34000">
@@ -964,7 +972,8 @@
              data-category="indumentaria"
              data-price="58000"
              data-size-options="35,36,37,38,39,40,41,42,43,44,45,46">
-          <div class="product-image" style="background-image:url('productos/indumentaria/camisa-manga-larga.png');"></div>
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/indumentaria/camisa-manga-larga.png');"></div>
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Camisa manga larga</div>
@@ -996,7 +1005,7 @@
             <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
           </div>
 
-          <!-- Filtro por precio (aparte) -->
+          <!-- Filtro por precio -->
           <div class="filters-row">
             <label for="filter-price">Filtrar por precio:</label>
             <select id="filter-price">
@@ -1226,26 +1235,24 @@
       detailDesc.textContent = desc;
       detailPrice.textContent = '$' + formatPrice(price);
 
-
       // Rellenar talles: primero miro si el producto tiene talles propios
-detailSize.innerHTML = '';
+      detailSize.innerHTML = '';
 
-const customSizes = card.dataset.sizeOptions; // ej: "35,36,37,38..."
-let options;
+      const customSizes = card.dataset.sizeOptions; // ej: "35,36,37..."
+      let options;
 
-if (customSizes) {
-  options = customSizes.split(',').map(s => s.trim()).filter(Boolean);
-} else {
-  options = sizeOptionsByCategory[cat] || ['A coordinar'];
-}
+      if (customSizes) {
+        options = customSizes.split(',').map(s => s.trim()).filter(Boolean);
+      } else {
+        options = sizeOptionsByCategory[cat] || ['A coordinar'];
+      }
 
-options.forEach(talle => {
-  const opt = document.createElement('option');
-  opt.value = talle;
-  opt.textContent = talle;
-  detailSize.appendChild(opt);
-});
-
+      options.forEach(talle => {
+        const opt = document.createElement('option');
+        opt.value = talle;
+        opt.textContent = talle;
+        detailSize.appendChild(opt);
+      });
 
       detailQty.value = 1;
 
@@ -1379,6 +1386,8 @@ options.forEach(talle => {
         currentCategory = 'all';
         const allBtn = document.querySelector('.filter-btn[data-category="all"]');
         if (allBtn) {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          allBtn.addEventListener('click', () => {});
           filterButtons.forEach(b => b.classList.remove('active'));
           allBtn.classList.add('active');
         }
