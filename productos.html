@@ -590,6 +590,7 @@
       background-size: cover;
       background-position: center;
       min-height: 260px;
+      cursor: zoom-in; /* cursor de lupa */
     }
 
     .detail-info {
@@ -690,6 +691,26 @@
       line-height: 1;
     }
 
+    /* === ZOOM DE IMAGEN === */
+    .image-zoom-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+
+    .image-zoom-overlay img {
+      max-width: 95vw;
+      max-height: 95vh;
+      object-fit: contain;
+      display: block;
+    }
+
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; }
       .catalog-layout { grid-template-columns: 1fr; }
@@ -782,7 +803,7 @@
   <!-- SECCIÓN CATÁLOGO -->
   <section class="section">
     <div class="section-inner">
-      <h2 class="section-title">Productos destacados</h2>
+      <h2 class="section-title">Catálogo completo</h2>
       <p class="section-subtitle">
         Catálogo orientativo. Los precios pueden variar según talle, modelo y cantidad. Consultá para presupuesto final.
       </p>
@@ -793,201 +814,230 @@
       <!-- PRODUCTOS -->
       <div class="product-grid">
 
-        <!-- BOTAS TÁCTICAS -->
-        <div class="product-card"
-             data-category="botas"
-             data-price="45000">
-          <div class="product-image" style="background-image:url('productos/botas/borcegui-negro-1.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Botas tácticas</div>
-            <div class="product-name">Borceguí táctico negro</div>
-            <div class="product-desc">
-              Suela antideslizante, costura reforzada y caña media. Ideal servicio diario.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$45.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+       <!-- 1. CAMISA MANGA LARGA -->
+<div class="product-card"
+     data-category="indumentaria"
+     data-price="58000"
+     data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/Indumentaria/camisa-manga-larga.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Camisa manga larga</div>
+    <div class="product-desc">
+      Camisa manga larga en ripstop (azul) y batista (negra).
+      Talles: 34 al 60.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$58.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <div class="product-card"
-             data-category="botas"
-             data-price="48000">
-          <div class="product-image" style="background-image:url('productos/botas/borcegui-arena.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Botas tácticas</div>
-            <div class="product-name">Borceguí color arena</div>
-            <div class="product-desc">
-              Capellada respirable, plantillas confort y cordones reforzados.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$48.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 2. CHALECO REFLECTIVO TIPO PONCHO -->
+<div class="product-card"
+     data-category="indumentaria"
+     data-price="28000"
+     data-size-options="XS,S,M,L">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/Indumentaria/chaleco-reflectivo.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Chaleco reflectivo tipo poncho</div>
+    <div class="product-desc">
+      Chaleco reflectivo tipo poncho, liviano y de alta visibilidad.
+      Talles: XS al L.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$28.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <div class="product-card"
-             data-category="botas"
-             data-price="52000">
-          <div class="product-image" style="background-image:url('productos/botas/borcegui-cierre-lateral.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Botas tácticas</div>
-            <div class="product-name">Borceguí con cierre lateral</div>
-            <div class="product-desc">
-              Caña alta, cierre lateral y puntera reforzada para uso intensivo.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$52.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 3. CHAQUETILLA AMERICANA -->
+<div class="product-card"
+     data-category="indumentaria"
+     data-price="65000"
+     data-size-options="2XS,XS,S,M,L,XL,2XL">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/Indumentaria/chaquetilla-americana.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Chaquetilla americana</div>
+    <div class="product-desc">
+      Chaquetilla estilo americano en colores azul y negro.
+      Talles: 2XS al 2XL.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$65.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <!-- CORREAJES -->
-        <div class="product-card"
-             data-category="correajes"
-             data-price="39000">
-          <div class="product-image" style="background-image:url('productos/correajes/cinturon-policial-completo.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Correajes</div>
-            <div class="product-name">Cinturón policial completo</div>
-            <div class="product-desc">
-              Incluye porta arma, porta cargador doble, porta esposas y porta bastón.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$39.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 4. CHOMBA PIQUÉ BORDADA -->
+<div class="product-card"
+     data-category="indumentaria"
+     data-price="24000"
+     data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/Indumentaria/chomba-pique-bordada.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Chomba piqué bordada</div>
+    <div class="product-desc">
+      Chomba piqué bordada azul marino, resistente y cómoda.
+      Talles: XS al 6XL.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$24.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <div class="product-card"
-             data-category="correajes"
-             data-price="26000">
-          <div class="product-image" style="background-image:url('productos/correajes/cinturon-simple.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Correajes</div>
-            <div class="product-name">Cinturón táctico simple</div>
-            <div class="product-desc">
-              Cinta de alta resistencia con hebilla rápida. Compatible con fundas modulares.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$26.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 5. CINTOS TÁCTICOS -->
+<div class="product-card"
+     data-category="correajes"
+     data-price="22000">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/correajes/cintos.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Correajes</div>
+    <div class="product-name">Cintos tácticos</div>
+    <div class="product-desc">
+      Cinto nato y americano. Cintos internos con abrojo y totalmente regulables.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$22.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <div class="product-card"
-             data-category="correajes"
-             data-price="28000">
-          <div class="product-image" style="background-image:url('productos/correajes/pechera-porta-radio.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Correajes</div>
-            <div class="product-name">Pechera porta radio y credencial</div>
-            <div class="product-desc">
-              Regulable, resistente y con compartimentos múltiples para radio, credencial y lapiceras.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$28.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 6. GARIBALDINA -->
+<div class="product-card"
+     data-category="indumentaria"
+     data-price="78000"
+     data-size-options="2XS,XS,S,M,L,XL,2XL,3XL,4XL,5XL">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/Indumentaria/garibaldina.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Garibaldina</div>
+    <div class="product-desc">
+      Garibaldina con abrigo desmontable. Colores: azul y negro.
+      Talles: 2XS al 5XL.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$78.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <!-- ACCESORIOS -->
-        <div class="product-card"
-             data-category="accesorios"
-             data-price="12000">
-          <div class="product-image" style="background-image:url('productos/accesorios/credencial-carpeta.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Accesorios</div>
-            <div class="product-name">Carpeta porta credencial</div>
-            <div class="product-desc">
-              Modelo para distintas fuerzas. Incluye espacio para placa y DNI.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$12.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 7. KEPIS BORDADOS Y LISOS -->
+<div class="product-card"
+     data-category="accesorios"
+     data-price="18000">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/accesorios/kepi-bordados-y-lisos.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Accesorios</div>
+    <div class="product-name">Kepis bordados y lisos</div>
+    <div class="product-desc">
+      Kepis bordados y lisos en colores azul y negro. Talle regulable.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$18.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <div class="product-card"
-             data-category="accesorios"
-             data-price="13500">
-          <div class="product-image" style="background-image:url('productos/accesorios/credencial-billetera.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Accesorios</div>
-            <div class="product-name">Billetera porta credencial</div>
-            <div class="product-desc">
-              Formato billetera, cuero sintético reforzado y compartimentos para tarjetas.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$13.500</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 8. MOCHILA TÁCTICA 45 LITROS -->
+<div class="product-card"
+     data-category="accesorios"
+     data-price="69000">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/accesorios/mochila-tactica-45-litros.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Accesorios</div>
+    <div class="product-name">Mochila táctica 45 litros</div>
+    <div class="product-desc">
+      Mochila táctica de 45 litros, con múltiples bolsillos y sistema MOLLE.
+      Ideal para uso intensivo y servicios.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$69.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <!-- INDUMENTARIA -->
-        <div class="product-card"
-             data-category="indumentaria"
-             data-price="32000">
-          <div class="product-image" style="background-image:url('productos/indumentaria/pantalon-tactico.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Indumentaria</div>
-            <div class="product-name">Pantalón táctico reforzado</div>
-            <div class="product-desc">
-              Tela ripstop, bolsillos cargo y refuerzo en rodillas para uso intensivo.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$32.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 9. MUSLERA PISTOLERA DE POLÍMERO -->
+<div class="product-card"
+     data-category="correajes"
+     data-price="36000">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/correajes/muslera-pistolera-polimero.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Correajes</div>
+    <div class="product-name">Muslera pistolera de polímero</div>
+    <div class="product-desc">
+      Muslera pistolera de polímero, ajustable y apta para servicio.
+      Compatible con cinturón táctico.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$36.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <!-- CAMISA TÁCTICA NEGRA -->
-        <div class="product-card"
-             data-category="indumentaria"
-             data-price="34000">
-          <div class="product-image" style="background-image:url('productos/indumentaria/camisa-tactica.jpg');"></div>
-          <div class="product-body">
-            <div class="product-tag">Indumentaria</div>
-            <div class="product-name">Camisa táctica negra</div>
-            <div class="product-desc">
-              Tejido respirable, mangas largas y porta lapicera en brazo.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$34.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 10. CHALECO MOLLE -->
+<div class="product-card"
+     data-category="indumentaria"
+     data-price="82000"
+     data-size-options="S,M,L,XL">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/Indumentaria/chaleco-molle.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Chaleco MOLLE</div>
+    <div class="product-desc">
+      Chaleco MOLLE confeccionado en cordura 600x600. Velcro frontal y trasero,
+      cierre con elástico y forro antitranspirante.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$82.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
-        <!-- CAMISA MANGA LARGA (foto nueva, talles 35–46) -->
-        <div class="product-card"
-             data-category="indumentaria"
-             data-price="58000"
-             data-size-options="36,38,40,42,44,46,48,50,52,54,56">
-          <div class="product-image product-image-contain"
-               style="background-image:url('productos/Indumentaria/camisa-manga-larga.png');"></div>
-          <div class="product-body">
-            <div class="product-tag">Indumentaria</div>
-            <div class="product-name">Camisa manga larga</div>
-            <div class="product-desc">
-              Camisa azul en ripstop y negra en batista, resistente y cómoda para uso laboral.
-              Talles: 35 al 46.
-            </div>
-            <div class="product-footer">
-              <span class="product-price">$58.000</span>
-              <button class="btn-small" type="button">Ver detalle</button>
-            </div>
-          </div>
-        </div>
+<!-- 11. PANTALÓN RIPSTOP -->
+<div class="product-card"
+     data-category="indumentaria"
+     data-price="35000"
+     data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58">
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/Indumentaria/pantalon-ripstop.png');"></div>
+  <div class="product-body">
+    <div class="product-tag">Indumentaria</div>
+    <div class="product-name">Pantalón ripstop</div>
+    <div class="product-desc">
+      Pantalón ripstop de tela antidesgarro. Colores: azul y negro.
+      Talles: 34 al 68.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">$35.000</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
 
       </div>
 
@@ -1088,12 +1138,17 @@
     </div>
   </div>
 
+  <!-- OVERLAY PARA ZOOM DE IMAGEN -->
+  <div class="image-zoom-overlay" id="image-zoom-overlay">
+    <img id="zoom-image" alt="Vista ampliada del producto" />
+  </div>
+
   <!-- FOOTER -->
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE -->
+  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE + ZOOM -->
   <script>
     const CART_KEY = 'segudab_cart';
     let cart = [];
@@ -1416,7 +1471,7 @@
       });
     }
 
-    // Configurar eventos de detalle
+    // Configurar eventos de detalle + zoom
     function setupProductDetailEvents() {
       const cards = document.querySelectorAll('.product-card');
 
@@ -1455,10 +1510,32 @@
         });
       }
 
-      // ESC para cerrar
+      // ZOOM: click en la imagen del detalle
+      const detailImage = document.getElementById('detail-image');
+      const zoomOverlay = document.getElementById('image-zoom-overlay');
+      const zoomImage = document.getElementById('zoom-image');
+
+      if (detailImage && zoomOverlay && zoomImage) {
+        detailImage.addEventListener('click', () => {
+          if (!currentProduct || !currentProduct.imageUrl) return;
+          zoomImage.src = currentProduct.imageUrl;
+          zoomOverlay.style.display = 'flex';
+        });
+
+        // cerrar zoom al clickear
+        zoomOverlay.addEventListener('click', () => {
+          zoomOverlay.style.display = 'none';
+        });
+      }
+
+      // ESC para cerrar detalle y zoom
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeProductDetail();
+          const zoomOverlayEl = document.getElementById('image-zoom-overlay');
+          if (zoomOverlayEl) {
+            zoomOverlayEl.style.display = 'none';
+          }
         }
       });
 
