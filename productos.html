@@ -245,7 +245,7 @@
     .section-subtitle {
       font-size: 14px;
       color: #777;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
 
     /* --- CATÁLOGO & CARRITO --- */
@@ -786,6 +786,7 @@
       <p class="section-subtitle">
         Catálogo orientativo. Los precios pueden variar según talle, modelo y cantidad. Consultá para presupuesto final.
       </p>
+      <p class="section-subtitle" id="product-count-text"></p>
     </div>
 
     <div class="catalog-layout">
@@ -969,7 +970,7 @@
 
         <!-- CAMISA MANGA LARGA (foto nueva, talles 35–46) -->
         <div class="product-card"
-             data-category="Indumentaria"
+             data-category="indumentaria"
              data-price="58000"
              data-size-options="35,36,37,38,39,40,41,42,43,44,45,46">
           <div class="product-image product-image-contain"
@@ -1326,6 +1327,25 @@
     const filterPrice = document.getElementById('filter-price');
     const clearFiltersBtn = document.getElementById('clear-filters');
 
+    // contador de productos visibles
+    function updateProductCount() {
+      const cards = document.querySelectorAll('.product-card');
+      let visible = 0;
+
+      cards.forEach(card => {
+        if (card.style.display !== 'none') {
+          visible++;
+        }
+      });
+
+      const label = document.getElementById('product-count-text');
+      if (label) {
+        label.textContent = visible === 1
+          ? 'Mostrando 1 producto'
+          : `Mostrando ${visible} productos`;
+      }
+    }
+
     // Detectar categoría desde la URL
     function loadCategoryFromURL() {
       const params = new URLSearchParams(window.location.search);
@@ -1364,6 +1384,8 @@
 
         card.style.display = show ? 'block' : 'none';
       });
+
+      updateProductCount();
     }
 
     filterButtons.forEach(btn => {
@@ -1386,8 +1408,6 @@
         currentCategory = 'all';
         const allBtn = document.querySelector('.filter-btn[data-category="all"]');
         if (allBtn) {
-          filterButtons.forEach(b => b.classList.remove('active'));
-          allBtn.addEventListener('click', () => {});
           filterButtons.forEach(b => b.classList.remove('active'));
           allBtn.classList.add('active');
         }
@@ -1462,7 +1482,7 @@
       loadCart();
       renderCart();
       loadCategoryFromURL();
-      applyFilters();
+      applyFilters();       // esto también actualiza el contador
       setupProductDetailEvents();
     });
   </script>
