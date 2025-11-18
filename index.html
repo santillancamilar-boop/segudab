@@ -402,6 +402,51 @@
       color: #555;
     }
 
+    /* MEDIOS DE PAGO */
+    .payment-box {
+      max-width: var(--max-width);
+      margin: 30px auto 0;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 22px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      text-align: left;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .payment-title-pill {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .payment-methods-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      font-size: 13px;
+    }
+
+    .payment-methods-list li::before {
+      content: "• ";
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
     /* SERVICIO A FUERZAS Y EMPRESAS */
     .service-section {
       background: #EEEEEE;
@@ -462,6 +507,10 @@
       }
       .service-layout {
         grid-template-columns: 1fr;
+      }
+      .payment-box {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -616,6 +665,19 @@
           según la zona y el volumen del pedido.
         </p>
       </div>
+    </div>
+
+    <!-- MEDIOS DE PAGO -->
+    <div class="payment-box">
+      <span class="payment-title-pill">Medios de pago</span>
+      <p style="margin:0; font-weight:600;">
+        Trabajamos con todos los medios de pago principales:
+      </p>
+      <ul class="payment-methods-list">
+        <li>Efectivo en el local</li>
+        <li>Tarjeta de crédito y débito</li>
+        <li>Mercado Pago (link de pago / QR)</li>
+      </ul>
     </div>
   </section>
 
