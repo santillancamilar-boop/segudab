@@ -555,6 +555,16 @@
       width: 100%;
     }
 
+    /* ⭐ NUEVO: select de forma de pago */
+    .checkout-inputs select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      width: 100%;
+      background: #fff;
+    }
+
     .btn-cart {
       width: 100%;
       text-align: center;
@@ -1301,6 +1311,14 @@
             <input id="checkout-nombre" type="text" placeholder="Nombre y apellido" />
             <input id="checkout-telefono" type="text" placeholder="Teléfono" />
             <input id="checkout-email" type="email" placeholder="Correo (opcional)" />
+
+            <!-- ⭐ NUEVO: forma de pago -->
+            <select id="checkout-pago">
+              <option value="">Forma de pago (a coordinar)</option>
+              <option value="Tarjeta de crédito/débito (a través de Mercado Pago)">Tarjeta de crédito/débito (Mercado Pago)</option>
+              <option value="Mercado Pago (link o QR)">Mercado Pago (link o QR)</option>
+              <option value="Efectivo en el local">Efectivo en el local</option>
+            </select>
           </div>
 
           <button class="btn-cart" onclick="finalizarCompraWhatsApp()">
@@ -1632,6 +1650,7 @@
       const nombre = document.getElementById('checkout-nombre').value.trim();
       const telefono = document.getElementById('checkout-telefono').value.trim();
       const email = document.getElementById('checkout-email').value.trim();
+      const pago = document.getElementById('checkout-pago').value;
 
       if (!nombre || !telefono) {
         alert('Por favor completá nombre y teléfono para enviar el pedido.');
@@ -1642,6 +1661,13 @@
       texto += 'Nombre: ' + nombre + '%0A';
       texto += 'Teléfono: ' + telefono + '%0A';
       if (email) texto += 'Email: ' + email + '%0A';
+
+      if (pago) {
+        texto += 'Forma de pago preferida: ' + pago + '%0A';
+      } else {
+        texto += 'Forma de pago preferida: A coordinar%0A';
+      }
+
       texto += '%0AProductos:%0A';
 
       let total = 0;
@@ -1753,7 +1779,6 @@
         const allBtn = document.querySelector('.filter-btn[data-category="all"]');
         if (allBtn) {
           filterButtons.forEach(b => b.classList.remove('active'));
-          allBtn.addEventListener('click', () => {});
           allBtn.classList.add('active');
         }
         filterPrice.value = 'all';
@@ -1893,8 +1918,6 @@
       applyFilters();       // esto también arma visibleProductCards y actualiza el contador
       setupProductDetailEvents();
     });
-
-  
   </script>
 
 </body>
