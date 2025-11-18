@@ -621,6 +621,12 @@
       font-size: 14px;
     }
 
+    .detail-article {
+      margin: 0;
+      font-size: 12px;
+      color: #777;
+    }
+
     .detail-stock {
       font-size: 13px;
       color: #008000;
@@ -810,234 +816,266 @@
       <p class="section-subtitle" id="product-count-text"></p>
     </div>
 
+    <!-- BARRA DE BÚSQUEDA -->
+    <div class="section-inner" style="max-width: var(--max-width); margin: 0 auto 20px auto;">
+      <div style="position: relative; max-width: 420px;">
+        <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; opacity:.6;">🔍</span>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Buscar por nombre, artículo o descripción..."
+          style="
+            width:100%;
+            padding:10px 12px 10px 32px;
+            border-radius:999px;
+            border:1px solid #ccc;
+            font-size:14px;
+          "
+        />
+      </div>
+    </div>
+
     <div class="catalog-layout">
       <!-- PRODUCTOS -->
       <div class="product-grid">
 
-       <!-- 1. CAMISA MANGA LARGA -->
-<div class="product-card"
-     data-category="indumentaria"
-     data-price="58000"
-     data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/Indumentaria/camisa-manga-larga.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Indumentaria</div>
-    <div class="product-name">Camisa manga larga</div>
-    <div class="product-desc">
-      Camisa manga larga en ripstop (azul) y batista (negra).
-      Talles: 34 al 60.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$58.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 1. CAMISA MANGA LARGA -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="58000"
+             data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60"
+             data-articulo="ART-CAM-ML">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/camisa-manga-larga.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Camisa manga larga</div>
+            <div class="product-desc">
+              Camisa manga larga en ripstop (azul) y batista (negra).
+              Talles: 34 al 60.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$58.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 2. CHALECO REFLECTIVO TIPO PONCHO -->
-<div class="product-card"
-     data-category="indumentaria"
-     data-price="28000"
-     data-size-options="XS,S,M,L">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/Indumentaria/chaleco-reflectivo.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Indumentaria</div>
-    <div class="product-name">Chaleco reflectivo tipo poncho</div>
-    <div class="product-desc">
-      Chaleco reflectivo tipo poncho, liviano y de alta visibilidad.
-      Talles: XS al L.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$28.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 2. CHALECO REFLECTIVO TIPO PONCHO -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="28000"
+             data-size-options="XS,S,M,L"
+             data-articulo="ART-CH-REF">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chaleco-reflectivo.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chaleco reflectivo tipo poncho</div>
+            <div class="product-desc">
+              Chaleco reflectivo tipo poncho, liviano y de alta visibilidad.
+              Talles: XS al L.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$28.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 3. CHAQUETILLA AMERICANA -->
-<div class="product-card"
-     data-category="indumentaria"
-     data-price="65000"
-     data-size-options="2XS,XS,S,M,L,XL,2XL">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/Indumentaria/chaquetilla-americana.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Indumentaria</div>
-    <div class="product-name">Chaquetilla americana</div>
-    <div class="product-desc">
-      Chaquetilla estilo americano en colores azul y negro.
-      Talles: 2XS al 2XL.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$65.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 3. CHAQUETILLA AMERICANA -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="65000"
+             data-size-options="2XS,XS,S,M,L,XL,2XL"
+             data-articulo="ART-CHAQ-AM">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chaquetilla-americana.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chaquetilla americana</div>
+            <div class="product-desc">
+              Chaquetilla estilo americano en colores azul y negro.
+              Talles: 2XS al 2XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$65.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 4. CHOMBA PIQUÉ BORDADA -->
-<div class="product-card"
-     data-category="indumentaria"
-     data-price="24000"
-     data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/Indumentaria/chomba-pique-bordada.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Indumentaria</div>
-    <div class="product-name">Chomba piqué bordada</div>
-    <div class="product-desc">
-      Chomba piqué bordada azul marino, resistente y cómoda.
-      Talles: XS al 6XL.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$24.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 4. CHOMBA PIQUÉ BORDADA -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="24000"
+             data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL"
+             data-articulo="ART-CH-PIQ">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chomba-pique-bordada.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chomba piqué bordada</div>
+            <div class="product-desc">
+              Chomba piqué bordada azul marino, resistente y cómoda.
+              Talles: XS al 6XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$24.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 5. CINTOS TÁCTICOS -->
-<div class="product-card"
-     data-category="correajes"
-     data-price="22000">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/correajes/cintos.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Correajes</div>
-    <div class="product-name">Cintos tácticos</div>
-    <div class="product-desc">
-      Cinto nato y americano. Cintos internos con abrojo y totalmente regulables.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$22.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 5. CINTOS TÁCTICOS -->
+        <div class="product-card"
+             data-category="correajes"
+             data-price="22000"
+             data-articulo="ART-CIN-TAC">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/correajes/cintos.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Correajes</div>
+            <div class="product-name">Cintos tácticos</div>
+            <div class="product-desc">
+              Cinto nato y americano. Cintos internos con abrojo y totalmente regulables.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$22.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 6. GARIBALDINA -->
-<div class="product-card"
-     data-category="indumentaria"
-     data-price="78000"
-     data-size-options="2XS,XS,S,M,L,XL,2XL,3XL,4XL,5XL">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/Indumentaria/garibaldina.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Indumentaria</div>
-    <div class="product-name">Garibaldina</div>
-    <div class="product-desc">
-      Garibaldina con abrigo desmontable. Colores: azul y negro.
-      Talles: 2XS al 5XL.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$78.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 6. GARIBALDINA -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="78000"
+             data-size-options="2XS,XS,S,M,L,XL,2XL,3XL,4XL,5XL"
+             data-articulo="ART-GAR-01">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/garibaldina.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Garibaldina</div>
+            <div class="product-desc">
+              Garibaldina con abrigo desmontable. Colores: azul y negro.
+              Talles: 2XS al 5XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$78.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 7. KEPIS BORDADOS Y LISOS -->
-<div class="product-card"
-     data-category="accesorios"
-     data-price="18000">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/accesorios/kepi-bordados-y-lisos.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Accesorios</div>
-    <div class="product-name">Kepis bordados y lisos</div>
-    <div class="product-desc">
-      Kepis bordados y lisos en colores azul y negro. Talle regulable.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$18.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 7. KEPIS BORDADOS Y LISOS (MODELO, NO TALLE) -->
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="18000"
+             data-size-options="Bordado,Liso"
+             data-size-label="Modelo"
+             data-articulo="ART-KEP-01">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/kepi-bordados-y-lisos.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Kepis bordados y lisos</div>
+            <div class="product-desc">
+              Kepis bordados y lisos en colores azul y negro. Talle regulable.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$18.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 8. MOCHILA TÁCTICA 45 LITROS -->
-<div class="product-card"
-     data-category="accesorios"
-     data-price="69000">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/accesorios/mochila-tactica-45-litros.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Accesorios</div>
-    <div class="product-name">Mochila táctica 45 litros</div>
-    <div class="product-desc">
-      Mochila táctica de 45 litros, con múltiples bolsillos y sistema MOLLE.
-      Ideal para uso intensivo y servicios.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$69.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 8. MOCHILA TÁCTICA 45 LITROS -->
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="69000"
+             data-articulo="ART-MOC-45">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/mochila-tactica-45-litros.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Mochila táctica 45 litros</div>
+            <div class="product-desc">
+              Mochila táctica de 45 litros, con múltiples bolsillos y sistema MOLLE.
+              Ideal para uso intensivo y servicios.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$69.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 9. MUSLERA PISTOLERA DE POLÍMERO -->
-<div class="product-card"
-     data-category="correajes"
-     data-price="36000">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/correajes/muslera-pistolera-polimero.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Correajes</div>
-    <div class="product-name">Muslera pistolera de polímero</div>
-    <div class="product-desc">
-      Muslera pistolera de polímero, ajustable y apta para servicio.
-      Compatible con cinturón táctico.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$36.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 9. MUSLERA PISTOLERA DE POLÍMERO -->
+        <div class="product-card"
+             data-category="correajes"
+             data-price="36000"
+             data-articulo="ART-MUS-POL">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/correajes/muslera-pistolera-polimero.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Correajes</div>
+            <div class="product-name">Muslera pistolera de polímero</div>
+            <div class="product-desc">
+              Muslera pistolera de polímero, ajustable y apta para servicio.
+              Compatible con cinturón táctico.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$36.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 10. CHALECO MOLLE -->
-<div class="product-card"
-     data-category="indumentaria"
-     data-price="82000"
-     data-size-options="S,M,L,XL">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/Indumentaria/chaleco-molle.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Indumentaria</div>
-    <div class="product-name">Chaleco MOLLE</div>
-    <div class="product-desc">
-      Chaleco MOLLE confeccionado en cordura 600x600. Velcro frontal y trasero,
-      cierre con elástico y forro antitranspirante.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$82.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 10. CHALECO MOLLE -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="82000"
+             data-size-options="S,M,L,XL"
+             data-articulo="ART-CH-MOL">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chaleco-molle.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chaleco MOLLE</div>
+            <div class="product-desc">
+              Chaleco MOLLE confeccionado en cordura 600x600. Velcro frontal y trasero,
+              cierre con elástico y forro antitranspirante.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$82.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- 11. PANTALÓN RIPSTOP -->
-<div class="product-card"
-     data-category="indumentaria"
-     data-price="35000"
-     data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/Indumentaria/pantalon-ripstop.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Indumentaria</div>
-    <div class="product-name">Pantalón ripstop</div>
-    <div class="product-desc">
-      Pantalón ripstop de tela antidesgarro. Colores: azul y negro.
-      Talles: 34 al 68.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">$35.000</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- 11. PANTALÓN RIPSTOP -->
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="35000"
+             data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68"
+             data-articulo="ART-PAN-RIP">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/pantalon-ripstop.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Pantalón ripstop</div>
+            <div class="product-desc">
+              Pantalón ripstop de tela antidesgarro. Colores: azul y negro.
+              Talles: 34 al 68.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$35.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -1111,6 +1149,7 @@
       <div class="detail-info">
         <div class="detail-tag" id="detail-tag"></div>
         <h3 class="detail-name" id="detail-name"></h3>
+        <p class="detail-article" id="detail-article"></p>
         <p class="detail-desc" id="detail-desc"></p>
         <p class="detail-stock" id="detail-stock">Stock a confirmar según talle y cantidad.</p>
 
@@ -1120,7 +1159,7 @@
 
         <div class="detail-form">
           <label>
-            Talle
+            <span id="detail-size-label">Talle</span>
             <select id="detail-size"></select>
           </label>
           <label>
@@ -1148,7 +1187,7 @@
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE + ZOOM -->
+  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE + ZOOM + BUSCADOR -->
   <script>
     const CART_KEY = 'segudab_cart';
     let cart = [];
@@ -1202,7 +1241,8 @@
             <span class="cart-item-subtotal">$${formatPrice(item.price * item.qty)}</span>
           </div>
           <div class="cart-item-meta">
-            Talle: ${item.size || 'A coordinar'}
+            ${item.article ? 'Artículo: ' + item.article + ' — ' : ''}
+            ${(item.sizeLabel || 'Talle')}: ${item.size || 'A coordinar'}
           </div>
           <div class="cart-item-actions">
             <button class="qty-btn" data-action="decrease" data-name="${item.name}" data-size="${item.size}">−</button>
@@ -1218,12 +1258,23 @@
       cartTotal.textContent = '$' + formatPrice(total);
     }
 
-    function addToCart(name, price, size = 'A coordinar', qty = 1) {
-      const existing = cart.find(p => p.name === name && p.size === size);
+    function addToCart(name, price, size = 'A coordinar', sizeLabel = 'Talle', qty = 1, article = '') {
+      const existing = cart.find(p =>
+        p.name === name &&
+        p.size === size &&
+        p.article === article
+      );
       if (existing) {
         existing.qty += qty;
       } else {
-        cart.push({ name, price: Number(price), qty: qty, size });
+        cart.push({
+          name,
+          price: Number(price),
+          qty: qty,
+          size,
+          sizeLabel,
+          article
+        });
       }
       saveCart();
       renderCart();
@@ -1267,6 +1318,8 @@
       const tag  = tagEl ? tagEl.textContent.trim() : '';
       const cat  = card.dataset.category || '';
       const price = Number(card.dataset.price || 0);
+      const article = card.dataset.articulo || '';
+      const sizeLabelFromCard = card.dataset.sizeLabel || 'Talle';
 
       // Imagen
       let bg = imgEl ? imgEl.style.backgroundImage : '';
@@ -1275,7 +1328,16 @@
         imageUrl = bg.slice(4, -1).replace(/["']/g, '');
       }
 
-      currentProduct = { name, price, category: cat, imageUrl, tag, desc };
+      currentProduct = {
+        name,
+        price,
+        category: cat,
+        imageUrl,
+        tag,
+        desc,
+        article,
+        sizeLabel: sizeLabelFromCard
+      };
 
       const detailImage = document.getElementById('detail-image');
       const detailTag   = document.getElementById('detail-tag');
@@ -1284,14 +1346,23 @@
       const detailPrice = document.getElementById('detail-price');
       const detailSize  = document.getElementById('detail-size');
       const detailQty   = document.getElementById('detail-qty');
+      const detailArticle = document.getElementById('detail-article');
+      const detailSizeLabel = document.getElementById('detail-size-label');
 
       detailImage.style.backgroundImage = imageUrl ? `url('${imageUrl}')` : 'none';
       detailTag.textContent = tag;
       detailName.textContent = name;
       detailDesc.textContent = desc;
       detailPrice.textContent = '$' + formatPrice(price);
+      detailSizeLabel.textContent = sizeLabelFromCard;
 
-      // Rellenar talles: primero miro si el producto tiene talles propios
+      if (article) {
+        detailArticle.textContent = 'Artículo: ' + article;
+      } else {
+        detailArticle.textContent = '';
+      }
+
+      // Rellenar talles/modelos: primero miro si el producto tiene opciones propias
       detailSize.innerHTML = '';
 
       const customSizes = card.dataset.sizeOptions; // ej: "35,36,37..."
@@ -1364,7 +1435,10 @@
       let total = 0;
       cart.forEach(item => {
         total += item.price * item.qty;
-        texto += '- ' + item.qty + ' x ' + item.name + ' (Talle: ' + (item.size || 'A coordinar') + ')%0A';
+        const label = item.sizeLabel || 'Talle';
+        const articuloTxt = item.article ? 'Artículo: ' + item.article + ' — ' : '';
+        texto += '- ' + item.qty + ' x ' + item.name +
+                 ' (' + articuloTxt + label + ': ' + (item.size || 'A coordinar') + ')%0A';
       });
 
       texto += '%0ATotal estimado: $' + formatPrice(total) + '%0A';
@@ -1376,11 +1450,12 @@
       window.open(url, '_blank');
     }
 
-    /* FILTROS */
+    /* FILTROS + BUSCADOR */
     let currentCategory = 'all';
     const filterButtons = document.querySelectorAll('.filter-btn');
     const filterPrice = document.getElementById('filter-price');
     const clearFiltersBtn = document.getElementById('clear-filters');
+    const searchInput = document.getElementById('search-input');
 
     // contador de productos visibles
     function updateProductCount() {
@@ -1418,6 +1493,7 @@
 
     function applyFilters() {
       const priceFilter = filterPrice.value;
+      const searchText = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
       document.querySelectorAll('.product-card').forEach(card => {
         const cardCat = card.dataset.category;
@@ -1435,6 +1511,23 @@
           if (priceFilter === 'low' && priceValue >= 20000) show = false;
           if (priceFilter === 'mid' && (priceValue < 20000 || priceValue > 40000)) show = false;
           if (priceFilter === 'high' && priceValue <= 40000) show = false;
+        }
+
+        // por búsqueda
+        if (searchText) {
+          const name = card.querySelector('.product-name')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('.product-desc')?.textContent.toLowerCase() || '';
+          const tag  = card.querySelector('.product-tag')?.textContent.toLowerCase() || '';
+          const article = (card.dataset.articulo || '').toLowerCase();
+
+          if (
+            !name.includes(searchText) &&
+            !desc.includes(searchText) &&
+            !tag.includes(searchText) &&
+            !article.includes(searchText)
+          ) {
+            show = false;
+          }
         }
 
         card.style.display = show ? 'block' : 'none';
@@ -1457,6 +1550,10 @@
 
     filterPrice.addEventListener('change', applyFilters);
 
+    if (searchInput) {
+      searchInput.addEventListener('input', applyFilters);
+    }
+
     // Botón "Limpiar filtros"
     if (clearFiltersBtn) {
       clearFiltersBtn.addEventListener('click', () => {
@@ -1467,6 +1564,7 @@
           allBtn.classList.add('active');
         }
         filterPrice.value = 'all';
+        if (searchInput) searchInput.value = '';
         applyFilters();
       });
     }
@@ -1549,7 +1647,14 @@
           const size = detailSize ? (detailSize.value || 'A coordinar') : 'A coordinar';
           const qty = detailQty ? Math.max(1, parseInt(detailQty.value || '1', 10)) : 1;
 
-          addToCart(currentProduct.name, currentProduct.price, size, qty);
+          addToCart(
+            currentProduct.name,
+            currentProduct.price,
+            size,
+            currentProduct.sizeLabel || 'Talle',
+            qty,
+            currentProduct.article || ''
+          );
           closeProductDetail();
         });
       }
