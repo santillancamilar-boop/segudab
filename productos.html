@@ -537,7 +537,29 @@
     .cart-note {
       font-size: 11px;
       color: #777;
+      margin-bottom: 8px;
+    }
+
+    /* medios de pago */
+    .payment-methods {
+      font-size: 11px;
+      color: #555;
       margin-bottom: 10px;
+    }
+
+    .payment-methods strong {
+      font-size: 12px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .payment-methods ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .payment-methods li {
+      margin-bottom: 2px;
     }
 
     .checkout-inputs {
@@ -555,16 +577,6 @@
       width: 100%;
     }
 
-    /* ⭐ NUEVO: select de forma de pago */
-    .checkout-inputs select {
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 13px;
-      width: 100%;
-      background: #fff;
-    }
-
     .btn-cart {
       width: 100%;
       text-align: center;
@@ -580,6 +592,16 @@
     }
 
     .btn-cart:hover { background: var(--color-primary-dark); }
+
+    /* Botón Mercado Pago */
+    .btn-mp {
+      background: #009ee3;
+      margin-top: 6px;
+    }
+
+    .btn-mp:hover {
+      background: #007bb8;
+    }
 
     /* === DETALLE DE PRODUCTO (overlay) === */
     .product-detail-overlay {
@@ -849,7 +871,7 @@
 
         <p class="hero-text">
           Seleccioná los productos que necesitás y armá tu pedido. Luego podés enviarnos la consulta con el detalle
-          para coordinar stock y formas de pago.
+          para coordinar stock, formas de pago y retiro o envío.
         </p>
 
         <div class="hero-buttons">
@@ -1304,25 +1326,31 @@
           </div>
 
           <div class="cart-note">
-            Este carrito es orientativo. Para confirmar precios y stock, completá tus datos y envianos el pedido por WhatsApp.
+            Este carrito es orientativo. Para confirmar precios, stock y medio de pago,
+            completá tus datos y envianos el pedido.
+          </div>
+
+          <div class="payment-methods">
+            <strong>Medios de pago:</strong>
+            <ul>
+              <li>Efectivo en el local</li>
+              <li>Transferencia bancaria</li>
+              <li>Tarjeta de crédito/débito y billeteras virtuales vía Mercado Pago</li>
+            </ul>
           </div>
 
           <div class="checkout-inputs">
             <input id="checkout-nombre" type="text" placeholder="Nombre y apellido" />
             <input id="checkout-telefono" type="text" placeholder="Teléfono" />
             <input id="checkout-email" type="email" placeholder="Correo (opcional)" />
-
-            <!-- ⭐ NUEVO: forma de pago -->
-            <select id="checkout-pago">
-              <option value="">Forma de pago (a coordinar)</option>
-              <option value="Tarjeta de crédito/débito (a través de Mercado Pago)">Tarjeta de crédito/débito (Mercado Pago)</option>
-              <option value="Mercado Pago (link o QR)">Mercado Pago (link o QR)</option>
-              <option value="Efectivo en el local">Efectivo en el local</option>
-            </select>
           </div>
 
-          <button class="btn-cart" onclick="finalizarCompraWhatsApp()">
-            Finalizar compra por WhatsApp
+          <button class="btn-cart" type="button" onclick="finalizarCompraWhatsApp()">
+            Enviar pedido por WhatsApp
+          </button>
+
+          <button class="btn-cart btn-mp" type="button" onclick="pagarConMercadoPago()">
+            Pagar con Mercado Pago
           </button>
         </aside>
       </div>
@@ -1380,11 +1408,14 @@
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE + ZOOM -->
+  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE + ZOOM + MERCADO PAGO -->
   <script>
     const CART_KEY = 'segudab_cart';
     let cart = [];
     let currentProduct = null; // para el detalle
+
+    // ⬇️ REEMPLAZÁ ESTE LINK POR TU LINK DE MERCADO PAGO
+    const MP_LINK = 'https://mpago.la/tu_link_de_pago';
 
     // para navegación entre productos
     let visibleProductCards = [];
@@ -1650,7 +1681,6 @@
       const nombre = document.getElementById('checkout-nombre').value.trim();
       const telefono = document.getElementById('checkout-telefono').value.trim();
       const email = document.getElementById('checkout-email').value.trim();
-      const pago = document.getElementById('checkout-pago').value;
 
       if (!nombre || !telefono) {
         alert('Por favor completá nombre y teléfono para enviar el pedido.');
@@ -1661,13 +1691,6 @@
       texto += 'Nombre: ' + nombre + '%0A';
       texto += 'Teléfono: ' + telefono + '%0A';
       if (email) texto += 'Email: ' + email + '%0A';
-
-      if (pago) {
-        texto += 'Forma de pago preferida: ' + pago + '%0A';
-      } else {
-        texto += 'Forma de pago preferida: A coordinar%0A';
-      }
-
       texto += '%0AProductos:%0A';
 
       let total = 0;
@@ -1683,6 +1706,28 @@
       const url = 'https://wa.me/' + numero + '?text=' + texto;
 
       window.open(url, '_blank');
+    }
+
+    // Botón "Pagar con Mercado Pago" (link genérico)
+    function pagarConMercadoPago() {
+      if (cart.length === 0) {
+        alert('Primero agregá productos al carrito.');
+        return;
+      }
+
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+      });
+
+      const msg =
+        'El total estimado de tu carrito es $' + formatPrice(total) +
+        '.\n\nEste botón te llevará a un link de pago de Mercado Pago configurado por Segudab. ' +
+        'Si el monto no coincide exactamente, se ajustará manualmente con el comercio.\n\n¿Querés continuar?';
+
+      if (confirm(msg)) {
+        window.open(MP_LINK, '_blank');
+      }
     }
 
     /* FILTROS */
@@ -1915,7 +1960,7 @@
         });
       }
 
-      applyFilters();       // esto también arma visibleProductCards y actualiza el contador
+      applyFilters();       // también arma visibleProductCards y actualiza el contador
       setupProductDetailEvents();
     });
   </script>
