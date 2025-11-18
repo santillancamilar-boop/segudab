@@ -415,6 +415,16 @@
       max-width: 220px;
     }
 
+    /* input del buscador */
+    .filters input[type="text"] {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      width: 100%;
+      max-width: 220px;
+    }
+
     /* Carrito */
     .cart-panel {
       background: #fff;
@@ -705,6 +715,36 @@
       line-height: 1;
     }
 
+    /* Flechas de navegación en detalle */
+    .detail-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .detail-arrow-left {
+      left: -18px;
+    }
+
+    .detail-arrow-right {
+      right: -18px;
+    }
+
+    .detail-arrow:hover {
+      background: rgba(0,0,0,0.6);
+    }
+
     /* === ZOOM DE IMAGEN === */
     .image-zoom-overlay {
       position: fixed;
@@ -739,6 +779,12 @@
       }
       .detail-image {
         min-height: 200px;
+      }
+      .detail-arrow-left {
+        left: 4px;
+      }
+      .detail-arrow-right {
+        right: 4px;
       }
     }
   </style>
@@ -1186,6 +1232,12 @@
             <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
           </div>
 
+          <!-- Buscador -->
+          <div class="filters-row">
+            <label for="filter-search">Buscar producto:</label>
+            <input type="text" id="filter-search" placeholder="Buscar por nombre o descripción" />
+          </div>
+
           <!-- Filtro por precio -->
           <div class="filters-row">
             <label for="filter-price">Filtrar por precio:</label>
@@ -1237,6 +1289,11 @@
   <div class="product-detail-overlay" id="product-detail-overlay">
     <div class="product-detail">
       <button class="detail-close" type="button" id="detail-close-btn">×</button>
+
+      <!-- Flechas navegación -->
+      <button class="detail-arrow detail-arrow-left" type="button" id="detail-prev-btn">‹</button>
+      <button class="detail-arrow detail-arrow-right" type="button" id="detail-next-btn">›</button>
+
       <div class="detail-image" id="detail-image"></div>
       <div class="detail-info">
         <div class="detail-tag" id="detail-tag"></div>
@@ -1284,6 +1341,11 @@
     const CART_KEY = 'segudab_cart';
     let cart = [];
     let currentProduct = null; // para el detalle
+
+    // para navegación entre productos
+    let visibleProductCards = [];
+    let currentProductIndex = -1;
+    let searchTerm = '';
 
     function loadCart() {
       const stored = localStorage.getItem(CART_KEY);
@@ -1409,6 +1471,16 @@
 
       currentProduct = { name, price, category: cat, imageUrl, tag, desc, article };
 
+      // aseguramos lista de visibles
+      if (!visibleProductCards.length) {
+        buildVisibleProductCards();
+      }
+      currentProductIndex = visibleProductCards.indexOf(card);
+      if (currentProductIndex === -1) {
+        buildVisibleProductCards();
+        currentProductIndex = visibleProductCards.indexOf(card);
+      }
+
       const detailImage = document.getElementById('detail-image');
       const detailTag   = document.getElementById('detail-tag');
       const detailName  = document.getElementById('detail-name');
@@ -1469,6 +1541,30 @@
       const overlay = document.getElementById('product-detail-overlay');
       overlay.style.display = 'none';
       currentProduct = null;
+      currentProductIndex = -1;
+    }
+
+    function buildVisibleProductCards() {
+      visibleProductCards = Array.from(document.querySelectorAll('.product-card'))
+        .filter(card => card.style.display !== 'none');
+    }
+
+    function showNextProduct() {
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      if (!visibleProductCards.length) return;
+      if (currentProductIndex < 0) currentProductIndex = 0;
+      let newIndex = currentProductIndex + 1;
+      if (newIndex >= visibleProductCards.length) newIndex = 0;
+      openProductDetail(visibleProductCards[newIndex]);
+    }
+
+    function showPrevProduct() {
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      if (!visibleProductCards.length) return;
+      if (currentProductIndex < 0) currentProductIndex = 0;
+      let newIndex = currentProductIndex - 1;
+      if (newIndex < 0) newIndex = visibleProductCards.length - 1;
+      openProductDetail(visibleProductCards[newIndex]);
     }
 
     // Botones dentro del carrito
@@ -1534,16 +1630,8 @@
 
     // contador de productos visibles
     function updateProductCount() {
-      const cards = document.querySelectorAll('.product-card');
-      let visible = 0;
-
-      cards.forEach(card => {
-        if (card.style.display !== 'none') {
-          visible++;
-        }
-      });
-
       const label = document.getElementById('product-count-text');
+      const visible = visibleProductCards.length;
       if (label) {
         label.textContent = visible === 1
           ? 'Mostrando 1 producto'
@@ -1569,7 +1657,10 @@
     function applyFilters() {
       const priceFilter = filterPrice.value;
 
-      document.querySelectorAll('.product-card').forEach(card => {
+      const cards = document.querySelectorAll('.product-card');
+      visibleProductCards = [];
+
+      cards.forEach(card => {
         const cardCat = card.dataset.category;
         const priceValue = Number(card.dataset.price);
 
@@ -1587,7 +1678,18 @@
           if (priceFilter === 'high' && priceValue <= 40000) show = false;
         }
 
+        // por texto (buscador)
+        if (searchTerm) {
+          const nameEl = card.querySelector('.product-name');
+          const descEl = card.querySelector('.product-desc');
+          const text = ((nameEl ? nameEl.textContent : '') + ' ' + (descEl ? descEl.textContent : '')).toLowerCase();
+          if (!text.includes(searchTerm)) {
+            show = false;
+          }
+        }
+
         card.style.display = show ? 'block' : 'none';
+        if (show) visibleProductCards.push(card);
       });
 
       updateProductCount();
@@ -1617,6 +1719,9 @@
           allBtn.classList.add('active');
         }
         filterPrice.value = 'all';
+        const filterSearch = document.getElementById('filter-search');
+        searchTerm = '';
+        if (filterSearch) filterSearch.value = '';
         applyFilters();
       });
     }
@@ -1644,10 +1749,26 @@
       const overlay = document.getElementById('product-detail-overlay');
       const closeBtn = document.getElementById('detail-close-btn');
       const addBtn = document.getElementById('detail-add-btn');
+      const prevBtn = document.getElementById('detail-prev-btn');
+      const nextBtn = document.getElementById('detail-next-btn');
 
       if (closeBtn) {
         closeBtn.addEventListener('click', () => {
           closeProductDetail();
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          showPrevProduct();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          showNextProduct();
         });
       }
 
@@ -1678,14 +1799,27 @@
         });
       }
 
-      // ESC para cerrar detalle y zoom
+      // ESC y flechas para cerrar / navegar
       document.addEventListener('keydown', (e) => {
+        const overlayEl = document.getElementById('product-detail-overlay');
+        const isDetailOpen = overlayEl && overlayEl.style.display === 'flex';
+
         if (e.key === 'Escape') {
           closeProductDetail();
           const zoomOverlayEl = document.getElementById('image-zoom-overlay');
           if (zoomOverlayEl) {
             zoomOverlayEl.style.display = 'none';
           }
+        }
+
+        if (isDetailOpen && e.key === 'ArrowRight') {
+          e.preventDefault();
+          showNextProduct();
+        }
+
+        if (isDetailOpen && e.key === 'ArrowLeft') {
+          e.preventDefault();
+          showPrevProduct();
         }
       });
 
@@ -1709,7 +1843,16 @@
       loadCart();
       renderCart();
       loadCategoryFromURL();
-      applyFilters();       // esto también actualiza el contador
+
+      const filterSearch = document.getElementById('filter-search');
+      if (filterSearch) {
+        filterSearch.addEventListener('input', () => {
+          searchTerm = filterSearch.value.toLowerCase().trim();
+          applyFilters();
+        });
+      }
+
+      applyFilters();       // esto también arma visibleProductCards y actualiza el contador
       setupProductDetailEvents();
     });
   </script>
