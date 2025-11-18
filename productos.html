@@ -1895,17 +1895,22 @@
     });
 
     /* ⭐ AGREGADO: rueda del mouse suave */
-    document.addEventListener(
-      'wheel',
-      function (e) {
-        e.preventDefault();
-        window.scrollBy({
-          top: e.deltaY,
-          behavior: 'smooth'
-        });
-      },
-      { passive: false }
-    );
+document.addEventListener(
+  'wheel',
+  function (e) {
+    e.preventDefault();
+
+    // Factor para que no se sienta tan lento (podés probar 1.5, 2, 2.5...)
+    const factor = 2;
+
+    window.scrollBy({
+      top: e.deltaY * factor,
+      behavior: 'smooth'
+    });
+  },
+  { passive: false }
+);
+
   </script>
 
 </body>
