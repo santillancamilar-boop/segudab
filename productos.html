@@ -1753,6 +1753,7 @@
         const allBtn = document.querySelector('.filter-btn[data-category="all"]');
         if (allBtn) {
           filterButtons.forEach(b => b.classList.remove('active'));
+          allBtn.addEventListener('click', () => {});
           allBtn.classList.add('active');
         }
         filterPrice.value = 'all';
@@ -1892,6 +1893,19 @@
       applyFilters();       // esto también arma visibleProductCards y actualiza el contador
       setupProductDetailEvents();
     });
+
+    /* ⭐ AGREGADO: rueda del mouse suave */
+    document.addEventListener(
+      'wheel',
+      function (e) {
+        e.preventDefault();
+        window.scrollBy({
+          top: e.deltaY,
+          behavior: 'smooth'
+        });
+      },
+      { passive: false }
+    );
   </script>
 
 </body>
