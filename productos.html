@@ -835,25 +835,23 @@
           </div>
         </div>
 
-        <!-- 5. CINTOS -->
+        <!-- 5. CINTOS (modelo + precio + imagen por opción) -->
         <div class="product-card"
              data-category="correajes"
-             data-price="22000"
-             data-size-options="Único"
+             data-price="0"
              data-article="ART-CIN-TAC"
-             data-stock="Stock a confirmar según modelo.">
+             data-stock="Stock a confirmar según modelo."
+             data-model-options="Cinto interno|Cinto externo"
+             data-model-prices="18000|22000"
+             data-model-images="productos/correajes/cinto-interno.png|productos/correajes/cinto-externo.png">
           <div class="product-image product-image-contain"
-               style="background-image:url('productos/correajes/cintos.png');"></div>
-
+               style="background-image:url('productos/correajes/cinto-externo.png');"></div>
           <div class="product-body">
             <div class="product-tag">Correajes</div>
             <div class="product-name">Cintos tácticos</div>
-            <div class="product-desc">
-              Cinto nato y americano. Cintos internos: todo abrojo y regulable.
-            </div>
-
+            <div class="product-desc">Elegí interno (todo abrojo, regulable) o externo.</div>
             <div class="product-footer">
-              <span class="product-price">$22.000</span>
+              <span class="product-price">Desde $18.000</span>
               <button class="btn-small" type="button">Ver detalle</button>
             </div>
           </div>
@@ -894,9 +892,7 @@
           <div class="product-body">
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Kepis bordados y lisos</div>
-            <div class="product-desc">
-              Colores: azul y negro. Talle regulable.
-            </div>
+            <div class="product-desc">Colores: azul y negro. Talle regulable.</div>
 
             <div class="product-footer">
               <span class="product-price">$18.000</span>
@@ -990,9 +986,7 @@
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Pantalón ripstop</div>
-            <div class="product-desc">
-              Tela antidesgarro. Colores: azul y negro. Talles: 34 al 68.
-            </div>
+            <div class="product-desc">Tela antidesgarro. Colores: azul y negro. Talles: 34 al 68.</div>
             <div class="product-footer">
               <span class="product-price">$35.000</span>
               <button class="btn-small" type="button">Ver detalle</button>
@@ -1012,9 +1006,7 @@
           <div class="product-body">
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Portacredencial</div>
-            <div class="product-desc">
-              Portacredencial colgante cuero y tipo libro cuero.
-            </div>
+            <div class="product-desc">Portacredencial colgante cuero y tipo libro cuero.</div>
 
             <div class="product-footer">
               <span class="product-price">$19.000</span>
@@ -1036,9 +1028,7 @@
           <div class="product-body">
             <div class="product-tag">Correajes</div>
             <div class="product-name">Porta objetos para cinturón</div>
-            <div class="product-desc">
-              Porta objetos para cinturón táctico (elementos varios).
-            </div>
+            <div class="product-desc">Porta objetos para cinturón táctico (elementos varios).</div>
 
             <div class="product-footer">
               <span class="product-price">$21.000</span>
@@ -1058,9 +1048,7 @@
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Remera m/corta con estampa</div>
-            <div class="product-desc">
-              Algodón peinado. Colores: azul y negro. Talles: XS al 6XL.
-            </div>
+            <div class="product-desc">Algodón peinado. Colores: azul y negro. Talles: XS al 6XL.</div>
             <div class="product-footer">
               <span class="product-price">$23.000</span>
               <button class="btn-small" type="button">Ver detalle</button>
@@ -1080,9 +1068,7 @@
           <div class="product-body">
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Tablilla portapapeles</div>
-            <div class="product-desc">
-              Tablilla rígida para uso en servicio.
-            </div>
+            <div class="product-desc">Tablilla rígida para uso en servicio.</div>
 
             <div class="product-footer">
               <span class="product-price">$12.000</span>
@@ -1102,9 +1088,7 @@
           <div class="product-body">
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Tricota</div>
-            <div class="product-desc">
-              Tricota 1/2 cierre forrada. Talles: XS al 6XL.
-            </div>
+            <div class="product-desc">Tricota 1/2 cierre forrada. Talles: XS al 6XL.</div>
             <div class="product-footer">
               <span class="product-price">$39.000</span>
               <button class="btn-small" type="button">Ver detalle</button>
@@ -1133,7 +1117,7 @@
           </div>
         </div>
 
-        <!-- ZAPATO PREMIUM --> 
+        <!-- ZAPATO PREMIUM -->
         <div class="product-card"
              data-category="zapatos"
              data-price="0"
@@ -1209,7 +1193,6 @@
           </div>
         </div>
 
-        
         <!-- BORCEGO APOLO -->
         <div class="product-card"
              data-category="borcegos"
@@ -1229,11 +1212,11 @@
           </div>
         </div>
 
-        <!-- BORCEGO COSTURADO -->
+        <!-- BORCEGO COSTURADO (ARREGLÉ el 36,3738...) -->
         <div class="product-card"
              data-category="borcegos"
              data-price="0"
-             data-size-options="36,3738,39,40,41,42,43,44,45,46"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46"
              data-article="ART-BOR-COSTS">
           <div class="product-image product-image-contain"
                style="background-image:url('productos/calzado/costurado.png');"></div>
@@ -1247,7 +1230,6 @@
             </div>
           </div>
         </div>
-
 
         <!-- BOTÍN SUELA PVC -->
         <div class="product-card"
@@ -1287,48 +1269,23 @@
           </div>
         </div>
 
-       <!-- ACCESORIOS DE POLÍMERO -->
-<div class="product-card"
-     data-category="accesorios"
-     data-price="0"
-     data-article="ART-ACC-POL"
-     data-stock="Todos los modelos con botón lateral. Stock a confirmar según modelo."
-     data-model-options="Portacargador|Portaesposa|Pistolera Bersa PRO|Pistolera Glock|Pistolera Beretta|Pistolera TPR 9">
-
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/accesorios/accesorios-polimero.png');"></div>
-
-  <div class="product-body">
-    <div class="product-tag">Accesorios</div>
-
-    <div class="product-name">Accesorios de polímero</div>
-
-    <div class="product-desc">
-      Portacargador, portaesposa y pistoleras de polímero para distintas marcas.
-      Elegí el modelo en el detalle.
-    </div>
-
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
-
-
-        <!-- CREDENCIALES (TODO JUNTO) -->
+        <!-- ACCESORIOS DE POLÍMERO -->
         <div class="product-card"
              data-category="accesorios"
              data-price="0"
-             data-article="ART-CRED-MODELOS"
-             data-model-options="Credenciales (varios modelos)"
+             data-article="ART-ACC-POL"
+             data-stock="Todos los modelos con botón lateral. Stock a confirmar según modelo."
+             data-model-options="Portacargador|Portaesposa|Pistolera Bersa PRO|Pistolera Glock|Pistolera Beretta|Pistolera TPR 9">
           <div class="product-image product-image-contain"
-               style="background-image:url('productos/accesorios/credenciales.png');"></div>
+               style="background-image:url('productos/accesorios/accesorios-polimero.png');"></div>
 
           <div class="product-body">
             <div class="product-tag">Accesorios</div>
-            <div class="product-name">Chapas policiales (modelos)</div>
-            <div class="product-desc">Consultar para cada provincia el modelo. Venta sujeta a identificación.</div>
+            <div class="product-name">Accesorios de polímero</div>
+            <div class="product-desc">
+              Portacargador, portaesposa y pistoleras de polímero para distintas marcas.
+              Elegí el modelo en el detalle.
+            </div>
             <div class="product-footer">
               <span class="product-price">Consultar</span>
               <button class="btn-small" type="button">Ver detalle</button>
@@ -1336,7 +1293,31 @@
           </div>
         </div>
 
-      </div>
+        <!-- CREDENCIALES / INSIGNIAS (ARREGLÉ el "<div") -->
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-CRED"
+             data-stock="Venta sujeta a identificación. Consultar.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/credenciales.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Credenciales e insignias</div>
+            <div class="product-desc">
+              Credenciales e insignias policiales. Consultar modelo según provincia o fuerza.
+              Venta sujeta a identificación.
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- ✅ CIERRE product-grid (esto te faltaba) -->
 
       <!-- SIDEBAR: FILTROS + CARRITO -->
       <div class="sidebar">
@@ -1498,7 +1479,6 @@
     }
 
     function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
-
     function formatPrice(value) { return value.toLocaleString('es-AR'); }
 
     function renderCart() {
@@ -1605,14 +1585,20 @@
         imageUrl = bg.slice(4, -1).replace(/["']/g, '');
       }
 
-      // Modelos (credenciales)
+      // Modelos (con imágenes y precios opcionales)
       const modelOptions = card.dataset.modelOptions;
       const modelImages  = card.dataset.modelImages;
+      const modelPricesRaw = card.dataset.modelPrices;
+
+      const modelPrices = modelPricesRaw
+        ? modelPricesRaw.split('|').map(p => Number(p.trim()) || 0)
+        : null;
 
       currentProduct = {
         name, price, category: cat, imageUrl, tag, desc, article,
         modelOptions,
-        modelImages: modelImages ? modelImages.split('|').map(s => s.trim()).filter(Boolean) : null
+        modelImages: modelImages ? modelImages.split('|').map(s => s.trim()).filter(Boolean) : null,
+        modelPrices
       };
 
       if (!visibleProductCards.length) buildVisibleProductCards();
@@ -1645,7 +1631,7 @@
       detailName.textContent = name;
       detailDesc.textContent = desc;
 
-      // Precio: si es 0 => “Consultar”
+      // Precio inicial
       detailPrice.textContent = price > 0 ? ('$' + formatPrice(price)) : 'Consultar';
 
       if (detailStock) {
@@ -1670,18 +1656,29 @@
         if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
         const opts = modelOptions.split('|').map(s => s.trim()).filter(Boolean);
 
-        opts.forEach(m => {
+        opts.forEach((m, i) => {
           const opt = document.createElement('option');
           opt.value = m;
           opt.textContent = m;
+          opt.dataset.img = (currentProduct.modelImages && currentProduct.modelImages[i]) ? currentProduct.modelImages[i] : '';
+          opt.dataset.price = (currentProduct.modelPrices && currentProduct.modelPrices[i]) ? currentProduct.modelPrices[i] : 0;
           detailSize.appendChild(opt);
         });
 
-        // al abrir: asegurar que la imagen corresponda al primer modelo
-        if (currentProduct.modelImages && currentProduct.modelImages[0]) {
-          detailImage.style.backgroundImage = `url('${currentProduct.modelImages[0]}')`;
-          currentProduct.imageUrl = currentProduct.modelImages[0];
+        // set inicial: imagen + precio del primer modelo (si existen)
+        const first = detailSize.options[0];
+        const firstImg = first?.dataset.img || '';
+        const firstPrice = Number(first?.dataset.price || 0);
+
+        if (firstImg) {
+          detailImage.style.backgroundImage = `url('${firstImg}')`;
+          currentProduct.imageUrl = firstImg;
         }
+        if (firstPrice > 0) {
+          detailPrice.textContent = '$' + formatPrice(firstPrice);
+          currentProduct.price = firstPrice;
+        }
+
       } else {
         if (sizeLabelEl) sizeLabelEl.textContent = 'Talle';
 
@@ -1925,19 +1922,27 @@
         });
       }
 
-      // cambio de Modelo (credenciales) => cambia imagen
+      // cambio de Modelo => cambia imagen + precio (si existen)
       const detailImage = document.getElementById('detail-image');
       const detailSize = document.getElementById('detail-size');
+      const detailPrice = document.getElementById('detail-price');
 
       if (detailSize) {
         detailSize.addEventListener('change', () => {
-          if (currentProduct && Array.isArray(currentProduct.modelImages) && currentProduct.modelImages.length) {
-            const idx = detailSize.selectedIndex;
-            const img = currentProduct.modelImages[idx] || currentProduct.imageUrl;
-            if (img && detailImage) {
-              detailImage.style.backgroundImage = `url('${img}')`;
-              currentProduct.imageUrl = img;
-            }
+          if (!currentProduct) return;
+
+          const selected = detailSize.options[detailSize.selectedIndex];
+          const newImg = selected?.dataset?.img || '';
+          const newPrice = Number(selected?.dataset?.price || 0);
+
+          if (newImg && detailImage) {
+            detailImage.style.backgroundImage = `url('${newImg}')`;
+            currentProduct.imageUrl = newImg;
+          }
+
+          if (newPrice > 0) {
+            currentProduct.price = newPrice;
+            if (detailPrice) detailPrice.textContent = '$' + formatPrice(newPrice);
           }
         });
       }
