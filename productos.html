@@ -110,14 +110,8 @@
     }
 
     /* === DROPDOWN PRODUCTOS === */
-    .nav-item {
-      position: relative;
-    }
-
-    .nav-link .caret {
-      font-size: 10px;
-      margin-left: 4px;
-    }
+    .nav-item { position: relative; }
+    .nav-link .caret { font-size: 10px; margin-left: 4px; }
 
     .dropdown {
       position: absolute;
@@ -211,10 +205,7 @@
       box-shadow: 0 6px 14px rgba(224,0,0,0.5);
     }
 
-    .btn-primary:hover {
-      background: var(--color-primary-dark);
-    }
-
+    .btn-primary:hover { background: var(--color-primary-dark); }
     .hero-buttons { margin-top: 12px; }
 
     /* Aviso */
@@ -249,7 +240,6 @@
     }
 
     /* --- CATÁLOGO & CARRITO --- */
-
     .catalog-layout {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -283,7 +273,6 @@
       background-position: center;
     }
 
-    /* Para que ciertas fotos se vean completas */
     .product-image.product-image-contain {
       background-size: contain;
       background-position: top center;
@@ -291,22 +280,9 @@
       background-color: #fff;
     }
 
-    .product-body {
-      padding: 14px 16px 16px;
-      text-align: left;
-    }
-
-    .product-name {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .product-desc {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 8px;
-    }
+    .product-body { padding: 14px 16px 16px; text-align: left; }
+    .product-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .product-desc { font-size: 13px; color: #555; margin-bottom: 8px; }
 
     .product-tag {
       display: inline-block;
@@ -325,11 +301,7 @@
       margin-top: 6px;
     }
 
-    .product-price {
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--color-primary);
-    }
+    .product-price { font-weight: 700; font-size: 15px; color: var(--color-primary); }
 
     .btn-small {
       padding: 8px 14px;
@@ -344,7 +316,7 @@
 
     .btn-small:hover { background: var(--color-primary-dark); }
 
-    /* Columna derecha: filtros + carrito */
+    /* Sidebar */
     .sidebar {
       display: flex;
       flex-direction: column;
@@ -401,21 +373,9 @@
       margin-top: 8px;
     }
 
-    .filters-row label {
-      font-size: 12px;
-      color: #555;
-    }
+    .filters-row label { font-size: 12px; color: #555; }
 
-    .filters select {
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      width: 100%;
-      max-width: 220px;
-    }
-
-    /* input del buscador */
+    .filters select,
     .filters input[type="text"] {
       padding: 8px 10px;
       border-radius: 8px;
@@ -441,11 +401,7 @@
       align-self: flex-start;
     }
 
-    .cart-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+    .cart-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
 
     .cart-items {
       max-height: 220px;
@@ -457,12 +413,7 @@
       font-size: 13px;
     }
 
-    .cart-item {
-      margin-bottom: 8px;
-      padding-bottom: 6px;
-      border-bottom: 1px dashed #eee;
-    }
-
+    .cart-item { margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed #eee; }
     .cart-item:last-child { border-bottom: none; }
 
     .cart-item-main {
@@ -474,26 +425,13 @@
 
     .cart-item-name { font-weight: 600; }
 
-    .cart-item-subtotal {
-      font-weight: 600;
-      color: var(--color-primary);
-    }
+    .cart-item-subtotal { font-weight: 600; color: var(--color-primary); }
 
-    .cart-item-meta {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 4px;
-    }
+    .cart-item-meta { font-size: 12px; color: #555; margin-bottom: 4px; }
 
-    .cart-item-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-    }
+    .cart-item-actions { display: flex; align-items: center; gap: 6px; font-size: 12px; }
 
-    .qty-btn,
-    .remove-btn {
+    .qty-btn, .remove-btn {
       border: none;
       border-radius: 999px;
       padding: 2px 7px;
@@ -512,18 +450,9 @@
 
     .remove-btn:hover { background: #f1b0b7; }
 
-    .cart-item-qty {
-      min-width: 18px;
-      text-align: center;
-      font-weight: 600;
-    }
+    .cart-item-qty { min-width: 18px; text-align: center; font-weight: 600; }
 
-    .cart-empty {
-      color: #777;
-      font-size: 13px;
-      text-align: center;
-      padding: 10px 0;
-    }
+    .cart-empty { color: #777; font-size: 13px; text-align: center; padding: 10px 0; }
 
     .cart-total {
       display: flex;
@@ -534,33 +463,12 @@
       margin-top: 4px;
     }
 
-    .cart-note {
-      font-size: 11px;
-      color: #777;
-      margin-bottom: 8px;
-    }
+    .cart-note { font-size: 11px; color: #777; margin-bottom: 8px; }
 
-    /* medios de pago */
-    .payment-methods {
-      font-size: 11px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .payment-methods strong {
-      font-size: 12px;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .payment-methods ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .payment-methods li {
-      margin-bottom: 2px;
-    }
+    .payment-methods { font-size: 11px; color: #555; margin-bottom: 10px; }
+    .payment-methods strong { font-size: 12px; display: block; margin-bottom: 4px; }
+    .payment-methods ul { margin: 0; padding-left: 18px; }
+    .payment-methods li { margin-bottom: 2px; }
 
     .checkout-inputs {
       display: flex;
@@ -593,15 +501,8 @@
 
     .btn-cart:hover { background: var(--color-primary-dark); }
 
-    /* Botón Mercado Pago */
-    .btn-mp {
-      background: #009ee3;
-      margin-top: 6px;
-    }
-
-    .btn-mp:hover {
-      background: #007bb8;
-    }
+    .btn-mp { background: #009ee3; margin-top: 6px; }
+    .btn-mp:hover { background: #007bb8; }
 
     /* === DETALLE DE PRODUCTO (overlay) === */
     .product-detail-overlay {
@@ -642,12 +543,7 @@
       background-color: #fff;
     }
 
-    .detail-info {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 14px;
-    }
+    .detail-info { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
 
     .detail-tag {
       display: inline-block;
@@ -659,52 +555,16 @@
       align-self: flex-start;
     }
 
-    .detail-name {
-      font-size: 20px;
-      margin: 0;
-    }
+    .detail-name { font-size: 20px; margin: 0; }
+    .detail-article { margin: 0; font-size: 12px; color: #777; }
+    .detail-desc { margin: 4px 0 0; color: #555; font-size: 14px; }
+    .detail-stock { font-size: 13px; color: #008000; }
 
-    .detail-article {
-      margin: 0;
-      font-size: 12px;
-      color: #777;
-    }
+    .detail-price-row { margin-top: 8px; margin-bottom: 6px; }
+    .detail-price { font-size: 20px; font-weight: 700; color: var(--color-primary); }
 
-    .detail-desc {
-      margin: 4px 0 0;
-      color: #555;
-      font-size: 14px;
-    }
-
-    .detail-stock {
-      font-size: 13px;
-      color: #008000;
-    }
-
-    .detail-price-row {
-      margin-top: 8px;
-      margin-bottom: 6px;
-    }
-
-    .detail-price {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--color-primary);
-    }
-
-    .detail-form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 8px 0 4px;
-    }
-
-    .detail-form label {
-      font-size: 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+    .detail-form { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 4px; }
+    .detail-form label { font-size: 13px; display: flex; flex-direction: column; gap: 4px; }
 
     .detail-form select,
     .detail-form input[type="number"] {
@@ -712,12 +572,10 @@
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 13px;
-      min-width: 100px;
+      min-width: 160px;
     }
 
-    .detail-actions {
-      margin-top: 4px;
-    }
+    .detail-actions { margin-top: 4px; }
 
     .detail-add-btn {
       border: none;
@@ -731,9 +589,7 @@
       text-transform: uppercase;
     }
 
-    .detail-add-btn:hover {
-      background: var(--color-primary-dark);
-    }
+    .detail-add-btn:hover { background: var(--color-primary-dark); }
 
     .detail-close {
       position: absolute;
@@ -746,7 +602,6 @@
       line-height: 1;
     }
 
-    /* Flechas de navegación en detalle */
     .detail-arrow {
       position: absolute;
       top: 50%;
@@ -764,17 +619,9 @@
       font-size: 18px;
     }
 
-    .detail-arrow-left {
-      left: -18px;
-    }
-
-    .detail-arrow-right {
-      right: -18px;
-    }
-
-    .detail-arrow:hover {
-      background: rgba(0,0,0,0.6);
-    }
+    .detail-arrow-left { left: -18px; }
+    .detail-arrow-right { right: -18px; }
+    .detail-arrow:hover { background: rgba(0,0,0,0.6); }
 
     /* === ZOOM DE IMAGEN === */
     .image-zoom-overlay {
@@ -796,27 +643,22 @@
       display: block;
     }
 
+    footer {
+      padding: 22px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+    }
+
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; }
       .catalog-layout { grid-template-columns: 1fr; }
       .cart-panel { position: static; max-width: none; }
-      .sidebar {
-        max-width: 480px;
-        width: 100%;
-        margin: 0 auto;
-      }
-      .product-detail {
-        grid-template-columns: 1fr;
-      }
-      .detail-image {
-        min-height: 200px;
-      }
-      .detail-arrow-left {
-        left: 4px;
-      }
-      .detail-arrow-right {
-        right: 4px;
-      }
+      .sidebar { max-width: 480px; width: 100%; margin: 0 auto; }
+      .product-detail { grid-template-columns: 1fr; }
+      .detail-image { min-height: 200px; }
+      .detail-arrow-left { left: 4px; }
+      .detail-arrow-right { right: 4px; }
     }
   </style>
 </head>
@@ -849,7 +691,7 @@
             Productos <span class="caret">▼</span>
           </a>
           <div class="dropdown">
-            <a href="productos.html?cat=botas">Calzado</a>
+            <a href="productos.html?cat=calzado">Calzado</a>
             <a href="productos.html?cat=correajes">Correajes</a>
             <a href="productos.html?cat=accesorios">Accesorios</a>
             <a href="productos.html?cat=indumentaria">Indumentaria</a>
@@ -1007,7 +849,7 @@
             <div class="product-tag">Correajes</div>
             <div class="product-name">Cintos tácticos</div>
             <div class="product-desc">
-              Cinto nato y americano. Cintos internos: todo abrojo y regulable.<br>
+              Cinto nato y americano. Cintos internos: todo abrojo y regulable.
             </div>
 
             <div class="product-footer">
@@ -1053,7 +895,7 @@
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Kepis bordados y lisos</div>
             <div class="product-desc">
-              Colores: azul y negro. Talle regulable.<br>  
+              Colores: azul y negro. Talle regulable.
             </div>
 
             <div class="product-footer">
@@ -1077,7 +919,7 @@
             <div class="product-name">Mochila táctica 45 litros</div>
             <div class="product-desc">
               Mochila táctica de 45 litros, con múltiples bolsillos y sistema MOLLE.
-              Ideal para uso intensivo y servicios.<br>
+              Ideal para uso intensivo y servicios.
             </div>
 
             <div class="product-footer">
@@ -1102,7 +944,7 @@
             <div class="product-name">Muslera pistolera de polímero</div>
             <div class="product-desc">
               Muslera pistolera de polímero, ajustable y apta para servicio.
-              Compatible con cinturón táctico.<br>
+              Compatible con cinturón táctico.
             </div>
 
             <div class="product-footer">
@@ -1126,8 +968,8 @@
             <div class="product-tag">Correajes</div>
             <div class="product-name">Chaleco MOLLE</div>
             <div class="product-desc">
-              Cordura importada de 600x600 con doble velcro de cierre con elástico para mayor elasticidad.
-              Velcro frente y espalda con forro antitranspirante doble frontura.<br>
+              Cordura importada 600x600 con doble velcro y elástico.
+              Velcro frente/espalda y forro antitranspirante.
             </div>
 
             <div class="product-footer">
@@ -1149,8 +991,7 @@
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Pantalón ripstop</div>
             <div class="product-desc">
-              Pantalón ripston, tela antidesgarro. Colores: azul y negro.
-              Talles: 34 al 68.
+              Tela antidesgarro. Colores: azul y negro. Talles: 34 al 68.
             </div>
             <div class="product-footer">
               <span class="product-price">$35.000</span>
@@ -1172,7 +1013,7 @@
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Portacredencial</div>
             <div class="product-desc">
-              Portacredencial colgante cuero. Portacredencial tipo libro cuero.<br>
+              Portacredencial colgante cuero y tipo libro cuero.
             </div>
 
             <div class="product-footer">
@@ -1196,7 +1037,7 @@
             <div class="product-tag">Correajes</div>
             <div class="product-name">Porta objetos para cinturón</div>
             <div class="product-desc">
-              Porta objetos para cinturón táctico (porta elementos varios).<br>
+              Porta objetos para cinturón táctico (elementos varios).
             </div>
 
             <div class="product-footer">
@@ -1218,8 +1059,7 @@
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Remera m/corta con estampa</div>
             <div class="product-desc">
-              Remera manga corta con estampa algodón peinado.
-              Colores: azul y negro. Talles: XS al 6XL.
+              Algodón peinado. Colores: azul y negro. Talles: XS al 6XL.
             </div>
             <div class="product-footer">
               <span class="product-price">$23.000</span>
@@ -1241,7 +1081,7 @@
             <div class="product-tag">Accesorios</div>
             <div class="product-name">Tablilla portapapeles</div>
             <div class="product-desc">
-              Tablilla portapapeles rígida para uso en servicio.<br>
+              Tablilla rígida para uso en servicio.
             </div>
 
             <div class="product-footer">
@@ -1263,8 +1103,7 @@
             <div class="product-tag">Indumentaria</div>
             <div class="product-name">Tricota</div>
             <div class="product-desc">
-              Tricota, 1/2 cierre forrada.
-              Talles: XS al 6XL.
+              Tricota 1/2 cierre forrada. Talles: XS al 6XL.
             </div>
             <div class="product-footer">
               <span class="product-price">$39.000</span>
@@ -1273,229 +1112,212 @@
           </div>
         </div>
 
-<!-- ZAPATO CLÁSICO -->
-<div class="product-card"
-     data-category="zapatos"
-     data-price="0"
-     data-size-options="38,39,40,41,42,43,44,45"
-     data-article="ART-ZAP-CLA">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/calzado/clasico.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Zapatos</div>
-    <div class="product-name">Zapato clásico</div>
-    <div class="product-desc">
-      Zapato clásico para uniforme. Consultar talles disponibles.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- ====================== CALZADO (NUEVOS) ====================== -->
 
-<!-- ZAPATO PREMIUM -->
-<div class="product-card"
-     data-category="zapatos"
-     data-price="0"
-     data-size-options="38,39,40,41,42,43,44,45"
-     data-article="ART-ZAP-PREM">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/calzado/zapato%20premium.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Zapatos</div>
-    <div class="product-name">Zapato premium</div>
-    <div class="product-desc">
-      Zapato premium para uso formal y de servicio.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- ZAPATO CLÁSICO -->
+        <div class="product-card"
+             data-category="zapatos"
+             data-price="0"
+             data-size-options="38,39,40,41,42,43,44,45"
+             data-article="ART-ZAP-CLA">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/clasico.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Zapatos</div>
+            <div class="product-name">Zapato clásico</div>
+            <div class="product-desc">Zapato clásico para uniforme. Consultar talles disponibles.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- ELITE PREMIUM -->
-<div class="product-card"
-     data-category="zapatos"
-     data-price="0"
-     data-size-options="38,39,40,41,42,43,44,45"
-     data-article="ART-ZAP-ELITE">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/calzado/elite%20premium.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Zapatos</div>
-    <div class="product-name">Elite premium</div>
-    <div class="product-desc">
-      Zapato Elite Premium. Máximo confort y durabilidad.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- ZAPATO PREMIUM -->
+        <div class="product-card"
+             data-category="zapatos"
+             data-price="0"
+             data-size-options="38,39,40,41,42,43,44,45"
+             data-article="ART-ZAP-PREM">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/zapato%20premium.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Zapatos</div>
+            <div class="product-name">Zapato premium</div>
+            <div class="product-desc">Zapato premium para uso formal y de servicio.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- ================= BORCEGOS ================= -->
+        <!-- ELITE PREMIUM -->
+        <div class="product-card"
+             data-category="zapatos"
+             data-price="0"
+             data-size-options="38,39,40,41,42,43,44,45"
+             data-article="ART-ZAP-ELITE">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/elite%20premium.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Zapatos</div>
+            <div class="product-name">Elite premium</div>
+            <div class="product-desc">Máximo confort y durabilidad.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- BORCEGO HEROS -->
-<div class="product-card"
-     data-category="borcegos"
-     data-price="0"
-     data-size-options="38,39,40,41,42,43,44,45"
-     data-article="ART-BOR-HEROS">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/calzado/heros.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Borcegos</div>
-    <div class="product-name">Borcego Heros</div>
-    <div class="product-desc">
-      Borcego táctico para servicio intensivo.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- BORCEGO HEROS -->
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="0"
+             data-size-options="38,39,40,41,42,43,44,45"
+             data-article="ART-BOR-HEROS">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/heros.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego Heros</div>
+            <div class="product-desc">Borcego táctico para servicio intensivo.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- BORCEGO CRONOS -->
-<div class="product-card"
-     data-category="borcegos"
-     data-price="0"
-     data-size-options="38,39,40,41,42,43,44,45"
-     data-article="ART-BOR-CRONOS">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/calzado/cronos.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Borcegos</div>
-    <div class="product-name">Borcego Cronos</div>
-    <div class="product-desc">
-      Borcego Cronos. Resistencia y estabilidad.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- BORCEGO CRONOS -->
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="0"
+             data-size-options="38,39,40,41,42,43,44,45"
+             data-article="ART-BOR-CRONOS">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/cronos.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego Cronos</div>
+            <div class="product-desc">Resistencia y estabilidad.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- ================= BOTINES ================= -->
+        <!-- BOTÍN SUELA PVC -->
+        <div class="product-card"
+             data-category="botines"
+             data-price="0"
+             data-size-options="38,39,40,41,42,43,44,45"
+             data-article="ART-BOT-PVC">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/botin%20suela%20pvc.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Botines</div>
+            <div class="product-name">Botín suela PVC</div>
+            <div class="product-desc">Uso diario y servicio.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- BOTÍN SUELA PVC -->
-<div class="product-card"
-     data-category="botines"
-     data-price="0"
-     data-size-options="38,39,40,41,42,43,44,45"
-     data-article="ART-BOT-PVC">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/calzado/botin%20suela%20pvc.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Botines</div>
-    <div class="product-name">Botín suela PVC</div>
-    <div class="product-desc">
-      Botín con suela PVC. Uso diario y servicio.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- BOTÍN PREMIUM -->
+        <div class="product-card"
+             data-category="botines"
+             data-price="0"
+             data-size-options="38,39,40,41,42,43,44,45"
+             data-article="ART-BOT-PREM">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/botin%20premium.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Botines</div>
+            <div class="product-name">Botín premium</div>
+            <div class="product-desc">Botín premium para servicio profesional.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- BOTÍN PREMIUM -->
-<div class="product-card"
-     data-category="botines"
-     data-price="0"
-     data-size-options="38,39,40,41,42,43,44,45"
-     data-article="ART-BOT-PREM">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/calzado/botin%20premium.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Botines</div>
-    <div class="product-name">Botín premium</div>
-    <div class="product-desc">
-      Botín premium para servicio profesional.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
+        <!-- ACCESORIOS DE POLÍMERO -->
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-size-options="Único"
+             data-article="ART-ACC-POL"
+             data-stock="Stock a confirmar según modelo.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/accesorios%20polimero.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Accesorios de polímero</div>
+            <div class="product-desc">Accesorios de polímero para cinturón y equipamiento táctico.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
-<!-- ================= ACCESORIOS DE POLÍMERO ================= -->
+        <!-- CREDENCIALES (TODO JUNTO) -->
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-CRED-MODELOS"
+             data-stock="Venta sujeta a identificación. Consultar."
+             data-model-options="Credenciales (varios modelos)|Credencial Policía de la Ciudad|Credencial Policía Provincial (plateada)|Credencial Bomberos de la Ciudad|Credencial Policía Provincial (dorada)"
+             data-model-images="productos/accesorios/credenciales.png|productos/accesorios/credencial%20policia%20de%20la%20ciudad.png|productos/accesorios/credencial%20policia%20provincial%20plateada.png|productos/accesorios/credencial%20bomberos%20de%20la%20ciudad.png|productos/accesorios/credencial%20policia%20provincial%20dorada.png">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/credenciales.png');"></div>
 
-<div class="product-card"
-     data-category="accesorios"
-     data-price="0"
-     data-size-options="Único"
-     data-article="ART-ACC-POL"
-     data-stock="Stock a confirmar según modelo.">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/accesorios/accesorios%20polimero.png');"></div>
-  <div class="product-body">
-    <div class="product-tag">Accesorios</div>
-    <div class="product-name">Accesorios de polímero</div>
-    <div class="product-desc">
-      Accesorios de polímero para cinturón y equipamiento táctico.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
-
-<!-- ================= CREDENCIALES (TODO JUNTO) ================= -->
-<div class="product-card"
-     data-category="accesorios"
-     data-price="0"
-     data-article="ART-CRED-MODELOS"
-     data-stock="Venta sujeta a identificación. Consultar."
-     data-model-options="Credenciales (varios modelos)|Credencial Policía de la Ciudad|Credencial Policía Provincial (plateada)|Credencial Bomberos de la Ciudad|Credencial Policía Provincial (dorada)"
-     data-model-images="productos/accesorios/credenciales.png|productos/accesorios/credencial%20policia%20de%20la%20ciudad.png|productos/accesorios/credencial%20policia%20provincial%20plateada.png|productos/accesorios/credencial%20bomberos%20de%20la%20ciudad.png|productos/accesorios/credencial%20policia%20provincial%20dorada.png">
-  <div class="product-image product-image-contain"
-       style="background-image:url('productos/accesorios/credenciales.png');"></div>
-
-  <div class="product-body">
-    <div class="product-tag">Credenciales</div>
-    <div class="product-name">Credenciales / Placas (modelos)</div>
-    <div class="product-desc">
-      Elegí el modelo en el detalle. Venta sujeta a identificación.
-    </div>
-    <div class="product-footer">
-      <span class="product-price">Consultar</span>
-      <button class="btn-small" type="button">Ver detalle</button>
-    </div>
-  </div>
-</div>
-
+          <div class="product-body">
+            <div class="product-tag">Credenciales</div>
+            <div class="product-name">Credenciales / Placas (modelos)</div>
+            <div class="product-desc">Elegí el modelo en el detalle. Venta sujeta a identificación.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
 
       </div>
 
       <!-- SIDEBAR: FILTROS + CARRITO -->
       <div class="sidebar">
+
         <!-- FILTROS -->
         <div class="filters">
           <h3>Filtrar productos</h3>
 
-          <!-- Filtro por categoría -->
           <div class="filter-buttons">
             <button class="filter-btn active" data-category="all">Todos</button>
-            <button class="filter-btn" data-category="botas">Calzado</button>
+
+            <!-- CALZADO -->
+            <button class="filter-btn" data-category="calzado">Calzado</button>
+            <button class="filter-btn" data-category="zapatos">Zapatos</button>
+            <button class="filter-btn" data-category="borcegos">Borcegos</button>
+            <button class="filter-btn" data-category="botines">Botines</button>
+
+            <!-- RESTO -->
             <button class="filter-btn" data-category="correajes">Correajes</button>
             <button class="filter-btn" data-category="accesorios">Accesorios</button>
             <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
           </div>
 
-          <!-- Buscador -->
           <div class="filters-row">
             <label for="filter-search">Buscar producto:</label>
             <input type="text" id="filter-search" placeholder="Buscar por nombre o descripción" />
           </div>
 
-          <!-- Filtro por precio -->
           <div class="filters-row">
             <label for="filter-price">Filtrar por precio:</label>
             <select id="filter-price">
@@ -1561,7 +1383,6 @@
     <div class="product-detail">
       <button class="detail-close" type="button" id="detail-close-btn">×</button>
 
-      <!-- Flechas navegación -->
       <button class="detail-arrow detail-arrow-left" type="button" id="detail-prev-btn">‹</button>
       <button class="detail-arrow detail-arrow-right" type="button" id="detail-next-btn">›</button>
 
@@ -1579,7 +1400,7 @@
 
         <div class="detail-form">
           <label>
-            Talle
+            <span id="detail-size-label">Talle</span>
             <select id="detail-size"></select>
           </label>
           <label>
@@ -1607,16 +1428,13 @@
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT CARRITO + WHATSAPP + FILTROS + DETALLE + ZOOM + MERCADO PAGO -->
   <script>
     const CART_KEY = 'segudab_cart';
     let cart = [];
-    let currentProduct = null; // para el detalle
+    let currentProduct = null;
 
-    // ⬇️ REEMPLAZÁ ESTE LINK POR TU LINK DE MERCADO PAGO
     const MP_LINK = 'https://mpago.la/tu_link_de_pago';
 
-    // para navegación entre productos
     let visibleProductCards = [];
     let currentProductIndex = -1;
     let searchTerm = '';
@@ -1632,13 +1450,9 @@
       }
     }
 
-    function saveCart() {
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    }
+    function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 
-    function formatPrice(value) {
-      return value.toLocaleString('es-AR');
-    }
+    function formatPrice(value) { return value.toLocaleString('es-AR'); }
 
     function renderCart() {
       const cartItemsContainer = document.getElementById('cart-items');
@@ -1669,7 +1483,7 @@
             <span class="cart-item-subtotal">$${formatPrice(item.price * item.qty)}</span>
           </div>
           <div class="cart-item-meta">
-            Talle: ${item.size || 'A coordinar'}
+            Talle/Modelo: ${item.size || 'A coordinar'}
           </div>
           <div class="cart-item-actions">
             <button class="qty-btn" data-action="decrease" data-name="${item.name}" data-size="${item.size}">−</button>
@@ -1687,11 +1501,8 @@
 
     function addToCart(name, price, size = 'A coordinar', qty = 1) {
       const existing = cart.find(p => p.name === name && p.size === size);
-      if (existing) {
-        existing.qty += qty;
-      } else {
-        cart.push({ name, price: Number(price), qty: qty, size });
-      }
+      if (existing) existing.qty += qty;
+      else cart.push({ name, price: Number(price), qty: qty, size });
       saveCart();
       renderCart();
     }
@@ -1716,10 +1527,13 @@
 
     // ---------- DETALLE DE PRODUCTO ----------
     const sizeOptionsByCategory = {
-      botas: ['38', '39', '40', '41', '42', '43', '44', '45'],
-      correajes: ['S', 'M', 'L', 'XL'],
+      botas: ['38','39','40','41','42','43','44','45'],
+      correajes: ['S','M','L','XL'],
       accesorios: ['Único'],
-      indumentaria: ['S', 'M', 'L', 'XL', 'XXL']
+      indumentaria: ['S','M','L','XL','XXL'],
+      zapatos: ['38','39','40','41','42','43','44','45'],
+      borcegos: ['38','39','40','41','42','43','44','45'],
+      botines: ['38','39','40','41','42','43','44','45'],
     };
 
     function openProductDetail(card) {
@@ -1735,21 +1549,26 @@
       const cat  = card.dataset.category || '';
       const price = Number(card.dataset.price || 0);
       const article = card.dataset.article || '';
-      const stockTextFromCard = card.dataset.stock;  // texto de stock específico
+      const stockTextFromCard = card.dataset.stock;
 
-      // Imagen
+      // Imagen base
       let bg = imgEl ? imgEl.style.backgroundImage : '';
       let imageUrl = '';
       if (bg && bg.startsWith('url')) {
         imageUrl = bg.slice(4, -1).replace(/["']/g, '');
       }
 
-      currentProduct = { name, price, category: cat, imageUrl, tag, desc, article };
+      // Modelos (credenciales)
+      const modelOptions = card.dataset.modelOptions;
+      const modelImages  = card.dataset.modelImages;
 
-      // aseguramos lista de visibles
-      if (!visibleProductCards.length) {
-        buildVisibleProductCards();
-      }
+      currentProduct = {
+        name, price, category: cat, imageUrl, tag, desc, article,
+        modelOptions,
+        modelImages: modelImages ? modelImages.split('|').map(s => s.trim()).filter(Boolean) : null
+      };
+
+      if (!visibleProductCards.length) buildVisibleProductCards();
       currentProductIndex = visibleProductCards.indexOf(card);
       if (currentProductIndex === -1) {
         buildVisibleProductCards();
@@ -1765,10 +1584,10 @@
       const detailQty     = document.getElementById('detail-qty');
       const detailArticle = document.getElementById('detail-article');
       const detailStock   = document.getElementById('detail-stock');
+      const sizeLabelEl   = document.getElementById('detail-size-label');
 
       detailImage.style.backgroundImage = imageUrl ? `url('${imageUrl}')` : 'none';
 
-      // si la card usa contain, aplico la clase en el detalle
       if (imgEl && imgEl.classList.contains('product-image-contain')) {
         detailImage.classList.add('detail-image-contain');
       } else {
@@ -1778,15 +1597,14 @@
       detailTag.textContent = tag;
       detailName.textContent = name;
       detailDesc.textContent = desc;
-      detailPrice.textContent = '$' + formatPrice(price);
 
-      // texto de stock según corresponda
+      // Precio: si es 0 => “Consultar”
+      detailPrice.textContent = price > 0 ? ('$' + formatPrice(price)) : 'Consultar';
+
       if (detailStock) {
-        if (stockTextFromCard) {
-          detailStock.textContent = stockTextFromCard;
-        } else {
-          detailStock.textContent = 'Stock a confirmar según talle y cantidad.';
-        }
+        detailStock.textContent = stockTextFromCard
+          ? stockTextFromCard
+          : 'Stock a confirmar según talle y cantidad.';
       }
 
       if (detailArticle) {
@@ -1798,27 +1616,42 @@
         }
       }
 
-      // Rellenar talles
+      // Rellenar select (Modelo o Talle)
       detailSize.innerHTML = '';
 
-      const customSizes = card.dataset.sizeOptions; // ej: "35,36,37..."
-      let options;
+      if (modelOptions) {
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
+        const opts = modelOptions.split('|').map(s => s.trim()).filter(Boolean);
 
-      if (customSizes) {
-        options = customSizes.split(',').map(s => s.trim()).filter(Boolean);
+        opts.forEach(m => {
+          const opt = document.createElement('option');
+          opt.value = m;
+          opt.textContent = m;
+          detailSize.appendChild(opt);
+        });
+
+        // al abrir: asegurar que la imagen corresponda al primer modelo
+        if (currentProduct.modelImages && currentProduct.modelImages[0]) {
+          detailImage.style.backgroundImage = `url('${currentProduct.modelImages[0]}')`;
+          currentProduct.imageUrl = currentProduct.modelImages[0];
+        }
       } else {
-        options = sizeOptionsByCategory[cat] || ['A coordinar'];
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Talle';
+
+        const customSizes = card.dataset.sizeOptions;
+        const options = customSizes
+          ? customSizes.split(',').map(s => s.trim()).filter(Boolean)
+          : (sizeOptionsByCategory[cat] || ['A coordinar']);
+
+        options.forEach(talle => {
+          const opt = document.createElement('option');
+          opt.value = talle;
+          opt.textContent = talle;
+          detailSize.appendChild(opt);
+        });
       }
 
-      options.forEach(talle => {
-        const opt = document.createElement('option');
-        opt.value = talle;
-        opt.textContent = talle;
-        detailSize.appendChild(opt);
-      });
-
       detailQty.value = 1;
-
       overlay.style.display = 'flex';
     }
 
@@ -1862,13 +1695,9 @@
       const size = btn.dataset.size;
       if (!action || !name) return;
 
-      if (action === 'increase') {
-        updateItemQty(name, size, 1);
-      } else if (action === 'decrease') {
-        updateItemQty(name, size, -1);
-      } else if (action === 'remove') {
-        removeFromCart(name, size);
-      }
+      if (action === 'increase') updateItemQty(name, size, 1);
+      else if (action === 'decrease') updateItemQty(name, size, -1);
+      else if (action === 'remove') removeFromCart(name, size);
     });
 
     function finalizarCompraWhatsApp() {
@@ -1895,19 +1724,16 @@
       let total = 0;
       cart.forEach(item => {
         total += item.price * item.qty;
-        texto += '- ' + item.qty + ' x ' + item.name + ' (Talle: ' + (item.size || 'A coordinar') + ')%0A';
+        texto += '- ' + item.qty + ' x ' + item.name + ' (Talle/Modelo: ' + (item.size || 'A coordinar') + ')%0A';
       });
 
       texto += '%0ATotal estimado: $' + formatPrice(total) + '%0A';
       texto += '%0A¿Me podrían confirmar stock, precio final y formas de pago?';
 
       const numero = '5491137286846';
-      const url = 'https://wa.me/' + numero + '?text=' + texto;
-
-      window.open(url, '_blank');
+      window.open('https://wa.me/' + numero + '?text=' + texto, '_blank');
     }
 
-    // Botón "Pagar con Mercado Pago" (link genérico)
     function pagarConMercadoPago() {
       if (cart.length === 0) {
         alert('Primero agregá productos al carrito.');
@@ -1915,18 +1741,14 @@
       }
 
       let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.qty;
-      });
+      cart.forEach(item => total += item.price * item.qty);
 
       const msg =
         'El total estimado de tu carrito es $' + formatPrice(total) +
         '.\n\nEste botón te llevará a un link de pago de Mercado Pago configurado por Segudab. ' +
         'Si el monto no coincide exactamente, se ajustará manualmente con el comercio.\n\n¿Querés continuar?';
 
-      if (confirm(msg)) {
-        window.open(MP_LINK, '_blank');
-      }
+      if (confirm(msg)) window.open(MP_LINK, '_blank');
     }
 
     /* FILTROS */
@@ -1935,22 +1757,16 @@
     const filterPrice = document.getElementById('filter-price');
     const clearFiltersBtn = document.getElementById('clear-filters');
 
-    // contador de productos visibles
     function updateProductCount() {
       const label = document.getElementById('product-count-text');
       const visible = visibleProductCards.length;
-      if (label) {
-        label.textContent = visible === 1
-          ? 'Mostrando 1 producto'
-          : `Mostrando ${visible} productos`;
-      }
+      if (label) label.textContent = visible === 1 ? 'Mostrando 1 producto' : `Mostrando ${visible} productos`;
     }
 
-    // Detectar categoría desde la URL
+    // URL: ?cat=...
     function loadCategoryFromURL() {
       const params = new URLSearchParams(window.location.search);
       const cat = params.get('cat');
-
       if (!cat) return;
 
       const btn = document.querySelector(`.filter-btn[data-category="${cat}"]`);
@@ -1963,36 +1779,34 @@
 
     function applyFilters() {
       const priceFilter = filterPrice.value;
-
       const cards = document.querySelectorAll('.product-card');
       visibleProductCards = [];
 
       cards.forEach(card => {
         const cardCat = card.dataset.category;
         const priceValue = Number(card.dataset.price);
-
         let show = true;
 
-        // por categoría
-        if (currentCategory !== 'all' && cardCat !== currentCategory) {
+        // categoría especial "calzado" = (zapatos/borcegos/botines/botas)
+        if (currentCategory === 'calzado') {
+          if (!['zapatos','borcegos','botines','botas'].includes(cardCat)) show = false;
+        } else if (currentCategory !== 'all' && cardCat !== currentCategory) {
           show = false;
         }
 
-        // por precio
+        // precio
         if (priceFilter !== 'all') {
           if (priceFilter === 'low' && priceValue >= 20000) show = false;
           if (priceFilter === 'mid' && (priceValue < 20000 || priceValue > 40000)) show = false;
           if (priceFilter === 'high' && priceValue <= 40000) show = false;
         }
 
-        // por texto (buscador)
+        // buscador
         if (searchTerm) {
           const nameEl = card.querySelector('.product-name');
           const descEl = card.querySelector('.product-desc');
           const text = ((nameEl ? nameEl.textContent : '') + ' ' + (descEl ? descEl.textContent : '')).toLowerCase();
-          if (!text.includes(searchTerm)) {
-            show = false;
-          }
+          if (!text.includes(searchTerm)) show = false;
         }
 
         card.style.display = show ? 'block' : 'none';
@@ -2016,7 +1830,6 @@
 
     filterPrice.addEventListener('change', applyFilters);
 
-    // Botón "Limpiar filtros"
     if (clearFiltersBtn) {
       clearFiltersBtn.addEventListener('click', () => {
         currentCategory = 'all';
@@ -2033,17 +1846,12 @@
       });
     }
 
-    // Configurar eventos de detalle + zoom
     function setupProductDetailEvents() {
       const cards = document.querySelectorAll('.product-card');
 
       cards.forEach(card => {
-        // click en toda la tarjeta
-        card.addEventListener('click', () => {
-          openProductDetail(card);
-        });
+        card.addEventListener('click', () => openProductDetail(card));
 
-        // que el botón no dispare doble
         const btn = card.querySelector('.btn-small');
         if (btn) {
           btn.addEventListener('click', (e) => {
@@ -2059,37 +1867,35 @@
       const prevBtn = document.getElementById('detail-prev-btn');
       const nextBtn = document.getElementById('detail-next-btn');
 
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          closeProductDetail();
-        });
-      }
+      if (closeBtn) closeBtn.addEventListener('click', closeProductDetail);
 
-      if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          showPrevProduct();
-        });
-      }
+      if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevProduct(); });
+      if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextProduct(); });
 
-      if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          showNextProduct();
-        });
-      }
-
-      // cerrar al clickear fuera del recuadro
       if (overlay) {
         overlay.addEventListener('click', (e) => {
-          if (e.target === overlay) {
-            closeProductDetail();
+          if (e.target === overlay) closeProductDetail();
+        });
+      }
+
+      // cambio de Modelo (credenciales) => cambia imagen
+      const detailImage = document.getElementById('detail-image');
+      const detailSize = document.getElementById('detail-size');
+
+      if (detailSize) {
+        detailSize.addEventListener('change', () => {
+          if (currentProduct && Array.isArray(currentProduct.modelImages) && currentProduct.modelImages.length) {
+            const idx = detailSize.selectedIndex;
+            const img = currentProduct.modelImages[idx] || currentProduct.imageUrl;
+            if (img && detailImage) {
+              detailImage.style.backgroundImage = `url('${img}')`;
+              currentProduct.imageUrl = img;
+            }
           }
         });
       }
 
-      // ZOOM: click en la imagen del detalle
-      const detailImage = document.getElementById('detail-image');
+      // ZOOM
       const zoomOverlay = document.getElementById('image-zoom-overlay');
       const zoomImage = document.getElementById('zoom-image');
 
@@ -2100,13 +1906,11 @@
           zoomOverlay.style.display = 'flex';
         });
 
-        // cerrar zoom al clickear
         zoomOverlay.addEventListener('click', () => {
           zoomOverlay.style.display = 'none';
         });
       }
 
-      // ESC y flechas para cerrar / navegar
       document.addEventListener('keydown', (e) => {
         const overlayEl = document.getElementById('product-detail-overlay');
         const isDetailOpen = overlayEl && overlayEl.style.display === 'flex';
@@ -2114,31 +1918,22 @@
         if (e.key === 'Escape') {
           closeProductDetail();
           const zoomOverlayEl = document.getElementById('image-zoom-overlay');
-          if (zoomOverlayEl) {
-            zoomOverlayEl.style.display = 'none';
-          }
+          if (zoomOverlayEl) zoomOverlayEl.style.display = 'none';
         }
 
-        if (isDetailOpen && e.key === 'ArrowRight') {
-          e.preventDefault();
-          showNextProduct();
-        }
-
-        if (isDetailOpen && e.key === 'ArrowLeft') {
-          e.preventDefault();
-          showPrevProduct();
-        }
+        if (isDetailOpen && e.key === 'ArrowRight') { e.preventDefault(); showNextProduct(); }
+        if (isDetailOpen && e.key === 'ArrowLeft')  { e.preventDefault(); showPrevProduct(); }
       });
 
-      // Agregar al carrito desde el detalle
       if (addBtn) {
         addBtn.addEventListener('click', () => {
           if (!currentProduct) return;
-          const detailSize = document.getElementById('detail-size');
-          const detailQty  = document.getElementById('detail-qty');
 
-          const size = detailSize ? (detailSize.value || 'A coordinar') : 'A coordinar';
-          const qty = detailQty ? Math.max(1, parseInt(detailQty.value || '1', 10)) : 1;
+          const detailSizeEl = document.getElementById('detail-size');
+          const detailQtyEl  = document.getElementById('detail-qty');
+
+          const size = detailSizeEl ? (detailSizeEl.value || 'A coordinar') : 'A coordinar';
+          const qty = detailQtyEl ? Math.max(1, parseInt(detailQtyEl.value || '1', 10)) : 1;
 
           addToCart(currentProduct.name, currentProduct.price, size, qty);
           closeProductDetail();
@@ -2159,7 +1954,7 @@
         });
       }
 
-      applyFilters();       // también arma visibleProductCards y actualiza el contador
+      applyFilters();
       setupProductDetailEvents();
     });
   </script>
