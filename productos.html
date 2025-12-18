@@ -1917,15 +1917,22 @@
         detailPrice.textContent = n > 0 ? ('$' + formatPrice(n)) : 'Consultar';
       }
 
+      // Limpia handlers para evitar duplicados
+      if (colorSelect) colorSelect.onchange = null;
+      detailSize.onchange = null;
+
       // ===== Caso 1: Color -> Modelo (MOLLE) =====
       if (Array.isArray(currentProduct.colorOptions) && currentProduct.colorOptions.length) {
         if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
-        // Mostrar color
+
+        // Mostrar selector de color
         if (colorWrap) {
           colorWrap.style.display = 'flex';
           colorWrap.style.flexDirection = 'column';
         }
+
         // Cargar colores
+        colorSelect.innerHTML = '';
         currentProduct.colorOptions.forEach(c => {
           const opt = document.createElement('option');
           opt.value = c;
@@ -1933,8 +1940,23 @@
           colorSelect.appendChild(opt);
         });
 
+        function applySelectedModelFromSize() {
+          const opt = detailSize.options[detailSize.selectedIndex];
+          if (!opt) return;
+
+          const img = opt.dataset.img || '';
+          const prc = opt.dataset.price ? Number(opt.dataset.price) : 0;
+
+          if (img) {
+            detailImage.style.backgroundImage = `url('${img}')`;
+            currentProduct.imageUrl = img;
+          }
+          setDetailPrice(prc);
+        }
+
         function fillModelsForColor(colorName) {
           const bundle = currentProduct.readColorBundle(colorName);
+
           detailSize.innerHTML = '';
           bundle.models.forEach((m, idx) => {
             const opt = document.createElement('option');
@@ -1945,25 +1967,25 @@
             detailSize.appendChild(opt);
           });
 
-          const first = detailSize.options[0];
-          const firstImg = first && first.dataset.img ? first.dataset.img : currentProduct.imageUrl;
-          const firstPrice = first && first.dataset.price ? Number(first.dataset.price) : 0;
-
-          if (firstImg) {
-            detailImage.style.backgroundImage = `url('${firstImg}')`;
-            currentProduct.imageUrl = firstImg;
+          if (!detailSize.options.length) {
+            // fallback a producto base
+            detailImage.style.backgroundImage = currentProduct.imageUrl ? `url('${currentProduct.imageUrl}')` : 'none';
+            setDetailPrice(currentProduct.price);
+            return;
           }
-          setDetailPrice(firstPrice);
+
+          detailSize.selectedIndex = 0;
+          applySelectedModelFromSize();
         }
 
         fillModelsForColor(colorSelect.value);
 
-        colorSelect.addEventListener('change', () => {
-          fillModelsForColor(colorSelect.value);
-        });
+        colorSelect.onchange = () => fillModelsForColor(colorSelect.value);
+        detailSize.onchange  = () => applySelectedModelFromSize();
+      }
 
-      // ===== Caso 2: Modelos simples (con imagen/precio por modelo) =====
-      } else if (Array.isArray(currentProduct.modelOptions) && currentProduct.modelOptions.length) {
+      // ===== Caso 2: Modelos (simple) (ej. Cintos, Chapas, Campera, Frente/Atrás) =====
+      else if (Array.isArray(currentProduct.modelOptions) && currentProduct.modelOptions.length) {
         if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
 
         currentProduct.modelOptions.forEach((m, idx) => {
@@ -1971,47 +1993,38 @@
           opt.value = m;
           opt.textContent = m;
 
-          const img = (currentProduct.modelImages && currentProduct.modelImages[idx]) ? currentProduct.modelImages[idx] : '';
-          const prc = (currentProduct.modelPrices && typeof currentProduct.modelPrices[idx] === 'number') ? currentProduct.modelPrices[idx] : 0;
+          const prc = currentProduct.modelPrices && currentProduct.modelPrices[idx] != null
+            ? Number(currentProduct.modelPrices[idx] || 0)
+            : currentProduct.price;
 
-          if (img) opt.dataset.img = img;
+          const img = currentProduct.modelImages && currentProduct.modelImages[idx]
+            ? currentProduct.modelImages[idx]
+            : currentProduct.imageUrl;
+
           opt.dataset.price = String(prc);
-
+          opt.dataset.img = img || '';
           detailSize.appendChild(opt);
         });
 
-        // inicial
-        const firstOpt = detailSize.options[0];
-        const firstImg = firstOpt && firstOpt.dataset.img ? firstOpt.dataset.img : currentProduct.imageUrl;
-        const firstPrice = firstOpt && firstOpt.dataset.price ? Number(firstOpt.dataset.price) : currentProduct.price;
-
-        if (firstImg) {
-          detailImage.style.backgroundImage = `url('${firstImg}')`;
-          currentProduct.imageUrl = firstImg;
-        }
-        setDetailPrice(firstPrice);
-
-        // Color condicional por modelo (Cintos)
+        // Colores condicionales por modelo (solo si existe modelColors)
         function setColorsForModel(modelIndex) {
           if (!colorWrap || !colorSelect) return;
 
-          if (!currentProduct.modelColors || !currentProduct.modelColors[modelIndex]) {
-            colorWrap.style.display = 'none';
-            colorSelect.innerHTML = '';
-            return;
-          }
+          const colorsStr = currentProduct.modelColors && currentProduct.modelColors[modelIndex]
+            ? currentProduct.modelColors[modelIndex]
+            : '';
 
-          const colorsStr = currentProduct.modelColors[modelIndex];
-          const colors = colorsStr.split(',').map(c => c.trim()).filter(Boolean);
+          const colors = String(colorsStr).split(',').map(c => c.trim()).filter(Boolean);
 
+          // si 0 o 1 color => oculto (o dejo fijo)
           if (colors.length <= 1) {
             colorWrap.style.display = 'none';
             colorSelect.innerHTML = '';
             if (colors[0]) {
-              const opt = document.createElement('option');
-              opt.value = colors[0];
-              opt.textContent = colors[0];
-              colorSelect.appendChild(opt);
+              const o = document.createElement('option');
+              o.value = colors[0];
+              o.textContent = colors[0];
+              colorSelect.appendChild(o);
             }
             return;
           }
@@ -2020,30 +2033,38 @@
           colorWrap.style.flexDirection = 'column';
           colorSelect.innerHTML = '';
           colors.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c;
-            opt.textContent = c;
-            colorSelect.appendChild(opt);
+            const o = document.createElement('option');
+            o.value = c;
+            o.textContent = c;
+            colorSelect.appendChild(o);
           });
         }
-        setColorsForModel(0);
 
-        // update en cambio de modelo
-        detailSize.addEventListener('change', () => {
+        function applySelectedModel() {
           const opt = detailSize.options[detailSize.selectedIndex];
-          const img = opt && opt.dataset.img ? opt.dataset.img : currentProduct.imageUrl;
-          const prc = opt && opt.dataset.price ? Number(opt.dataset.price) : currentProduct.price;
+          if (!opt) return;
 
-          if (img && detailImage) {
+          const img = opt.dataset.img || '';
+          const prc = opt.dataset.price ? Number(opt.dataset.price) : 0;
+
+          if (img) {
             detailImage.style.backgroundImage = `url('${img}')`;
             currentProduct.imageUrl = img;
           }
           setDetailPrice(prc);
+
+          // actualiza colores según modelo
           setColorsForModel(detailSize.selectedIndex);
-        });
+        }
+
+        // init
+        applySelectedModel();
+
+        detailSize.onchange = () => applySelectedModel();
+      }
 
       // ===== Caso 3: Talles normales =====
-      } else {
+      else {
         if (sizeLabelEl) sizeLabelEl.textContent = 'Talle';
 
         const customSizes = card.dataset.sizeOptions;
@@ -2060,6 +2081,7 @@
 
         setDetailPrice(currentProduct.price);
       }
+
 
       detailQty.value = 1;
       overlay.style.display = 'flex';
