@@ -840,7 +840,7 @@
         <!-- 4. CHOMBA PIQUÉ BORDADA -->
         <div class="product-card"
              data-category="indumentaria"
-             data-price="329000"
+             data-price="32900"
              data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL"
              data-article="ART-CHOM-PIQ">
           <div class="product-image product-image-contain"
@@ -1227,7 +1227,7 @@
             <div class="product-tag">Borcegos</div>
             <div class="product-name">Borcego Cronos</div>
             <div class="product-desc">Calzado en cuero flor (1,82 mm) y cordura con EVA, con cierre recto. Base de PU sin costura, resistente al agua, forrería interior absorbente y plantilla termoformada de 4,5 mm. Talles del 36 al 47.</div>
-          <div class="product-footer">
+            <div class="product-footer">
               <span class="product-price">$55.900</span>
               <button class="btn-small" type="button">Ver detalle</button>
             </div>
@@ -1695,13 +1695,13 @@
             <select id="detail-size"></select>
           </label>
 
-          <!-- NUEVO: talle separado cuando hay modelos -->
+          <!-- ✅ TALLE SEPARADO (cuando hay modelos) -->
           <label id="detail-talle-wrap" style="display:none;">
             Talle
             <select id="detail-talle"></select>
           </label>
 
-          <!-- Color (se usa en 2 casos: color condicional por modelo, o color->modelo como MOLLE) -->
+          <!-- Color (condicional) -->
           <label id="detail-color-wrap" style="display:none;">
             Color
             <select id="detail-color"></select>
@@ -1790,7 +1790,7 @@
             <span class="cart-item-subtotal">$${formatPrice(item.price * item.qty)}</span>
           </div>
           <div class="cart-item-meta">
-            Talle/Modelo: ${item.size || 'A coordinar'}
+            Variante: ${item.size || 'A coordinar'}
           </div>
           <div class="cart-item-actions">
             <button class="qty-btn" data-action="decrease" data-name="${item.name}" data-size="${item.size}">−</button>
@@ -1952,18 +1952,24 @@
       const detailStock   = document.getElementById('detail-stock');
       const sizeLabelEl   = document.getElementById('detail-size-label');
 
-      const colorWrap  = document.getElementById('detail-color-wrap');
+      const colorWrap   = document.getElementById('detail-color-wrap');
       const colorSelect = document.getElementById('detail-color');
 
-      // Reset
+      const talleWrap   = document.getElementById('detail-talle-wrap');
+      const talleSelect = document.getElementById('detail-talle');
+
+      // Reset selects / wraps
       if (colorWrap) colorWrap.style.display = 'none';
       if (colorSelect) colorSelect.innerHTML = '';
+
+      if (talleWrap) talleWrap.style.display = 'none';
+      if (talleSelect) talleSelect.innerHTML = '';
+
       detailSize.innerHTML = '';
 
-      // Reset galería (siempre arranca en frente)
+      // Reset galería
       currentGallery = imageUrl ? [imageUrl] : [];
       galleryIndex = 0;
-
       detailImage.style.backgroundImage = imageUrl ? `url('${imageUrl}')` : 'none';
       updateGalleryArrows();
 
@@ -2004,6 +2010,38 @@
         currentProduct.imageUrl = url;
       }
 
+      // ✅ Helper: mostrar talles (solo si el producto tiene data-size-options)
+      function fillTallesIfAny() {
+        if (!talleWrap || !talleSelect) return;
+
+        const customSizes = card.dataset.sizeOptions;
+        if (!customSizes) {
+          talleWrap.style.display = 'none';
+          talleSelect.innerHTML = '';
+          return;
+        }
+
+        const talles = customSizes.split(',').map(s => s.trim()).filter(Boolean);
+        if (!talles.length) {
+          talleWrap.style.display = 'none';
+          talleSelect.innerHTML = '';
+          return;
+        }
+
+        talleWrap.style.display = 'flex';
+        talleWrap.style.flexDirection = 'column';
+        talleSelect.innerHTML = '';
+
+        talles.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t;
+          opt.textContent = t;
+          talleSelect.appendChild(opt);
+        });
+
+        talleSelect.selectedIndex = 0;
+      }
+
       // Limpia handlers para evitar duplicados
       if (colorSelect) colorSelect.onchange = null;
       detailSize.onchange = null;
@@ -2011,6 +2049,7 @@
       // ===== Caso 1: Color -> Modelo (MOLLE) =====
       if (Array.isArray(currentProduct.colorOptions) && currentProduct.colorOptions.length) {
         if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
+        fillTallesIfAny();
 
         if (colorWrap) {
           colorWrap.style.display = 'flex';
@@ -2075,6 +2114,7 @@
       // ===== Caso 2: Modelos (simple) =====
       else if (Array.isArray(currentProduct.modelOptions) && currentProduct.modelOptions.length) {
         if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
+        fillTallesIfAny();
 
         currentProduct.modelOptions.forEach((m, idx) => {
           const opt = document.createElement('option');
@@ -2157,6 +2197,10 @@
       else {
         if (sizeLabelEl) sizeLabelEl.textContent = 'Talle';
 
+        // en talles normales, ocultamos el "talle separado"
+        if (talleWrap) talleWrap.style.display = 'none';
+        if (talleSelect) talleSelect.innerHTML = '';
+
         const customSizes = card.dataset.sizeOptions;
         const options = customSizes
           ? customSizes.split(',').map(s => s.trim()).filter(Boolean)
@@ -2197,7 +2241,7 @@
         .filter(card => card.style.display !== 'none');
     }
 
-    // ✅ Flechas grandes: SIEMPRE cambian de producto (no tocan la galería)
+    // ✅ Flechas grandes: SIEMPRE cambian de producto
     function showNextProduct() {
       if (!visibleProductCards.length) buildVisibleProductCards();
       if (!visibleProductCards.length) return;
@@ -2207,7 +2251,7 @@
       let newIndex = currentProductIndex + 1;
       if (newIndex >= visibleProductCards.length) newIndex = 0;
 
-      openProductDetail(visibleProductCards[newIndex]); // resetea a frente
+      openProductDetail(visibleProductCards[newIndex]);
     }
 
     function showPrevProduct() {
@@ -2219,7 +2263,7 @@
       let newIndex = currentProductIndex - 1;
       if (newIndex < 0) newIndex = visibleProductCards.length - 1;
 
-      openProductDetail(visibleProductCards[newIndex]); // resetea a frente
+      openProductDetail(visibleProductCards[newIndex]);
     }
 
     // Botones dentro del carrito
@@ -2261,7 +2305,7 @@
       let total = 0;
       cart.forEach(item => {
         total += item.price * item.qty;
-        texto += '- ' + item.qty + ' x ' + item.name + ' (Talle/Modelo: ' + (item.size || 'A coordinar') + ')%0A';
+        texto += '- ' + item.qty + ' x ' + item.name + ' (Variante: ' + (item.size || 'A coordinar') + ')%0A';
       });
 
       texto += '%0ATotal estimado: $' + formatPrice(total) + '%0A';
@@ -2447,7 +2491,6 @@
           if (zoomOverlayEl) zoomOverlayEl.style.display = 'none';
         }
 
-        // ✅ Teclado: flechas cambian de producto (como tus botones grandes)
         if (isDetailOpen && e.key === 'ArrowRight') { e.preventDefault(); showNextProduct(); }
         if (isDetailOpen && e.key === 'ArrowLeft')  { e.preventDefault(); showPrevProduct(); }
       });
@@ -2461,12 +2504,25 @@
           const colorEl = document.getElementById('detail-color');
 
           const modelOrSize = detailSizeEl ? (detailSizeEl.value || 'A coordinar') : 'A coordinar';
+
+          const talleEl = document.getElementById('detail-talle');
+          const talleWrapEl = document.getElementById('detail-talle-wrap');
+          const talle = (talleWrapEl && talleWrapEl.style.display !== 'none' && talleEl && talleEl.options.length)
+            ? (talleEl.value || '')
+            : '';
+
           const color = (colorEl && colorEl.options.length) ? (colorEl.value || '') : '';
 
-          const sizeLabel = color ? `${modelOrSize} / ${color}` : modelOrSize;
+          let labelParts = [];
+          if (modelOrSize) labelParts.push(modelOrSize);
+          if (talle) labelParts.push(talle);
+          if (color) labelParts.push(color);
+
+          const sizeLabel = labelParts.join(' / ');
+
           const qty = detailQtyEl ? Math.max(1, parseInt(detailQtyEl.value || '1', 10)) : 1;
 
-          addToCart(currentProduct.name, currentProduct.price, sizeLabel, qty);
+          addToCart(currentProduct.name, currentProduct.price, sizeLabel || 'A coordinar', qty);
           closeProductDetail();
         });
       }
