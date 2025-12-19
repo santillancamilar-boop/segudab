@@ -1362,7 +1362,7 @@
         <div class="product-card"
              data-category="indumentaria"
              data-price="0"
-              data-size-options="S,M,L,XL,2XL,3XL"
+             data-size-options="S,M,L,XL,2XL,3XL"
              data-article="ART-CAMP-SOFT"
              data-stock="Stock a confirmar según color y talle."
              data-model-options="Arena|Azul|Negra"
@@ -1388,7 +1388,7 @@
         <div class="product-card"
              data-category="indumentaria"
              data-price="44900"
-            data-size-options="S,M,L,XL,2XL"
+             data-size-options="S,M,L,XL,2XL"
              data-article="ART-CHA-PORTA"
              data-stock="Stock a confirmar según talle y configuración.">
           <div class="product-image product-image-contain"
@@ -1410,7 +1410,7 @@
         <div class="product-card"
              data-category="indumentaria"
              data-price="0"
-            data-size-options="XS,S,M,L"
+             data-size-options="XS,S,M,L"
              data-article="ART-BAJO-CHAL"
              data-stock="Stock a confirmar según talle.">
           <div class="product-image product-image-contain"
@@ -1637,12 +1637,12 @@
               <li>Tarjeta de crédito/débito y billeteras virtuales vía Mercado Pago</li>
             </ul>
           </div>
-          <div class="cart-note" style="margin-top:8px; color:#900; font-weight:600;">
- ⚠️ Envíos al interior del país:<br>
-  Se realizan únicamente por <strong>Vía Cargo</strong> y son a cargo del comprador.
-  El costo de envío se abona al retirar la mercadería.
-</div>
 
+          <div class="cart-note" style="margin-top:8px; color:#900; font-weight:600;">
+            ⚠️ Envíos al interior del país:<br>
+            Se realizan únicamente por <strong>Vía Cargo</strong> y son a cargo del comprador.
+            El costo de envío se abona al retirar la mercadería.
+          </div>
 
           <div class="checkout-inputs">
             <input id="checkout-nombre" type="text" placeholder="Nombre y apellido" />
@@ -1694,17 +1694,18 @@
             <span id="detail-size-label">Talle</span>
             <select id="detail-size"></select>
           </label>
-  <!-- NUEVO: talle separado cuando hay modelos -->
-  <label id="detail-talle-wrap" style="display:none;">
-    Talle
-    <select id="detail-talle"></select>
-  </label>
+
+          <!-- NUEVO: talle separado cuando hay modelos -->
+          <label id="detail-talle-wrap" style="display:none;">
+            Talle
+            <select id="detail-talle"></select>
+          </label>
+
           <!-- Color (se usa en 2 casos: color condicional por modelo, o color->modelo como MOLLE) -->
           <label id="detail-color-wrap" style="display:none;">
             Color
             <select id="detail-color"></select>
           </label>
-
 
           <label>
             Cantidad
