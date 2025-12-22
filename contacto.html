@@ -16,11 +16,12 @@
     }
 
     * { box-sizing: border-box; }
+    html, body { margin:0; width:100%; overflow-x:hidden; }
 
     body {
-      margin: 0;
       font-family: system-ui, sans-serif;
       background: var(--color-bg-light);
+      color: var(--color-text);
     }
 
     /* TOP BAR */
@@ -32,7 +33,10 @@
       display: flex;
       justify-content: center;
       gap: 16px;
+      flex-wrap: wrap;
+      text-align: center;
     }
+    .top-bar span{ white-space: nowrap; }
 
     /* HEADER */
     header {
@@ -51,6 +55,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+      position: relative;
     }
 
     .logo {
@@ -59,6 +65,7 @@
       gap: 10px;
       text-decoration: none;
       color: #fff;
+      min-width: 0;
     }
 
     .logo-img {
@@ -66,6 +73,7 @@
       height: 48px;
       border-radius: 6px;
       background: url('logo.png') center/cover no-repeat;
+      flex: 0 0 auto;
     }
 
     .logo-text {
@@ -73,6 +81,8 @@
       flex-direction: column;
       font-size: 13px;
       text-transform: uppercase;
+      line-height: 1.1;
+      min-width: 0;
     }
 
     .logo-text strong {
@@ -88,15 +98,18 @@
       align-items: center;
     }
 
-    nav a {
+    .nav-link {
       color: #fff;
       padding-bottom: 3px;
       border-bottom: 2px solid transparent;
       transition: .2s;
       text-decoration: none;
+      position: relative;
+      display: inline-block;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    nav a:hover {
+    .nav-link:hover {
       border-color: var(--color-primary);
       color: var(--color-accent);
     }
@@ -106,17 +119,17 @@
       padding: 8px 16px;
       border-radius: 999px;
       font-weight: 600;
+      border-bottom: none;
     }
 
-    /* === DROPDOWN PRODUCTOS === */
-    .nav-item {
-      position: relative;
+    .nav-cta:hover {
+      background: var(--color-primary-dark);
+      color: #fff;
     }
 
-    .nav-link .caret {
-      font-size: 10px;
-      margin-left: 4px;
-    }
+    /* DROPDOWN (desktop hover) */
+    .nav-item { position: relative; }
+    .nav-link .caret { font-size: 10px; margin-left: 4px; }
 
     .dropdown {
       position: absolute;
@@ -146,7 +159,6 @@
       font-size: 13px;
       color: #fff;
       text-decoration: none;
-      border-bottom: none;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -154,6 +166,28 @@
     .dropdown a:hover {
       background: #111;
       color: var(--color-accent);
+    }
+
+    /* MOBILE MENU */
+    .mobile-toggle{
+      display:none;
+      border:none;
+      background:rgba(255,255,255,0.06);
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      padding:10px 12px;
+      border-radius:12px;
+      flex: 0 0 auto;
+    }
+    .mobile-toggle:active{ background: rgba(255,255,255,0.12); }
+
+    .nav-overlay{
+      display:none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 9998;
     }
 
     /* HERO */
@@ -176,19 +210,24 @@
       font-size: 40px;
       text-transform: uppercase;
       font-weight: 800;
+      margin: 0 0 10px;
     }
 
+    /* ✅ sin “letras grises”: dejamos blanco limpio */
     .hero-subtitle {
       font-size: 18px;
       text-transform: uppercase;
-      color: #ddd;
+      color: #fff;
       margin-bottom: 12px;
+      font-weight: 700;
     }
 
     .hero-text {
-      color: #ddd;
+      color: #fff;
       font-size: 15px;
       margin-bottom: 18px;
+      line-height: 1.55;
+      max-width: 620px;
     }
 
     .hero-buttons {
@@ -201,7 +240,8 @@
       width: 100%;
       max-width: 400px;
       border-radius: 18px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      /* ✅ bajamos la sombra fuerte */
+      box-shadow: 0 18px 34px rgba(0,0,0,0.65);
       background: #000;
       overflow: hidden;
       display: flex;
@@ -216,7 +256,7 @@
       display: block;
     }
 
-    /* BOTONES HERO */
+    /* BOTONES */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -229,20 +269,20 @@
       text-decoration: none;
       transition: .15s;
       font-size: 14px;
+      border: none;
     }
 
     .btn-primary {
       background: var(--color-primary);
       color: #fff;
       box-shadow: 0 6px 14px rgba(224,0,0,0.5);
-      border: none;
     }
 
     .btn-primary:hover {
       background: var(--color-primary-dark);
     }
 
-    /* AVISO ROJO */
+    /* AVISO */
     .notice-bar {
       background: var(--color-primary);
       color: #fff;
@@ -269,13 +309,15 @@
       margin-bottom: 10px;
     }
 
+    /* ✅ sin gris: directamente negro */
     .section-subtitle {
-      color: #777;
+      color: #111;
       font-size: 14px;
       margin-bottom: 30px;
+      font-weight: 600;
     }
 
-    /* LAYOUT DOS COLUMNAS (datos+mapa / formulario) */
+    /* LAYOUT */
     .contact-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -305,6 +347,8 @@
     .contact-item {
       margin-bottom: 12px;
       font-size: 14px;
+      color: #111; /* ✅ sin gris */
+      line-height: 1.55;
     }
 
     .contact-item strong {
@@ -360,16 +404,101 @@
       margin-top: 40px;
     }
 
-    @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 980px) {
+      header{ padding: 10px 14px; }
+
+      .top-bar{
+        gap: 8px 14px;
+        padding: 8px 10px;
+        font-size: 12px;
       }
-      .contact-layout {
-        grid-template-columns: 1fr;
+      .top-bar span{ white-space: normal; }
+
+      .logo-img{ width:40px; height:40px; }
+      .logo-text strong{ font-size:16px; }
+      .logo-text span{ font-size:11px; }
+
+      .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
+
+      /* nav panel: SIN SOMBRA */
+      nav{
+        position: fixed;
+        top: 0;
+        right: -92vw;
+        width: min(90vw, 420px);
+        max-width: 420px;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 14px 14px 22px;
+        border-left: 1px solid rgba(255,255,255,0.10);
+        box-shadow: none; /* ✅ sin sombra */
+        z-index: 9999;
+        transition: right .18s ease;
+        overflow-y: auto;
       }
-      .hero-image {
-        margin-top: 20px;
+
+      header.nav-open .nav-overlay{ display:block; }
+      header.nav-open nav{ right: 0; }
+
+      nav a{
+        padding: 14px 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.10);
+        border-left: 3px solid transparent;
       }
+
+      .nav-cta{
+        margin-top: 12px;
+        width:100%;
+        text-align:center;
+        padding: 12px 16px;
+      }
+
+      /* dropdown en mobile: tocable */
+      .nav-item:hover .dropdown{ opacity:0; pointer-events:none; transform: translateY(8px); }
+      .dropdown{
+        position: static;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+        box-shadow: none;
+        border-top: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+      }
+      .nav-item.open .dropdown{ display:block; }
+
+      .dropdown a{
+        padding: 12px 12px 12px 22px;
+        font-size: 13px;
+        border-bottom: 1px solid rgba(255,255,255,0.10);
+      }
+
+      .hero{ padding: 46px 14px 42px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 18px; }
+      .hero-title{ font-size: 30px; line-height: 1.05; }
+      .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
+      .hero-text{ font-size: 14px; }
+
+      .hero-buttons{ flex-direction: column; align-items: stretch; }
+      .btn{ width: 100%; padding: 12px 16px; font-size: 14px; }
+
+      .hero-image{ margin-top: 10px; max-width: 520px; }
+
+      .contact-layout { grid-template-columns: 1fr; }
+      .section{ padding: 36px 14px; }
+      .section-title{ font-size: 22px; }
+      .section-subtitle{ margin-bottom: 18px; }
+    }
+
+    @media (max-width: 520px){
+      .hero-title{ font-size: 28px; }
+      .hero-text{ font-size: 13px; }
+      .section-title{ font-size: 20px; }
     }
   </style>
 </head>
@@ -383,7 +512,7 @@
   </div>
 
   <!-- HEADER -->
-  <header>
+  <header id="site-header">
     <div class="nav-inner">
       <a href="index.html" class="logo">
         <div class="logo-img"></div>
@@ -393,11 +522,14 @@
         </div>
       </a>
 
-      <nav>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+      <nav id="main-nav" aria-label="Navegación principal">
         <a href="index.html" class="nav-link">Inicio</a>
 
-        <div class="nav-item">
-          <a href="productos.html" class="nav-link">
+        <div class="nav-item" id="nav-products">
+          <a href="productos.html" class="nav-link" id="products-link">
             Productos <span class="caret">▼</span>
           </a>
           <div class="dropdown">
@@ -427,9 +559,7 @@
         </p>
 
         <div class="hero-buttons">
-          <a href="productos.html" class="btn btn-primary">
-            Ver catálogo completo
-          </a>
+          <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
 
           <a href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
              class="btn btn-primary" target="_blank" rel="noopener">
@@ -444,7 +574,7 @@
     </div>
   </section>
 
-  <!-- AVISO ROJO -->
+  <!-- AVISO -->
   <div class="notice-bar">
     Insignias policiales se venden únicamente a personal de fuerzas con identificación.
   </div>
@@ -453,47 +583,33 @@
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Hablemos</h2>
-      <p class="section-subtitle">
-        Completá el formulario o escribinos directamente por WhatsApp.
-      </p>
+      <p class="section-subtitle">Completá el formulario o escribinos por WhatsApp.</p>
     </div>
 
     <div class="contact-layout">
-
-      <!-- DATOS + MAPA -->
       <div class="contact-box">
         <h3>Datos de contacto</h3>
 
-        <div class="contact-item">
-          <strong>WhatsApp:</strong> 11 3728-6846
-        </div>
-
-        <div class="contact-item">
-          <strong>Email:</strong> segudab@hotmail.com
-        </div>
-
+        <div class="contact-item"><strong>WhatsApp:</strong> 11 3728-6846</div>
+        <div class="contact-item"><strong>Email:</strong> segudab@hotmail.com</div>
         <div class="contact-item">
           <strong>Horario:</strong> Lunes a viernes: 9 a 12.30 y 16 a 20 hs / Sábados: 9 a 13 hs
         </div>
-
-        <div class="contact-item">
-          <strong>Dirección:</strong> Av. San Martín 1668, Caseros, Buenos Aires
-        </div>
+        <div class="contact-item"><strong>Dirección:</strong> Av. San Martín 1668, Caseros, Buenos Aires</div>
 
         <div class="map">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.447453815018!2d-58.57355682360992!3d-34.61539465881379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb86acba48b4b%3A0x1724f75c92c93bfb!2sAv.%20San%20Mart%C3%ADn%201668%2C%20B1678%20Caseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1731624797000!5m2!1ses-419!2sar" 
-            width="100%" 
-            height="250" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.447453815018!2d-58.57355682360992!3d-34.61539465881379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb86acba48b4b%3A0x1724f75c92c93bfb!2sAv.%20San%20Mart%C3%ADn%201668%2C%20B1678%20Caseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1731624797000!5m2!1ses-419!2sar"
+            width="100%"
+            height="250"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
       </div>
 
-      <!-- FORMULARIO -->
       <div class="contact-box">
         <h3>Enviá tu consulta</h3>
 
@@ -502,21 +618,66 @@
           <input id="telefono" type="text" placeholder="Teléfono" required />
           <input id="email" type="email" placeholder="Correo (opcional)" />
           <textarea id="consulta" placeholder="Consulta (producto, cantidad, talles...)" rows="6" required></textarea>
-
           <button type="submit">Enviar por WhatsApp</button>
         </form>
       </div>
-
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPT WHATSAPP -->
   <script>
+    // MENU MOBILE
+    const header = document.getElementById('site-header');
+    const toggle = document.getElementById('mobile-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+
+    const productsItem = document.getElementById('nav-products');
+    const productsLink = document.getElementById('products-link');
+
+    function closeMenu(){
+      header.classList.remove('nav-open');
+      toggle.textContent = '☰';
+      toggle.setAttribute('aria-expanded','false');
+      overlay.setAttribute('aria-hidden','true');
+      productsItem.classList.remove('open');
+    }
+    function openMenu(){
+      header.classList.add('nav-open');
+      toggle.textContent = '✕';
+      toggle.setAttribute('aria-expanded','true');
+      overlay.setAttribute('aria-hidden','false');
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = header.classList.contains('nav-open');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+
+    nav.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+
+      // Dropdown tocable en móvil
+      if (a === productsLink && window.matchMedia('(max-width: 980px)').matches) {
+        e.preventDefault();
+        productsItem.classList.toggle('open');
+        return;
+      }
+
+      closeMenu();
+    });
+
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
+    });
+
+    // WHATSAPP FORM
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -533,14 +694,11 @@
       let texto = 'Hola Segudab, quiero hacer una consulta:%0A%0A';
       texto += 'Nombre: ' + nombre + '%0A';
       texto += 'Teléfono: ' + telefono + '%0A';
-      if (email) {
-        texto += 'Email: ' + email + '%0A';
-      }
+      if (email) texto += 'Email: ' + email + '%0A';
       texto += '%0AMensaje:%0A' + consulta;
 
       const numero = '5491137286846';
       const url = 'https://wa.me/' + numero + '?text=' + texto;
-
       window.open(url, '_blank');
     });
   </script>
