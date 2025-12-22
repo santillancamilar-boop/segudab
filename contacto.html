@@ -23,7 +23,6 @@
       background: var(--color-bg-light);
     }
 
-    /* TOP BAR */
     .top-bar{
       background:#000;
       color:#fff;
@@ -37,7 +36,7 @@
     }
     .top-bar span{ white-space:nowrap; }
 
-    /* HEADER / NAV */
+  
     header{
       background:#000;
       color:#fff;
@@ -127,7 +126,7 @@
       color:#fff;
     }
 
-    /* DROPDOWN (desktop hover) */
+  
     .nav-item{ position:relative; }
     .nav-link .caret{ font-size:10px; margin-left:4px; }
 
@@ -167,26 +166,42 @@
       color: var(--color-accent);
     }
 
-   .mobile-toggle{
-      display:none;
-      border:none;
-      background:rgba(255,255,255,0.06);
-      color:#fff;
-      font-size:22px;
-      cursor:pointer;
-      padding:10px 12px;
-      border-radius:12px;
-      flex: 0 0 auto;
-    }
-    .mobile-toggle:active{ background: rgba(255,255,255,0.12); }
+.mobile-toggle{
+  display:none;            
+  border:none;
+  background:transparent;   
+  color:#fff;
+  cursor:pointer;
+  padding:6px;          
+  border-radius:0;       
+  box-shadow:none;           
+  flex:0 0 auto;
+}
 
-    .nav-overlay{
-      display:none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 9998;
-    }
+.mobile-toggle:active{ background:transparent; }
+
+.mobile-toggle:focus{ outline:none; }
+.mobile-toggle:focus-visible{
+  outline:2px solid rgba(244,197,66,.55);
+  outline-offset:4px;
+  border-radius:10px;
+}
+
+
+.hamb{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  width:28px;
+  align-items:flex-end;
+}
+.hamb span{
+  height:2px;
+  width:26px;
+  background:#fff;
+  border-radius:2px;
+  display:block;
+}
 
 
     .hero {
@@ -273,7 +288,7 @@
     }
     .btn-primary:hover{ background: var(--color-primary-dark); }
 
-    /* AVISO */
+
     .notice-bar{
       background: var(--color-primary);
       color:#fff;
@@ -283,7 +298,6 @@
       margin-bottom:20px;
     }
 
-    /* SECCIÓN */
     .section{ padding:50px 20px; }
 
     .section-inner{
@@ -304,7 +318,7 @@
       margin-bottom:30px;
     }
 
-    /* CONTACTO */
+
     .contact-layout{
       display:grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -338,7 +352,6 @@
       color:#111;
     }
 
-    /* ✅ sin “WhatsApp: / Email: / Horario: / Dirección:” */
     .contact-item strong{ display:none; }
 
     form{
@@ -384,7 +397,7 @@
       margin-top:40px;
     }
 
-    /* ====== RESPONSIVE (igual al otro) ====== */
+  
     @media (max-width: 980px){
       header{ padding:10px 14px; }
 
@@ -400,7 +413,7 @@
 
       .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
 
-      /* panel lateral: ✅ SIN SOMBRA */
+
       nav{
         position:fixed;
         top:0;
@@ -436,7 +449,6 @@
         padding:12px 16px;
       }
 
-      /* dropdown tocable en mobile */
       .nav-item:hover .dropdown{ opacity:0; pointer-events:none; transform:translateY(8px); }
       .dropdown{
         position:static;
@@ -457,7 +469,7 @@
         border-bottom:1px solid rgba(255,255,255,0.10);
       }
 
-      /* hero */
+     
       .hero{ padding:46px 14px 42px; }
       .hero-inner{ grid-template-columns:1fr; gap:18px; }
       .hero-title{ font-size:30px; line-height:1.05; }
@@ -484,13 +496,13 @@
 
 <body>
 
-  <!-- TOP BAR -->
+
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
   </div>
 
-  <!-- HEADER -->
+
   <header id="site-header">
     <div class="nav-inner">
       <a href="index.html" class="logo">
@@ -529,7 +541,7 @@
     </div>
   </header>
 
-  <!-- HERO -->
+
   <section class="hero">
     <div class="hero-inner">
       <div>
@@ -557,12 +569,11 @@
     </div>
   </section>
 
-  <!-- AVISO -->
+
   <div class="notice-bar">
     Insignias policiales se venden únicamente a personal de fuerzas con identificación.
   </div>
 
-  <!-- SECCIÓN CONTACTO -->
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Hablemos</h2>
@@ -573,7 +584,6 @@
 
     <div class="contact-layout">
 
-      <!-- DATOS + MAPA -->
       <div class="contact-box">
         <h3>Datos de contacto</h3>
 
@@ -595,7 +605,7 @@
         </div>
       </div>
 
-      <!-- FORMULARIO -->
+   
       <div class="contact-box">
         <h3>Enviá tu consulta</h3>
 
@@ -612,12 +622,12 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPTS: MENÚ + WHATSAPP -->
+ 
   <script>
     const header = document.getElementById('site-header');
     const toggle = document.getElementById('mobile-toggle');
@@ -664,7 +674,6 @@
       if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
     });
 
-    // WhatsApp form
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
