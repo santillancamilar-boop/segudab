@@ -24,7 +24,7 @@
       background: var(--color-bg-light);
     }
 
-    /* Top bar */
+
     .top-bar {
       background: #000;
       color: #fff;
@@ -167,7 +167,7 @@
       color: var(--color-accent);
     }
 
-    /* MOBILE MENU */
+
     .mobile-toggle{
       display:none;
       border:none;
@@ -189,7 +189,7 @@
       z-index: 9998;
     }
 
-    /* Hero */
+
     .hero {
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
       color: #fff;
@@ -239,7 +239,7 @@
       height: 260px;
       background: url('equipo-seguridad.jpg') center/cover;
       border-radius: 18px;
-      /* sombra fuerte en mobile a veces se ve “borde”; la bajamos */
+
       box-shadow: 0 18px 34px rgba(0,0,0,0.65);
       position: relative;
     }
@@ -286,7 +286,7 @@
       margin-top: 14px;
     }
 
-    /* Aviso */
+
     .notice-bar {
       background: var(--color-primary);
       color: #fff;
@@ -296,7 +296,7 @@
       margin-bottom: 20px;
     }
 
-    /* Section genérica */
+
     .section { padding: 50px 20px; }
 
     .section-inner {
@@ -317,7 +317,6 @@
       margin-bottom: 30px;
     }
 
-    /* Why choose us */
     .why-layout {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -376,7 +375,7 @@
 
     .why-text-block li { margin-bottom: 6px; }
 
-    /* Payment box */
+
     .payment-box {
       margin-top: 18px;
       background: #fdfdfd;
@@ -406,7 +405,6 @@
       line-height: 1.6;
     }
 
-    /* Stats */
     .stats-strip {
       background: #111;
       color: #fff;
@@ -435,7 +433,7 @@
       color: var(--color-accent);
     }
 
-    /* Testimonials */
+
     .testimonials {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -462,7 +460,7 @@
       color: #555;
     }
 
-    /* Footer */
+
     footer {
       background: #000;
       color: #888;
@@ -472,7 +470,6 @@
       margin-top: 40px;
     }
 
-    /* ====== RESPONSIVE ====== */
     @media (max-width: 980px) {
       header{ padding: 10px 14px; }
 
@@ -488,7 +485,7 @@
 
       .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
 
-      /* nav panel: SIN SOMBRA */
+
       nav{
         position: fixed;
         top: 0;
@@ -502,7 +499,7 @@
         gap: 0;
         padding: 14px 14px 22px;
         border-left: 1px solid rgba(255,255,255,0.10);
-        box-shadow: none; /* ✅ sin sombra */
+        box-shadow: none; 
         z-index: 9999;
         transition: right .18s ease;
         overflow-y: auto;
@@ -524,7 +521,6 @@
         padding: 12px 16px;
       }
 
-      /* dropdown en mobile: tocable */
       .nav-item:hover .dropdown{ opacity:0; pointer-events:none; transform: translateY(8px); }
       .dropdown{
         position: static;
@@ -545,7 +541,7 @@
         border-bottom: 1px solid rgba(255,255,255,0.10);
       }
 
-      /* hero */
+
       .hero{ padding: 46px 14px 42px; }
       .hero-inner { grid-template-columns: 1fr; gap: 18px; }
       .hero-title{ font-size: 30px; line-height: 1.05; }
@@ -555,7 +551,7 @@
       .btn{ width: 100%; padding: 12px 16px; font-size: 14px; }
       .hero-image{ height: 220px; }
 
-      /* why */
+
       .why-layout { grid-template-columns: 1fr; }
       .why-text-block { order: -1; }
       .why-item { width: 100%; max-width: 520px; }
@@ -574,13 +570,13 @@
 
 <body>
 
-  <!-- TOP BAR -->
+
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
   </div>
 
-  <!-- HEADER -->
+
   <header id="site-header">
     <div class="nav-inner">
       <a href="index.html" class="logo">
@@ -614,7 +610,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero" id="por-que">
     <div class="hero-inner">
       <div>
@@ -640,19 +635,14 @@
           </a>
         </div>
       </div>
-
-      <div class="hero-image" role="img" aria-label="Equipo de seguridad">
-        <div class="hero-label">Calidad comprobada • Atención real</div>
-      </div>
     </div>
   </section>
 
-  <!-- AVISO -->
   <div class="notice-bar">
     Insignias policiales se venden únicamente a personal de fuerzas con identificación.
   </div>
 
-  <!-- POR QUÉ ELEGIRNOS - DETALLE -->
+
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Calidad real, no solo apariencia</h2>
@@ -727,7 +717,6 @@
     </div>
   </section>
 
-  <!-- NÚMEROS / DATOS -->
   <section class="stats-strip">
     <div class="stats-inner">
       <div class="stat-item"><strong>+10</strong>Años dedicados al rubro de equipamiento policial y táctico.</div>
@@ -737,7 +726,7 @@
     </div>
   </section>
 
-  <!-- TESTIMONIOS -->
+
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Lo que dicen nuestros clientes</h2>
@@ -764,7 +753,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
