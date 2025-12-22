@@ -167,10 +167,7 @@
       color: var(--color-accent);
     }
 
-    /* ✅ BOTÓN HAMBURGUESA COMO TU CAPTURA:
-       - sin fondo
-       - sin sombra
-       - solo 3 líneas */
+    /* ✅ BOTÓN HAMBURGUESA: 3 líneas, sin fondo/sombra */
     .mobile-toggle{
       display:none;
       border:none;
@@ -409,7 +406,7 @@
       margin-top:40px;
     }
 
-    /* ====== RESPONSIVE (corregido) ====== */
+    /* ====== RESPONSIVE (IGUAL A TU CAPTURA: pastilla + ☰ centrado) ====== */
     @media (max-width: 980px){
       header{ padding:10px 14px; }
 
@@ -420,20 +417,30 @@
       }
       .top-bar span{ white-space:normal; }
 
-      /* ✅ CLAVE: para que la hamburguesa llegue al borde derecho */
+      .logo-img{ width:40px; height:40px; }
+      .logo-text strong{ font-size:16px; }
+
+      /* ✅ la “pastilla” */
       .nav-inner{
         max-width:none;
         width:100%;
+        background: rgba(255,255,255,0.06);
+        border-radius: 18px;
+        padding: 10px 12px;
+        position: relative;          /* CLAVE */
+        justify-content: flex-start; /* CLAVE */
       }
+
+      /* ✅ ☰ centrado */
       .mobile-toggle{
-        margin-left:auto;
         display:inline-flex;
         align-items:center;
         justify-content:center;
-      }
 
-      .logo-img{ width:40px; height:40px; }
-      .logo-text strong{ font-size:16px; }
+        position:absolute;            /* CLAVE */
+        left:50%;
+        transform:translateX(-50%);
+      }
 
       /* panel lateral: ✅ SIN SOMBRA */
       nav{
