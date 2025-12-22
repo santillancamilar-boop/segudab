@@ -167,57 +167,32 @@
       color: var(--color-accent);
     }
 
-    /* ✅ BOTÓN HAMBURGUESA COMO TU CAPTURA:
-       - sin fondo
-       - sin sombra
-       - solo 3 líneas */
-    .mobile-toggle{
+   .mobile-toggle{
       display:none;
       border:none;
-      background:transparent;
+      background:rgba(255,255,255,0.06);
       color:#fff;
+      font-size:22px;
       cursor:pointer;
-      padding:6px;
-      border-radius:0;
-      box-shadow:none;
-      flex:0 0 auto;
+      padding:10px 12px;
+      border-radius:12px;
+      flex: 0 0 auto;
     }
-    .mobile-toggle:active{ background:transparent; }
-    .mobile-toggle:focus{ outline:none; }
-    .mobile-toggle:focus-visible{
-      outline:2px solid rgba(244,197,66,.55);
-      outline-offset:4px;
-      border-radius:10px;
-    }
-
-    .hamb{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      width:28px;
-      align-items:flex-end;
-    }
-    .hamb span{
-      height:2px;
-      width:26px;
-      background:#fff;
-      border-radius:2px;
-      display:block;
-    }
+    .mobile-toggle:active{ background: rgba(255,255,255,0.12); }
 
     .nav-overlay{
       display:none;
-      position:fixed;
-      inset:0;
+      position: fixed;
+      inset: 0;
       background: rgba(0,0,0,0.55);
-      z-index:9998;
+      z-index: 9998;
     }
 
-    /* HERO */
-    .hero{
+
+    .hero {
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
-      color:#fff;
-      padding:60px 20px;
+      color: #fff;
+      padding: 60px 20px;
     }
 
     .hero-inner{
