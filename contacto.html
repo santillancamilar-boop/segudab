@@ -24,7 +24,7 @@
       color: var(--color-text);
     }
 
-
+    /* TOP BAR */
     .top-bar {
       background: #000;
       color: #fff;
@@ -34,11 +34,11 @@
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
-      text-align:center;
+      text-align: center;
     }
     .top-bar span{ white-space: nowrap; }
 
-
+    /* HEADER */
     header {
       background: #000;
       color: #fff;
@@ -122,7 +122,12 @@
       border-bottom: none;
     }
 
+    .nav-cta:hover {
+      background: var(--color-primary-dark);
+      color: #fff;
+    }
 
+    /* DROPDOWN (desktop hover) */
     .nav-item { position: relative; }
     .nav-link .caret { font-size: 10px; margin-left: 4px; }
 
@@ -163,6 +168,7 @@
       color: var(--color-accent);
     }
 
+    /* MOBILE MENU */
     .mobile-toggle{
       display:none;
       border:none;
@@ -184,7 +190,7 @@
       z-index: 9998;
     }
 
-
+    /* HERO */
     .hero {
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
       color: #fff;
@@ -207,7 +213,7 @@
       margin: 0 0 10px;
     }
 
-
+    /* ✅ sin “letras grises”: dejamos blanco limpio */
     .hero-subtitle {
       font-size: 18px;
       text-transform: uppercase;
@@ -216,13 +222,12 @@
       font-weight: 700;
     }
 
-
     .hero-text {
       color: #fff;
       font-size: 15px;
       margin-bottom: 18px;
       line-height: 1.55;
-      max-width: 680px;
+      max-width: 620px;
     }
 
     .hero-buttons {
@@ -235,6 +240,7 @@
       width: 100%;
       max-width: 400px;
       border-radius: 18px;
+      /* ✅ bajamos la sombra fuerte */
       box-shadow: 0 18px 34px rgba(0,0,0,0.65);
       background: #000;
       overflow: hidden;
@@ -250,7 +256,7 @@
       display: block;
     }
 
-
+    /* BOTONES */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -276,7 +282,7 @@
       background: var(--color-primary-dark);
     }
 
-
+    /* AVISO */
     .notice-bar {
       background: var(--color-primary);
       color: #fff;
@@ -286,7 +292,7 @@
       margin-bottom: 20px;
     }
 
-
+    /* SECCIÓN CONTACTO */
     .section {
       padding: 50px 20px;
     }
@@ -303,7 +309,7 @@
       margin-bottom: 10px;
     }
 
-
+    /* ✅ sin gris: directamente negro */
     .section-subtitle {
       color: #111;
       font-size: 14px;
@@ -311,7 +317,7 @@
       font-weight: 600;
     }
 
-
+    /* LAYOUT */
     .contact-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -341,7 +347,7 @@
     .contact-item {
       margin-bottom: 12px;
       font-size: 14px;
-      color: #111;
+      color: #111; /* ✅ sin gris */
       line-height: 1.55;
     }
 
@@ -349,7 +355,7 @@
       color: var(--color-primary);
     }
 
-
+    /* FORM */
     form {
       display: flex;
       flex-direction: column;
@@ -380,7 +386,7 @@
       background: var(--color-primary-dark);
     }
 
-
+    /* MAPA */
     .map {
       margin-top: 20px;
       border-radius: 14px;
@@ -388,7 +394,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-
+    /* FOOTER */
     footer {
       background: #000;
       color: #888;
@@ -398,7 +404,7 @@
       margin-top: 40px;
     }
 
-
+    /* ====== RESPONSIVE ====== */
     @media (max-width: 980px) {
       header{ padding: 10px 14px; }
 
@@ -415,7 +421,7 @@
 
       .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
 
-
+      /* nav panel: SIN SOMBRA */
       nav{
         position: fixed;
         top: 0;
@@ -429,7 +435,7 @@
         gap: 0;
         padding: 14px 14px 22px;
         border-left: 1px solid rgba(255,255,255,0.10);
-        box-shadow: none; 
+        box-shadow: none; /* ✅ sin sombra */
         z-index: 9999;
         transition: right .18s ease;
         overflow-y: auto;
@@ -451,7 +457,7 @@
         padding: 12px 16px;
       }
 
-   
+      /* dropdown en mobile: tocable */
       .nav-item:hover .dropdown{ opacity:0; pointer-events:none; transform: translateY(8px); }
       .dropdown{
         position: static;
@@ -499,12 +505,13 @@
 
 <body>
 
-
+  <!-- TOP BAR -->
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
   </div>
 
+  <!-- HEADER -->
   <header id="site-header">
     <div class="nav-inner">
       <a href="index.html" class="logo">
@@ -539,7 +546,7 @@
     </div>
   </header>
 
-
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <div>
@@ -567,11 +574,12 @@
     </div>
   </section>
 
-
+  <!-- AVISO -->
   <div class="notice-bar">
     Insignias policiales se venden únicamente a personal de fuerzas con identificación.
   </div>
 
+  <!-- SECCIÓN CONTACTO -->
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Hablemos</h2>
@@ -579,8 +587,6 @@
     </div>
 
     <div class="contact-layout">
-
-
       <div class="contact-box">
         <h3>Datos de contacto</h3>
 
@@ -594,12 +600,15 @@
         <div class="map">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.447453815018!2d-58.57355682360992!3d-34.61539465881379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb86acba48b4b%3A0x1724f75c92c93bfb!2sAv.%20San%20Mart%C3%ADn%201668%2C%20B1678%20Caseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1731624797000!5m2!1ses-419!2sar"
-            width="100%" height="250" style="border:0;"
-            allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+            width="100%"
+            height="250"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
       </div>
-
 
       <div class="contact-box">
         <h3>Enviá tu consulta</h3>
@@ -612,7 +621,6 @@
           <button type="submit">Enviar por WhatsApp</button>
         </form>
       </div>
-
     </div>
   </section>
 
@@ -621,7 +629,7 @@
   </footer>
 
   <script>
-
+    // MENU MOBILE
     const header = document.getElementById('site-header');
     const toggle = document.getElementById('mobile-toggle');
     const nav = document.getElementById('main-nav');
@@ -655,6 +663,7 @@
       const a = e.target.closest('a');
       if (!a) return;
 
+      // Dropdown tocable en móvil
       if (a === productsLink && window.matchMedia('(max-width: 980px)').matches) {
         e.preventDefault();
         productsItem.classList.toggle('open');
@@ -668,7 +677,7 @@
       if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
     });
 
-
+    // WHATSAPP FORM
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -690,7 +699,6 @@
 
       const numero = '5491137286846';
       const url = 'https://wa.me/' + numero + '?text=' + texto;
-
       window.open(url, '_blank');
     });
   </script>
