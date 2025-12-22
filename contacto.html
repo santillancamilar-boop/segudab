@@ -6,8 +6,7 @@
   <title>Segudab — Contacto</title>
 
   <style>
-    :root {
-      --color-bg-dark:#050505;
+    :root{
       --color-bg-light:#f5f5f5;
       --color-primary:#e00000;
       --color-primary-dark:#b30000;
@@ -22,35 +21,39 @@
     /* TOP BAR */
     .top-bar{
       background:#000;color:#fff;font-size:13px;
-      padding:6px 16px;display:flex;gap:16px;
-      justify-content:center;flex-wrap:wrap;text-align:center
+      padding:6px 16px;display:flex;justify-content:center;
+      gap:16px;flex-wrap:wrap;text-align:center
     }
+    .top-bar span{white-space:nowrap}
 
-    /* HEADER */
+    /* HEADER / NAV (MISMO ESTILO QUE TU "POR QUÉ") */
     header{
       background:#000;color:#fff;
       padding:12px 30px;
       position:sticky;top:0;z-index:999;
+      /* ✅ sin sombra */
+      box-shadow:none;
     }
 
     .nav-inner{
       max-width:var(--max-width);
       margin:0 auto;
-      display:flex;align-items:center;justify-content:space-between;
+      display:flex;justify-content:space-between;align-items:center;
       gap:12px;position:relative
     }
 
     .logo{
       display:flex;align-items:center;gap:10px;
-      color:#fff;text-decoration:none
+      color:#fff;text-decoration:none;min-width:0
     }
-
     .logo-img{
-      width:44px;height:44px;border-radius:6px;
-      background:url('logo.png') center/cover no-repeat
+      width:48px;height:48px;border-radius:6px;
+      background:url('logo.png') center/cover no-repeat;
+      flex:0 0 auto;
     }
-
-    .logo-text strong{font-size:18px;letter-spacing:1px}
+    .logo-text{display:flex;flex-direction:column;line-height:1.1;text-transform:uppercase}
+    .logo-text strong{font-size:20px;letter-spacing:1px}
+    .logo-text span{font-size:13px}
 
     nav{
       display:flex;gap:20px;
@@ -59,19 +62,20 @@
 
     .nav-link{
       color:#fff;text-decoration:none;
-      border-bottom:2px solid transparent;
-      padding-bottom:3px
+      padding-bottom:3px;border-bottom:2px solid transparent;
+      transition:.2s;display:inline-block
     }
     .nav-link:hover{border-color:var(--color-primary);color:var(--color-accent)}
 
     .nav-cta{
       background:var(--color-primary);
-      padding:8px 16px;border-radius:999px;font-weight:600
+      padding:8px 16px;border-radius:999px;font-weight:600;border-bottom:none
     }
+    .nav-cta:hover{background:var(--color-primary-dark);color:#fff}
 
-    /* DROPDOWN */
+    /* DROPDOWN desktop */
     .nav-item{position:relative}
-    .caret{font-size:10px;margin-left:4px}
+    .nav-link .caret{font-size:10px;margin-left:4px}
 
     .dropdown{
       position:absolute;top:100%;left:0;
@@ -79,270 +83,463 @@
       padding:10px 0;
       opacity:0;pointer-events:none;
       transform:translateY(8px);
-      transition:.15s;z-index:9999
+      transition:opacity .15s ease, transform .15s ease;
+      z-index:9999;
+      border-top:2px solid var(--color-accent);
+      /* ✅ sin sombra */
+      box-shadow:none;
     }
-
     .nav-item:hover .dropdown{
-      opacity:1;pointer-events:auto;transform:none
+      opacity:1;pointer-events:auto;transform:translateY(0)
     }
-
     .dropdown a{
-      display:block;padding:10px 18px;
-      color:#fff;text-decoration:none;font-size:13px
+      display:block;padding:10px 18px;font-size:13px;
+      color:#fff;text-decoration:none;text-transform:uppercase;white-space:nowrap
     }
     .dropdown a:hover{background:#111;color:var(--color-accent)}
 
-    /* MOBILE TOGGLE */
+    /* MOBILE MENU (Mismo que "por qué") */
     .mobile-toggle{
       display:none;border:none;
-      background:rgba(255,255,255,.08);
-      border-radius:14px;
-      padding:12px 14px;
-      flex-direction:column;gap:6px
+      background:rgba(255,255,255,0.06);
+      color:#fff;cursor:pointer;
+      padding:10px 12px;border-radius:12px;
+      flex:0 0 auto;
     }
+    .mobile-toggle:active{background:rgba(255,255,255,0.12)}
 
-    .hamb-line{
-      width:22px;height:2px;background:#fff;border-radius:2px;
-      transition:.2s
+    /* ✅ tres líneas reales */
+    .hamb{
+      display:flex;flex-direction:column;gap:6px;
+      width:24px;
     }
-
-    header.nav-open .hamb-line:nth-child(1){
-      transform:translateY(8px) rotate(45deg)
-    }
-    header.nav-open .hamb-line:nth-child(2){opacity:0}
-    header.nav-open .hamb-line:nth-child(3){
-      transform:translateY(-8px) rotate(-45deg)
+    .hamb span{
+      height:2px;width:22px;background:#fff;border-radius:2px;
+      transition:.18s ease;
     }
 
     .nav-overlay{
       display:none;position:fixed;inset:0;
-      background:rgba(0,0,0,.55);z-index:9998
+      background:rgba(0,0,0,0.55);z-index:9998;
     }
 
     /* HERO */
     .hero{
       background:radial-gradient(circle at top left,#333 0,#000 45%,#111 100%);
-      color:#fff;padding:50px 20px
+      color:#fff;padding:60px 20px;
     }
-
     .hero-inner{
       max-width:var(--max-width);
       margin:0 auto;
-      display:grid;grid-template-columns:1fr 1fr;
-      gap:32px;align-items:center
+      display:grid;grid-template-columns:1.2fr 1fr;
+      gap:40px;align-items:center;
     }
-
     .hero-title{
-      font-size:36px;font-weight:800;text-transform:uppercase;margin:0 0 12px
+      font-size:40px;text-transform:uppercase;font-weight:800;
+      margin:0 0 10px;
+    }
+    .hero-subtitle{
+      font-size:18px;text-transform:uppercase;color:#ddd;
+      margin:0 0 12px;
+    }
+    .hero-text{color:#ddd;font-size:15px;line-height:1.5;margin:0 0 18px}
+
+    .hero-buttons{display:flex;flex-wrap:wrap;gap:10px}
+
+    .hero-image{
+      width:100%;
+      max-width:400px;
+      border-radius:18px;
+      background:#000;
+      overflow:hidden;
+      display:flex;justify-content:center;
+      /* ✅ sin sombra fuerte (era lo que hacía “borde”) */
+      box-shadow:none;
+    }
+    .hero-image img{
+      width:100%;height:auto;object-fit:contain;object-position:center;display:block
     }
 
-    .hero-text{color:#ddd;font-size:15px;line-height:1.5}
-
-    .hero-buttons{
-      display:flex;flex-wrap:wrap;gap:10px;margin-top:16px
-    }
-
+    /* BOTONES */
     .btn{
-      display:inline-flex;justify-content:center;align-items:center;
+      display:inline-flex;align-items:center;justify-content:center;
       padding:12px 24px;border-radius:999px;
       text-transform:uppercase;font-weight:600;
-      text-decoration:none;font-size:14px;border:none
+      cursor:pointer;text-decoration:none;
+      transition:.15s;font-size:14px;border:none;
     }
-
     .btn-primary{
-      background:var(--color-primary);color:#fff
+      background:var(--color-primary);color:#fff;
+      /* ✅ sin sombra */
+      box-shadow:none;
     }
+    .btn-primary:hover{background:var(--color-primary-dark)}
 
     /* AVISO */
     .notice-bar{
-      background:var(--color-primary);
-      color:#fff;padding:10px;text-align:center;font-size:13px
+      background:var(--color-primary);color:#fff;
+      padding:10px;text-align:center;font-size:13px;
+      margin-bottom:20px;
     }
 
-    /* CONTACTO */
-    .section{padding:40px 20px}
+    /* SECCIÓN */
+    .section{padding:50px 20px}
+    .section-inner{
+      max-width:var(--max-width);
+      margin:0 auto;
+      text-align:center;
+    }
+    .section-title{
+      font-size:26px;text-transform:uppercase;margin:0 0 10px;
+    }
+    /* ✅ sin “texto gris explicativo” */
+    .section-subtitle{display:none;}
+
+    /* CONTACT */
     .contact-layout{
-      max-width:1000px;margin:0 auto;
-      display:grid;grid-template-columns:1fr 1fr;gap:24px
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+      gap:26px;
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 16px;
+      align-items:flex-start;
     }
 
     .contact-box{
-      background:#fff;border-radius:16px;
-      padding:22px
+      background:#fff;
+      padding:20px 24px 24px;
+      border-radius:16px;
+      /* ✅ sin sombra */
+      box-shadow:none;
+      text-align:left;
+      width:100%;
+      border:1px solid rgba(0,0,0,0.08);
     }
 
     .contact-box h3{
-      margin-top:0;text-transform:uppercase;font-size:18px
+      margin:0 0 14px;
+      font-size:20px;text-transform:uppercase;
     }
 
-    .contact-item{margin-bottom:10px;font-size:14px}
+    .contact-item{margin-bottom:12px;font-size:14px}
     .contact-item strong{color:var(--color-primary)}
 
     form{display:flex;flex-direction:column;gap:14px}
     input,textarea{
       padding:12px;border-radius:8px;
-      border:1px solid #ccc;font-size:15px
+      border:1px solid #ccc;font-size:15px;width:100%;
     }
-
     button{
-      padding:12px;border-radius:8px;
+      padding:12px 18px;border-radius:8px;border:none;
       background:var(--color-primary);color:#fff;
-      border:none;font-weight:600
+      cursor:pointer;font-weight:600;font-size:15px;width:100%;
+      box-shadow:none;
     }
+    button:hover{background:var(--color-primary-dark)}
 
-    .map{margin-top:16px;border-radius:14px;overflow:hidden}
+    .map{
+      margin-top:20px;border-radius:14px;overflow:hidden;
+      /* ✅ sin sombra */
+      box-shadow:none;
+      border:1px solid rgba(0,0,0,0.08);
+    }
 
     footer{
       background:#000;color:#888;
-      padding:14px;text-align:center;font-size:13px;margin-top:40px
+      padding:14px;text-align:center;font-size:13px;margin-top:40px;
     }
 
-    /* MOBILE */
-    @media(max-width:980px){
+    /* ====== RESPONSIVE ====== */
+    @media (max-width:980px){
       header{padding:10px 14px}
-      .mobile-toggle{display:flex}
+      .top-bar{gap:8px 14px;padding:8px 10px;font-size:12px}
+      .top-bar span{white-space:normal}
 
+      .logo-img{width:40px;height:40px}
+      .logo-text strong{font-size:16px}
+      .logo-text span{font-size:11px}
+
+      .mobile-toggle{display:inline-flex;align-items:center;justify-content:center}
+
+      /* nav panel móvil: ✅ sin sombra */
       nav{
-        position:fixed;top:0;right:-90vw;
-        width:90vw;max-width:420px;height:100vh;
-        background:#000;flex-direction:column;
-        padding:14px;transition:.2s;z-index:9999
+        position:fixed;top:0;right:-92vw;
+        width:min(90vw,420px);max-width:420px;height:100vh;
+        background:#000;
+        display:flex;flex-direction:column;gap:0;
+        padding:14px 14px 22px;
+        border-left:1px solid rgba(255,255,255,0.10);
+        box-shadow:none; /* ✅ */
+        z-index:9999;
+        transition:right .18s ease;
+        overflow-y:auto;
       }
-
-      header.nav-open nav{right:0}
       header.nav-open .nav-overlay{display:block}
+      header.nav-open nav{right:0}
 
       nav a{
         padding:14px 12px;
-        border-bottom:1px solid rgba(255,255,255,.1)
+        border-bottom:1px solid rgba(255,255,255,0.10);
+        border-left:3px solid transparent;
       }
 
-      .dropdown{position:static;opacity:1;transform:none;display:none}
-      .nav-item.open .dropdown{display:block}
+      .nav-cta{
+        margin-top:12px;width:100%;
+        text-align:center;padding:12px 16px;
+      }
 
-      .hero-inner{grid-template-columns:1fr}
+      /* dropdown mobile: tocable */
+      .nav-item:hover .dropdown{opacity:0;pointer-events:none;transform:translateY(8px)}
+      .dropdown{
+        position:static;
+        opacity:1;pointer-events:auto;transform:none;
+        box-shadow:none;border-top:none;padding:0;margin:0;
+        display:none;
+      }
+      .nav-item.open .dropdown{display:block}
+      .dropdown a{
+        padding:12px 12px 12px 22px;
+        font-size:13px;
+        border-bottom:1px solid rgba(255,255,255,0.10);
+      }
+
+      .hero{padding:46px 14px 42px}
+      .hero-inner{grid-template-columns:1fr;gap:18px}
+      .hero-title{font-size:30px;line-height:1.05}
+      .hero-subtitle{font-size:14px}
+      .hero-text{font-size:14px}
+      .hero-buttons{flex-direction:column;align-items:stretch}
+      .btn{width:100%;padding:12px 16px}
+
+      .hero-image{max-width:100%;margin-top:10px}
+
       .contact-layout{grid-template-columns:1fr}
+      .section{padding:36px 14px}
+      .section-title{font-size:22px}
+    }
+
+    @media (max-width:520px){
+      .hero-title{font-size:28px}
+      .section-title{font-size:20px}
     }
   </style>
 </head>
 
 <body>
 
-<div class="top-bar">
-  <span>WhatsApp 11 3728-6846</span>
-  <span>Industria argentina • Venta mayorista y minorista</span>
-</div>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span>WhatsApp 11 3728-6846</span>
+    <span>Industria argentina • Venta mayorista y minorista</span>
+  </div>
 
-<header id="site-header">
-  <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <div class="logo-img"></div>
-      <div class="logo-text"><strong>SEGUDAB</strong></div>
-    </a>
+  <!-- HEADER -->
+  <header id="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-img"></div>
+        <div class="logo-text">
+          <strong>SEGUDAB</strong>
+          <span>Equipamiento táctico y policial</span>
+        </div>
+      </a>
 
-    <button class="mobile-toggle" id="mobile-toggle">
-      <span class="hamb-line"></span>
-      <span class="hamb-line"></span>
-      <span class="hamb-line"></span>
-    </button>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="hamb" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
 
-    <div class="nav-overlay" id="nav-overlay"></div>
+      <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
-    <nav id="main-nav">
-      <a href="index.html" class="nav-link">Inicio</a>
+      <nav id="main-nav" aria-label="Navegación principal">
+        <a href="index.html" class="nav-link">Inicio</a>
 
-      <div class="nav-item" id="nav-products">
-        <a href="productos.html" class="nav-link" id="products-link">
-          Productos <span class="caret">▼</span>
-        </a>
-        <div class="dropdown">
-          <a href="productos.html?cat=botas">Calzado</a>
-          <a href="productos.html?cat=correajes">Correajes</a>
-          <a href="productos.html?cat=accesorios">Accesorios</a>
-          <a href="productos.html?cat=indumentaria">Indumentaria</a>
+        <div class="nav-item" id="nav-products">
+          <a href="productos.html" class="nav-link" id="products-link">
+            Productos <span class="caret">▼</span>
+          </a>
+          <div class="dropdown">
+            <a href="productos.html?cat=botas">Calzado</a>
+            <a href="productos.html?cat=correajes">Correajes</a>
+            <a href="productos.html?cat=accesorios">Accesorios</a>
+            <a href="productos.html?cat=indumentaria">Indumentaria</a>
+          </div>
+        </div>
+
+        <a href="porque-elegirnos.html" class="nav-link">¿Por qué elegirnos?</a>
+        <a href="contacto.html" class="nav-link nav-cta">Contactar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1 class="hero-title">Contacto</h1>
+        <p class="hero-subtitle">Estamos para asesorarte</p>
+
+        <p class="hero-text">
+          Consultanos por disponibilidad, talles, precios, pedidos mayoristas o cualquier duda
+          sobre nuestros productos. Respondemos rápido por WhatsApp y correo.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
+
+          <a href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
+             class="btn btn-primary" target="_blank" rel="noopener">
+            Consulta mayorista
+          </a>
         </div>
       </div>
 
-      <a href="porque-elegirnos.html" class="nav-link">¿Por qué elegirnos?</a>
-      <a href="contacto.html" class="nav-link nav-cta">Contactar</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="hero-inner">
-    <div>
-      <h1 class="hero-title">Contacto</h1>
-      <p class="hero-text">
-        Consultanos por disponibilidad, talles, precios o compras mayoristas.
-        Respondemos rápido por WhatsApp.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="productos.html" class="btn btn-primary">Ver catálogo</a>
-        <a href="https://wa.me/5491137286846" class="btn btn-primary">WhatsApp</a>
+      <div class="hero-image">
+        <img src="local-segudab.png" alt="Local Segudab" />
       </div>
     </div>
+  </section>
+
+  <!-- AVISO -->
+  <div class="notice-bar">
+    Insignias policiales se venden únicamente a personal de fuerzas con identificación.
   </div>
-</section>
 
-<div class="notice-bar">
-  Insignias policiales se venden únicamente a personal de fuerzas con identificación.
-</div>
+  <!-- SECCIÓN CONTACTO -->
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Hablemos</h2>
+    </div>
 
-<section class="section">
-  <div class="contact-layout">
+    <div class="contact-layout">
 
-    <div class="contact-box">
-      <h3>Datos</h3>
-      <div class="contact-item"><strong>WhatsApp:</strong> 11 3728-6846</div>
-      <div class="contact-item"><strong>Email:</strong> segudab@hotmail.com</div>
-      <div class="contact-item"><strong>Dirección:</strong> Av. San Martín 1668, Caseros</div>
+      <!-- DATOS + MAPA -->
+      <div class="contact-box">
+        <h3>Datos de contacto</h3>
 
-      <div class="map">
-        <iframe src="https://www.google.com/maps?q=Av.%20San%20Martín%201668%20Caseros&output=embed"
-          width="100%" height="240" style="border:0" loading="lazy"></iframe>
+        <div class="contact-item">
+          <strong>WhatsApp:</strong> 11 3728-6846
+        </div>
+
+        <div class="contact-item">
+          <strong>Email:</strong> segudab@hotmail.com
+        </div>
+
+        <div class="contact-item">
+          <strong>Horario:</strong> Lunes a viernes: 9 a 12.30 y 16 a 20 hs / Sábados: 9 a 13 hs
+        </div>
+
+        <div class="contact-item">
+          <strong>Dirección:</strong> Av. San Martín 1668, Caseros, Buenos Aires
+        </div>
+
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.447453815018!2d-58.57355682360992!3d-34.61539465881379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb86acba48b4b%3A0x1724f75c92c93bfb!2sAv.%20San%20Mart%C3%ADn%201668%2C%20B1678%20Caseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1731624797000!5m2!1ses-419!2sar"
+            width="100%"
+            height="250"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
       </div>
+
+      <!-- FORMULARIO -->
+      <div class="contact-box">
+        <h3>Enviá tu consulta</h3>
+
+        <form id="contact-form">
+          <input id="nombre" type="text" placeholder="Nombre y apellido" required />
+          <input id="telefono" type="text" placeholder="Teléfono" required />
+          <input id="email" type="email" placeholder="Correo (opcional)" />
+          <textarea id="consulta" placeholder="Consulta (producto, cantidad, talles...)" rows="6" required></textarea>
+
+          <button type="submit">Enviar por WhatsApp</button>
+        </form>
+      </div>
+
     </div>
+  </section>
 
-    <div class="contact-box">
-      <h3>Consulta</h3>
-      <form id="contact-form">
-        <input id="nombre" placeholder="Nombre" required>
-        <input id="telefono" placeholder="Teléfono" required>
-        <textarea id="consulta" placeholder="Consulta" rows="5" required></textarea>
-        <button type="submit">Enviar por WhatsApp</button>
-      </form>
-    </div>
+  <footer>
+    © 2025 Segudab — Todos los derechos reservados.
+  </footer>
 
-  </div>
-</section>
+  <!-- SCRIPTS (MISMO COMPORTAMIENTO QUE TU "POR QUÉ") -->
+  <script>
+    const header = document.getElementById('site-header');
+    const toggle = document.getElementById('mobile-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
 
-<footer>© 2025 Segudab — Todos los derechos reservados.</footer>
+    const productsItem = document.getElementById('nav-products');
+    const productsLink = document.getElementById('products-link');
 
-<script>
-  const header = document.getElementById('site-header');
-  const toggle = document.getElementById('mobile-toggle');
-  const overlay = document.getElementById('nav-overlay');
-  const products = document.getElementById('nav-products');
-  const productsLink = document.getElementById('products-link');
-
-  toggle.onclick = () => header.classList.toggle('nav-open');
-  overlay.onclick = () => header.classList.remove('nav-open');
-
-  productsLink.onclick = e => {
-    if (window.innerWidth <= 980) {
-      e.preventDefault();
-      products.classList.toggle('open');
+    function closeMenu(){
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded','false');
+      overlay.setAttribute('aria-hidden','true');
+      productsItem.classList.remove('open');
     }
-  };
 
-  document.getElementById('contact-form').onsubmit = e => {
-    e.preventDefault();
-    const n = nombre.value, t = telefono.value, c = consulta.value;
-    window.open(`https://wa.me/5491137286846?text=Nombre:%20${n}%0ATeléfono:%20${t}%0AConsulta:%20${c}`);
-  };
-</script>
+    function openMenu(){
+      header.classList.add('nav-open');
+      toggle.setAttribute('aria-expanded','true');
+      overlay.setAttribute('aria-hidden','false');
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = header.classList.contains('nav-open');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+
+    nav.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+
+      if (a === productsLink && window.matchMedia('(max-width: 980px)').matches) {
+        e.preventDefault();
+        productsItem.classList.toggle('open');
+        return;
+      }
+      closeMenu();
+    });
+
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
+    });
+
+    // WhatsApp form
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const consulta = document.getElementById('consulta').value.trim();
+
+      if (!nombre || !telefono || !consulta) {
+        alert('Por favor completá nombre, teléfono y consulta.');
+        return;
+      }
+
+      let texto = 'Hola Segudab, quiero hacer una consulta:%0A%0A';
+      texto += 'Nombre: ' + encodeURIComponent(nombre) + '%0A';
+      texto += 'Teléfono: ' + encodeURIComponent(telefono) + '%0A';
+      if (email) texto += 'Email: ' + encodeURIComponent(email) + '%0A';
+      texto += '%0AMensaje:%0A' + encodeURIComponent(consulta);
+
+      const numero = '5491137286846';
+      const url = 'https://wa.me/' + numero + '?text=' + texto;
+      window.open(url, '_blank');
+    });
+  </script>
 
 </body>
 </html>
