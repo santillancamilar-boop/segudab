@@ -24,7 +24,6 @@
       background: var(--color-bg-light);
     }
 
-    /* Top bar */
     .top-bar {
       background: #000;
       color: #fff;
@@ -35,7 +34,6 @@
       gap: 16px;
     }
 
-    /* Nav */
     header {
       background: #000;
       color: #fff;
@@ -89,7 +87,7 @@
       align-items: center;
     }
 
-    /* enlaces principales del nav */
+
     .nav-link {
       color: #fff;
       padding-bottom: 3px;
@@ -105,18 +103,15 @@
       color: var(--color-accent);
     }
 
-    /* item que tiene dropdown */
     .nav-item {
       position: relative;
     }
 
-    /* flechita ▼ chica */
     .nav-link .caret {
       font-size: 10px;
       margin-left: 4px;
     }
 
-    /* DROPDOWN */
     .dropdown {
       position: absolute;
       top: 100%;
@@ -155,7 +150,7 @@
       color: var(--color-accent);
     }
 
-    /* botón de contacto */
+
     .nav-cta {
       background: var(--color-primary);
       padding: 8px 16px;
@@ -169,7 +164,7 @@
       color: #fff;
     }
 
-    /* HERO */
+
     .hero {
       position: relative;
       color: #fff;
@@ -252,7 +247,7 @@
       background: var(--color-primary-dark);
     }
 
-    /* Aviso */
+
     .notice-bar {
       background: var(--color-primary);
       color: #fff;
@@ -262,7 +257,6 @@
       margin-bottom: 20px;
     }
 
-    /* Section */
     .section {
       padding: 50px 20px;
     }
@@ -285,7 +279,7 @@
       margin-bottom: 30px;
     }
 
-    /* Categorías */
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
@@ -363,7 +357,7 @@
       font-size: 14px;
     }
 
-    /* CÓMO HACER TU PEDIDO */
+
     .steps-grid {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -402,7 +396,7 @@
       color: #555;
     }
 
-    /* MEDIOS DE PAGO */
+
     .payment-box {
       max-width: var(--max-width);
       margin: 30px auto 0;
@@ -447,7 +441,7 @@
       font-weight: 700;
     }
 
-    /* SERVICIO A FUERZAS Y EMPRESAS */
+
     .service-section {
       background: #EEEEEE;
       padding: 60px 20px;
@@ -499,6 +493,7 @@
     }
 
     @media (max-width: 900px) {
+      .nav-inner { position: relative; }
       .hero-inner {
         max-width: 100%;
       }
@@ -513,37 +508,200 @@
         align-items: flex-start;
       }
     }
+
+input, select, textarea { font-size: 16px; }
+
+
+.nav-link, .btn { -webkit-tap-highlight-color: transparent; }
+
+.mobile-toggle{
+  display:none;
+  border:none;
+  background:transparent;
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+  padding:10px 12px;
+  border-radius:10px;
+}
+.mobile-toggle:active{ background: rgba(255,255,255,0.08); }
+
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+@media (max-width: 900px) {
+
+  .top-bar{
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    justify-content: center;
+    text-align:center;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+
+  header{
+    padding: 10px 14px;
+  }
+
+  .logo-img{
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-text strong{ font-size: 18px; }
+  .logo-text span{ font-size: 12px; }
+
+
+  .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
+
+
+  nav{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: #000;
+    display: none;          
+    flex-direction: column;
+    gap: 0;
+    padding: 10px 12px 14px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 12px 22px rgba(0,0,0,0.55);
+  }
+
+  header.nav-open nav{
+    display: flex;
+  }
+
+
+  nav a{
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid transparent;
+  }
+
+  nav a:hover{
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+
+  nav a:active{
+    background: rgba(255,255,255,0.06);
+  }
+
+
+  .nav-cta{
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+
+  .nav-item:hover .dropdown{ opacity:0; pointer-events:none; transform: translateY(8px); }
+  .dropdown{
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
+    border-top: none;
+    padding: 0;
+    margin: 6px 0 0;
+  }
+  .dropdown a{
+    padding: 10px 10px 10px 18px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+
+  .hero{
+    padding: 46px 14px 42px;
+  }
+  .hero-title{
+    font-size: 30px;
+    line-height: 1.05;
+  }
+  .hero-subtitle{
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .hero-text{
+    font-size: 14px;
+    max-width: 100%;
+  }
+  .hero-buttons{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn{
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+
+  .section{ padding: 36px 14px; }
+  .section-title{ font-size: 22px; }
+  .section-subtitle{ margin-bottom: 18px; }
+
+
+  .grid{ gap: 14px; }
+  .card-category{ height: 160px; border-radius: 14px; }
+  .card-category-content{
+    left: 16px;
+    bottom: 18px;
+  }
+  .card-category-content h3{ font-size: 18px; }
+  .card-category-content span{ font-size: 13px; }
+
+
+  .steps-grid{ gap: 14px; }
+  .step-card{ padding: 16px; }
+
+
+  .service-section{ padding: 42px 14px; }
+  .service-text{ padding: 18px; }
+}
+
   </style>
 </head>
 
 <body>
 
-  <!-- TOP BAR -->
+
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>segudab@hotmail.com</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
   </div>
 
-  <!-- HEADER -->
   <header>
-    <div class="nav-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-img"></div>
-        <div class="logo-text">
-          <strong>SEGUDAB</strong>
-          <span>Equipamiento táctico y policial</span>
-        </div>
-      </a>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-img"></div>
+      <div class="logo-text">
+        <strong>SEGUDAB</strong>
+        <span>Equipamiento táctico y policial</span>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">☰</button>
 
       <nav>
         <a href="index.html" class="nav-link">Inicio</a>
 
-        <!-- ITEM CON DROPDOWN -->
         <div class="nav-item">
           <a href="productos.html" class="nav-link">
             Productos <span class="caret">▼</span>
           </a>
+
           <div class="dropdown">
             <a href="productos.html?cat=botas">Calzado</a>
             <a href="productos.html?cat=cinturones-fundas">Correajes</a>
@@ -556,9 +714,10 @@
         <a href="contacto.html" class="nav-link nav-cta">Contactar</a>
       </nav>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- HERO -->
+
   <section class="hero" id="hero-section">
     <div class="hero-inner">
       <h1 class="hero-title">Equipamiento táctico de confianza</h1>
@@ -581,7 +740,7 @@
     </div>
   </section>
 
-  <!-- AVISO -->
+
   <div class="notice-bar">
     Insignias policiales se venden únicamente a personal de fuerzas con identificación.
   </div>
@@ -601,7 +760,6 @@
 </div>
 
 
-  <!-- CATEGORÍAS -->
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Categorías principales</h2>
@@ -643,7 +801,7 @@
     </div>
   </section>
 
-  <!-- CÓMO HACER TU PEDIDO -->
+
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Cómo hacer tu pedido</h2>
@@ -681,7 +839,6 @@
       </div>
     </div>
 
-    <!-- MEDIOS DE PAGO -->
     <div class="payment-box">
       <span class="payment-title-pill">Medios de pago</span>
       <p style="margin:0; font-weight:600;">
@@ -695,7 +852,6 @@
     </div>
   </section>
 
-  <!-- SERVICIO A FUERZAS Y EMPRESAS -->
   <section class="section service-section">
     <div class="section-inner">
       <h2 class="section-title">Servicio a fuerzas y empresas</h2>
@@ -749,32 +905,33 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SLIDESHOW HERO -->
-  <script>
-    const heroPhotos = [
-      'fondo-1.png',
-      'fondo-2.png'
-    ];
+ <script>
+  const header = document.querySelector('header');
+  const toggle = document.getElementById('mobile-toggle');
+  const nav = header?.querySelector('nav');
 
-    const heroSection = document.getElementById('hero-section');
-    let currentHero = 0;
+  function closeMenu(){
+    header.classList.remove('nav-open');
+    if (toggle) toggle.textContent = '☰';
+  }
 
-    function updateHeroBackground() {
-      if (!heroSection) return;
-      const img = heroPhotos[currentHero];
-      heroSection.style.backgroundImage =
-        "url('" + img + "')";
-      currentHero = (currentHero + 1) % heroPhotos.length;
-    }
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      header.classList.toggle('nav-open');
+      toggle.textContent = header.classList.contains('nav-open') ? '✕' : '☰';
+    });
+  }
 
-    updateHeroBackground();
-    setInterval(updateHeroBackground, 5000);
-  </script>
+  if (nav) {
+    nav.addEventListener('click', (e) => {
+      if (e.target.closest('a')) closeMenu();
+    });
+  }
+</script>
 
 </body>
 </html>
