@@ -89,7 +89,7 @@
       letter-spacing:1px;
     }
 
-    /* ✅ sacamos el “texto gris descriptivo” */
+    /* ✅ sin texto gris del logo */
     .logo-text span{ display:none; }
 
     nav{
@@ -167,34 +167,39 @@
       color: var(--color-accent);
     }
 
-    /* MOBILE MENU (igual al de tu “¿Por qué…?”) */
+    /* ✅ BOTÓN HAMBURGUESA COMO TU CAPTURA:
+       - sin fondo
+       - sin sombra
+       - solo 3 líneas */
     .mobile-toggle{
       display:none;
       border:none;
-      background: rgba(255,255,255,0.06);
+      background:transparent;
       color:#fff;
       cursor:pointer;
-      padding:12px 14px;
-      border-radius:16px;
+      padding:6px;
+      border-radius:0;
+      box-shadow:none;
       flex:0 0 auto;
-      box-shadow:none; /* ✅ sin sombra */
     }
-    .mobile-toggle:active{ background: rgba(255,255,255,0.12); }
+    .mobile-toggle:active{ background:transparent; }
     .mobile-toggle:focus{ outline:none; }
     .mobile-toggle:focus-visible{
       outline:2px solid rgba(244,197,66,.55);
-      outline-offset:2px;
+      outline-offset:4px;
+      border-radius:10px;
     }
 
     .hamb{
       display:flex;
       flex-direction:column;
       gap:6px;
-      width:26px;
+      width:28px;
+      align-items:flex-end;
     }
     .hamb span{
       height:2px;
-      width:24px;
+      width:26px;
       background:#fff;
       border-radius:2px;
       display:block;
@@ -259,7 +264,6 @@
       overflow:hidden;
       display:flex;
       justify-content:center;
-      /* ✅ bajamos la sombra (a veces genera “borde” en cel) */
       box-shadow: 0 18px 34px rgba(0,0,0,0.65);
     }
 
@@ -284,6 +288,7 @@
       transition:.15s;
       font-size:14px;
       border:none;
+      width:auto;
     }
 
     .btn-primary{
@@ -355,9 +360,10 @@
       margin-bottom:12px;
       font-size:14px;
       line-height:1.5;
+      color:#111;
     }
 
-    /* ✅ sin “letras grises” descriptivas: ocultamos los labels */
+    /* ✅ sin “WhatsApp: / Email: / Horario: / Dirección:” */
     .contact-item strong{ display:none; }
 
     form{
@@ -433,7 +439,7 @@
         gap:0;
         padding:14px 14px 22px;
         border-left:1px solid rgba(255,255,255,0.10);
-        box-shadow:none; /* ✅ sin sombra */
+        box-shadow:none;
         z-index:9999;
         transition: right .18s ease;
         overflow-y:auto;
@@ -636,7 +642,7 @@
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPTS: MENU + DROPDOWN + WHATSAPP -->
+  <!-- SCRIPTS: MENÚ + WHATSAPP -->
   <script>
     const header = document.getElementById('site-header');
     const toggle = document.getElementById('mobile-toggle');
@@ -680,9 +686,7 @@
     });
 
     window.addEventListener('resize', () => {
-      if (!window.matchMedia('(max-width: 980px)').matches) {
-        closeMenu();
-      }
+      if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
     });
 
     // WhatsApp form
@@ -702,15 +706,11 @@
       let texto = 'Hola Segudab, quiero hacer una consulta:%0A%0A';
       texto += 'Nombre: ' + encodeURIComponent(nombre) + '%0A';
       texto += 'Teléfono: ' + encodeURIComponent(telefono) + '%0A';
-      if (email) {
-        texto += 'Email: ' + encodeURIComponent(email) + '%0A';
-      }
+      if (email) texto += 'Email: ' + encodeURIComponent(email) + '%0A';
       texto += '%0AMensaje:%0A' + encodeURIComponent(consulta);
 
       const numero = '5491137286846';
-      const url = 'https://wa.me/' + numero + '?text=' + texto;
-
-      window.open(url, '_blank', 'noopener');
+      window.open('https://wa.me/' + numero + '?text=' + texto, '_blank', 'noopener');
     });
   </script>
 
