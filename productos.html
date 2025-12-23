@@ -1673,7 +1673,7 @@
 
       if (isMobile && a === productsLink) {
         e.preventDefault();
-         setProductsExpanded(!productsItem.classList.contains('open'));
+         setProductsExpanded(!productsItem.classList.contains('false'));
         return;
       }
 
@@ -1935,8 +1935,7 @@
     });
 
     function setupProductCardClicks() {
-      // Para que “Ver detalle” no intente abrir modal (si después lo agregás),
-      // por ahora solo agrega al carrito como demo si querés.
+
       const cards = document.querySelectorAll('.product-card');
       cards.forEach(card => {
         const btn = card.querySelector('.btn-small');
