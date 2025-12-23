@@ -400,27 +400,63 @@
     }
 
 
-   @media (max-width: 980px) {
+ @media (max-width: 980px) {
   header{ padding: 10px 14px; }
 
+  /* TOP BAR igual a la foto: 1 sola línea */
   .top-bar{
-    gap: 8px 14px;
-    padding: 8px 10px;
-    font-size: 12px;
+    gap:16px;
+    padding:6px 10px;
+    font-size:12px;
+    flex-wrap:nowrap;
+    overflow:hidden;
   }
-  .top-bar span{ white-space: normal; }
+  .top-bar span{ white-space:nowrap; }
 
   .logo-img{ width:40px; height:40px; }
   .logo-text strong{ font-size:16px; }
 
   .nav-inner{ max-width:none; width:100%; }
 
- .mobile-toggle{
-        display:inline-flex !important;
-        align-items:center !important;
-        justify-content: right;
-        padding:15px;
- }
+  /* Hamburguesa igual a contacto / foto */
+  .mobile-toggle{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    margin-left:auto;                 /* la manda a la derecha */
+    padding:6px !important;           /* NO 15px, así queda igual */
+    border:none;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    border-radius:0;
+    box-shadow:none;
+    flex:0 0 auto;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-toggle:active{ background:transparent; }
+  .mobile-toggle:focus{ outline:none; }
+  .mobile-toggle:focus-visible{
+    outline:2px solid rgba(244,197,66,.55);
+    outline-offset:4px;
+    border-radius:10px;
+  }
+
+  /* Las 3 rayitas */
+  .hamb{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    width:28px;
+    align-items:flex-end;
+  }
+  .hamb span{
+    height:2px;
+    width:26px;
+    background:#fff;
+    border-radius:2px;
+    display:block;
+  }
 
   nav{
     position: fixed;
@@ -439,31 +475,24 @@
     z-index: 9999;
     transition: right .18s ease;
     overflow-y: auto;
-
-
     align-items: stretch;
   }
 
   header.nav-open .nav-overlay{ display:block; }
   header.nav-open nav{ right: 0; }
 
-
   nav a{
     display: block !important;
     width: 100% !important;
     padding: 14px 12px !important;
     margin: 0 !important;
-
     border-bottom: 1px solid rgba(255,255,255,0.10) !important;
     border-left: 3px solid transparent !important;
     text-align: left !important;
-
-
     border-top: 0 !important;
     border-right: 0 !important;
     border-radius: 0 !important;
   }
-
 
   .nav-link:hover{
     border-color: transparent !important;
@@ -482,7 +511,6 @@
   }
 
   .nav-item{ width: 100%; }
-
 
   .nav-item:hover .dropdown{
     opacity: 0;
@@ -510,7 +538,6 @@
     text-align:left !important;
   }
 
-
   .hero{ padding: 46px 14px 42px; }
   .hero-inner { grid-template-columns: 1fr; gap: 18px; }
   .hero-title{ font-size: 30px; line-height: 1.05; }
@@ -527,12 +554,6 @@
   .section-subtitle{ margin-bottom: 18px; }
 }
 
-
-    @media (max-width: 520px){
-      .hero-title{ font-size:28px; }
-      .hero-text{ font-size:13px; }
-      .section-title{ font-size:20px; }
-    }
   </style>
 </head>
 
