@@ -1,3 +1,5 @@
+asi? sino, pasamelo vos arreglado
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -125,7 +127,6 @@
     .nav-item { position: relative; }
     .nav-link .caret { font-size: 10px; margin-left: 6px; }
 
-    /* Dropdown DESKTOP (hover) */
     .dropdown {
       position: absolute;
       top: 100%;
@@ -143,6 +144,12 @@
     }
 
     .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .nav-item.open .dropdown{
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
@@ -225,6 +232,7 @@
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
       overflow: hidden;
     }
+
     .hero::after {
       content: "";
       position: absolute;
@@ -233,12 +241,14 @@
       pointer-events: none;
       z-index: 0;
     }
+
     .hero-inner {
       max-width: var(--max-width);
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
+
     .hero-title {
       font-size: 44px;
       text-transform: uppercase;
@@ -246,6 +256,7 @@
       margin: 0 0 10px;
       text-shadow: 0 4px 8px rgba(0,0,0,0.7);
     }
+
     .hero-subtitle {
       font-size: 18px;
       text-transform: uppercase;
@@ -253,6 +264,7 @@
       margin-bottom: 16px;
       text-shadow: 0 3px 6px rgba(0,0,0,0.7);
     }
+
     .hero-text {
       color: #ddd;
       max-width: 520px;
@@ -260,11 +272,13 @@
       font-size: 15px;
       text-shadow: 0 2px 4px rgba(0,0,0,0.7);
     }
+
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -280,11 +294,13 @@
       border: none;
       -webkit-tap-highlight-color: transparent;
     }
+
     .btn-primary {
       background: var(--color-primary);
       color: #fff;
       box-shadow: 0 6px 14px rgba(224,0,0,0.5);
     }
+
     .btn-primary:hover { background: var(--color-primary-dark); }
 
     .notice-bar {
@@ -306,120 +322,288 @@
       color: #444;
     }
 
+    .section { padding: 50px 20px; }
+    .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align:center;
+    }
+
+    .section-title {
+      font-size: 26px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 20px;
+    }
+
+    .card-category {
+      height: 180px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      transition: transform .15s ease, box-shadow .15s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-category::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 2px solid rgba(255,255,255,0.9);
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: 2;
+      transition: inset .15s ease, border-color .15s ease;
+    }
+
+    .card-category::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .card-category:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.35);
+    }
+
+    .card-category:hover::before {
+      inset: 8px;
+      border-color: var(--color-primary);
+    }
+
+    .card-category img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-category-content {
+      position: absolute;
+      left: 22px;
+      bottom: 26px;
+      z-index: 3;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    .card-category-content h3 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .card-category-content span { font-size: 14px; }
+
+    .steps-grid {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+
+    .step-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .step-number {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .step-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .payment-box {
+      max-width: var(--max-width);
+      margin: 30px auto 0;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 22px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      text-align: left;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .payment-title-pill {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .payment-methods-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      font-size: 13px;
+    }
+
+    .payment-methods-list li::before {
+      content: "• ";
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .service-section {
+      background: #EEEEEE;
+      padding: 60px 20px;
+    }
+
+    .service-layout {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .service-cards { display: flex; flex-direction: column; gap: 18px; }
+
+    .service-card {
+      background: #ffffff;
+      padding: 18px 20px;
+      border-radius: 16px;
+      border: 1px solid #dcdcdc;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.10);
+      font-size: 14px;
+      color: #444;
+    }
+
+    .service-text {
+      background: #ffffff;
+      padding: 24px 26px;
+      border-radius: 16px;
+      border: 1px solid #dcdcdc;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      font-size: 14px;
+      color: #333;
+      line-height: 1.55;
+    }
+
+    footer {
+      background: #000;
+      color: #888;
+      padding: 14px;
+      text-align: center;
+      font-size: 13px;
+      margin-top: 40px;
+    }
+
+    input, select, textarea { font-size: 16px; }
+
     /* =======================
-       MOBILE NAV + HERO
+       MOBILE
     ======================= */
-    @media (max-width: 980px) {
-      header{ padding: 10px 14px; }
+  /* ===== Dropdown modo acordeón (MOBILE) ===== */
 
-      .top-bar{
-        gap: 8px 14px;
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-      .top-bar span{ white-space: normal; }
+/* En mobile, NO usar hover para abrir */
+.nav-item:hover .dropdown{
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
 
-      .logo-img{ width:40px; height:40px; }
-      .logo-text strong{ font-size:16px; }
-      .logo-text span{ font-size:11px; max-width: 220px; }
+/* Dropdown cerrado por defecto */
+.dropdown{
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  box-shadow: none;
+  border-top: none;
+  padding: 0;
+  margin: 0;
+  display: none;              /* <-- cerrado */
+}
 
-      .nav-inner{ max-width:none; width:100%; }
+/* Cuando tocás "Productos", se abre */
+.nav-item.open .dropdown{
+  display: block;             /* <-- abierto */
+}
 
-      .mobile-toggle{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-      }
+.dropdown a{
+  display:block;
+  width:100%;
+  padding: 12px 12px 12px 22px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  text-align:left;
+}
 
-      /* Panel lateral */
-      nav{
-        position: fixed;
-        top: 0;
-        right: -92vw;
-        width: min(90vw, 420px);
-        max-width: 420px;
-        height: 100vh;
-        background: #000;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        padding: 14px 14px 22px;
-        border-left: 1px solid rgba(255,255,255,0.10);
-        z-index: 9999;
-        transition: right .18s ease;
-        overflow-y: auto;
-        align-items: stretch;
-      }
+  /* ✅ y desactivamos el hover de desktop */
+  .nav-item:hover .dropdown{
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
 
-      header.nav-open .nav-overlay{ display:block; }
-      header.nav-open nav{ right: 0; }
+  .nav-cta{
+    margin-top: 12px;
+    width:100%;
+    text-align:center;
+    padding: 12px 16px;
+  }
+}
 
-      /* Links: sin “cosita roja” / sin underline en mobile */
-      nav .nav-link{
-        display:flex;
-        width:100%;
-        align-items:center;
-        justify-content:space-between;
-        padding: 14px 12px;
-        margin: 0;
-        border: 0;
-        border-bottom: 1px solid rgba(255,255,255,0.10);
-        color:#fff;
-        text-decoration:none;
-      }
-      nav .nav-link:hover{
-        border-bottom-color: rgba(255,255,255,0.10);
-        color:#fff;
-      }
-
-      .nav-cta{
-        margin-top: 12px;
-        width:100%;
-        justify-content:center;
-        text-align:center;
-        padding: 12px 16px;
-      }
-
-      /* ===== Dropdown modo acordeón (MOBILE) ===== */
-
-      /* En mobile, NO usar hover para abrir */
-      .nav-item:hover .dropdown{
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(8px);
-      }
-
-      /* Dropdown cerrado por defecto */
-      .dropdown{
-        position: static;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        box-shadow: none;
-        border-top: none;
-        padding: 0;
-        margin: 0;
-        display: none;
-      }
-
-      /* Cuando tocás Productos, se abre */
-      .nav-item.open .dropdown{
-        display: block;
-      }
 
       .dropdown a{
-        display:block;
-        width:100%;
         padding: 12px 12px 12px 22px;
         font-size: 13px;
         border-bottom: 1px solid rgba(255,255,255,0.10);
-        color:#fff;
-        text-decoration:none;
-        text-transform: uppercase;
       }
-      .dropdown a:hover{ background:#111; color: var(--color-accent); }
 
-      /* Hero mobile */
       .hero{ padding: 46px 14px 42px; }
       .hero-title{ font-size: 30px; line-height: 1.05; }
       .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
@@ -427,18 +611,36 @@
       .hero-buttons{ flex-direction: column; align-items: stretch; }
       .btn{ width: 100%; padding: 12px 16px; font-size: 14px; }
 
+      .section{ padding: 36px 14px; }
+      .section-title{ font-size: 22px; }
+      .section-subtitle{ margin-bottom: 18px; }
+
       .intro-text{ font-size: 15px; margin: 8px auto 6px; }
+      .grid{ gap: 14px; }
+      .card-category{ height: 160px; border-radius: 14px; }
+      .card-category-content{ left: 16px; bottom: 18px; }
+      .card-category-content h3{ font-size: 18px; }
+      .card-category-content span{ font-size: 13px; }
+
+      .service-layout{ grid-template-columns: 1fr; }
+      .service-section{ padding: 42px 14px; }
+      .service-text{ padding: 18px; }
+      .payment-box{ flex-direction: column; align-items: flex-start; }
     }
 
     @media (max-width: 520px){
       .logo-text span{ display:none; }
       .hero-title{ font-size: 28px; }
       .hero-text{ font-size: 13px; }
+      .section-title{ font-size: 20px; }
+      .card-category{ height: 150px; }
+      .payment-box{ padding: 16px; font-size: 13px; }
     }
   </style>
 </head>
 
 <body>
+
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
@@ -495,6 +697,7 @@
 
       <div class="hero-buttons">
         <a href="productos.html" class="btn btn-primary">Ver catálogo completo</a>
+
         <a href="https://wa.me/5491137286846?text=Hola%20Segudab,%20quisiera%20consultar%20por%20compras%20mayoristas"
            class="btn btn-primary" target="_blank" rel="noopener">
           Consulta mayorista
@@ -514,7 +717,149 @@
     <strong>Gracias por elegir Segudab.</strong>
   </div>
 
-  <footer style="background:#000;color:#888;padding:14px;text-align:center;font-size:13px;margin-top:40px;">
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Categorías principales</h2>
+      <p class="section-subtitle">Encontrá rápido lo que necesitás.</p>
+
+      <div class="grid">
+        <a href="productos.html?cat=calzado" class="card-category">
+          <img src="categoria-1.png" alt="Calzado" />
+          <div class="card-category-content">
+            <h3>Calzado</h3>
+            <span>Borcegos y zapatos resistentes</span>
+          </div>
+        </a>
+
+        <a href="productos.html?cat=correajes" class="card-category">
+          <img src="categoria-2.png" alt="Correajes" />
+          <div class="card-category-content">
+            <h3>Correajes</h3>
+            <span>Porta armamento y equipos</span>
+          </div>
+        </a>
+
+        <a href="productos.html?cat=accesorios" class="card-category">
+          <img src="categoria-3.png" alt="Accesorios" />
+          <div class="card-category-content">
+            <h3>Accesorios</h3>
+            <span>Modelos para cada fuerza</span>
+          </div>
+        </a>
+
+        <a href="productos.html?cat=indumentaria" class="card-category">
+          <img src="categoria-4.png" alt="Indumentaria" />
+          <div class="card-category-content">
+            <h3>Indumentaria</h3>
+            <span>Trabajo diario y táctico</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Cómo hacer tu pedido</h2>
+      <p class="section-subtitle">
+        En pocos pasos podés armar tu equipamiento completo y coordinar la entrega.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-number">Paso 1</span>
+        <div class="step-title">Elegí los productos</div>
+        <p class="step-text">
+          Ingresá al catálogo, seleccioná borcegos, cinturones, fundas, uniformes y agregalos al carrito
+          según la cantidad aproximada que necesites.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">Paso 2</span>
+        <div class="step-title">Enviá tu pedido</div>
+        <p class="step-text">
+          Desde el carrito, completá tus datos y enviá el detalle por WhatsApp. Te respondemos con la
+          confirmación de stock, talles y precios finales.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">Paso 3</span>
+        <div class="step-title">Coordiná entrega o retiro</div>
+        <p class="step-text">
+          Podés retirar en nuestro local de Caseros o coordinar envíos a tu empresa, dependencia o domicilio,
+          según la zona y el volumen del pedido.
+        </p>
+      </div>
+    </div>
+
+    <div class="payment-box">
+      <span class="payment-title-pill">Medios de pago</span>
+      <p style="margin:0; font-weight:600;">
+        Trabajamos con todos los medios de pago principales:
+      </p>
+      <ul class="payment-methods-list">
+        <li>Efectivo en el local</li>
+        <li>Tarjeta de crédito y débito</li>
+        <li>Mercado Pago (link de pago / QR)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section service-section">
+    <div class="section-inner">
+      <h2 class="section-title">Servicio a fuerzas y empresas</h2>
+      <p class="section-subtitle">
+        Equipamiento confiable, asesoramiento profesional y entregas rápidas.
+      </p>
+    </div>
+
+    <div class="service-layout">
+      <div class="service-cards">
+        <div class="service-card">
+          <strong>Asesoramiento personalizado</strong><br>
+          Te ayudamos a elegir talles, combinaciones y cantidades según la necesidad operativa.
+        </div>
+
+        <div class="service-card">
+          <strong>Stock permanente</strong><br>
+          Disponibilidad en los modelos y talles más solicitados por fuerzas.
+        </div>
+
+        <div class="service-card">
+          <strong>Precios mayoristas</strong><br>
+          Tarifas especiales para empresas de seguridad y compras institucionales.
+        </div>
+      </div>
+
+      <div class="service-text">
+        <h3 style="margin-top:0; font-size:18px; text-transform:uppercase;">
+          Cómo trabajamos
+        </h3>
+
+        <p>
+          En Segudab entendemos la importancia de contar con equipamiento confiable todos los días.
+          Probamos nuestros modelos con usuarios reales, revisamos costuras y materiales y elegimos
+          insumos nacionales que respondan a uso intensivo.
+        </p>
+
+        <ul style="padding-left:18px;">
+          <li>Probamos calces y refuerzos con personal operativo.</li>
+          <li>Control de calidad antes de cada entrega.</li>
+          <li>Opciones de personalización para empresas y cuerpos de seguridad.</li>
+        </ul>
+
+        <p>
+          Si necesitás equipar a un equipo completo, te armamos un presupuesto a medida con
+          diferentes combinaciones de borcegos, cinturones, fundas y uniformes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
@@ -559,15 +904,13 @@
 
     overlay.addEventListener('click', closeMenu);
 
-    // En mobile: tocar "Productos" abre/cierra y NO navega
-    productsLink.addEventListener('click', (e) => {
-      if (!isMobile()) return;   // desktop navega normal
-      e.preventDefault();
+productsLink.addEventListener('click', (e) => {
+  if (!isMobile()) return;
+  e.preventDefault(); 
       e.stopPropagation();
       setProductsExpanded(!productsItem.classList.contains('open'));
     });
 
-    // En mobile: tocar cualquier link real cierra el menú
     nav.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (!link || !isMobile()) return;
@@ -575,7 +918,6 @@
       closeMenu();
     });
 
-    // Cierra acordeón si tocás fuera (mobile)
     document.addEventListener('click', (e) => {
       if (!isMobile()) return;
       if (!productsItem.classList.contains('open')) return;
@@ -591,5 +933,6 @@
       if (e.key === 'Escape' && header.classList.contains('nav-open')) closeMenu();
     });
   </script>
+
 </body>
 </html>
