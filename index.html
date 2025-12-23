@@ -544,157 +544,174 @@
 
     /* =======================
        MOBILE NAV (CORREGIDO)
-       ======================= */
-    @media (max-width: 980px) {
-      header{ padding: 10px 14px; }
+   @media (max-width: 980px) {
+  header{ padding: 10px 14px; }
 
-      .top-bar{
-        gap: 8px 14px;
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-      .top-bar span{ white-space: normal; }
+  .top-bar{
+    gap: 8px 14px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .top-bar span{ white-space: normal; }
 
-      .logo-img{ width:40px; height:40px; }
-      .logo-text strong{ font-size:16px; }
-      .logo-text span{ font-size:11px; max-width: 220px; }
+  .logo-img{ width:40px; height:40px; }
+  .logo-text strong{ font-size:16px; }
+  .logo-text span{ font-size:11px; max-width: 220px; }
 
-      .nav-inner{ max-width:none; width:100%; }
+  .nav-inner{ max-width:none; width:100%; }
 
-      .mobile-toggle{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        margin-left:auto;
-      }
+  .mobile-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-left:auto;
+  }
 
-      nav{
-        position: fixed;
-        top: 0;
-        right: -92vw;
-        width: min(90vw, 420px);
-        max-width: 420px;
-        height: 100vh;
-        background: #000;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        padding: 6px 14px 22px;
-        border-left: 1px solid rgba(255,255,255,0.10);
-        z-index: 9999;
-        transition: right .18s ease;
-        overflow-y: auto;
-        align-items: stretch;
-      }
+  nav{
+    position: fixed;
+    top: 0;
+    right: -92vw;
+    width: min(90vw, 420px);
+    max-width: 420px;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 10px 14px 22px;
+    border-left: 1px solid rgba(255,255,255,0.10);
+    z-index: 9999;
+    transition: right .18s ease;
+    overflow-y: auto;
+    align-items: stretch;
+  }
 
-      header.nav-open .nav-overlay{ display:block; }
-      header.nav-open nav{ right: 0; }
+  header.nav-open .nav-overlay{ display:block; }
+  header.nav-open nav{ right: 0; }
 
-      nav .nav-item{ width:100%; }
+  nav .nav-item{ width: 100%; }
 
-      /* links full-width (no subrayado raro) */
-      nav a,
-      nav .nav-link{
-        display:flex;
-        width:100%;
-        align-items:center;
-        justify-content: space-between;
+  /* Links principales del menú (NO rojo, NO subrayados raros) */
+  nav > a.nav-link,
+  nav > a,
+  nav .nav-item > a.nav-link{
+    display:flex;
+    width:100%;
+    align-items:center;
+    justify-content: space-between;
 
-        margin: 0;
-        padding: 14px 12px;
-        text-align:left;
-        line-height: 1.2;
-        text-decoration:none;
+    margin: 0;
+    padding: 14px 12px;
+    text-align: left;
+    line-height: 1.2;
+    text-decoration: none;
 
-        border: 0;
-        border-bottom: 1px solid rgba(255,255,255,0.10);
-        border-left: 3px solid transparent;
-        border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    border-radius: 0;
 
-        /* IMPORTANTÍSIMO: mata el border-bottom “rojo” del desktop */
-        padding-bottom: 14px;
-      }
+    /* mata el estilo desktop */
+    padding-bottom: 14px;
+    border-bottom-width: 1px;
+  }
 
-      /* no marcar hover con underline/borde en mobile */
-      nav .nav-link:hover{
-        border-bottom-color: rgba(255,255,255,0.10);
-        color:#fff;
-      }
+  /* IMPORTANTÍSIMO: anula el border-color rojo del desktop */
+  nav > a.nav-link:hover,
+  nav > a:hover,
+  nav .nav-item > a.nav-link:hover,
+  nav > a.nav-link:active,
+  nav > a:active,
+  nav .nav-item > a.nav-link:active,
+  nav > a.nav-link:focus,
+  nav > a:focus,
+  nav .nav-item > a.nav-link:focus{
+    border-color: transparent; /* evita rojo */
+    border-bottom-color: rgba(255,255,255,0.10);
+    color: #fff;
+  }
 
-      nav .caret{
-        margin-left: 10px;
-        font-size: 11px;
-        opacity: .9;
-        flex: 0 0 auto;
-      }
+  nav .caret{
+    margin-left: 10px;
+    font-size: 11px;
+    opacity: .9;
+    flex: 0 0 auto;
+  }
 
-      .nav-cta{
-        margin-top: 12px;
-        width:100%;
-        text-align:center;
-        padding: 12px 16px;
-        justify-content:center;
-      }
+  .nav-cta{
+    margin-top: 12px;
+    width:100%;
+    text-align:center;
+    padding: 12px 16px;
+    justify-content:center;
+    border: 0;
+    border-radius: 999px;
+  }
 
-      /* dropdown como acordeón */
-      .nav-item:hover .dropdown{
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(8px);
-      }
+  /* Dropdown como acordeón */
+  .nav-item:hover .dropdown{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+  }
 
-      .dropdown{
-        position: static;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        box-shadow: none;
-        border-top: none;
-        padding: 0;
-        margin: 0;
-        display: none;
-      }
-      .nav-item.open .dropdown{ display:block; }
+  .dropdown{
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
+    border-top: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+  }
 
-      .dropdown a{
-        justify-content:flex-start;
-        padding: 12px 12px 12px 22px;
-        border-left: 3px solid transparent;
-      }
+  /* ESTA ES LA CLAVE PARA QUE “APAREZCA” */
+  nav .nav-item.open > .dropdown{
+    display: block !important;
+  }
 
-      /* resto responsive */
-      .hero{ padding: 46px 14px 42px; }
-      .hero-title{ font-size: 30px; line-height: 1.05; }
-      .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
-      .hero-text{ font-size: 14px; max-width: 100%; }
-      .hero-buttons{ flex-direction: column; align-items: stretch; }
-      .btn{ width: 100%; padding: 12px 16px; font-size: 14px; }
+  /* Links del dropdown (solo adentro del dropdown) */
+  .dropdown a{
+    display:block;
+    width:100%;
+    padding: 12px 12px 12px 22px;
+    text-decoration:none;
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    color:#fff;
+  }
 
-      .section{ padding: 36px 14px; }
-      .section-title{ font-size: 22px; }
-      .section-subtitle{ margin-bottom: 18px; }
+  .dropdown a:hover{
+    background:#111;
+    color: var(--color-accent);
+  }
 
-      .intro-text{ font-size: 15px; margin: 8px auto 6px; }
-      .grid{ gap: 14px; }
-      .card-category{ height: 160px; border-radius: 14px; }
-      .card-category-content{ left: 16px; bottom: 18px; }
-      .card-category-content h3{ font-size: 18px; }
-      .card-category-content span{ font-size: 13px; }
+  /* resto responsive */
+  .hero{ padding: 46px 14px 42px; }
+  .hero-title{ font-size: 30px; line-height: 1.05; }
+  .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
+  .hero-text{ font-size: 14px; max-width: 100%; }
+  .hero-buttons{ flex-direction: column; align-items: stretch; }
+  .btn{ width: 100%; padding: 12px 16px; font-size: 14px; }
 
-      .service-layout{ grid-template-columns: 1fr; }
-      .service-section{ padding: 42px 14px; }
-      .service-text{ padding: 18px; }
-      .payment-box{ flex-direction: column; align-items: flex-start; }
-    }
+  .section{ padding: 36px 14px; }
+  .section-title{ font-size: 22px; }
+  .section-subtitle{ margin-bottom: 18px; }
 
-    @media (max-width: 520px){
-      .logo-text span{ display:none; }
-      .hero-title{ font-size: 28px; }
-      .hero-text{ font-size: 13px; }
-      .section-title{ font-size: 20px; }
-      .card-category{ height: 150px; }
-      .payment-box{ padding: 16px; font-size: 13px; }
-    }
+  .intro-text{ font-size: 15px; margin: 8px auto 6px; }
+  .grid{ gap: 14px; }
+  .card-category{ height: 160px; border-radius: 14px; }
+  .card-category-content{ left: 16px; bottom: 18px; }
+  .card-category-content h3{ font-size: 18px; }
+  .card-category-content span{ font-size: 13px; }
+
+  .service-layout{ grid-template-columns: 1fr; }
+  .service-section{ padding: 42px 14px; }
+  .service-text{ padding: 18px; }
+  .payment-box{ flex-direction: column; align-items: flex-start; }
+}
+
   </style>
 </head>
 
