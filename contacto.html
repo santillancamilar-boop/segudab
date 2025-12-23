@@ -399,13 +399,9 @@
       margin-top:40px;
     }
 
-    /* ================================
-       AJUSTES SOLO PARA QUE SE VEA COMO TU CAPTURA (MOBILE)
-       NO TOCA EL RESTO
-       ================================ */
+
     @media (max-width: 980px){
 
-      /* TOP BAR: una sola línea, WhatsApp izq / texto der */
       .top-bar{
         padding:6px 10px !important;
         font-size:12px !important;
@@ -422,7 +418,6 @@
       .top-bar span:first-child{ flex:0 0 auto !important; }
       .top-bar span:last-child{ flex:1 1 auto !important; text-align:right !important; }
 
-      /* header compacto */
       header{
         padding:10px 12px !important;
       }
@@ -446,8 +441,7 @@
         gap:10px !important;
         min-width: 0 !important;
       }
-
-      /* logo circular como la captura */
+¿
       .logo-img{
         width: 34px !important;
         height: 34px !important;
@@ -464,12 +458,11 @@
         letter-spacing:.5px !important;
         line-height:1 !important;
       }
-
-      /* hamburguesa derecha */
+¿
       .mobile-toggle{
         display:inline-flex !important;
         align-items:center !important;
-        justify-content:center !important;
+        justify-content: right !important;
         padding:6px !important;
       }
 
@@ -488,7 +481,6 @@
       .top-bar{ font-size:11px !important; }
     }
 
-    /* ======= TU MENU MOBILE (NO TOCO OTRA COSA) ======= */
     @media (max-width: 980px){
 
       nav{
@@ -664,14 +656,23 @@
       <h2 class="section-title">Hablemos</h2>
       <p class="section-subtitle">Completá el formulario o escribinos directamente por WhatsApp.</p>
     </div>
+  
 
-    <div class="contact-layout">
-      <div class="contact-box">
-        <h3>Datos de contacto</h3>
-        <div class="contact-item">Whatsapp: 11 3728-6846</div>
-        <div class="contact-item">Mail: segudab@hotmail.com</div>
-        <div class="contact-item">Horarios: Lunes a viernes: 9 a 12.30 y 16 a 20 hs / Sábados: 9 a 13 hs</div>
-        <div class="contact-item">Dirección: Av. San Martín 1668, Caseros, Buenos Aires</div>
+<div class="contact-layout">
+  <div class="contact-box">
+    <h3>Datos de contacto</h3>
+
+    <div class="contact-item"><strong>Whatsapp:</strong> 11 3728-6846</div>
+    <div class="contact-item"><strong>Mail:</strong> segudab@hotmail.com</div>
+    <div class="contact-item">
+      <strong>Horarios:</strong> Lunes a viernes: 9 a 12.30 y 16 a 20 hs / Sábados: 9 a 13 hs
+    </div>
+    <div class="contact-item">
+      <strong>Dirección:</strong> Av. San Martín 1668, Caseros, Buenos Aires
+    </div>
+  </div>
+</div>
+
 
         <div class="map">
           <iframe
