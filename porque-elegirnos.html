@@ -24,7 +24,6 @@
       background: var(--color-bg-light);
     }
 
-
     .top-bar {
       background: #000;
       color: #fff;
@@ -38,7 +37,6 @@
     }
     .top-bar span{ white-space: nowrap; }
 
- 
     header {
       background: #000;
       color: #fff;
@@ -170,15 +168,37 @@
     .mobile-toggle{
       display:none;
       border:none;
-      background:rgba(255,255,255,0.06);
+      background:transparent;
       color:#fff;
-      font-size:22px;
       cursor:pointer;
-      padding:10px 12px;
-      border-radius:12px;
+      padding:6px;
+      border-radius:0;
+      box-shadow:none;
       flex: 0 0 auto;
+      margin-left:auto;
     }
-    .mobile-toggle:active{ background: rgba(255,255,255,0.12); }
+    .mobile-toggle:active{ background:transparent; }
+    .mobile-toggle:focus{ outline:none; }
+    .mobile-toggle:focus-visible{
+      outline:2px solid rgba(244,197,66,.55);
+      outline-offset:4px;
+      border-radius:10px;
+    }
+
+    .hamb{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      width:28px;
+      align-items:flex-end;
+    }
+    .hamb span{
+      height:2px;
+      width:26px;
+      background:#fff;
+      border-radius:2px;
+      display:block;
+    }
 
     .nav-overlay{
       display:none;
@@ -187,7 +207,6 @@
       background: rgba(0,0,0,0.55);
       z-index: 9998;
     }
-
 
     .hero {
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
@@ -238,7 +257,6 @@
       height: 260px;
       background: url('equipo-seguridad.jpg') center/cover;
       border-radius: 18px;
-
       box-shadow: 0 18px 34px rgba(0,0,0,0.65);
       position: relative;
     }
@@ -285,7 +303,6 @@
       margin-top: 14px;
     }
 
-
     .notice-bar {
       background: var(--color-primary);
       color: #fff;
@@ -294,7 +311,6 @@
       font-size: 13px;
       margin-bottom: 20px;
     }
-
 
     .section { padding: 50px 20px; }
 
@@ -374,7 +390,6 @@
 
     .why-text-block li { margin-bottom: 6px; }
 
-
     .payment-box {
       margin-top: 18px;
       background: #fdfdfd;
@@ -432,7 +447,6 @@
       color: var(--color-accent);
     }
 
-
     .testimonials {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -459,7 +473,6 @@
       color: #555;
     }
 
-
     footer {
       background: #000;
       color: #888;
@@ -482,22 +495,13 @@
       .logo-img{ width:40px; height:40px; }
       .logo-text strong{ font-size:16px; }
 
-      .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
 
-    .hamb{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      width:28px;
-      align-items:flex-end;
-    }
-    .hamb span{
-      height:2px;
-      width:26px;
-      background:#fff;
-      border-radius:2px;
-      display:block;
-    }
+      .nav-inner{
+        max-width:none;
+        width:100%;
+      }
+
+      .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
 
       nav{
         position: fixed;
@@ -512,7 +516,7 @@
         gap: 0;
         padding: 14px 14px 22px;
         border-left: 1px solid rgba(255,255,255,0.10);
-        box-shadow: none; 
+        box-shadow: none;
         z-index: 9999;
         transition: right .18s ease;
         overflow-y: auto;
@@ -554,7 +558,6 @@
         border-bottom: 1px solid rgba(255,255,255,0.10);
       }
 
-
       .hero{ padding: 46px 14px 42px; }
       .hero-inner { grid-template-columns: 1fr; gap: 18px; }
       .hero-title{ font-size: 30px; line-height: 1.05; }
@@ -563,7 +566,6 @@
       .hero-buttons{ flex-direction: column; align-items: stretch; }
       .btn{ width: 100%; padding: 12px 16px; font-size: 14px; }
       .hero-image{ height: 220px; }
-
 
       .why-layout { grid-template-columns: 1fr; }
       .why-text-block { order: -1; }
@@ -583,12 +585,10 @@
 
 <body>
 
-
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
   </div>
-
 
   <header id="site-header">
     <div class="nav-inner">
@@ -599,7 +599,13 @@
         </div>
       </a>
 
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="hamb" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+
       <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
       <nav id="main-nav" aria-label="Navegación principal">
@@ -648,13 +654,16 @@
           </a>
         </div>
       </div>
+
+      <div class="hero-image">
+        <div class="hero-label">Equipo / trabajo en campo</div>
+      </div>
     </div>
   </section>
 
   <div class="notice-bar">
     Insignias policiales se venden únicamente a personal de fuerzas con identificación.
   </div>
-
 
   <section class="section">
     <div class="section-inner">
@@ -739,7 +748,6 @@
     </div>
   </section>
 
-
   <section class="section">
     <div class="section-inner">
       <h2 class="section-title">Lo que dicen nuestros clientes</h2>
@@ -766,7 +774,6 @@
     </div>
   </section>
 
-
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
@@ -782,7 +789,6 @@
 
     function closeMenu(){
       header.classList.remove('nav-open');
-      toggle.textContent = '☰';
       toggle.setAttribute('aria-expanded','false');
       overlay.setAttribute('aria-hidden','true');
       productsItem.classList.remove('open');
@@ -790,7 +796,6 @@
 
     function openMenu(){
       header.classList.add('nav-open');
-      toggle.textContent = '✕';
       toggle.setAttribute('aria-expanded','true');
       overlay.setAttribute('aria-hidden','false');
     }
