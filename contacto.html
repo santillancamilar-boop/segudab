@@ -403,33 +403,58 @@
     /* =======================
        MOBILE NAV (ARREGLADO)
     ======================= */
-    @media (max-width: 980px){
-      header{ padding:10px 14px; }
+ /* ===== HEADER MOBILE: igual al de la captura ===== */
+@media (max-width: 980px){
 
-      .top-bar{
-        gap:8px 14px;
-        padding:8px 10px;
-        font-size:12px;
-      }
-      .top-bar span{ white-space:normal; }
+  /* header limpio, sin “caja” */
+  header{
+    padding: 12px 14px !important;
+  }
 
-      .logo-img{ width:40px; height:40px; }
-      .logo-text strong{ font-size:16px; }
+  .nav-inner{
+    max-width: none !important;
+    width: 100% !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
 
-      .nav-inner{
-        max-width:none;
-        width:100%;
-        background: rgba(255,255,255,0.06);
-        border-radius: 18px;
-        padding: 10px 12px;
-      }
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+  }
 
-      .mobile-toggle{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        margin-left:auto;
-      }
+  /* logo a la izquierda */
+  .logo{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    min-width: 0 !important;
+  }
+
+  .logo-img{
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  /* SOLO “SEGUDAB” (sin subtítulo), como tu captura */
+  .logo-text span{
+    display: none !important;
+  }
+  .logo-text strong{
+    font-size: 16px !important;
+  }
+
+  /* hamburguesa bien a la derecha */
+  .mobile-toggle{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    padding: 6px !important;
+  }
+}
+
 
       nav{
         position:fixed;
