@@ -179,13 +179,14 @@
       box-shadow:none;
       flex:0 0 auto;
     }
-    .mobile-toggle:active{ background:transparent; }
-    .mobile-toggle:focus{ outline:none; }
-    .mobile-toggle:focus-visible{
-      outline:2px solid rgba(244,197,66,.55);
-      outline-offset:4px;
-      border-radius:10px;
-    }
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    left: 135%;
+    transform: translateX(-50%);
+}
 
     .hamb{
       display:flex;
