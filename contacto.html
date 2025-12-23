@@ -17,13 +17,11 @@
 
     *{ box-sizing:border-box; }
     html,body{ margin:0; width:100%; overflow-x:hidden; }
-
     body{
       font-family: system-ui, sans-serif;
       background: var(--color-bg-light);
     }
 
-    
     .top-bar{
       background:#000;
       color:#fff;
@@ -36,7 +34,6 @@
       text-align:center;
     }
     .top-bar span{ white-space:nowrap; }
-
 
     header{
       background:#000;
@@ -107,6 +104,7 @@
       text-decoration:none;
       position:relative;
       display:inline-block;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .nav-link:hover{
@@ -151,6 +149,13 @@
       transform:translateY(0);
     }
 
+    /* importante: permite abrir por JS también */
+    .nav-item.open .dropdown{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
     .dropdown a{
       display:block;
       padding:8px 18px;
@@ -165,7 +170,6 @@
       color: var(--color-accent);
     }
 
- 
     .mobile-toggle{
       display:none;
       border:none;
@@ -176,6 +180,7 @@
       border-radius:0;
       box-shadow:none;
       flex:0 0 auto;
+      -webkit-tap-highlight-color: transparent;
     }
     .mobile-toggle:active{ background:transparent; }
     .mobile-toggle:focus{ outline:none; }
@@ -207,7 +212,6 @@
       background: rgba(0,0,0,0.55);
       z-index:9998;
     }
-
 
     .hero{
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
@@ -284,6 +288,7 @@
       font-size:14px;
       border:none;
       width:auto;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .btn-primary{
@@ -292,7 +297,6 @@
       box-shadow: 0 6px 14px rgba(224,0,0,0.5);
     }
     .btn-primary:hover{ background: var(--color-primary-dark); }
-
 
     .notice-bar{
       background: var(--color-primary);
@@ -303,28 +307,23 @@
       margin-bottom:20px;
     }
 
-
     .section{ padding:50px 20px; }
-
     .section-inner{
       max-width: var(--max-width);
       margin:0 auto;
       text-align:center;
     }
-
     .section-title{
       font-size:26px;
       text-transform:uppercase;
       margin-bottom:10px;
     }
-
     .section-subtitle{
       color:#777;
       font-size:14px;
       margin-bottom:30px;
     }
 
-    
     .contact-layout{
       display:grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -401,6 +400,9 @@
       margin-top:40px;
     }
 
+    /* =======================
+       MOBILE NAV (ARREGLADO)
+    ======================= */
     @media (max-width: 980px){
       header{ padding:10px 14px; }
 
@@ -414,7 +416,6 @@
       .logo-img{ width:40px; height:40px; }
       .logo-text strong{ font-size:16px; }
 
-      
       .nav-inner{
         max-width:none;
         width:100%;
@@ -426,10 +427,8 @@
       .mobile-toggle{
         display:inline-flex;
         align-items:center;
-        justify-content:right;
-        margin-left:auto;      
-        position:static;       
-        transform:none;        
+        justify-content:center;
+        margin-left:auto;
       }
 
       nav{
@@ -449,15 +448,26 @@
         z-index:9999;
         transition: right .18s ease;
         overflow-y:auto;
+        align-items: stretch;
       }
 
       header.nav-open .nav-overlay{ display:block; }
       header.nav-open nav{ right:0; }
 
-      nav a{
+      /* links mobile (evita “cosita roja” / subrayados raros) */
+      nav .nav-link{
+        display:flex;
+        width:100%;
+        align-items:center;
+        justify-content:space-between;
         padding:14px 12px;
-        border-bottom:1px solid rgba(255,255,255,0.10);
-        border-left:3px solid transparent;
+        margin:0;
+        border:0 !important;
+        border-bottom:1px solid rgba(255,255,255,0.10) !important;
+      }
+      .nav-link:hover{
+        border-color: transparent !important;
+        color:#fff !important;
       }
 
       .nav-cta{
@@ -467,20 +477,24 @@
         padding:12px 16px;
       }
 
- 
+      /* overlay visible cuando menú abierto */
+      .nav-overlay{ display:none; }
+
+      /* Dropdown acordeón */
       .nav-item:hover .dropdown{ opacity:0; pointer-events:none; transform:translateY(8px); }
+
       .dropdown{
-        position:static;
-        opacity:1;
-        pointer-events:auto;
-        transform:none;
-        box-shadow:none;
-        border-top:none;
-        padding:0;
-        margin:0;
-        display:none;
+        position:static !important;
+        display:none !important;       /* cerrado */
+        opacity:1 !important;
+        pointer-events:auto !important;
+        transform:none !important;
+        box-shadow:none !important;
+        border-top:none !important;
+        padding:0 !important;
+        margin:0 !important;
       }
-      .nav-item.open .dropdown{ display:block; }
+      .nav-item.open .dropdown{ display:block !important; } /* abierto */
 
       .dropdown a{
         padding:12px 12px 12px 22px;
@@ -539,14 +553,15 @@
         <a href="index.html" class="nav-link">Inicio</a>
 
         <div class="nav-item" id="nav-products">
-          <a href="productos.html" class="nav-link" id="products-link">
+          <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
             Productos <span class="caret">▼</span>
           </a>
-          <div class="dropdown">
-            <a href="productos.html?cat=botas">Calzado</a>
+
+          <div class="dropdown" id="products-dropdown">
+            <a href="productos.html?cat=calzado">Calzado</a>
+            <a href="productos.html?cat=indumentaria">Indumentaria</a>
             <a href="productos.html?cat=correajes">Correajes</a>
             <a href="productos.html?cat=accesorios">Accesorios</a>
-            <a href="productos.html?cat=indumentaria">Indumentaria</a>
           </div>
         </div>
 
@@ -638,42 +653,71 @@
     const productsItem = document.getElementById('nav-products');
     const productsLink = document.getElementById('products-link');
 
-    function closeMenu(){
-      header.classList.remove('nav-open');
-      toggle.setAttribute('aria-expanded','false');
-      overlay.setAttribute('aria-hidden','true');
-      productsItem.classList.remove('open');
+    function isMobile() {
+      return window.matchMedia('(max-width: 980px)').matches;
     }
 
-    function openMenu(){
+    function setProductsExpanded(expanded) {
+      productsItem.classList.toggle('open', expanded);
+      productsLink.setAttribute('aria-expanded', String(expanded));
+    }
+
+    function openMenu() {
       header.classList.add('nav-open');
-      toggle.setAttribute('aria-expanded','true');
-      overlay.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded', 'true');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
+      setProductsExpanded(false);
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     }
 
     toggle.addEventListener('click', () => {
-      const isOpen = header.classList.contains('nav-open');
-      isOpen ? closeMenu() : openMenu();
+      header.classList.contains('nav-open') ? closeMenu() : openMenu();
     });
 
     overlay.addEventListener('click', closeMenu);
 
-    nav.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (!a) return;
+    // Click en "Productos" => en mobile abre/cierra dropdown (no navega)
+    productsLink.addEventListener('click', (e) => {
+      if (!isMobile()) return;
+      e.preventDefault();
+      e.stopPropagation();
+      setProductsExpanded(!productsItem.classList.contains('open'));
+    });
 
-      if (a === productsLink && window.matchMedia('(max-width: 980px)').matches) {
-        e.preventDefault();
-        productsItem.classList.toggle('open');
-        return;
-      }
+    // En mobile: tocar cualquier link (menos Productos) cierra el panel
+    nav.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link || !isMobile()) return;
+      if (link === productsLink) return;
       closeMenu();
     });
 
-    window.addEventListener('resize', () => {
-      if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
+    // Click afuera del dropdown => lo cierra
+    document.addEventListener('click', (e) => {
+      if (!isMobile()) return;
+      if (!productsItem.classList.contains('open')) return;
+      if (productsItem.contains(e.target)) return;
+      setProductsExpanded(false);
     });
 
+    window.addEventListener('resize', () => {
+      if (!isMobile()) closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.classList.contains('nav-open')) closeMenu();
+    });
+
+    // Form => WhatsApp
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
