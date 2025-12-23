@@ -636,7 +636,13 @@
       .section-title{ font-size: 22px; }
       .section-subtitle{ margin-bottom: 12px; }
 
-      .catalog-layout { grid-template-columns: 1fr; padding: 0; }
+     .catalog-layout {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+      }
+      .sidebar { order: 1; }
+      .product-grid { order: 2; }
       .cart-panel { position: static; max-width: none; top:auto; }
       .sidebar { max-width: 520px; width: 100%; margin: 0 auto; }
     }
@@ -1665,7 +1671,7 @@
 
       if (isMobile && a === productsLink) {
         e.preventDefault();
-        setProductsExpanded(!productsItem.classList.contains('open'));
+         setProductsExpanded(true);
         return;
       }
 
