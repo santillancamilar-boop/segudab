@@ -676,7 +676,7 @@
         <a href="index.html" class="nav-link">Inicio</a>
 
         <div class="nav-item" id="nav-products">
-          <a href="productos.html" class="nav-link" id="products-link">
+         <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
             Productos <span class="caret">▼</span>
           </a>
 
@@ -1626,13 +1626,17 @@
 
     const productsItem = document.getElementById('nav-products');
     const productsLink = document.getElementById('products-link');
-
+    
+ function setProductsExpanded(isExpanded) {
+      productsItem.classList.toggle('open', isExpanded);
+      productsLink.setAttribute('aria-expanded', String(isExpanded));
+    }
     function closeMenu(){
       header.classList.remove('nav-open');
       toggle.textContent = '☰';
       toggle.setAttribute('aria-expanded','false');
       overlay.setAttribute('aria-hidden','true');
-      productsItem.classList.remove('open');
+       setProductsExpanded(false);
     }
 
     function openMenu(){
@@ -1640,6 +1644,9 @@
       toggle.textContent = '✕';
       toggle.setAttribute('aria-expanded','true');
       overlay.setAttribute('aria-hidden','false');
+       if (window.matchMedia('(max-width: 980px)').matches) {
+        setProductsExpanded(true);
+      }
     }
 
     toggle.addEventListener('click', () => {
@@ -1658,7 +1665,7 @@
 
       if (isMobile && a === productsLink) {
         e.preventDefault();
-        productsItem.classList.toggle('open');
+        setProductsExpanded(!productsItem.classList.contains('open'));
         return;
       }
 
