@@ -131,7 +131,7 @@
       top: 100%;
       left: 0;
       background: #000;
-      min-width: 200px;
+      min-width: 220px;
       padding: 10px 0;
       box-shadow: 0 8px 18px rgba(0,0,0,0.6);
       opacity: 0;
@@ -143,6 +143,13 @@
     }
 
     .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* también abre con clase open (por JS en mobile) */
+    .nav-item.open .dropdown{
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
@@ -188,6 +195,7 @@
       margin-left:auto;
       -webkit-tap-highlight-color: transparent;
     }
+    .mobile-toggle:focus{ outline:none; }
     .mobile-toggle:focus-visible{
       outline:2px solid rgba(244,197,66,.55);
       outline-offset:4px;
@@ -306,8 +314,173 @@
       color: #444;
     }
 
+    /* ====== Secciones (tu contenido) ====== */
+    .section { padding: 50px 20px; }
+    .section-inner { max-width: var(--max-width); margin: 0 auto; text-align:center; }
+    .section-title { font-size: 26px; text-transform: uppercase; margin-bottom: 10px; }
+    .section-subtitle { font-size: 14px; color: #777; margin-bottom: 30px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 20px;
+    }
+
+    .card-category {
+      height: 180px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      transition: transform .15s ease, box-shadow .15s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-category::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .card-category img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-category-content {
+      position: absolute;
+      left: 22px;
+      bottom: 26px;
+      z-index: 3;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    .card-category-content h3 { margin: 0 0 4px; font-size: 20px; font-weight: 700; }
+    .card-category-content span { font-size: 14px; }
+
+    .steps-grid {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      text-align: left;
+      padding: 0 20px;
+    }
+    .step-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .step-number {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .step-title { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+    .step-text { font-size: 14px; color: #555; }
+
+    .payment-box{
+      max-width: var(--max-width);
+      margin: 30px auto 0;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 22px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      text-align: left;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .payment-title-pill{
+      display:inline-block;
+      background: var(--color-primary);
+      color:#fff;
+      border-radius:999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .payment-methods-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px 14px;
+      font-size: 13px;
+    }
+    .payment-methods-list li::before{
+      content:"• ";
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .service-section{ background:#EEEEEE; padding: 60px 20px; }
+    .service-layout{
+      max-width: var(--max-width);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 28px;
+      align-items:flex-start;
+    }
+    .service-cards{ display:flex; flex-direction:column; gap:18px; }
+    .service-card{
+      background:#fff;
+      padding:18px 20px;
+      border-radius:16px;
+      border:1px solid #dcdcdc;
+      box-shadow:0 6px 14px rgba(0,0,0,0.10);
+      font-size:14px;
+      color:#444;
+    }
+    .service-text{
+      background:#fff;
+      padding:24px 26px;
+      border-radius:16px;
+      border:1px solid #dcdcdc;
+      box-shadow:0 6px 16px rgba(0,0,0,0.12);
+      font-size:14px;
+      color:#333;
+      line-height:1.55;
+    }
+
+    footer{
+      background:#000;
+      color:#888;
+      padding:14px;
+      text-align:center;
+      font-size:13px;
+      margin-top:40px;
+    }
+
+    input, select, textarea { font-size: 16px; }
+
     /* =======================
        MOBILE NAV + HERO
+       (ARREGLADO: dropdown visible sí o sí)
     ======================= */
     @media (max-width: 980px) {
       header{ padding: 10px 14px; }
@@ -354,7 +527,7 @@
       header.nav-open .nav-overlay{ display:block; }
       header.nav-open nav{ right: 0; }
 
-      /* Links: sin “cosita roja” / sin underline en mobile */
+      /* Links mobile */
       nav .nav-link{
         display:flex;
         width:100%;
@@ -362,14 +535,14 @@
         justify-content:space-between;
         padding: 14px 12px;
         margin: 0;
-        border: 0;
-        border-bottom: 1px solid rgba(255,255,255,0.10);
+        border: 0 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.10) !important;
         color:#fff;
         text-decoration:none;
       }
       nav .nav-link:hover{
-        border-bottom-color: rgba(255,255,255,0.10);
-        color:#fff;
+        border-bottom-color: rgba(255,255,255,0.10) !important;
+        color:#fff !important;
       }
 
       .nav-cta{
@@ -380,31 +553,33 @@
         padding: 12px 16px;
       }
 
-      /* ===== Dropdown modo acordeón (MOBILE) ===== */
-
-      /* En mobile, NO usar hover para abrir */
+      /* ===== Dropdown acordeón (MOBILE) ===== */
+      /* Desactivamos hover en mobile */
       .nav-item:hover .dropdown{
         opacity: 0;
         pointer-events: none;
         transform: translateY(8px);
       }
 
-      /* Dropdown cerrado por defecto */
+      /* Cerrado por defecto */
       .dropdown{
-        position: static;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        box-shadow: none;
-        border-top: none;
-        padding: 0;
-        margin: 0;
-        display: none;
+        position: static !important;
+        display: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border-top: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
       }
 
-      /* Cuando tocás Productos, se abre */
+      /* Abierto cuando JS agrega .open */
       .nav-item.open .dropdown{
-        display: block;
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
       }
 
       .dropdown a{
@@ -427,7 +602,20 @@
       .hero-buttons{ flex-direction: column; align-items: stretch; }
       .btn{ width: 100%; padding: 12px 16px; font-size: 14px; }
 
-      .intro-text{ font-size: 15px; margin: 8px auto 6px; }
+      .section{ padding: 36px 14px; }
+      .section-title{ font-size: 22px; }
+      .section-subtitle{ margin-bottom: 18px; }
+      .grid{ gap: 14px; }
+      .card-category{ height: 160px; border-radius: 14px; }
+      .card-category-content{ left: 16px; bottom: 18px; }
+      .card-category-content h3{ font-size: 18px; }
+      .card-category-content span{ font-size: 13px; }
+
+      .service-layout{ grid-template-columns: 1fr; }
+      .service-section{ padding: 42px 14px; }
+      .service-text{ padding: 18px; }
+      .payment-box{ flex-direction: column; align-items: flex-start; }
+      .steps-grid{ padding: 0 14px; }
     }
 
     @media (max-width: 520px){
@@ -473,9 +661,9 @@
 
           <div class="dropdown" id="products-dropdown">
             <a href="productos.html?cat=calzado">Calzado</a>
+            <a href="productos.html?cat=indumentaria">Indumentaria</a>
             <a href="productos.html?cat=correajes">Correajes</a>
             <a href="productos.html?cat=accesorios">Accesorios</a>
-            <a href="productos.html?cat=indumentaria">Indumentaria</a>
           </div>
         </div>
 
@@ -665,7 +853,6 @@
   <script>
     const header = document.getElementById('site-header');
     const toggle = document.getElementById('mobile-toggle');
-    const nav = document.getElementById('main-nav');
     const overlay = document.getElementById('nav-overlay');
 
     const productsItem = document.getElementById('nav-products');
@@ -703,20 +890,22 @@
 
     overlay.addEventListener('click', closeMenu);
 
-productsLink.addEventListener('click', (e) => {
-  if (!isMobile()) return;
-  e.preventDefault(); 
+    productsLink.addEventListener('click', (e) => {
+      if (!isMobile()) return;
+      e.preventDefault();
       e.stopPropagation();
       setProductsExpanded(!productsItem.classList.contains('open'));
     });
 
-    nav.addEventListener('click', (e) => {
+    // En mobile, tocás un link normal => cierra el panel
+    document.getElementById('main-nav').addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (!link || !isMobile()) return;
       if (link === productsLink) return;
       closeMenu();
     });
 
+    // Click afuera del dropdown => lo cierra
     document.addEventListener('click', (e) => {
       if (!isMobile()) return;
       if (!productsItem.classList.contains('open')) return;
