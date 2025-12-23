@@ -1654,7 +1654,6 @@
   </footer>
 
 <script>
-
 const header = document.getElementById('site-header');
 const toggle = document.getElementById('mobile-toggle');
 const nav = document.getElementById('main-nav');
@@ -1669,7 +1668,7 @@ function isMobile() {
 
 function setProductsExpanded(expanded) {
   productsItem.classList.toggle('open', expanded);
-  productsLink.setAttribute('aria-expanded', expanded);
+  productsLink.setAttribute('aria-expanded', String(expanded));
 }
 
 function openMenu() {
@@ -1703,7 +1702,17 @@ productsLink.addEventListener('click', (e) => {
 nav.addEventListener('click', (e) => {
   const link = e.target.closest('a');
   if (!link || !isMobile()) return;
-  if (link === productsLink) return;
+
+  // Si tocan "Productos" (el padre), NO navegar, solo abre/cierra acordeón
+  if (link.id === 'products-link') return;
+
+  // Si tocan un link del dropdown (Calzado, etc), DEJAR navegar y cerrar
+  if (link.closest('.dropdown')) {
+    closeMenu();
+    return;
+  }
+
+  // Cualquier otro link normal
   closeMenu();
 });
 
@@ -1725,6 +1734,9 @@ document.addEventListener('keydown', (e) => {
 });
 
 
+// ----------------------
+// Carrito
+// ----------------------
 const CART_KEY = 'segudab_cart';
 let cart = [];
 const MP_LINK = 'https://mpago.la/tu_link_de_pago';
@@ -1781,7 +1793,7 @@ function renderCart() {
     container.appendChild(div);
   });
 
-  count.textContent = qty;
+  count.textContent = String(qty);
   totalEl.textContent = '$' + formatPrice(total);
 }
 
@@ -1821,10 +1833,51 @@ function setupProductCardClicks() {
   });
 }
 
+
+// ----------------------
+// Filtro por URL ?cat=...
+// ----------------------
+function applyCategoryFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const cat = (params.get('cat') || '').toLowerCase();
+  if (!cat) return;
+
+  // Mapear "cat=calzado" a tus data-category reales
+  // Tus cards usan borcegos/zapatos/botines, así que "calzado" debería mostrar esos 3.
+  const map = {
+    calzado: ['borcegos', 'zapatos', 'botines'],
+    correajes: ['correajes'],
+    accesorios: ['accesorios'],
+    indumentaria: ['indumentaria']
+  };
+
+  const allowed = map[cat] || [cat];
+
+  // Activar botón visual
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  const btnToActivate = document.querySelector(`.filter-btn[data-category="${cat}"]`);
+  if (btnToActivate) btnToActivate.classList.add('active');
+
+  // Filtrar cards
+  document.querySelectorAll('.product-card').forEach(card => {
+    const c = (card.dataset.category || '').toLowerCase();
+    card.style.display = allowed.includes(c) ? '' : 'none';
+  });
+
+  // (opcional) scrollear al catálogo
+  const sec = document.querySelector('.section');
+  if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+
+// ----------------------
+// Init (UNO SOLO)
+// ----------------------
 document.addEventListener('DOMContentLoaded', () => {
   loadCart();
   renderCart();
   setupProductCardClicks();
+  applyCategoryFromUrl(); // ✅
 });
 </script>
 
