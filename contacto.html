@@ -149,7 +149,7 @@
       transform:translateY(0);
     }
 
-    /* importante: permite abrir por JS también */
+
     .nav-item.open .dropdown{
       opacity:1;
       pointer-events:auto;
@@ -400,13 +400,9 @@
       margin-top:40px;
     }
 
-    /* =======================
-       MOBILE NAV (ARREGLADO)
-    ======================= */
- /* ===== HEADER MOBILE: igual al de la captura ===== */
 @media (max-width: 980px){
 
-  /* header limpio, sin “caja” */
+  
   header{
     padding: 12px 14px !important;
   }
@@ -424,7 +420,7 @@
     gap: 12px !important;
   }
 
-  /* logo a la izquierda */
+ 
   .logo{
     display:flex !important;
     align-items:center !important;
@@ -437,7 +433,7 @@
     height: 40px !important;
   }
 
-  /* SOLO “SEGUDAB” (sin subtítulo), como tu captura */
+ 
   .logo-text span{
     display: none !important;
   }
@@ -445,11 +441,11 @@
     font-size: 16px !important;
   }
 
-  /* hamburguesa bien a la derecha */
+
   .mobile-toggle{
     display: inline-flex !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: right;
     margin-left: auto !important;
     padding: 6px !important;
   }
@@ -479,7 +475,7 @@
       header.nav-open .nav-overlay{ display:block; }
       header.nav-open nav{ right:0; }
 
-      /* links mobile (evita “cosita roja” / subrayados raros) */
+   
       nav .nav-link{
         display:flex;
         width:100%;
@@ -502,15 +498,15 @@
         padding:12px 16px;
       }
 
-      /* overlay visible cuando menú abierto */
+   
       .nav-overlay{ display:none; }
 
-      /* Dropdown acordeón */
+
       .nav-item:hover .dropdown{ opacity:0; pointer-events:none; transform:translateY(8px); }
 
       .dropdown{
         position:static !important;
-        display:none !important;       /* cerrado */
+        display:none !important;   
         opacity:1 !important;
         pointer-events:auto !important;
         transform:none !important;
@@ -519,7 +515,7 @@
         padding:0 !important;
         margin:0 !important;
       }
-      .nav-item.open .dropdown{ display:block !important; } /* abierto */
+      .nav-item.open .dropdown{ display:block !important; }
 
       .dropdown a{
         padding:12px 12px 12px 22px;
@@ -710,7 +706,7 @@
 
     overlay.addEventListener('click', closeMenu);
 
-    // Click en "Productos" => en mobile abre/cierra dropdown (no navega)
+  
     productsLink.addEventListener('click', (e) => {
       if (!isMobile()) return;
       e.preventDefault();
@@ -718,7 +714,7 @@
       setProductsExpanded(!productsItem.classList.contains('open'));
     });
 
-    // En mobile: tocar cualquier link (menos Productos) cierra el panel
+  
     nav.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (!link || !isMobile()) return;
@@ -726,7 +722,6 @@
       closeMenu();
     });
 
-    // Click afuera del dropdown => lo cierra
     document.addEventListener('click', (e) => {
       if (!isMobile()) return;
       if (!productsItem.classList.contains('open')) return;
@@ -742,7 +737,7 @@
       if (e.key === 'Escape' && header.classList.contains('nav-open')) closeMenu();
     });
 
-    // Form => WhatsApp
+
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
