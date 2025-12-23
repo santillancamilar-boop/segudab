@@ -310,7 +310,7 @@
     }
     .catalog-main{ width: 100%; }
 
-    /* ===== Filters (se quedan) ===== */
+
     .filters {
       background: #fff;
       padding: 16px 18px;
@@ -369,7 +369,53 @@
       max-width: 220px;
     }
 
-    /* ===== Grid placeholder ===== */
+
+.product-card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+  min-height: 320px;
+}
+.product-image{
+  height: 160px;
+  background: #f2f2f2 center/cover no-repeat;
+}
+.product-image-contain{
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+.product-body{ padding: 12px 12px 14px; display:flex; flex-direction:column; gap:6px; flex:1; }
+.product-tag{
+  display:inline-block;
+  align-self:flex-start;
+  background:#111;
+  color:#fff;
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:999px;
+  text-transform:uppercase;
+}
+.product-name{ font-weight:800; font-size:15px; line-height:1.2; }
+.product-desc{ color:#666; font-size:13px; line-height:1.35; }
+.product-footer{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.product-price{ font-weight:800; color:var(--color-primary); }
+
+.btn-small{
+  border:none;
+  background:#111;
+  color:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  cursor:pointer;
+  text-transform:uppercase;
+}
+.btn-small:hover{ background:#222; }
+    
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -385,7 +431,7 @@
       font-size: 14px;
     }
 
-    /* ===== Cart ===== */
+
     .cart-panel {
       background: #fff;
       border-radius: 14px;
@@ -1466,7 +1512,6 @@ document.getElementById('cart-items').addEventListener('click', e => {
   renderCart();
 });
 
-/* ===== Acciones checkout (básico, editable) ===== */
 function finalizarCompraWhatsApp(){
   const nombre = (document.getElementById('checkout-nombre').value || '').trim();
   const tel = (document.getElementById('checkout-telefono').value || '').trim();
