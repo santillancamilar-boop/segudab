@@ -236,19 +236,20 @@
       font-size: 40px;
       text-transform: uppercase;
       font-weight: 800;
+      margin: 0 0 8px;
     }
 
     .hero-subtitle {
       font-size: 18px;
       text-transform: uppercase;
       color: #ddd;
-      margin-bottom: 12px;
+      margin: 0 0 12px;
     }
 
     .hero-text {
       color: #ddd;
       max-width: 480px;
-      margin-bottom: 20px;
+      margin: 0 0 20px;
       font-size: 15px;
     }
 
@@ -271,8 +272,8 @@
       color: #fff;
       box-shadow: 0 6px 14px rgba(224,0,0,0.5);
     }
-
     .btn-primary:hover { background: var(--color-primary-dark); }
+
     .hero-buttons { margin-top: 12px; }
 
     .notice-bar {
@@ -301,80 +302,15 @@
       margin-bottom: 10px;
     }
 
-    /* ✅ Layout: filtros arriba, productos, carrito abajo (en 1 columna) */
     .catalog-layout{
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 0 10px;
-      display: block; /* antes era grid 2 columnas */
+      display: block;
     }
     .catalog-main{ width: 100%; }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .product-card {
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .product-image {
-      height: 170px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .product-image.product-image-contain {
-      background-size: contain;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-color: #fff;
-    }
-
-    .product-body { padding: 14px 16px 16px; text-align: left; }
-    .product-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-    .product-desc { font-size: 13px; color: #555; margin-bottom: 8px; }
-
-    .product-tag {
-      display: inline-block;
-      font-size: 11px;
-      text-transform: uppercase;
-      background: #eee;
-      padding: 2px 8px;
-      border-radius: 999px;
-      margin-bottom: 8px;
-    }
-
-    .product-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 6px;
-    }
-
-    .product-price { font-weight: 700; font-size: 15px; color: var(--color-primary); }
-
-    .btn-small {
-      padding: 8px 14px;
-      font-size: 12px;
-      border-radius: 999px;
-      border: none;
-      background: var(--color-primary);
-      color: #fff;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .btn-small:hover { background: var(--color-primary-dark); }
-
+    /* ===== Filters (se quedan) ===== */
     .filters {
       background: #fff;
       padding: 16px 18px;
@@ -382,7 +318,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
       text-align: left;
       width: 100%;
-      margin-bottom: 16px; /* ✅ arriba del grid */
+      margin-bottom: 16px;
     }
 
     .filters h3 {
@@ -407,9 +343,7 @@
       cursor: pointer;
       text-transform: uppercase;
     }
-
     .filter-btn:hover { background: #eee; }
-
     .filter-btn.active {
       background: var(--color-primary);
       border-color: var(--color-primary);
@@ -423,7 +357,6 @@
       align-items: center;
       margin-top: 8px;
     }
-
     .filters-row label { font-size: 12px; color: #555; }
 
     .filters select,
@@ -436,18 +369,35 @@
       max-width: 220px;
     }
 
+    /* ===== Grid placeholder ===== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      min-height: 80px;
+    }
+    .empty-products {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      color: #555;
+      font-size: 14px;
+    }
+
+    /* ===== Cart ===== */
     .cart-panel {
       background: #fff;
       border-radius: 14px;
       padding: 16px 18px 18px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-      position: static;      /* ✅ abajo del último producto */
+      position: static;
       top: auto;
       font-size: 14px;
       max-width: 100%;
       width: 100%;
       text-align: left;
-      margin-top: 18px;      /* ✅ separación con el grid */
+      margin-top: 18px;
     }
 
     .cart-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
@@ -469,6 +419,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 4px;
+      gap: 10px;
     }
 
     .cart-item-name { font-weight: 600; }
@@ -485,7 +436,6 @@
       font-size: 12px;
       background: #eee;
     }
-
     .qty-btn:hover { background: #ddd; }
 
     .remove-btn {
@@ -493,11 +443,9 @@
       color: #900;
       margin-left: auto;
     }
-
     .remove-btn:hover { background: #f1b0b7; }
 
     .cart-item-qty { min-width: 18px; text-align: center; font-weight: 600; }
-
     .cart-empty { color: #777; font-size: 13px; text-align: center; padding: 10px 0; }
 
     .cart-total {
@@ -544,7 +492,6 @@
       cursor: pointer;
       margin-top: 4px;
     }
-
     .btn-cart:hover { background: var(--color-primary-dark); }
 
     .btn-mp { background: #009ee3; margin-top: 6px; }
@@ -633,11 +580,12 @@
 
       .nav-item{ width: 100%; }
 
+      /* evita hover en mobile */
       .nav-item:hover .dropdown{
         opacity: 0;
         pointer-events: none;
-        transform: translateY(8px
-)      }
+        transform: translateY(8px);
+      }
 
       .dropdown{
         position: static !important;
@@ -679,7 +627,6 @@
       .section-title{ font-size: 22px; }
       .section-subtitle{ margin-bottom: 18px; }
 
-      /* filtros y selects full en móvil */
       .filters select, .filters input[type="text"]{ max-width: none; }
     }
 
@@ -773,23 +720,21 @@
       <p class="section-subtitle" id="product-count-text"></p>
     </div>
 
-    <!-- ✅ Filtros arriba, productos, carrito abajo -->
     <div class="catalog-layout">
       <div class="catalog-main">
 
-        <!-- FILTROS -->
         <div class="filters">
           <h3>Filtrar productos</h3>
 
           <div class="filter-buttons">
-            <button class="filter-btn active" data-category="all">Todos</button>
-            <button class="filter-btn" data-category="calzado">Calzado</button>
-            <button class="filter-btn" data-category="zapatos">Zapatos</button>
-            <button class="filter-btn" data-category="borcegos">Borcegos</button>
-            <button class="filter-btn" data-category="botines">Botines</button>
-            <button class="filter-btn" data-category="correajes">Correajes</button>
-            <button class="filter-btn" data-category="accesorios">Accesorios</button>
-            <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
+            <button class="filter-btn active" data-category="all" type="button">Todos</button>
+            <button class="filter-btn" data-category="calzado" type="button">Calzado</button>
+            <button class="filter-btn" data-category="zapatos" type="button">Zapatos</button>
+            <button class="filter-btn" data-category="borcegos" type="button">Borcegos</button>
+            <button class="filter-btn" data-category="botines" type="button">Botines</button>
+            <button class="filter-btn" data-category="correajes" type="button">Correajes</button>
+            <button class="filter-btn" data-category="accesorios" type="button">Accesorios</button>
+            <button class="filter-btn" data-category="indumentaria" type="button">Indumentaria</button>
           </div>
 
           <div class="filters-row">
@@ -812,18 +757,504 @@
           </div>
         </div>
 
-        <!-- PRODUCTOS -->
-        <div class="product-grid">
+<div class="product-grid" id="product-grid">
 
-          <!-- ⬇️ Pegá acá TODOS tus product-card (no los dejo incompletos para no romper el HTML) -->
-          <!-- Ejemplo: -->
-          <!--
-          <div class="product-card" data-category="indumentaria" ...>...</div>
-          -->
+  <div class="product-card" data-category="indumentaria" data-price="20000" data-size-options="XS,S,M,L" data-article="ART-CH-REF">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/chaleco-reflectivo.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Chaleco reflectivo tipo poncho</div>
+      <div class="product-desc">Chaleco reflectivo tipo poncho. Talles: XS al L.</div>
+      <div class="product-footer">
+        <span class="product-price">$20.000</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
 
-        </div>
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="2XS,XS,S,M,L,XL,2XL" data-article="ART-CHAQ-AM">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/chaquetilla-americana.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Chaquetilla americana</div>
+      <div class="product-desc">Colores: azul y negro. Talles: 2XS al 2XL.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
 
-        <!-- CARRITO -->
+  <div class="product-card" data-category="indumentaria" data-price="32900" data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL" data-article="ART-CHOM-PIQ">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/chomba-pique-bordada.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Chomba piqué bordada</div>
+      <div class="product-desc">Chomba piqué bordada azul marino. Talles: XS al 6XL.</div>
+      <div class="product-footer">
+        <span class="product-price">$32.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="correajes" data-price="0" data-article="ART-CIN-TAC" data-stock="Stock a confirmar según modelo."
+       data-model-options="Cinto interno|Cinto externo" data-model-prices="6900|10900"
+       data-model-images="productos/correajes/interno.png|productos/correajes/externo.png"
+       data-model-colors="Negro|Negro,Verde,Arena">
+    <div class="product-image product-image-contain" style="background-image:url('productos/correajes/cintos.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Correajes</div>
+      <div class="product-name">Cintos tácticos americanos</div>
+      <div class="product-desc">Elegí interno o externo, ambos regulables. Externo en colores verde, negro y arena e interno, solo negro.</div>
+      <div class="product-footer">
+        <span class="product-price">Desde $6.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="2XS,XS,S,M,L,XL,2XL,3XL,4XL,5XL" data-article="ART-GARIB">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/garibaldina.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Garibaldina</div>
+      <div class="product-desc">Garibaldina con abrigo desmontable. Colores: azul y negro. Talles: 2XS al 5XL.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="18900" data-size-options="Bordado,Liso" data-article="ART-KEPI" data-stock="Stock a confirmar según modelo y cantidad.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/kepi-bordados-y-lisos.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Kepis bordados y lisos</div>
+      <div class="product-desc">Colores: azul y negro. Talle regulable.</div>
+      <div class="product-footer">
+        <span class="product-price">$18.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-MOCH-45" data-stock="Stock a confirmar según cantidad.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/mochila-tactica-45-litros.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Mochila táctica 45 litros</div>
+      <div class="product-desc">Mochila táctica de 45 litros, con múltiples bolsillos y sistema MOLLE. Ideal para uso intensivo y servicios.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="correajes" data-price="0" data-size-options="Único" data-article="ART-MUS-POL" data-stock="Stock a confirmar según cantidad.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/correajes/muslera-pistolera-polimero.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Correajes</div>
+      <div class="product-name">Muslera pistolera de polímero</div>
+      <div class="product-desc">Muslera pistolera de polímero, ajustable y apta para servicio. Compatible con cinturón táctico.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="Único" data-article="ART-CHA-MOL" data-stock="Stock a confirmar.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/chaleco-molle.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Chaleco MOLLE</div>
+      <div class="product-desc">Cordura importada 600x600 con doble velcro y elástico. Velcro frente/espalda y forro antitranspirante.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68" data-article="ART-PANT-RIP">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/pantalon-ripstop.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Pantalón ripstop</div>
+      <div class="product-desc">Tela antidesgarro. Colores: azul y negro. Talles: 34 al 68. Precio diferente para talles especiales.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="12900" data-article="ART-PORT-CRED" data-stock="Stock a confirmar.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/portacredenciales.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Portacredencial</div>
+      <div class="product-desc">Portacredencial colgante cuero y tipo libro cuero. Sin chapa.</div>
+      <div class="product-footer">
+        <span class="product-price">$12.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-size-options="Único" data-article="ART-PORT-OBJ" data-stock="Stock a confirmar según modelo y cantidad.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/portaobjetos-cinturon.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Porta objetos para cinturón</div>
+      <div class="product-desc">Porta objetos para cinturón táctico (elementos varios).</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="14900" data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL" data-article="ART-REM-MC">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/remera-estampada.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Remera m/corta con estampa</div>
+      <div class="product-desc">Algodón peinado. Colores: azul y negro. Talles: XS al 6XL.</div>
+      <div class="product-footer">
+        <span class="product-price">$14.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-TABL-PP" data-stock="Stock a confirmar según cantidad.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/tablilla-portapapeles.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Tablilla portapapeles</div>
+      <div class="product-desc">Tablilla rígida para uso en servicio.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL" data-article="ART-TRIC">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/tricota.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Tricota</div>
+      <div class="product-desc">Tricota 1/2 cierre forrada. Talles: XS al 6XL.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="borcegos" data-price="49900" data-size-options="36,37,38,39,40,41,42,43,44,45,46,47" data-article="ART-BOR-CLA">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/clasico.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Borcegos</div>
+      <div class="product-name">Borcego clásico</div>
+      <div class="product-desc">Calzado en cuero box (1,82 mm) y cordura con EVA. Base de PU sin costura, resistente al agua, con forrería interna absorbente y plantilla termoformada de 4,5 mm. Con puntera de acero. Talles del 36 al 47.</div>
+      <div class="product-footer">
+        <span class="product-price">$49.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="zapatos" data-price="0" data-size-options="36,37,38,39,40,41,42,43,44,45,46" data-article="ART-ZAP-PREM">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/zapato-premium.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Zapatos</div>
+      <div class="product-name">Zapato premium</div>
+      <div class="product-desc">Base PU, sistema que no necesita costura. Cuero flor. Cocido y pegado p/ cuero.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="borcegos" data-price="59900" data-size-options="36,37,38,39,40,41,42,43,44,45,46,47" data-article="ART-BOR-ELITE">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/elite-premium.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Borcegos</div>
+      <div class="product-name">Borcego Elite premium</div>
+      <div class="product-desc">Calzado en cuero flor (1,8 mm) y cordura con EVA, con cierre lateral curvo de caña alta. Base de PU sin costura, resistente al agua, forrería interior absorbente y plantilla termoformada de 4,5 mm. Talles del 36 al 47.</div>
+      <div class="product-footer">
+        <span class="product-price">$59.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="borcegos" data-price="61900" data-size-options="36,37,38,39,40,41,42,43,44,45,46,47" data-article="ART-BOR-HEROS">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/heros.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Borcegos</div>
+      <div class="product-name">Borcego Heros</div>
+      <div class="product-desc">Calzado en cuero flor (1,82 mm) y cordura con EVA, con cierre recto. Base de PU sin costura, resistente al agua, forrería interior absorbente y plantilla termoformada de 4,5 mm. Talles del 36 al 47.</div>
+      <div class="product-footer">
+        <span class="product-price">$61.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="borcegos" data-price="55900" data-size-options="36,37,38,39,40,41,42,43,44,45,46,47" data-article="ART-BOR-CRONOS">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/cronos.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Borcegos</div>
+      <div class="product-name">Borcego Cronos</div>
+      <div class="product-desc">Calzado en cuero flor (1,82 mm) y cordura con EVA, con cierre recto. Base de PU sin costura, resistente al agua, forrería interior absorbente y plantilla termoformada de 4,5 mm. Talles del 36 al 47.</div>
+      <div class="product-footer">
+        <span class="product-price">$55.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="borcegos" data-price="69000" data-size-options="36,37,38,39,40,41,42,43,44,45,46" data-article="ART-BOR-APOLO">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/apolo.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Borcegos</div>
+      <div class="product-name">Borcego Apolo</div>
+      <div class="product-desc">Calzado de cuero vacuno flor (1,8–2 mm) con base de PU pegada y cosida. Cuenta con forrería doble, fuelle para mayor flexibilidad, ojalillos resistentes y puntera termoformada con talonera reforzada. Incluye cordones con alma (21 hilos) de hasta 180 cm.</div>
+      <div class="product-footer">
+        <span class="product-price">$69.000</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="borcegos" data-price="35000" data-size-options="36,37,38,39,40,41,42,43,44,45,46" data-article="ART-BOR-COSTS">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/costurado.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Borcegos</div>
+      <div class="product-name">Borcego Costurado</div>
+      <div class="product-desc">Calzado con cordura antidesgarro y cuero ecológico con EVA. Puntera y talonera reforzadas, suela de expanso antideslizante con traba para escalera, ojalillos de ala ancha y cordones reforzados. Resistente al agua.</div>
+      <div class="product-footer">
+        <span class="product-price">$35.000</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="botines" data-price="24900" data-size-options="36,37,38,39,40,41,42,43,44,45,46" data-article="ART-BOT-PVC">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/botin-suela-pvc.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Botines</div>
+      <div class="product-name">Botín suela PVC</div>
+      <div class="product-desc">Cuero descarne pegado. Punta acero.</div>
+      <div class="product-footer">
+        <span class="product-price">$24.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="botines" data-price="0" data-size-options="36,37,38,39,40,41,42,43,44,45,46" data-article="ART-BOT-PREM">
+    <div class="product-image product-image-contain" style="background-image:url('productos/calzado/botin-premium.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Botines</div>
+      <div class="product-name">Botín premium</div>
+      <div class="product-desc">Base de PU sin necesidad de costura, con cuero flor, cocido y pegado para mayor resistencia.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-ACC-POL"
+       data-stock="Todos los modelos con botón lateral. Stock a confirmar según modelo."
+       data-model-options="Portacargador|Portaesposa|Pistolera Bersa PRO|Pistolera Glock|Pistolera Beretta|Pistolera TPR 9"
+       data-model-images="productos/accesorios/portacargador.png|productos/accesorios/portaesposas.png|productos/accesorios/pistolera-pro.png|productos/accesorios/pistolera-glock-houston.png|productos/accesorios/pistolera-beretta-houston.png|productos/accesorios/pistolera-tpr.png">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/accesorios-polimero.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Accesorios de polímero</div>
+      <div class="product-desc">Portacargador, portaesposa y pistoleras de polímero para distintas marcas. Elegí el modelo en el detalle.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-CRED"
+       data-stock="Venta sujeta a identificación. Consultar."
+       data-model-options="Chapas (foto 1)|Chapas (foto 2)"
+       data-model-prices="0|0"
+       data-model-images="productos/accesorios/chapas-1.png|productos/accesorios/chapas-2.png">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/chapas-1.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Chapas e insignias metalicas</div>
+      <div class="product-desc">Consultar modelo según provincia o fuerza. Venta sujeta a identificación.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="S,M,L,XL,2XL,3XL" data-article="ART-CAMP-SOFT"
+       data-stock="Stock a confirmar según color y talle."
+       data-model-options="Arena|Azul|Negra"
+       data-model-images="productos/Indumentaria/campera-softshell-arena.png|productos/Indumentaria/campera-softshell-azul.png|productos/Indumentaria/campera-softshell-negra.png"
+       data-gallery-arena="productos/Indumentaria/campera-softshell-arena.png|productos/Indumentaria/campera-softshell-arena-atras.png">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/campera-softshell-arena.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Campera Softshell</div>
+      <div class="product-desc">Campera softshell impermeable y térmica. Forrada con polar y contiene capucha desmonstable. Talles: S al 3Xl Colores: arena, azul y negra. (En arena se puede ver frente y espalda).</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="44900" data-size-options="S,M,L,XL,2XL" data-article="ART-CHA-PORTA" data-stock="Stock a confirmar según talle y configuración.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/chaleco-portaplaca-portaaccesorios.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Chaleco porta placa / porta accesorios</div>
+      <div class="product-desc">Chaleco porta placa con sistema MOLLE para accesorios. Configuración y compatibilidad a coordinar.</div>
+      <div class="product-footer">
+        <span class="product-price">$44.900</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="XS,S,M,L" data-article="ART-BAJO-CHAL" data-stock="Stock a confirmar según talle.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/bajo-chaleco-mangas-ripstop.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Bajo chaleco con mangas</div>
+      <div class="product-desc">Bajo chaleco con mangas cortas confeccionado en ripstop. Ideal para uso táctico y servicio.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="correajes" data-price="0" data-article="ART-MOR-MUS" data-stock="Stock a confirmar según cantidad."
+       data-gallery-default="productos/correajes/morral-muslera.png|productos/correajes/morral-muslera-atras.png">
+    <div class="product-image product-image-contain" style="background-image:url('productos/correajes/morral-muslera.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Correajes</div>
+      <div class="product-name">Morral muslera táctico</div>
+      <div class="product-desc">Morral muslera con sujeción a cinturón y pierna. Vista frontal y trasera disponibles.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-PORT-BOTI" data-stock="Stock a confirmar.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/portabotiquin.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Portabotiquín</div>
+      <div class="product-desc">Portabotiquín para transporte seguro de insumos de primeros auxilios. Ideal para uso táctico y vehicular.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-PORT-CIN" data-stock="Stock a confirmar según modelo.">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/portaobjetos-cinto.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Porta objetos para cinto</div>
+      <div class="product-desc">Porta objetos para cinto táctico. Compatible con distintos sistemas de portación.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-GUA-CON" data-stock="Stock a confirmar según color y talle."
+       data-model-options="Negro|Arena"
+       data-model-images="productos/accesorios/guantes-dedos-negro.png|productos/accesorios/guantes-dedos-arena.png">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/guantes-condedos.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Guantes tácticos con dedos</div>
+      <div class="product-desc">Guantes tácticos con dedos completos. Disponibles en color negro y arena.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-GUA-SIN" data-stock="Stock a confirmar según color y talle."
+       data-model-options="Negro|Arena|Verde"
+       data-model-images="productos/accesorios/guantes-sindedos-negro.png|productos/accesorios/guantes-sindedos-arena.png|productos/accesorios/guantes-sindedos-verde.png">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/guantes-sindedos-todos.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Guantes tácticos sin dedos</div>
+      <div class="product-desc">Guantes tácticos sin dedos. Colores: negro, arena y verde.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="accesorios" data-price="0" data-article="ART-ACC-MOLLE" data-stock="Stock a confirmar según modelo y color."
+       data-color-options="Arena|Negro"
+       data-color-models-arena="Portacargador|Portahandy|Porta objetos / celular"
+       data-color-prices-arena="Consultar"
+       data-color-images-arena="productos/accesorios/portacargador-molle-arena.png|productos/accesorios/portahandy-molle-arena.png|productos/accesorios/portaobjetos-celular-molle-arena.png"
+       data-color-models-negro="Portaesposa MOLLE|Portacargador doble MOLLE|Pistolera universal MOLLE"
+       data-color-prices-negro="Consultar"
+       data-color-images-negro="productos/accesorios/portaesposa-molle.png|productos/accesorios/portacargador-doble-molle.png|productos/accesorios/pistolera-universal-molle.png">
+    <div class="product-image product-image-contain" style="background-image:url('productos/accesorios/accesorios-chaleco-molle-arena.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Accesorios</div>
+      <div class="product-name">Accesorios para chaleco MOLLE</div>
+      <div class="product-desc">Elegí primero el color (arena o negro) y luego el accesorio. El precio cambia según el modelo.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="indumentaria" data-price="0" data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60" data-article="ART-CAM-ML">
+    <div class="product-image product-image-contain" style="background-image:url('productos/Indumentaria/camisa-manga-larga.png');"></div>
+    <div class="product-body">
+      <div class="product-tag">Indumentaria</div>
+      <div class="product-name">Camisa manga larga</div>
+      <div class="product-desc">Camisa manga larga azul en ripstop, negra en batista. Talles: 34 al 60.</div>
+      <div class="product-footer">
+        <span class="product-price">Consultar</span>
+        <button class="btn-small" type="button">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
         <aside class="cart-panel">
           <div class="cart-title">Carrito de compras (<span id="cart-count">0</span>)</div>
 
@@ -1035,51 +1466,35 @@ document.getElementById('cart-items').addEventListener('click', e => {
   renderCart();
 });
 
-function setupProductCardClicks() {
-  document.querySelectorAll('.product-card').forEach(card => {
-    const btn = card.querySelector('.btn-small');
-    btn?.addEventListener('click', e => {
-      e.stopPropagation();
-      addToCart(
-        card.querySelector('.product-name').textContent.trim(),
-        Number(card.dataset.price || 0)
-      );
-    });
+/* ===== Acciones checkout (básico, editable) ===== */
+function finalizarCompraWhatsApp(){
+  const nombre = (document.getElementById('checkout-nombre').value || '').trim();
+  const tel = (document.getElementById('checkout-telefono').value || '').trim();
+  const email = (document.getElementById('checkout-email').value || '').trim();
+
+  let msg = `Hola Segudab! Quiero hacer este pedido:%0A`;
+  if (!cart.length) msg += `- (Carrito vacío)%0A`;
+  cart.forEach(i => {
+    msg += `- ${i.name} (${i.size}) x${i.qty} — $${formatPrice(i.price*i.qty)}%0A`;
   });
+
+  msg += `%0A`;
+  msg += `Datos:%0A`;
+  msg += `Nombre: ${nombre || '—'}%0A`;
+  msg += `Teléfono: ${tel || '—'}%0A`;
+  msg += `Email: ${email || '—'}%0A`;
+
+  const url = `https://wa.me/5491137286846?text=${msg}`;
+  window.open(url, '_blank', 'noopener');
 }
 
-function applyCategoryFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const cat = (params.get('cat') || '').toLowerCase();
-  if (!cat) return;
-
-  const map = {
-    calzado: ['borcegos', 'zapatos', 'botines'],
-    correajes: ['correajes'],
-    accesorios: ['accesorios'],
-    indumentaria: ['indumentaria']
-  };
-
-  const allowed = map[cat] || [cat];
-
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  const btnToActivate = document.querySelector(`.filter-btn[data-category="${cat}"]`);
-  if (btnToActivate) btnToActivate.classList.add('active');
-
-  document.querySelectorAll('.product-card').forEach(card => {
-    const c = (card.dataset.category || '').toLowerCase();
-    card.style.display = allowed.includes(c) ? '' : 'none';
-  });
-
-  const sec = document.querySelector('.section');
-  if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function pagarConMercadoPago(){
+  window.open(MP_LINK, '_blank', 'noopener');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   loadCart();
   renderCart();
-  setupProductCardClicks();
-  applyCategoryFromUrl();
 });
 </script>
 
