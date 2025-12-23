@@ -641,11 +641,13 @@
         flex-direction: column;
         padding: 0;
       }
-      .sidebar { order: 1; }
+      .sidebar { display: contents; }
+      .filters { order: 1; }
       .product-grid { order: 2; }
-      .cart-panel { position: static; max-width: none; top:auto; }
-      .sidebar { max-width: 520px; width: 100%; margin: 0 auto; }
-    }
+      .cart-panel { order: 3; position: static; max-width: none; top:auto; }
+      .filters,
+      .cart-panel { max-width: 520px; width: 100%; margin: 0 auto; }
+      }
 
     @media (max-width: 520px){
       .logo-text span{ display:none; }
@@ -682,7 +684,7 @@
         <a href="index.html" class="nav-link">Inicio</a>
 
         <div class="nav-item" id="nav-products">
-         <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
+        <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
             Productos <span class="caret">▼</span>
           </a>
 
@@ -1637,12 +1639,12 @@
       productsItem.classList.toggle('open', isExpanded);
       productsLink.setAttribute('aria-expanded', String(isExpanded));
     }
-    function closeMenu(){
+   function closeMenu(){
       header.classList.remove('nav-open');
       toggle.textContent = '☰';
       toggle.setAttribute('aria-expanded','false');
       overlay.setAttribute('aria-hidden','true');
-       setProductsExpanded(false);
+      setProductsExpanded(false);
     }
 
     function openMenu(){
@@ -1671,7 +1673,7 @@
 
       if (isMobile && a === productsLink) {
         e.preventDefault();
-         setProductsExpanded(true);
+         setProductsExpanded(!productsItem.classList.contains('open'));
         return;
       }
 
