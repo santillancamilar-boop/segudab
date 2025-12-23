@@ -400,40 +400,20 @@
     }
 
 
-    @media (max-width: 980px){
+    @media (max-width: 980px) {
+  header{ padding: 10px 14px; }
 
-      .top-bar{
-        padding:6px 10px !important;
-        font-size:12px !important;
-        justify-content:space-between !important;
-        gap:10px !important;
-        flex-wrap:nowrap !important;
-        text-align:left !important;
-      }
-      .top-bar span{
-        white-space:nowrap !important;
-        overflow:hidden !important;
-        text-overflow:ellipsis !important;
-      }
-      .top-bar span:first-child{ flex:0 0 auto !important; }
-      .top-bar span:last-child{ flex:1 1 auto !important; text-align:right !important; }
+  .top-bar{
+    gap: 8px 14px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .top-bar span{ white-space: normal; }
 
-      header{
-        padding:10px 12px !important;
-      }
+  .logo-img{ width:40px; height:40px; }
+  .logo-text strong{ font-size:16px; }
 
-      .nav-inner{
-        max-width: none !important;
-        width: 100% !important;
-        background: transparent !important;
-        border-radius: 0 !important;
-        padding: 0 !important;
-
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        gap: 10px !important;
-      }
+  .nav-inner{ max-width:none; width:100%; }
 
       .logo{
         display:flex !important;
