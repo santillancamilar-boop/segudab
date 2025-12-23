@@ -1640,11 +1640,11 @@
     const productsItem = document.getElementById('nav-products');
     const productsLink = document.getElementById('products-link');
     
- function setProductsExpanded(isExpanded) {
+    function setProductsExpanded(isExpanded) {
       productsItem.classList.toggle('open', isExpanded);
       productsLink.setAttribute('aria-expanded', String(isExpanded));
     }
-   function closeMenu(){
+    function closeMenu(){
       header.classList.remove('nav-open');
       toggle.textContent = '☰';
       toggle.setAttribute('aria-expanded','false');
@@ -1658,7 +1658,9 @@
       toggle.setAttribute('aria-expanded','true');
       overlay.setAttribute('aria-hidden','false');
 
-  productsLink.addEventListener('click', (e) => {
+   productsLink.addEventListener('click', (e) => {
+      const isMobile = window.matchMedia('(max-width: 980px)').matches;
+      if (!isMobile) return;
       e.preventDefault();
       e.stopPropagation();
       setProductsExpanded(!productsItem.classList.contains('open'));
@@ -1687,12 +1689,11 @@
 
       if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
     });
-  document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
       if (!productsItem.classList.contains('open')) return;
       if (productsItem.contains(e.target)) return;
       setProductsExpanded(false);
     });
-
 
     const CART_KEY = 'segudab_cart';
     let cart = [];
