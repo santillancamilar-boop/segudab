@@ -1652,9 +1652,7 @@
       toggle.textContent = '✕';
       toggle.setAttribute('aria-expanded','true');
       overlay.setAttribute('aria-hidden','false');
-       if (window.matchMedia('(max-width: 980px)').matches) {
-        setProductsExpanded(true);
-      }
+
     }
 
     toggle.addEventListener('click', () => {
@@ -1673,7 +1671,7 @@
 
       if (isMobile && a === productsLink) {
         e.preventDefault();
-         setProductsExpanded(!productsItem.classList.contains('false'));
+         setProductsExpanded(!productsItem.classList.contains('true'));
         return;
       }
 
