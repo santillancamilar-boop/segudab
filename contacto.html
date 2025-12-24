@@ -86,7 +86,13 @@
       letter-spacing:1px;
     }
 
-    .logo-text span{ display:none; }
+      .logo-text span{
+      opacity: .9;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 360px;
+    }
 
     nav{
       display:flex;
@@ -569,6 +575,7 @@
         <div class="logo-img"></div>
         <div class="logo-text">
           <strong>SEGUDAB</strong>
+           <span>Equipamiento táctico y policial</span>
         </div>
       </a>
 
