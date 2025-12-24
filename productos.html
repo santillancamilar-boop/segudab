@@ -719,10 +719,14 @@
 
 @media (max-width: 980px){
 
-  /* HEADER */
+  /* =========================
+     HEADER
+     ========================= */
   header{ padding: 10px 14px; }
 
-  /* TOP BAR – UNA SOLA LÍNEA */
+  /* =========================
+     TOP BAR – UNA SOLA LÍNEA
+     ========================= */
   .top-bar{
     display:flex !important;
     justify-content:center !important;
@@ -737,12 +741,16 @@
   }
   .top-bar span{ white-space: nowrap !important; }
 
-  /* LOGO */
+  /* =========================
+     LOGO
+     ========================= */
   .logo-img{ width: 40px; height: 40px; }
   .logo-text strong{ font-size: 16px; }
   .logo-text span{ font-size: 11px; max-width: 220px; }
 
-  /* HAMBURGUESA SIN CUADRADO */
+  /* =========================
+     HAMBURGUESA (SIN CUADRADO)
+     ========================= */
   .mobile-toggle{
     display: inline-flex;
     align-items: center;
@@ -767,7 +775,9 @@
 
   .mobile-toggle svg{ display: none !important; }
 
-  /* NAV */
+  /* =========================
+     NAV MOBILE
+     ========================= */
   nav{
     position: fixed;
     top: 0;
@@ -788,27 +798,45 @@
   header.nav-open nav{ right: 0; }
   header.nav-open .nav-overlay{ display: block; }
 
-  /* Items del menú (estilo lista, como tu 2da foto) */
+  /* =========================
+     LINKS DEL MENÚ (TODOS IGUALES)
+     ========================= */
+  nav, nav *{
+    text-align: left !important;
+  }
+
   nav a{
     display:block !important;
     width:100% !important;
     margin:0 !important;
     padding: 14px 12px !important;
-    text-align:left !important;
+
     color:#fff !important;
+    background: transparent !important;
+    text-decoration: none !important;
 
+    border-left: 0 !important;
     border-bottom: 1px solid rgba(255,255,255,0.10) !important;
-    border-left: 0 !important; /* ✅ sin barra roja */
+
+    box-shadow: none !important;
+    outline: none !important;
   }
 
-  .nav-cta{
-    margin-top: 12px;
-    width: 100%;
-    text-align: center;
-    padding: 12px 16px;
+  /* Quita estados activos/hover raros */
+  nav a:hover,
+  nav a:active,
+  nav a:focus,
+  nav a:focus-visible{
+    background: transparent !important;
+    color:#fff !important;
+    border-left: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+    box-shadow: none !important;
   }
 
-  /* DROPDOWN */
+  /* =========================
+     PRODUCTOS + DROPDOWN
+     ========================= */
   .dropdown{
     position: static;
     padding: 0 !important;
@@ -820,19 +848,34 @@
     display: block !important;
   }
 
-  /* links del dropdown igual a lista */
   .dropdown a{
-    display:block !important;
-    width:100% !important;
-    margin:0 !important;
-    padding: 14px 12px !important;
-    text-align:left !important;
+    padding: 14px 12px !important;   /* sin sangría */
     color:#fff !important;
-    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+    background: transparent !important;
     border-left: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+    text-decoration: none !important;
   }
 
-  /* HERO */
+  /* ELIMINA líneas / subrayados creados con pseudo-elementos */
+  nav a::before,
+  nav a::after{
+    content: none !important;
+    display: none !important;
+  }
+
+  /* =========================
+     CTA CONTACTAR (SE MANTIENE)
+     ========================= */
+  .nav-cta{
+    margin-top: 16px;
+    padding: 14px 16px !important;
+    border-bottom: none !important;
+  }
+
+  /* =========================
+     HERO
+     ========================= */
   .hero{ padding: 46px 14px 42px; }
   .hero-inner{ grid-template-columns: 1fr; gap: 16px; }
   .hero-title{ font-size: 30px; line-height: 1.05; }
@@ -840,12 +883,16 @@
   .hero-text{ font-size: 14px; max-width: 100%; }
   .btn{ width: 100%; justify-content: center; }
 
-  /* SECTION */
+  /* =========================
+     SECTIONS
+     ========================= */
   .section{ padding: 36px 14px; }
   .section-title{ font-size: 22px; }
   .section-subtitle{ margin-bottom: 12px; }
 
-  /* CATÁLOGO: FILTROS ARRIBA / PRODUCTOS / CARRITO ABAJO */
+  /* =========================
+     CATÁLOGO – ORDEN MOBILE
+     ========================= */
   .catalog-layout{
     display: flex !important;
     flex-direction: column !important;
@@ -876,12 +923,15 @@
     top: auto !important;
   }
 
-  /* DETALLE PRODUCTO */
+  /* =========================
+     DETALLE PRODUCTO
+     ========================= */
   .product-detail{ grid-template-columns: 1fr; }
   .detail-image{ min-height: 200px; }
   .detail-arrow-left{ left: 4px; }
   .detail-arrow-right{ right: 4px; }
 }
+
 
 
 @media (max-width: 520px){
