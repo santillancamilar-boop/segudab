@@ -1005,7 +1005,11 @@
       </a>
 
       <!-- ✅ Botón mobile -->
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+      </button>
 
       <!-- ✅ Overlay -->
       <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
@@ -1014,7 +1018,7 @@
         <a href="index.html" class="nav-link">Inicio</a>
 
         <div class="nav-item" id="nav-products">
-          <a href="productos.html" class="nav-link" id="products-link">
+        <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
             Productos <span class="caret">▼</span>
           </a>
 
@@ -2864,45 +2868,77 @@
     });
   </script>
 <script>
+  
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('mobile-toggle');
+  const overlay = document.getElementById('nav-overlay');
+ const productsItem = document.getElementById('nav-products');
+  const productsLink = document.getElementById('products-link');
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const productosLink = document.querySelector('.nav-item > a.nav-link');
-    const navItem = productosLink?.closest('.nav-item');
+     function isMobile() {
+    return window.matchMedia('(max-width: 980px)').matches;
+  }
 
-    if (!productosLink || !navItem) return;
+ function setProductsExpanded(expanded) {
+    productsItem.classList.toggle('open', expanded);
+    productsLink.setAttribute('aria-expanded', String(expanded));
+  }
 
-    productosLink.addEventListener('click', (e) => {
+    function openMenu() {
+    header.classList.add('nav-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
 
-      if (window.matchMedia('(max-width: 900px)').matches) {
-        e.preventDefault();
-        navItem.classList.toggle('open');
-      }
-    });
+  function closeMenu() {
+    header.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    setProductsExpanded(false);
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
 
 
-    document.addEventListener('click', (e) => {
-      if (!navItem.contains(e.target)) navItem.classList.remove('open');
+    toggle.addEventListener('click', () => {
+    header.classList.contains('nav-open') ? closeMenu() : openMenu();
     });
   });
-  // Abrir / cerrar menú mobile
-  const toggle = document.querySelector('.mobile-toggle');
-  const header = document.querySelector('header');
+ 
+  overlay.addEventListener('click', closeMenu);
 
-  toggle.addEventListener('click', () => {
-    header.classList.toggle('nav-open');
+  productsLink.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setProductsExpanded(!productsItem.classList.contains('open'));
   });
 
-  // Dropdown Productos (mobile)
-  document.querySelectorAll('.nav-item.has-dropdown > a')
-    .forEach(link => {
-      link.addEventListener('click', e => {
-        if (window.innerWidth <= 980) {
-          e.preventDefault();
-          link.parentElement.classList.toggle('open');
-        }
-      });
-    });
-    const params = new URLSearchParams(window.location.search);
+   document.getElementById('main-nav').addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link || !isMobile()) return;
+    if (link === productsLink) return;
+    closeMenu();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    if (!productsItem.classList.contains('open')) return;
+    if (productsItem.contains(e.target)) return;
+    setProductsExpanded(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (!isMobile()) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('nav-open')) closeMenu();
+  });
+
+  const params = new URLSearchParams(window.location.search);
   const categoria = params.get('categoria');
 
   if (categoria) {
