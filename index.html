@@ -16,7 +16,7 @@
       --max-width: 1200px;
     }
 
-    { box-sizing: border-box; }
+   *{ box-sizing: border-box; }
     html, body { margin:0; width:100%; overflow-x:hidden; }
     body {
       font-family: system-ui, sans-serif;
@@ -491,7 +491,9 @@
 
       .logo-img{ width:40px; height:40px; }
       .logo-text strong{ font-size:16px; }
-      .logo-text span{ font-size:11px; max-width: 220px; }
+     .logo-text span{
+  display: none !important;
+}
 
       .nav-inner{ max-width:none; width:100%; }
 
