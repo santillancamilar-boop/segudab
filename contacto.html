@@ -424,6 +424,12 @@
 
   .nav-inner{ max-width:none; width:100%; }
 
+.contact-layout{
+  grid-template-columns: 1fr;
+  max-width: 520px;
+  padding: 0 14px;
+}
+.map iframe{ height: 220px; }
 
   .mobile-toggle{
     display:inline-flex !important;
@@ -646,47 +652,46 @@
       <p class="section-subtitle">Completá el formulario o escribinos directamente por WhatsApp.</p>
     </div>
   
-
 <div class="contact-layout">
-  <div class="contact-box">
-    <h3>Datos de contacto</h3>
+ <div>
+    <div class="contact-box">
+      <h3>Datos de contacto</h3>
 
-    <div class="contact-item"><strong>Whatsapp:</strong> 11 3728-6846</div>
-    <div class="contact-item"><strong>Mail:</strong> segudab@hotmail.com</div>
-    <div class="contact-item">
-      <strong>Horarios:</strong> Lunes a viernes: 9 a 12.30 y 16 a 20 hs / Sábados: 9 a 13 hs
+      <div class="contact-item"><strong>Whatsapp:</strong> 11 3728-6846</div>
+      <div class="contact-item"><strong>Mail:</strong> segudab@hotmail.com</div>
+      <div class="contact-item">
+        <strong>Horarios:</strong> Lunes a viernes: 9 a 12.30 y 16 a 20 hs / Sábados: 9 a 13 hs
+      </div>
+      <div class="contact-item">
+        <strong>Dirección:</strong> Av. San Martín 1668, Caseros, Buenos Aires
+      </div>
     </div>
-    <div class="contact-item">
-      <strong>Dirección:</strong> Av. San Martín 1668, Caseros, Buenos Aires
+
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.447453815018!2d-58.57355682360992!3d-34.61539465881379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb86acba48b4b%3A0x1724f75c92c93bfb!2sAv.%20San%20Mart%C3%ADn%201668%2C%20B1678%20Caseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1731624797000!5m2!1ses-419!2sar"
+        width="100%"
+        height="250"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
+
+
+  <div class="contact-box">
+    <h3>Enviá tu consulta</h3>
+
+    <form id="contact-form">
+      <input id="nombre" type="text" placeholder="Nombre y apellido" required />
+      <input id="telefono" type="text" placeholder="Teléfono" required />
+      <input id="email" type="email" placeholder="Correo (opcional)" />
+      <textarea id="consulta" placeholder="Consulta (producto, cantidad, talles...)" rows="6" required></textarea>
+      <button type="submit">Enviar por WhatsApp</button>
+    </form>
+  </div>
 </div>
-
-
-        <div class="map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.447453815018!2d-58.57355682360992!3d-34.61539465881379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb86acba48b4b%3A0x1724f75c92c93bfb!2sAv.%20San%20Mart%C3%ADn%201668%2C%20B1678%20Caseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1731624797000!5m2!1ses-419!2sar"
-            width="100%"
-            height="250"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-
-      <div class="contact-box">
-        <h3>Enviá tu consulta</h3>
-
-        <form id="contact-form">
-          <input id="nombre" type="text" placeholder="Nombre y apellido" required />
-          <input id="telefono" type="text" placeholder="Teléfono" required />
-          <input id="email" type="email" placeholder="Correo (opcional)" />
-          <textarea id="consulta" placeholder="Consulta (producto, cantidad, talles...)" rows="6" required></textarea>
-          <button type="submit">Enviar por WhatsApp</button>
-        </form>
-      </div>
-    </div>
   </section>
 
   <footer>© 2025 Segudab — Todos los derechos reservados.</footer>
