@@ -294,7 +294,7 @@
       margin-bottom: 10px;
     }
 
-    /* --- CATÁLOGO & CARRITO --- */
+
     .catalog-layout {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -581,14 +581,17 @@
       position: relative;
     }
 
-    .detail-image {
-      border-radius: 14px;
-      background-size: cover;
-      background-position: center;
-      min-height: 260px;
-      cursor: zoom-in;
-      position: relative;
-    }
+ .detail-image{
+  border-radius: 14px;
+  min-height: 360px;            
+  background-size: contain;    
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  cursor: zoom-in;
+  position: relative;
+}
+
 
     .detail-image.detail-image-contain {
       background-size: contain;
