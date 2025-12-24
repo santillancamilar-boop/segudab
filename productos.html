@@ -2117,6 +2117,24 @@
     if (e.key === 'Escape') closeMenu();
   });
 
+document.addEventListener('keydown', (e) => {
+  const overlay = document.getElementById('product-detail-overlay');
+  if (!overlay || overlay.style.display !== 'flex') return;
+
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    showPrevProduct();
+  }
+
+  if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    showNextProduct();
+  }
+
+  if (e.key === 'Escape') {
+    closeProductDetail();
+  }
+});
 
 
   const CART_KEY = 'segudab_cart';
