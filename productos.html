@@ -847,11 +847,13 @@
   /* =========================
      DROPDOWN PRODUCTOS (FUNCIONA)
      ========================= */
-  .nav-item:hover .dropdown{
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(8px);
-  }
+ /* ✅ MOBILE: NO usar hover para controlar dropdown */
+.nav-item:hover .dropdown{
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
 
   .dropdown{
     position: static;
@@ -867,20 +869,19 @@
     display: none;
   }
 
-  /* 🔑 CLAVE: se abre al tocar */
   .nav-item.open .dropdown{
-    display: block;
-  }
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
 
-  .dropdown a{
-    padding: 12px 12px 12px 22px;
-    font-size: 13px;
-    border-bottom: 1px solid rgba(255,255,255,0.10);
-  }
+.dropdown a{
+  color: #fff !important;
+}
 
-  /* =========================
-     HERO
-     ========================= */
+
+
   .hero{
     padding: 46px 14px 42px;
   }
