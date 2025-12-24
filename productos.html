@@ -2904,6 +2904,15 @@
         }
       });
     });
+    const params = new URLSearchParams(window.location.search);
+  const categoria = params.get('categoria');
+
+  if (categoria) {
+    const boton = document.querySelector(
+      `[data-filter="${categoria}"]`
+    );
+    if (boton) boton.click();
+  }
 </script>
   
 </body>
