@@ -717,120 +717,271 @@
       color: #666;
     }
 
-    @media (max-width: 980px){
-      header{ padding: 10px 14px; }
+@media (max-width: 980px){
 
-      .logo-img{ width:40px; height:40px; }
-      .logo-text strong{ font-size:16px; }
-      .logo-text span{ font-size:11px; max-width: 220px; }
+  /* =========================
+     HEADER
+     ========================= */
+  header{ padding: 10px 14px; }
 
-      .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
+  /* =========================
+     TOP BAR – UNA SOLA LÍNEA
+     ========================= */
+  .top-bar{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    gap: 10px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .top-bar span{ white-space: nowrap !important; }
 
-      nav{
-        position: fixed;
-        top: 0;
-        right: -92vw;
-        width: 92vw;
-        max-width: 420px;
-        height: 100vh;
-        background: #000;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        padding: 14px 14px 22px;
-        border-left: 1px solid rgba(255,255,255,0.10);
-        z-index: 9999;
-        transition: right .18s ease;
-        overflow-y: auto;
-      }
+  /* =========================
+     LOGO
+     ========================= */
+  .logo-img{ width: 40px; height: 40px; }
+  .logo-text strong{ font-size: 16px; }
+  .logo-text span{ font-size: 11px; max-width: 220px; }
 
-      header.nav-open .nav-overlay{ display:block; }
-      header.nav-open nav{ right: 0; }
+  /* =========================
+     HAMBURGUESA (SIN CUADRADO)
+     ========================= */
+  .mobile-toggle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 6px !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+  }
 
-      nav a{
-        padding: 14px 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.10);
-        border-left: 3px solid transparent;
-      }
+  .mobile-toggle .bar{
+    display: block;
+    width: 26px !important;
+    height: 2px !important;
+    margin: 6px 0 !important;
+    background: #fff !important;
+    border-radius: 2px !important;
+  }
 
-      .nav-cta{
-        margin-top: 12px;
-        width:100%;
-        text-align:center;
-        padding: 12px 16px;
-      }
+  .mobile-toggle svg{ display: none !important; }
 
+  /* =========================
+     NAV MOBILE (PANEL)
+     ========================= */
+  nav{
+    position: fixed;
+    top: 0;
+    right: -92vw;
+    width: 92vw;
+    max-width: 420px;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 0 22px; /* <- sin padding lateral para que las líneas lleguen al borde */
+    border-left: 1px solid rgba(255,255,255,0.10);
+    z-index: 9999;
+    transition: right .18s ease;
+    overflow-y: auto;
+  }
 
-      .nav-item:hover .dropdown{
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(8px);
-      }
+  header.nav-open nav{ right: 0; }
+  header.nav-open .nav-overlay{ display: block; }
 
-      .dropdown{
-        position: static;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        box-shadow: none;
-        border-top: none;
-        padding: 0;
-        margin: 0;
-        display: none;
-      }
-      .nav-item.open .dropdown{ display:block; }
+  /* =========================
+     RESET LISTAS (CLAVE PARA QUE SE VEA COMO CAPTURA)
+     ========================= */
+  nav ul, nav li{
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-      .dropdown a{
-        padding: 12px 12px 12px 22px;
-        font-size: 13px;
-        border-bottom: 1px solid rgba(255,255,255,0.10);
-      }
-.nav-item.open .dropdown{
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+  /* Todo alineado a la izquierda */
+  nav, nav *{ text-align: left !important; }
+
+  /* =========================
+     LINKS DEL MENÚ (COMO EN LA CAPTURA)
+     ========================= */
+  nav a{
+    display:flex !important;
+    align-items:center !important;
+    justify-content: space-between !important;
+
+    width:100% !important;
+    margin:0 !important;
+    padding: 14px 14px !important;
+
+    color:#fff !important;
+    background: transparent !important;
+    text-decoration: none !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+
+    box-shadow: none !important;
+    outline: none !important;
+
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: .3px;
+  }
+
+  nav a:hover,
+  nav a:active,
+  nav a:focus,
+  nav a:focus-visible{
+    background: transparent !important;
+    color:#fff !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: none !important;
+  }
+
+  /* Elimina decoraciones raras con pseudo-elementos */
+  nav a::before,
+  nav a::after{
+    content: none !important;
+    display: none !important;
+  }
+
+  /* =========================
+     PRODUCTOS + FLECHITA ▾ (IGUAL A LA CAPTURA)
+     ========================= */
+  .nav-item.has-dropdown > a{
+    position: relative !important;
+  }
+  .nav-item.has-dropdown > a::after{
+    content: "▾" !important;
+    font-size: 12px !important;
+    opacity: .7 !important;
+    margin-left: 10px !important;
+  }
+
+  /* =========================
+     DROPDOWN (SIN SANGRÍA, IGUAL QUE LOS LINKS)
+     ========================= */
+  .dropdown{
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: none !important;
+    background: transparent !important;
+  }
+
+  .nav-item.open .dropdown{
+    display: block !important;
+  }
+
+  .dropdown a{
+    padding: 14px 14px !important; /* <- sin sangría */
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color:#fff !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    text-decoration: none !important;
+  }
+
+  /* =========================
+     CTA CONTACTAR (SI TENÉS)
+     ========================= */
+  .nav-cta{
+    margin-top: 16px;
+    padding: 14px 16px !important;
+    border-bottom: none !important;
+  }
+
+  /* =========================
+     HERO
+     ========================= */
+  .hero{ padding: 46px 14px 42px; }
+  .hero-inner{ grid-template-columns: 1fr; gap: 16px; }
+  .hero-title{ font-size: 30px; line-height: 1.05; }
+  .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
+  .hero-text{ font-size: 14px; max-width: 100%; }
+  .btn{ width: 100%; justify-content: center; }
+
+  /* =========================
+     SECTIONS
+     ========================= */
+  .section{ padding: 36px 14px; }
+  .section-title{ font-size: 22px; }
+  .section-subtitle{ margin-bottom: 12px; }
+
+  /* =========================
+     CATÁLOGO – ORDEN MOBILE
+     ========================= */
+  .catalog-layout{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 0;
+  }
+
+  .sidebar{
+    order: 1 !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+  }
+
+  .products-grid,
+  .catalog-grid,
+  .products,
+  .product-grid{
+    order: 2 !important;
+  }
+
+  .cart-panel{
+    order: 3 !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    top: auto !important;
+  }
+
+  /* =========================
+     DETALLE PRODUCTO
+     ========================= */
+  .product-detail{ grid-template-columns: 1fr; }
+  .detail-image{ min-height: 200px; }
+  .detail-arrow-left{ left: 4px; }
+  .detail-arrow-right{ right: 4px; }
 }
 
 
-.nav-item:focus-within .dropdown{
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+@media (max-width: 520px){
+
+  .logo-text span{
+    display: none;
+  }
+
+  .hero-title{
+    font-size: 28px;
+  }
+
+  .hero-text{
+    font-size: 13px;
+  }
+
+  .section-title{
+    font-size: 20px;
+  }
 }
-      .top-bar{
-        gap: 8px 14px;
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-      .top-bar span{ white-space: normal; }
 
-      .hero{ padding: 46px 14px 42px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 16px; }
-      .hero-title{ font-size: 30px; line-height: 1.05; }
-      .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
-      .hero-text{ font-size: 14px; max-width: 100%; }
-      .btn{ width: 100%; justify-content:center; }
-
-      .section{ padding: 36px 14px; }
-      .section-title{ font-size: 22px; }
-      .section-subtitle{ margin-bottom: 12px; }
-
-      .catalog-layout { grid-template-columns: 1fr; padding: 0; }
-      .cart-panel { position: static; max-width: none; top:auto; }
-      .sidebar { max-width: 520px; width: 100%; margin: 0 auto; }
-
-      .product-detail { grid-template-columns: 1fr; }
-      .detail-image { min-height: 200px; }
-      .detail-arrow-left { left: 4px; }
-      .detail-arrow-right { right: 4px; }
-    }
-
-    @media (max-width: 520px){
-      .logo-text span{ display:none; }
-      .hero-title{ font-size: 28px; }
-      .hero-text{ font-size: 13px; }
-      .section-title{ font-size: 20px; }
-    }
   </style>
 </head>
 
@@ -854,7 +1005,11 @@
       </a>
 
       <!-- ✅ Botón mobile -->
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+      </button>
 
       <!-- ✅ Overlay -->
       <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
@@ -862,4 +1017,1935 @@
       <nav id="main-nav" aria-label="Navegación principal">
         <a href="index.html" class="nav-link">Inicio</a>
 
-        <div class="nav-item" id="nav-products">
+        <div class="nav-item has-dropdown" id="nav-products">
+        <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
+            Productos <span class="caret">▼</span>
+          </a>
+
+          <div class="dropdown" id="products-dropdown">
+            <a href="productos.html?cat=calzado">Calzado</a>
+            <a href="productos.html?cat=correajes">Correajes</a>
+            <a href="productos.html?cat=accesorios">Accesorios</a>
+            <a href="productos.html?cat=indumentaria">Indumentaria</a>
+          </div>
+        </div>
+
+        <a href="porque-elegirnos.html" class="nav-link">¿Por qué elegirnos?</a>
+        <a href="contacto.html" class="nav-link nav-cta">Contactar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1 class="hero-title">Catálogo de productos</h1>
+        <p class="hero-subtitle">Botas, zapatos, correajes, accesorios e indumentaria</p>
+
+        <p class="hero-text">
+          Seleccioná los productos que necesitás y armá tu pedido. Luego podés enviarnos la consulta con el detalle
+          para coordinar stock, formas de pago y retiro o envío.
+        </p>
+
+        <div class="hero-buttons">
+          <a
+            href="https://wa.me/5491137286846?text=Hola-Segudab,-quisiera-consultar-por-compras-mayoristas"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener"
+          >
+            Consulta mayorista
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="notice-bar">Insignias policiales se venden únicamente a personal de fuerzas con identificación.</div>
+
+
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Catálogo completo</h2>
+      <p class="section-subtitle">
+        Catálogo orientativo. Los precios pueden variar según talle, modelo y cantidad. Consultá para presupuesto final.
+      </p>
+      <p class="section-subtitle" id="product-count-text"></p>
+    </div>
+
+    <div class="catalog-layout">
+
+      <div class="product-grid">
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="20000"
+             data-size-options="XS,S,M,L"
+             data-article="ART-CH-REF">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chaleco-reflectivo.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chaleco reflectivo tipo poncho</div>
+            <div class="product-desc">
+              Chaleco reflectivo tipo poncho.
+              Talles: XS al L.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$20.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="2XS,XS,S,M,L,XL,2XL"
+             data-article="ART-CHAQ-AM">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chaquetilla-americana.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chaquetilla americana</div>
+            <div class="product-desc">
+              Colores: azul y negro.
+              Talles: 2XS al 2XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="32900"
+             data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL"
+             data-article="ART-CHOM-PIQ">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chomba-pique-bordada.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chomba piqué bordada</div>
+            <div class="product-desc">
+              Chomba piqué bordada azul marino.
+              Talles: XS al 6XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$32.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+     
+        <div class="product-card"
+             data-category="correajes"
+             data-price="0"
+             data-article="ART-CIN-TAC"
+             data-stock="Stock a confirmar según modelo."
+             data-model-options="Cinto interno|Cinto externo"
+             data-model-prices="6900|10900"
+             data-model-images="productos/correajes/interno.png|productos/correajes/externo.png"
+             data-model-colors="Negro|Negro,Verde,Arena">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/correajes/cintos.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Correajes</div>
+            <div class="product-name">Cintos tácticos americanos</div>
+            <div class="product-desc">
+              Elegí interno o externo, ambos regulables. Externo en colores verde, negro y arena e interno, solo negro.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Desde $6.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="2XS,XS,S,M,L,XL,2XL,3XL,4XL,5XL"
+             data-article="ART-GARIB">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/garibaldina.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Garibaldina</div>
+            <div class="product-desc">
+              Garibaldina con abrigo desmontable. Colores: azul y negro.
+              Talles: 2XS al 5XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+    
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="18900"
+             data-size-options="Bordado,Liso"
+             data-article="ART-KEPI"
+             data-stock="Stock a confirmar según modelo y cantidad.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/kepi-bordados-y-lisos.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Kepis bordados y lisos</div>
+            <div class="product-desc">
+              Colores: azul y negro. Talle regulable.
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">$18.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-MOCH-45"
+             data-stock="Stock a confirmar según cantidad.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/mochila-tactica-45-litros.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Mochila táctica 45 litros</div>
+            <div class="product-desc">
+              Mochila táctica de 45 litros, con múltiples bolsillos y sistema MOLLE.
+              Ideal para uso intensivo y servicios.
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="correajes"
+             data-price="0"
+             data-size-options="Único"
+             data-article="ART-MUS-POL"
+             data-stock="Stock a confirmar según cantidad.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/correajes/muslera-pistolera-polimero.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Correajes</div>
+            <div class="product-name">Muslera pistolera de polímero</div>
+            <div class="product-desc">
+              Muslera pistolera de polímero, ajustable y apta para servicio.
+              Compatible con cinturón táctico.
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+  
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="Único"
+             data-article="ART-CHA-MOL"
+             data-stock="Stock a confirmar.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chaleco-molle.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chaleco MOLLE</div>
+            <div class="product-desc">
+              Cordura importada 600x600 con doble velcro y elástico.
+              Velcro frente/espalda y forro antitranspirante.
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68"
+             data-article="ART-PANT-RIP">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/pantalon-ripstop.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Pantalón ripstop</div>
+            <div class="product-desc">
+              Tela antidesgarro. Colores: azul y negro. Talles: 34 al 68. Precio diferente para talles especiales.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="12900"
+             data-article="ART-PORT-CRED"
+             data-stock="Stock a confirmar.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/portacredenciales.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Portacredencial</div>
+            <div class="product-desc">
+              Portacredencial colgante cuero y tipo libro cuero. Sin chapa.
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">$12.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-size-options="Único"
+             data-article="ART-PORT-OBJ"
+             data-stock="Stock a confirmar según modelo y cantidad.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/portaobjetos-cinturon.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Porta objetos para cinturón</div>
+            <div class="product-desc">
+              Porta objetos para cinturón táctico (elementos varios).
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+ 
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="14900"
+             data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL"
+             data-article="ART-REM-MC">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/remera-estampada.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Remera m/corta con estampa</div>
+            <div class="product-desc">
+              Algodón peinado. Colores: azul y negro. Talles: XS al 6XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$14.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+   
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-TABL-PP"
+             data-stock="Stock a confirmar según cantidad.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/tablilla-portapapeles.png');"></div>
+
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Tablilla portapapeles</div>
+            <div class="product-desc">
+              Tablilla rígida para uso en servicio.
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL"
+             data-article="ART-TRIC">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/tricota.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Tricota</div>
+            <div class="product-desc">
+              Tricota 1/2 cierre forrada. Talles: XS al 6XL.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+   
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="49900"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46,47"
+             data-article="ART-BOR-CLA">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/clasico.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego clásico</div>
+            <div class="product-desc">Calzado en cuero box (1,82 mm) y cordura con EVA. Base de PU sin costura, resistente al agua, con forrería interna absorbente y plantilla termoformada de 4,5 mm. Con puntera de acero. Talles del 36 al 47.</div>
+            <div class="product-footer">
+              <span class="product-price">$49.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+      
+        <div class="product-card"
+             data-category="zapatos"
+             data-price="0"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46"
+             data-article="ART-ZAP-PREM">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/zapato-premium.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Zapatos</div>
+            <div class="product-name">Zapato premium</div>
+            <div class="product-desc">Base PU, sistema que no necesita costura. Cuero flor. Cocido y pegado p/ cuero.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="59900"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46,47"
+             data-article="ART-BOR-ELITE">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/elite-premium.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego Elite premium</div>
+            <div class="product-desc">Calzado en cuero flor (1,8 mm) y cordura con EVA, con cierre lateral curvo de caña alta. Base de PU sin costura, resistente al agua, forrería interior absorbente y plantilla termoformada de 4,5 mm. Talles del 36 al 47.</div>
+            <div class="product-footer">
+              <span class="product-price">$59.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="61900"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46,47"
+             data-article="ART-BOR-HEROS">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/heros.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego Heros</div>
+            <div class="product-desc">Calzado en cuero flor (1,82 mm) y cordura con EVA, con cierre recto. Base de PU sin costura, resistente al agua, forrería interior absorbente y plantilla termoformada de 4,5 mm. Talles del 36 al 47.</div>
+            <div class="product-footer">
+              <span class="product-price">$61.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="55900"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46,47"
+             data-article="ART-BOR-CRONOS">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/cronos.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego Cronos</div>
+            <div class="product-desc">Calzado en cuero flor (1,82 mm) y cordura con EVA, con cierre recto. Base de PU sin costura, resistente al agua, forrería interior absorbente y plantilla termoformada de 4,5 mm. Talles del 36 al 47.</div>
+            <div class="product-footer">
+              <span class="product-price">$55.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="69000"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46"
+             data-article="ART-BOR-APOLO">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/apolo.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego Apolo</div>
+            <div class="product-desc">Calzado de cuero vacuno flor (1,8–2 mm) con base de PU pegada y cosida. Cuenta con forrería doble, fuelle para mayor flexibilidad, ojalillos resistentes y puntera termoformada con talonera reforzada. Incluye cordones con alma (21 hilos) de hasta 180 cm.</div>
+            <div class="product-footer">
+              <span class="product-price">$69.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="borcegos"
+             data-price="35000"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46"
+             data-article="ART-BOR-COSTS">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/costurado.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Borcegos</div>
+            <div class="product-name">Borcego Costurado</div>
+            <div class="product-desc">Calzado con cordura antidesgarro y cuero ecológico con EVA. Puntera y talonera reforzadas, suela de expanso antideslizante con traba para escalera, ojalillos de ala ancha y cordones reforzados. Resistente al agua.</div>
+            <div class="product-footer">
+              <span class="product-price">$35.000</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="botines"
+             data-price="24900"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46"
+             data-article="ART-BOT-PVC">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/botin-suela-pvc.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Botines</div>
+            <div class="product-name">Botín suela PVC</div>
+            <div class="product-desc">Cuero descarne pegado. Punta acero.</div>
+            <div class="product-footer">
+              <span class="product-price">$24.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+  
+        <div class="product-card"
+             data-category="botines"
+             data-price="0"
+             data-size-options="36,37,38,39,40,41,42,43,44,45,46"
+             data-article="ART-BOT-PREM">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/calzado/botin-premium.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Botines</div>
+            <div class="product-name">Botín premium</div>
+            <div class="product-desc">Base de PU sin necesidad de costura, con cuero flor, cocido y pegado para mayor resistencia.</div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+      
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-ACC-POL"
+             data-stock="Todos los modelos con botón lateral. Stock a confirmar según modelo."
+             data-model-options="Portacargador|Portaesposa|Pistolera Bersa PRO|Pistolera Glock|Pistolera Beretta|Pistolera TPR 9"
+             data-model-images="productos/accesorios/portacargador.png|productos/accesorios/portaesposas.png|productos/accesorios/pistolera-pro.png|productos/accesorios/pistolera-glock-houston.png|productos/accesorios/pistolera-beretta-houston.png|productos/accesorios/pistolera-tpr.png">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/accesorios-polimero.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Accesorios de polímero</div>
+            <div class="product-desc">
+              Portacargador, portaesposa y pistoleras de polímero para distintas marcas.
+              Elegí el modelo en el detalle.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-CRED"
+             data-stock="Venta sujeta a identificación. Consultar."
+             data-model-options="Chapas (foto 1)|Chapas (foto 2)"
+             data-model-prices="0|0"
+             data-model-images="productos/accesorios/chapas-1.png|productos/accesorios/chapas-2.png">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/chapas-1.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Chapas e insignias metalicas</div>
+            <div class="product-desc">
+              Consultar modelo según provincia o fuerza. Venta sujeta a identificación.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="S,M,L,XL,2XL,3XL"
+             data-article="ART-CAMP-SOFT"
+             data-stock="Stock a confirmar según color y talle."
+             data-model-options="Arena|Azul|Negra"
+             data-model-images="productos/Indumentaria/campera-softshell-arena.png|productos/Indumentaria/campera-softshell-azul.png|productos/Indumentaria/campera-softshell-negra.png"
+             data-gallery-arena="productos/Indumentaria/campera-softshell-arena.png|productos/Indumentaria/campera-softshell-arena-atras.png">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/campera-softshell-arena.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Campera Softshell</div>
+            <div class="product-desc">
+              Campera softshell impermeable y térmica. Forrada con polar y contiene capucha desmonstable. Talles: S al 3Xl Colores: arena, azul y negra.
+              (En arena se puede ver frente y espalda).
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="44900"
+             data-size-options="S,M,L,XL,2XL"
+             data-article="ART-CHA-PORTA"
+             data-stock="Stock a confirmar según talle y configuración.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/chaleco-portaplaca-portaaccesorios.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Chaleco porta placa / porta accesorios</div>
+            <div class="product-desc">
+              Chaleco porta placa con sistema MOLLE para accesorios. Configuración y compatibilidad a coordinar.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">$44.900</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="XS,S,M,L"
+             data-article="ART-BAJO-CHAL"
+             data-stock="Stock a confirmar según talle.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/bajo-chaleco-mangas-ripstop.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Bajo chaleco con mangas</div>
+            <div class="product-desc">
+              Bajo chaleco con mangas cortas confeccionado en ripstop. Ideal para uso táctico y servicio.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+<div class="product-card"
+     data-category="correajes"
+     data-price="0"
+     data-article="ART-MOR-MUS"
+     data-stock="Stock a confirmar según cantidad."
+     data-gallery-default="productos/correajes/morral-muslera.png|productos/correajes/morral-muslera-atras.png">
+
+  <div class="product-image product-image-contain"
+       style="background-image:url('productos/correajes/morral-muslera.png');"></div>
+
+  <div class="product-body">
+    <div class="product-tag">Correajes</div>
+    <div class="product-name">Morral muslera táctico</div>
+    <div class="product-desc">
+      Morral muslera con sujeción a cinturón y pierna.
+      Vista frontal y trasera disponibles.
+    </div>
+    <div class="product-footer">
+      <span class="product-price">Consultar</span>
+      <button class="btn-small" type="button">Ver detalle</button>
+    </div>
+  </div>
+</div>
+
+
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-PORT-BOTI"
+             data-stock="Stock a confirmar.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/portabotiquin.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Portabotiquín</div>
+            <div class="product-desc">
+              Portabotiquín para transporte seguro de insumos de primeros auxilios. Ideal para uso táctico y vehicular.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-PORT-CIN"
+             data-stock="Stock a confirmar según modelo.">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/portaobjetos-cinto.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Porta objetos para cinto</div>
+            <div class="product-desc">
+              Porta objetos para cinto táctico. Compatible con distintos sistemas de portación.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-GUA-CON"
+             data-stock="Stock a confirmar según color y talle."
+             data-model-options="Negro|Arena"
+             data-model-images="productos/accesorios/guantes-dedos-negro.png|productos/accesorios/guantes-dedos-arena.png">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/guantes-condedos.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Guantes tácticos con dedos</div>
+            <div class="product-desc">
+              Guantes tácticos con dedos completos. Disponibles en color negro y arena.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-GUA-SIN"
+             data-stock="Stock a confirmar según color y talle."
+             data-model-options="Negro|Arena|Verde"
+             data-model-images="productos/accesorios/guantes-sindedos-negro.png|productos/accesorios/guantes-sindedos-arena.png|productos/accesorios/guantes-sindedos-verde.png">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/guantes-sindedos-todos.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Guantes tácticos sin dedos</div>
+            <div class="product-desc">
+              Guantes tácticos sin dedos. Colores: negro, arena y verde.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-category="accesorios"
+             data-price="0"
+             data-article="ART-ACC-MOLLE"
+             data-stock="Stock a confirmar según modelo y color."
+             data-color-options="Arena|Negro"
+             data-color-models-arena="Portacargador|Portahandy|Porta objetos / celular"
+             data-color-prices-arena="Consultar"
+             data-color-images-arena="productos/accesorios/portacargador-molle-arena.png|productos/accesorios/portahandy-molle-arena.png|productos/accesorios/portaobjetos-celular-molle-arena.png"
+             data-color-models-negro="Portaesposa MOLLE|Portacargador doble MOLLE|Pistolera universal MOLLE"
+             data-color-prices-negro="Consultar"
+             data-color-images-negro="productos/accesorios/portaesposa-molle.png|productos/accesorios/portacargador-doble-molle.png|productos/accesorios/pistolera-universal-molle.png">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/accesorios/accesorios-chaleco-molle-arena.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Accesorios</div>
+            <div class="product-name">Accesorios para chaleco MOLLE</div>
+            <div class="product-desc">
+              Elegí primero el color (arena o negro) y luego el accesorio. El precio cambia según el modelo.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card"
+             data-category="indumentaria"
+             data-price="0"
+             data-size-options="34,36,38,40,42,44,46,48,50,52,54,56,58,60"
+             data-article="ART-CAM-ML">
+          <div class="product-image product-image-contain"
+               style="background-image:url('productos/Indumentaria/camisa-manga-larga.png');"></div>
+          <div class="product-body">
+            <div class="product-tag">Indumentaria</div>
+            <div class="product-name">Camisa manga larga</div>
+            <div class="product-desc">
+              Camisa manga larga azul en ripstop, negra en batista.
+              Talles: 34 al 60.
+            </div>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
+              <button class="btn-small" type="button">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+
+   
+
+      </div>
+
+
+      <div class="sidebar">
+
+        <div class="filters">
+          <h3>Filtrar productos</h3>
+
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-category="all">Todos</button>
+
+            <button class="filter-btn" data-category="calzado">Calzado</button>
+            <button class="filter-btn" data-category="zapatos">Zapatos</button>
+            <button class="filter-btn" data-category="borcegos">Borcegos</button>
+            <button class="filter-btn" data-category="botines">Botines</button>
+
+            <button class="filter-btn" data-category="correajes">Correajes</button>
+            <button class="filter-btn" data-category="accesorios">Accesorios</button>
+            <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
+          </div>
+
+          <div class="filters-row">
+            <label for="filter-search">Buscar producto:</label>
+            <input type="text" id="filter-search" placeholder="Buscar por nombre o descripción" />
+          </div>
+
+          <div class="filters-row">
+            <label for="filter-price">Filtrar por precio:</label>
+            <select id="filter-price">
+              <option value="all">Todos los precios</option>
+              <option value="low">Menos de $20.000</option>
+              <option value="mid">Entre $20.000 y $40.000</option>
+              <option value="high">Más de $40.000</option>
+            </select>
+
+            <button id="clear-filters" type="button" class="filter-btn">
+              Limpiar filtros
+            </button>
+          </div>
+        </div>
+
+
+        <aside class="cart-panel">
+          <div class="cart-title">Carrito de compras (<span id="cart-count">0</span>)</div>
+
+          <div id="cart-items" class="cart-items">
+            <div class="cart-empty">Todavía no agregaste productos.</div>
+          </div>
+
+          <div class="cart-total">
+            <span>Total estimado:</span>
+            <span id="cart-total">$0</span>
+          </div>
+
+          <div class="cart-note">
+            Este carrito es orientativo. Para confirmar precios, stock y medio de pago,
+            completá tus datos y envianos el pedido.
+          </div>
+
+          <div class="payment-methods">
+            <strong>Medios de pago:</strong>
+            <ul>
+              <li>Efectivo en el local</li>
+              <li>Transferencia bancaria</li>
+              <li>Tarjeta de crédito/débito y billeteras virtuales vía Mercado Pago</li>
+            </ul>
+          </div>
+
+          <div class="cart-note" style="margin-top:8px; color:#900; font-weight:600;">
+            ⚠️ Envíos al interior del país:<br>
+            Se realizan únicamente por <strong>Vía Cargo</strong> y son a cargo del comprador.
+            El costo de envío se abona al retirar la mercadería.
+          </div>
+
+          <div class="checkout-inputs">
+            <input id="checkout-nombre" type="text" placeholder="Nombre y apellido" />
+            <input id="checkout-telefono" type="text" placeholder="Teléfono" />
+            <input id="checkout-email" type="email" placeholder="Correo (opcional)" />
+          </div>
+
+          <button class="btn-cart" type="button" onclick="finalizarCompraWhatsApp()">
+            Enviar pedido por WhatsApp
+          </button>
+
+          <button class="btn-cart btn-mp" type="button" onclick="pagarConMercadoPago()">
+            Pagar con Mercado Pago
+          </button>
+        </aside>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="product-detail-overlay" id="product-detail-overlay">
+    <div class="product-detail">
+      <button class="detail-close" type="button" id="detail-close-btn">×</button>
+      <button class="detail-arrow detail-arrow-left" type="button" id="detail-prev-btn">‹</button>
+      <button class="detail-arrow detail-arrow-right" type="button" id="detail-next-btn">›</button>
+
+      <div class="detail-image" id="detail-image">
+        <button class="gallery-arrow gallery-arrow-left" type="button" id="gallery-prev-btn">‹</button>
+        <button class="gallery-arrow gallery-arrow-right" type="button" id="gallery-next-btn">›</button>
+      </div>
+
+      <div class="detail-info">
+        <div class="detail-tag" id="detail-tag"></div>
+        <h3 class="detail-name" id="detail-name"></h3>
+        <p class="detail-article" id="detail-article"></p>
+        <p class="detail-desc" id="detail-desc"></p>
+        <p class="detail-stock" id="detail-stock">Stock a confirmar según talle y cantidad.</p>
+
+        <div class="detail-price-row">
+          <span class="detail-price" id="detail-price"></span>
+        </div>
+
+        <div class="detail-form">
+          <label>
+            <span id="detail-size-label">Talle</span>
+            <select id="detail-size"></select>
+          </label>
+
+          <label id="detail-talle-wrap" style="display:none;">
+            Talle
+            <select id="detail-talle"></select>
+          </label>
+
+          <label id="detail-color-wrap" style="display:none;">
+            Color
+            <select id="detail-color"></select>
+          </label>
+
+          <label>
+            Cantidad
+            <input type="number" id="detail-qty" min="1" value="1" />
+          </label>
+        </div>
+
+        <div class="detail-actions">
+          <button class="detail-add-btn" type="button" id="detail-add-btn">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-zoom-overlay" id="image-zoom-overlay">
+    <img id="zoom-image" alt="Vista ampliada del producto" />
+  </div>
+
+  <footer>
+    © 2025 Segudab — Todos los derechos reservados.
+  </footer>
+
+  <script>
+
+    const header = document.getElementById('site-header');
+    const toggle = document.getElementById('mobile-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+
+    const productsItem = document.getElementById('nav-products');
+    const productsLink = document.getElementById('products-link');
+
+    function closeMenu(){
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded','false');
+      overlay.setAttribute('aria-hidden','true');
+      productsItem.classList.remove('open');
+    }
+
+    function openMenu(){
+      header.classList.add('nav-open');
+      toggle.setAttribute('aria-expanded','true');
+      overlay.setAttribute('aria-hidden','false');
+    }
+
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const isOpen = header.classList.contains('nav-open');
+        isOpen ? closeMenu() : openMenu();
+      });
+    }
+
+    if (overlay) overlay.addEventListener('click', closeMenu);
+
+    if (nav) {
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (!a) return;
+
+        if (a === productsLink && window.matchMedia('(max-width: 980px)').matches) {
+          e.preventDefault();
+          productsItem.classList.toggle('open');
+          return;
+        }
+
+        closeMenu();
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia('(max-width: 980px)').matches) {
+        closeMenu();
+      }
+    });
+
+    /* ====== TU SCRIPT ORIGINAL DE CATALOGO (SIN CAMBIOS) ====== */
+    const CART_KEY = 'segudab_cart';
+    let cart = [];
+    let currentProduct = null;
+
+    const MP_LINK = 'https://mpago.la/tu_link_de_pago';
+
+    let visibleProductCards = [];
+    let currentProductIndex = -1;
+    let searchTerm = '';
+
+    let currentGallery = [];
+    let galleryIndex = 0;
+
+    function loadCart() {
+      const stored = localStorage.getItem(CART_KEY);
+      if (!stored) return;
+      try {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) cart = parsed;
+      } catch (e) {
+        console.error('Error leyendo carrito de localStorage', e);
+      }
+    }
+
+    function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function formatPrice(value) { return Number(value).toLocaleString('es-AR'); }
+
+    function renderCart() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
+
+      cartItemsContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<div class="cart-empty">Todavía no agregaste productos.</div>';
+        cartCount.textContent = '0';
+        cartTotal.textContent = '$0';
+        return;
+      }
+
+      let total = 0;
+      let count = 0;
+
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        count += item.qty;
+
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div class="cart-item-main">
+            <span class="cart-item-name">${item.name}</span>
+            <span class="cart-item-subtotal">$${formatPrice(item.price * item.qty)}</span>
+          </div>
+          <div class="cart-item-meta">
+            Variante: ${item.size || 'A coordinar'}
+          </div>
+          <div class="cart-item-actions">
+            <button class="qty-btn" data-action="decrease" data-name="${item.name}" data-size="${item.size}">−</button>
+            <span class="cart-item-qty">${item.qty}</span>
+            <button class="qty-btn" data-action="increase" data-name="${item.name}" data-size="${item.size}">+</button>
+            <button class="remove-btn" data-action="remove" data-name="${item.name}" data-size="${item.size}">✕</button>
+          </div>
+        `;
+        cartItemsContainer.appendChild(div);
+      });
+
+      cartCount.textContent = count;
+      cartTotal.textContent = '$' + formatPrice(total);
+    }
+
+    function addToCart(name, price, size = 'A coordinar', qty = 1) {
+      const existing = cart.find(p => p.name === name && p.size === size);
+      if (existing) existing.qty += qty;
+      else cart.push({ name, price: Number(price), qty: qty, size });
+      saveCart();
+      renderCart();
+    }
+
+    function updateItemQty(name, size, delta) {
+      const item = cart.find(p => p.name === name && p.size === size);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty < 1) item.qty = 1;
+      saveCart();
+      renderCart();
+    }
+
+    function removeFromCart(name, size) {
+      const index = cart.findIndex(p => p.name === name && p.size === size);
+      if (index !== -1) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCart();
+      }
+    }
+
+    const sizeOptionsByCategory = {
+      botas: ['38','39','40','41','42','43','44','45'],
+      correajes: ['S','M','L','XL'],
+      accesorios: ['Único'],
+      indumentaria: ['S','M','L','XL','XXL'],
+      zapatos: ['38','39','40','41','42','43','44','45'],
+      borcegos: ['38','39','40','41','42','43','44','45'],
+      botines: ['38','39','40','41','42','43','44','45'],
+    };
+
+    function updateGalleryArrows() {
+      const prev = document.getElementById('gallery-prev-btn');
+      const next = document.getElementById('gallery-next-btn');
+      const show = currentGallery && currentGallery.length > 1;
+
+      if (prev) prev.style.display = show ? 'flex' : 'none';
+      if (next) next.style.display = show ? 'flex' : 'none';
+    }
+
+    function setGalleryIndex(idx) {
+      const detailImage = document.getElementById('detail-image');
+      if (!currentGallery || !currentGallery.length) return;
+
+      galleryIndex = (idx + currentGallery.length) % currentGallery.length;
+      const url = currentGallery[galleryIndex];
+
+      if (detailImage && url) {
+        detailImage.style.backgroundImage = `url('${url}')`;
+        if (currentProduct) currentProduct.imageUrl = url;
+      }
+    }
+
+    function showNextGallery() { setGalleryIndex(galleryIndex + 1); }
+    function showPrevGallery() { setGalleryIndex(galleryIndex - 1); }
+
+    function openProductDetail(card) {
+      const overlay = document.getElementById('product-detail-overlay');
+      const nameEl = card.querySelector('.product-name');
+      const descEl = card.querySelector('.product-desc');
+      const tagEl  = card.querySelector('.product-tag');
+      const imgEl  = card.querySelector('.product-image');
+
+      const name = nameEl ? nameEl.textContent.trim() : '';
+      const desc = descEl ? descEl.textContent.trim() : '';
+      const tag  = tagEl ? tagEl.textContent.trim() : '';
+      const cat  = card.dataset.category || '';
+      const basePrice = Number(card.dataset.price || 0);
+      const article = card.dataset.article || '';
+      const stockTextFromCard = card.dataset.stock;
+
+      let bg = imgEl ? imgEl.style.backgroundImage : '';
+      let imageUrl = '';
+      if (bg && bg.startsWith('url')) {
+        imageUrl = bg.slice(4, -1).replace(/["']/g, '');
+      }
+
+      const modelOptionsRaw = card.dataset.modelOptions;
+      const modelImagesRaw  = card.dataset.modelImages;
+      const modelPricesRaw  = card.dataset.modelPrices;
+      const modelColorsRaw  = card.dataset.modelColors;
+
+      const modelOptions = modelOptionsRaw ? modelOptionsRaw.split('|').map(s => s.trim()).filter(Boolean) : null;
+      const modelImages  = modelImagesRaw  ? modelImagesRaw.split('|').map(s => s.trim()).filter(Boolean) : null;
+      const modelPrices  = modelPricesRaw  ? modelPricesRaw.split('|').map(s => Number(String(s).trim() || 0)) : null;
+      const modelColors  = modelColorsRaw  ? modelColorsRaw.split('|').map(s => s.trim()) : null;
+
+      const colorOptionsRaw = card.dataset.colorOptions;
+      const colorOptions = colorOptionsRaw ? colorOptionsRaw.split('|').map(s => s.trim()).filter(Boolean) : null;
+
+      function readColorBundle(colorName) {
+        const key = (colorName || '').toLowerCase();
+        const modelsRaw = card.dataset['colorModels' + key.charAt(0).toUpperCase() + key.slice(1)] || card.getAttribute('data-color-models-' + key);
+        const pricesRaw = card.dataset['colorPrices' + key.charAt(0).toUpperCase() + key.slice(1)] || card.getAttribute('data-color-prices-' + key);
+        const imagesRaw = card.dataset['colorImages' + key.charAt(0).toUpperCase() + key.slice(1)] || card.getAttribute('data-color-images-' + key);
+
+        const models = modelsRaw ? String(modelsRaw).split('|').map(s => s.trim()).filter(Boolean) : [];
+        const prices = pricesRaw ? String(pricesRaw).split('|').map(s => Number(String(s).trim() || 0)) : [];
+        const images = imagesRaw ? String(imagesRaw).split('|').map(s => s.trim()).filter(Boolean) : [];
+        return { models, prices, images };
+      }
+
+      currentProduct = {
+        name,
+        price: basePrice,
+        category: cat,
+        imageUrl,
+        tag,
+        desc,
+        article,
+        modelOptions,
+        modelImages,
+        modelPrices,
+        modelColors,
+        colorOptions,
+        readColorBundle
+      };
+
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      currentProductIndex = visibleProductCards.indexOf(card);
+      if (currentProductIndex === -1) {
+        buildVisibleProductCards();
+        currentProductIndex = visibleProductCards.indexOf(card);
+      }
+
+      const detailImage   = document.getElementById('detail-image');
+      const detailTag     = document.getElementById('detail-tag');
+      const detailName    = document.getElementById('detail-name');
+      const detailDesc    = document.getElementById('detail-desc');
+      const detailPrice   = document.getElementById('detail-price');
+      const detailSize    = document.getElementById('detail-size');
+      const detailQty     = document.getElementById('detail-qty');
+      const detailArticle = document.getElementById('detail-article');
+      const detailStock   = document.getElementById('detail-stock');
+      const sizeLabelEl   = document.getElementById('detail-size-label');
+
+      const colorWrap   = document.getElementById('detail-color-wrap');
+      const colorSelect = document.getElementById('detail-color');
+
+      const talleWrap   = document.getElementById('detail-talle-wrap');
+      const talleSelect = document.getElementById('detail-talle');
+
+      if (colorWrap) colorWrap.style.display = 'none';
+      if (colorSelect) colorSelect.innerHTML = '';
+
+      if (talleWrap) talleWrap.style.display = 'none';
+      if (talleSelect) talleSelect.innerHTML = '';
+
+      detailSize.innerHTML = '';
+
+      currentGallery = imageUrl ? [imageUrl] : [];
+      detailImage.style.backgroundImage = imageUrl ? `url('${imageUrl}')` : 'none';
+      updateGalleryArrows();
+
+      if (imgEl && imgEl.classList.contains('product-image-contain')) {
+        detailImage.classList.add('detail-image-contain');
+      } else {
+        detailImage.classList.remove('detail-image-contain');
+      }
+
+      detailTag.textContent = tag;
+      detailName.textContent = name;
+      detailDesc.textContent = desc;
+
+      if (detailStock) {
+        detailStock.textContent = stockTextFromCard
+          ? stockTextFromCard
+          : 'Stock a confirmar según talle y cantidad.';
+      }
+
+      if (detailArticle) {
+        if (article) {
+          detailArticle.textContent = 'Artículo: ' + article;
+          detailArticle.style.display = 'block';
+        } else {
+          detailArticle.style.display = 'none';
+        }
+      }
+
+      function setDetailPrice(p) {
+        const n = Number(p || 0);
+        currentProduct.price = n;
+        detailPrice.textContent = n > 0 ? ('$' + formatPrice(n)) : 'Consultar';
+      }
+
+      function setDetailImage(url) {
+        if (!url) return;
+        detailImage.style.backgroundImage = `url('${url}')`;
+        currentProduct.imageUrl = url;
+      }
+
+      function fillTallesIfAny() {
+        if (!talleWrap || !talleSelect) return;
+
+        const customSizes = card.dataset.sizeOptions;
+        if (!customSizes) {
+          talleWrap.style.display = 'none';
+          talleSelect.innerHTML = '';
+          return;
+        }
+
+        const talles = customSizes.split(',').map(s => s.trim()).filter(Boolean);
+        if (!talles.length) {
+          talleWrap.style.display = 'none';
+          talleSelect.innerHTML = '';
+          return;
+        }
+
+        talleWrap.style.display = 'flex';
+        talleWrap.style.flexDirection = 'column';
+        talleSelect.innerHTML = '';
+
+        talles.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t;
+          opt.textContent = t;
+          talleSelect.appendChild(opt);
+        });
+
+        talleSelect.selectedIndex = 0;
+      }
+
+      if (colorSelect) colorSelect.onchange = null;
+      detailSize.onchange = null;
+
+      if (Array.isArray(currentProduct.colorOptions) && currentProduct.colorOptions.length) {
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
+        fillTallesIfAny();
+
+        if (colorWrap) {
+          colorWrap.style.display = 'flex';
+          colorWrap.style.flexDirection = 'column';
+        }
+
+        colorSelect.innerHTML = '';
+        currentProduct.colorOptions.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c;
+          opt.textContent = c;
+          colorSelect.appendChild(opt);
+        });
+
+        function applySelectedModelFromSize() {
+          const opt = detailSize.options[detailSize.selectedIndex];
+          if (!opt) return;
+
+          const img = opt.dataset.img || '';
+          const prc = opt.dataset.price ? Number(opt.dataset.price) : 0;
+
+          currentGallery = img ? [img] : [];
+          galleryIndex = 0;
+          if (currentGallery[0]) setDetailImage(currentGallery[0]);
+          updateGalleryArrows();
+
+          setDetailPrice(prc);
+        }
+
+        function fillModelsForColor(colorName) {
+          const bundle = currentProduct.readColorBundle(colorName);
+
+          detailSize.innerHTML = '';
+          bundle.models.forEach((m, idx) => {
+            const opt = document.createElement('option');
+            opt.value = m;
+            opt.textContent = m;
+            opt.dataset.price = String(bundle.prices[idx] ?? 0);
+            opt.dataset.img = bundle.images[idx] ?? '';
+            detailSize.appendChild(opt);
+          });
+
+          if (!detailSize.options.length) {
+            currentGallery = currentProduct.imageUrl ? [currentProduct.imageUrl] : [];
+            galleryIndex = 0;
+            if (currentGallery[0]) setDetailImage(currentGallery[0]);
+            updateGalleryArrows();
+            setDetailPrice(currentProduct.price);
+            return;
+          }
+
+          detailSize.selectedIndex = 0;
+          applySelectedModelFromSize();
+        }
+
+        fillModelsForColor(colorSelect.value);
+
+        colorSelect.onchange = () => fillModelsForColor(colorSelect.value);
+        detailSize.onchange  = () => applySelectedModelFromSize();
+      }
+      else if (Array.isArray(currentProduct.modelOptions) && currentProduct.modelOptions.length) {
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
+        fillTallesIfAny();
+
+        currentProduct.modelOptions.forEach((m, idx) => {
+          const opt = document.createElement('option');
+          opt.value = m;
+          opt.textContent = m;
+
+          const prc = currentProduct.modelPrices && currentProduct.modelPrices[idx] != null
+            ? Number(currentProduct.modelPrices[idx] || 0)
+            : currentProduct.price;
+
+          const img = currentProduct.modelImages && currentProduct.modelImages[idx]
+            ? currentProduct.modelImages[idx]
+            : currentProduct.imageUrl;
+
+          opt.dataset.price = String(prc);
+          opt.dataset.img = img || '';
+          detailSize.appendChild(opt);
+        });
+
+        function setColorsForModel(modelIndex) {
+          if (!colorWrap || !colorSelect) return;
+
+          const colorsStr = currentProduct.modelColors && currentProduct.modelColors[modelIndex]
+            ? currentProduct.modelColors[modelIndex]
+            : '';
+
+          const colors = String(colorsStr).split(',').map(c => c.trim()).filter(Boolean);
+
+          if (colors.length <= 1) {
+            colorWrap.style.display = 'none';
+            colorSelect.innerHTML = '';
+            if (colors[0]) {
+              const o = document.createElement('option');
+              o.value = colors[0];
+              o.textContent = colors[0];
+              colorSelect.appendChild(o);
+            }
+            return;
+          }
+
+          colorWrap.style.display = 'flex';
+          colorWrap.style.flexDirection = 'column';
+          colorSelect.innerHTML = '';
+          colors.forEach(c => {
+            const o = document.createElement('option');
+            o.value = c;
+            o.textContent = c;
+            colorSelect.appendChild(o);
+          });
+        }
+
+        function applySelectedModel() {
+          const opt = detailSize.options[detailSize.selectedIndex];
+          if (!opt) return;
+
+          const img = opt.dataset.img || '';
+          const prc = opt.dataset.price ? Number(opt.dataset.price) : 0;
+          const model = (opt.value || '').trim().toLowerCase();
+
+          if (model === 'arena' && card.dataset.galleryArena) {
+            currentGallery = card.dataset.galleryArena.split('|').map(s => s.trim()).filter(Boolean);
+          } else if (card.dataset.galleryDefault) {
+            currentGallery = card.dataset.galleryDefault.split('|').map(s => s.trim()).filter(Boolean);
+          } else {
+            currentGallery = img ? [img] : [];
+          }
+          galleryIndex = 0;
+
+          if (currentGallery[0]) setDetailImage(currentGallery[0]);
+          updateGalleryArrows();
+
+          setDetailPrice(prc);
+          setColorsForModel(detailSize.selectedIndex);
+        }
+
+        applySelectedModel();
+        detailSize.onchange = () => applySelectedModel();
+      }
+      else {
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Talle';
+        if (talleWrap) talleWrap.style.display = 'none';
+        if (talleSelect) talleSelect.innerHTML = '';
+
+        const customSizes = card.dataset.sizeOptions;
+        const options = customSizes
+          ? customSizes.split(',').map(s => s.trim()).filter(Boolean)
+          : (sizeOptionsByCategory[cat] || ['A coordinar']);
+
+        options.forEach(talle => {
+          const opt = document.createElement('option');
+          opt.value = talle;
+          opt.textContent = talle;
+          detailSize.appendChild(opt);
+        });
+
+        currentGallery = imageUrl ? [imageUrl] : [];
+        galleryIndex = 0;
+
+        if (currentGallery[0]) setDetailImage(currentGallery[0]);
+        updateGalleryArrows();
+
+        setDetailPrice(currentProduct.price);
+      }
+
+      detailQty.value = 1;
+      overlay.style.display = 'flex';
+    }
+
+    function closeProductDetail() {
+      const overlay = document.getElementById('product-detail-overlay');
+      overlay.style.display = 'none';
+      currentProduct = null;
+      currentProductIndex = -1;
+      currentGallery = [];
+      galleryIndex = 0;
+      updateGalleryArrows();
+    }
+
+    function buildVisibleProductCards() {
+      visibleProductCards = Array.from(document.querySelectorAll('.product-card'))
+        .filter(card => card.style.display !== 'none');
+    }
+
+    function showNextProduct() {
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      if (!visibleProductCards.length) return;
+
+      if (currentProductIndex < 0) currentProductIndex = 0;
+
+      let newIndex = currentProductIndex + 1;
+      if (newIndex >= visibleProductCards.length) newIndex = 0;
+
+      openProductDetail(visibleProductCards[newIndex]);
+    }
+
+    function showPrevProduct() {
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      if (!visibleProductCards.length) return;
+
+      if (currentProductIndex < 0) currentProductIndex = 0;
+
+      let newIndex = currentProductIndex - 1;
+      if (newIndex < 0) newIndex = visibleProductCards.length - 1;
+
+      openProductDetail(visibleProductCards[newIndex]);
+    }
+
+    document.getElementById('cart-items').addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+
+      const action = btn.dataset.action;
+      const name = btn.dataset.name;
+      const size = btn.dataset.size;
+      if (!action || !name) return;
+
+      if (action === 'increase') updateItemQty(name, size, 1);
+      else if (action === 'decrease') updateItemQty(name, size, -1);
+      else if (action === 'remove') removeFromCart(name, size);
+    });
+
+    function finalizarCompraWhatsApp() {
+      if (cart.length === 0) {
+        alert('Primero agregá productos al carrito.');
+        return;
+      }
+
+      const nombre = document.getElementById('checkout-nombre').value.trim();
+      const telefono = document.getElementById('checkout-telefono').value.trim();
+      const email = document.getElementById('checkout-email').value.trim();
+
+      if (!nombre || !telefono) {
+        alert('Por favor completá nombre y teléfono para enviar el pedido.');
+        return;
+      }
+
+      let texto = 'Hola Segudab, quiero hacer un pedido desde la web:%0A%0A';
+      texto += 'Nombre: ' + nombre + '%0A';
+      texto += 'Teléfono: ' + telefono + '%0A';
+      if (email) texto += 'Email: ' + email + '%0A';
+      texto += '%0AProductos:%0A';
+
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        texto += '- ' + item.qty + ' x ' + item.name + ' (Variante: ' + (item.size || 'A coordinar') + ')%0A';
+      });
+
+      texto += '%0ATotal estimado: $' + formatPrice(total) + '%0A';
+      texto += '%0A¿Me podrían confirmar stock, precio final y formas de pago?';
+
+      const numero = '5491137286846';
+      window.open('https://wa.me/' + numero + '?text=' + texto, '_blank');
+    }
+
+    function pagarConMercadoPago() {
+      if (cart.length === 0) {
+        alert('Primero agregá productos al carrito.');
+        return;
+      }
+
+      let total = 0;
+      cart.forEach(item => total += item.price * item.qty);
+
+      const msg =
+        'El total estimado de tu carrito es $' + formatPrice(total) +
+        '.\n\nEste botón te llevará a un link de pago de Mercado Pago configurado por Segudab. ' +
+        'Si el monto no coincide exactamente, se ajustará manualmente con el comercio.\n\n¿Querés continuar?';
+
+      if (confirm(msg)) window.open(MP_LINK, '_blank');
+    }
+
+    let currentCategory = 'all';
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterPrice = document.getElementById('filter-price');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+
+    function updateProductCount() {
+      const label = document.getElementById('product-count-text');
+      const visible = visibleProductCards.length;
+      if (label) label.textContent = visible === 1 ? 'Mostrando 1 producto' : `Mostrando ${visible} productos`;
+    }
+
+    function loadCategoryFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('cat');
+      if (!cat) return;
+
+      const btn = document.querySelector(`.filter-btn[data-category="${cat}"]`);
+      if (btn) {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = cat;
+      }
+    }
+
+    function applyFilters() {
+      const priceFilter = filterPrice.value;
+      const cards = document.querySelectorAll('.product-card');
+      visibleProductCards = [];
+
+      cards.forEach(card => {
+        const cardCat = card.dataset.category;
+        const priceValue = Number(card.dataset.price);
+        let show = true;
+
+        if (currentCategory === 'calzado') {
+          if (!['zapatos','borcegos','botines','botas'].includes(cardCat)) show = false;
+        } else if (currentCategory !== 'all' && cardCat !== currentCategory) {
+          show = false;
+        }
+
+        if (priceFilter !== 'all') {
+          if (priceFilter === 'low' && priceValue >= 20000) show = false;
+          if (priceFilter === 'mid' && (priceValue < 20000 || priceValue > 40000)) show = false;
+          if (priceFilter === 'high' && priceValue <= 40000) show = false;
+        }
+
+        if (searchTerm) {
+          const nameEl = card.querySelector('.product-name');
+          const descEl = card.querySelector('.product-desc');
+          const text = ((nameEl ? nameEl.textContent : '') + ' ' + (descEl ? descEl.textContent : '')).toLowerCase();
+          if (!text.includes(searchTerm)) show = false;
+        }
+
+        card.style.display = show ? 'block' : 'none';
+        if (show) visibleProductCards.push(card);
+      });
+
+      updateProductCount();
+    }
+
+    filterButtons.forEach(btn => {
+      const cat = btn.dataset.category;
+      if (!cat) return;
+
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.category;
+        applyFilters();
+      });
+    });
+
+    filterPrice.addEventListener('change', applyFilters);
+
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', () => {
+        currentCategory = 'all';
+        const allBtn = document.querySelector('.filter-btn[data-category="all"]');
+        if (allBtn) {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          allBtn.classList.add('active');
+        }
+        filterPrice.value = 'all';
+        const filterSearch = document.getElementById('filter-search');
+        searchTerm = '';
+        if (filterSearch) filterSearch.value = '';
+        applyFilters();
+      });
+    }
+
+    function setupProductDetailEvents() {
+      const cards = document.querySelectorAll('.product-card');
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => openProductDetail(card));
+
+        const btn = card.querySelector('.btn-small');
+        if (btn) {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openProductDetail(card);
+          });
+        }
+      });
+
+      const overlay = document.getElementById('product-detail-overlay');
+      const closeBtn = document.getElementById('detail-close-btn');
+      const addBtn = document.getElementById('detail-add-btn');
+      const prevBtn = document.getElementById('detail-prev-btn');
+      const nextBtn = document.getElementById('detail-next-btn');
+
+      const gPrev = document.getElementById('gallery-prev-btn');
+      const gNext = document.getElementById('gallery-next-btn');
+
+      if (closeBtn) closeBtn.addEventListener('click', closeProductDetail);
+
+      if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevProduct(); });
+      if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextProduct(); });
+
+      if (gPrev) gPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevGallery(); });
+      if (gNext) gNext.addEventListener('click', (e) => { e.stopPropagation(); showNextGallery(); });
+
+      if (overlay) {
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeProductDetail();
+        });
+      }
+
+      const detailImage = document.getElementById('detail-image');
+      const zoomOverlay = document.getElementById('image-zoom-overlay');
+      const zoomImage = document.getElementById('zoom-image');
+
+      if (detailImage && zoomOverlay && zoomImage) {
+        detailImage.addEventListener('click', () => {
+          if (!currentProduct || !currentProduct.imageUrl) return;
+          zoomImage.src = currentProduct.imageUrl;
+          zoomOverlay.style.display = 'flex';
+        });
+
+        zoomOverlay.addEventListener('click', () => {
+          zoomOverlay.style.display = 'none';
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        const overlayEl = document.getElementById('product-detail-overlay');
+        const isDetailOpen = overlayEl && overlayEl.style.display === 'flex';
+
+        if (e.key === 'Escape') {
+          closeProductDetail();
+          const zoomOverlayEl = document.getElementById('image-zoom-overlay');
+          if (zoomOverlayEl) zoomOverlayEl.style.display = 'none';
+        }
+
+        if (isDetailOpen && e.key === 'ArrowRight') { e.preventDefault(); showNextProduct(); }
+        if (isDetailOpen && e.key === 'ArrowLeft')  { e.preventDefault(); showPrevProduct(); }
+      });
+
+      if (addBtn) {
+        addBtn.addEventListener('click', () => {
+          if (!currentProduct) return;
+
+          const detailSizeEl = document.getElementById('detail-size');
+          const detailQtyEl  = document.getElementById('detail-qty');
+          const colorEl = document.getElementById('detail-color');
+
+          const modelOrSize = detailSizeEl ? (detailSizeEl.value || 'A coordinar') : 'A coordinar';
+
+          const talleEl = document.getElementById('detail-talle');
+          const talleWrapEl = document.getElementById('detail-talle-wrap');
+          const talle = (talleWrapEl && talleWrapEl.style.display !== 'none' && talleEl && talleEl.options.length)
+            ? (talleEl.value || '')
+            : '';
+
+          const color = (colorEl && colorEl.options.length) ? (colorEl.value || '') : '';
+
+          let labelParts = [];
+          if (modelOrSize) labelParts.push(modelOrSize);
+          if (talle) labelParts.push(talle);
+          if (color) labelParts.push(color);
+
+          const sizeLabel = labelParts.join(' / ');
+
+          const qty = detailQtyEl ? Math.max(1, parseInt(detailQtyEl.value || '1', 10)) : 1;
+
+          addToCart(currentProduct.name, currentProduct.price, sizeLabel || 'A coordinar', qty);
+          closeProductDetail();
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCart();
+      renderCart();
+      loadCategoryFromURL();
+
+      const filterSearch = document.getElementById('filter-search');
+      if (filterSearch) {
+        filterSearch.addEventListener('input', () => {
+          searchTerm = filterSearch.value.toLowerCase().trim();
+          applyFilters();
+        });
+      }
+
+      applyFilters();
+      setupProductDetailEvents();
+      updateGalleryArrows();
+    });
+  </script>
+<script>
+  
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('mobile-toggle');
+  const overlay = document.getElementById('nav-overlay');
+ const productsItem = document.getElementById('nav-products');
+  const productsLink = document.getElementById('products-link');
+
+     function isMobile() {
+    return window.matchMedia('(max-width: 980px)').matches;
+  }
+
+ function setProductsExpanded(expanded) {
+    productsItem.classList.toggle('open', expanded);
+    productsLink.setAttribute('aria-expanded', String(expanded));
+  }
+
+    function openMenu() {
+    header.classList.add('nav-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    header.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    setProductsExpanded(false);
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+
+
+    toggle.addEventListener('click', () => {
+    header.classList.contains('nav-open') ? closeMenu() : openMenu();
+    });
+  });
+ 
+  overlay.addEventListener('click', closeMenu);
+
+  productsLink.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setProductsExpanded(!productsItem.classList.contains('open'));
+  });
+
+   document.getElementById('main-nav').addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link || !isMobile()) return;
+    if (link === productsLink) return;
+    closeMenu();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    if (!productsItem.classList.contains('open')) return;
+    if (productsItem.contains(e.target)) return;
+    setProductsExpanded(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (!isMobile()) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('nav-open')) closeMenu();
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const categoria = params.get('categoria');
+
+  if (categoria) {
+    const boton = document.querySelector(
+      `[data-filter="${categoria}"]`
+    );
+    if (boton) boton.click();
+  }
+</script>
+  
+</body>
+</html>
