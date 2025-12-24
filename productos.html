@@ -2020,7 +2020,11 @@
           <span class="detail-price" id="detail-price"></span>
         </div>
 
-        <div class="detail-form">
+       <label id="detail-model-wrap" style="display:none;">
+  Modelo
+  <select id="detail-model"></select>
+</label>
+
           <label>
             <span id="detail-size-label">Talle</span>
             <select id="detail-size"></select>
@@ -2479,6 +2483,7 @@ function applyFilters(){
     galleryIndex = 0;
     updateGalleryArrows();
     setGalleryIndex(0);
+setupModelsForCard(card);
 
     
     visibleProductCards = visibleProductCards.length ? visibleProductCards : getAllCards().filter(c => c.style.display !== 'none');
@@ -2638,6 +2643,68 @@ function applyFilters(){
   setupProductDetailEvents();
   applyCategoryFromURL(); 
 });
+function setupModelsForCard(card){
+  const modelWrap = document.getElementById('detail-model-wrap');
+  const modelSelect = document.getElementById('detail-model');
+  const colorWrap = document.getElementById('detail-color-wrap');
+  const colorSelect = document.getElementById('detail-color');
+  const priceEl = document.getElementById('detail-price');
+
+  if (!modelWrap || !modelSelect) return;
+
+  const models = (card.dataset.modelOptions || '').split('|').map(s => s.trim()).filter(Boolean);
+  const prices = (card.dataset.modelPrices || '').split('|').map(p => Number(p));
+  const images = (card.dataset.modelImages || '').split('|').map(s => s.trim());
+  const colors = (card.dataset.modelColors || '').split('|').map(s => s.trim());
+
+  if (!models.length) {
+    modelWrap.style.display = 'none';
+    return;
+  }
+
+  modelWrap.style.display = 'flex';
+  modelSelect.innerHTML = '';
+
+  models.forEach((m, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = m;
+    modelSelect.appendChild(opt);
+  });
+
+  function applyModel(index){
+    const img = images[index];
+    const price = prices[index] || 0;
+    const cols = (colors[index] || '').split(',').map(c => c.trim()).filter(Boolean);
+
+    if (img){
+      currentGallery = [img];
+      galleryIndex = 0;
+      setGalleryIndex(0);
+      updateGalleryArrows();
+    }
+
+    if (priceEl){
+      priceEl.textContent = price > 0 ? `$${formatPrice(price)}` : 'Consultar';
+    }
+
+    if (cols.length && colorWrap && colorSelect){
+      colorWrap.style.display = 'flex';
+      colorSelect.innerHTML = '';
+      cols.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        colorSelect.appendChild(opt);
+      });
+    } else if (colorWrap){
+      colorWrap.style.display = 'none';
+    }
+  }
+
+  modelSelect.onchange = () => applyModel(Number(modelSelect.value));
+  applyModel(0);
+}
 
  function applyCategoryFromURL() {
   const params = new URLSearchParams(window.location.search);
