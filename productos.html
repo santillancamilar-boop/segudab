@@ -717,13 +717,33 @@
       color: #666;
     }
 
-   /* ======================================================
-   PRODUCTOS – MOBILE
-   ====================================================== */
+   .mobile-toggle{
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+}
 
+.mobile-toggle .bar{
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: #fff;
+  margin: 6px 0;
+  border-radius: 2px;
+}
+
+/* MOBILE */
 @media (max-width: 980px){
+  .mobile-toggle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
-  /* HEADER */
   header{ padding: 10px 14px; }
 
   /* =========================
@@ -2883,6 +2903,25 @@
       if (!navItem.contains(e.target)) navItem.classList.remove('open');
     });
   });
+  // Abrir / cerrar menú mobile
+  const toggle = document.querySelector('.mobile-toggle');
+  const header = document.querySelector('header');
+
+  toggle.addEventListener('click', () => {
+    header.classList.toggle('nav-open');
+  });
+
+  // Dropdown Productos (mobile)
+  document.querySelectorAll('.nav-item.has-dropdown > a')
+    .forEach(link => {
+      link.addEventListener('click', e => {
+        if (window.innerWidth <= 980) {
+          e.preventDefault();
+          link.parentElement.classList.toggle('open');
+        }
+      });
+    });
 </script>
+  
 </body>
 </html>
