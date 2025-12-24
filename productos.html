@@ -746,32 +746,39 @@
      ========================= */
   .logo-img{ width: 40px; height: 40px; }
   .logo-text strong{ font-size: 16px; }
-  .logo-text span{ font-size: 11px; max-width: 220px; }
+ .logo-text span{
+  display: none !important;
+}
 
   /* =========================
      HAMBURGUESA (SIN CUADRADO)
      ========================= */
   .mobile-toggle{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    padding: 6px !important;
-    width: auto !important;
-    height: auto !important;
-    border-radius: 0 !important;
-  }
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
 
-  .mobile-toggle .bar{
-    display: block;
-    width: 26px !important;
-    height: 2px !important;
-    margin: 6px 0 !important;
-    background: #fff !important;
-    border-radius: 2px !important;
-  }
+  width: 40px !important;
+  height: 40px !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  background: transparent !important;
+  border: none !important;
+}
+
+/* líneas */
+.mobile-toggle .bar{
+  width: 22px !important;
+  height: 2px !important;
+  margin: 4px 0 !important;
+
+  background: #fff !important;
+  border-radius: 2px !important;
+}
+
 
   .mobile-toggle svg{ display: none !important; }
 
@@ -858,41 +865,49 @@
   /* =========================
      PRODUCTOS + FLECHITA ▾ (IGUAL A LA CAPTURA)
      ========================= */
-  .nav-item.has-dropdown > a{
-    position: relative !important;
-  }
-  .nav-item.has-dropdown > a::after{
-    content: "▾" !important;
-    font-size: 12px !important;
-    opacity: .7 !important;
-    margin-left: 10px !important;
-  }
+ .nav-item.has-dropdown > a{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  width: 100% !important;
+  padding: 14px 14px !important;
+
+  border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+}
 
   /* =========================
      DROPDOWN (SIN SANGRÍA, IGUAL QUE LOS LINKS)
      ========================= */
-  .dropdown{
-    position: static !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: none !important;
-    background: transparent !important;
-  }
+ .dropdown{
+  position: static !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
 
-  .nav-item.open .dropdown{
-    display: block !important;
-  }
+/* cuando está abierto */
+.nav-item.open .dropdown{
+  display: block !important;
+}
 
-  .dropdown a{
-    padding: 14px 14px !important; /* <- sin sangría */
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    color:#fff !important;
-    background: transparent !important;
-    border: 0 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
-    text-decoration: none !important;
-  }
+/* links del desplegable */
+.dropdown a{
+  display: block !important;
+  width: 100% !important;
+
+  padding: 14px 14px !important;   /* MISMO padding que PRODUCTOS */
+  margin: 0 !important;
+
+  font-size: 14px !important;
+  font-weight: 500 !important;
+
+  color: #fff !important;
+  background: transparent !important;
+
+  border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+}
 
   /* =========================
      CTA CONTACTAR (SI TENÉS)
@@ -927,23 +942,32 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 14px !important;
-    padding: 0;
+    padding: 0 !important;
   }
 
+  /* 1) Filtros arriba */
   .sidebar{
+    order: 1 !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    display: contents !important; /* <- permite reordenar filtros y carrito separados */
+  }
+
+  .filters{
     order: 1 !important;
     width: 100% !important;
     max-width: 520px !important;
     margin: 0 auto !important;
   }
 
-  .products-grid,
-  .catalog-grid,
-  .products,
+  /* 2) Productos al medio */
   .product-grid{
     order: 2 !important;
+    width: 100% !important;
   }
 
+  /* 3) Carrito abajo del último producto */
   .cart-panel{
     order: 3 !important;
     position: static !important;
@@ -952,7 +976,6 @@
     margin: 0 auto !important;
     top: auto !important;
   }
-
   /* =========================
      DETALLE PRODUCTO
      ========================= */
@@ -960,6 +983,48 @@
   .detail-image{ min-height: 200px; }
   .detail-arrow-left{ left: 4px; }
   .detail-arrow-right{ right: 4px; }
+}
+/* === FIX: Productos y dropdown alineados como el resto === */
+#main-nav,
+#main-nav .nav-item,
+#main-nav .nav-item > a,
+#main-nav .dropdown,
+#main-nav .dropdown a{
+  width: 100% !important;
+  text-align: left !important;
+}
+
+/* Alineación izquierda real (evita centrado por flex) */
+#main-nav .nav-item > a,
+#main-nav .dropdown a{
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Si algún estilo viejo los centra, lo anulamos */
+#main-nav .nav-item.has-dropdown{
+  display: block !important;
+}
+/* =========================
+   CTA CONTACTAR – ROJO EN MOBILE
+   ========================= */
+#main-nav .nav-cta{
+  background: var(--color-primary) !important;
+  color: #fff !important;
+
+  border-radius: 0 !important;
+  margin: 0 !important;
+
+  justify-content: center !important;
+  font-weight: 700 !important;
+
+  border-bottom: none !important;
+}
+
+#main-nav .nav-cta:hover,
+#main-nav .nav-cta:active{
+  background: var(--color-primary-dark) !important;
+  color: #fff !important;
 }
 
 
