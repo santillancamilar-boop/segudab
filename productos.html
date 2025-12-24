@@ -776,7 +776,7 @@
   .mobile-toggle svg{ display: none !important; }
 
   /* =========================
-     NAV MOBILE
+     NAV MOBILE (PANEL)
      ========================= */
   nav{
     position: fixed;
@@ -788,7 +788,7 @@
     background: #000;
     display: flex;
     flex-direction: column;
-    padding: 14px 14px 22px;
+    padding: 14px 0 22px; /* <- sin padding lateral para que las líneas lleguen al borde */
     border-left: 1px solid rgba(255,255,255,0.10);
     z-index: 9999;
     transition: right .18s ease;
@@ -799,65 +799,56 @@
   header.nav-open .nav-overlay{ display: block; }
 
   /* =========================
-     LINKS DEL MENÚ (TODOS IGUALES)
+     RESET LISTAS (CLAVE PARA QUE SE VEA COMO CAPTURA)
      ========================= */
-  nav, nav *{
-    text-align: left !important;
+  nav ul, nav li{
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
+  /* Todo alineado a la izquierda */
+  nav, nav *{ text-align: left !important; }
+
+  /* =========================
+     LINKS DEL MENÚ (COMO EN LA CAPTURA)
+     ========================= */
   nav a{
-    display:block !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content: space-between !important;
+
     width:100% !important;
     margin:0 !important;
-    padding: 14px 12px !important;
+    padding: 14px 14px !important;
 
     color:#fff !important;
     background: transparent !important;
     text-decoration: none !important;
 
-    border-left: 0 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
 
     box-shadow: none !important;
     outline: none !important;
+
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: .3px;
   }
 
-  /* Quita estados activos/hover raros */
   nav a:hover,
   nav a:active,
   nav a:focus,
   nav a:focus-visible{
     background: transparent !important;
     color:#fff !important;
-    border-left: 0 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
     box-shadow: none !important;
   }
 
-  /* =========================
-     PRODUCTOS + DROPDOWN
-     ========================= */
-  .dropdown{
-    position: static;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: none;
-  }
-
-  .nav-item.open .dropdown{
-    display: block !important;
-  }
-
-  .dropdown a{
-    padding: 14px 12px !important;   /* sin sangría */
-    color:#fff !important;
-    background: transparent !important;
-    border-left: 0 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
-    text-decoration: none !important;
-  }
-
-  /* ELIMINA líneas / subrayados creados con pseudo-elementos */
+  /* Elimina decoraciones raras con pseudo-elementos */
   nav a::before,
   nav a::after{
     content: none !important;
@@ -865,7 +856,46 @@
   }
 
   /* =========================
-     CTA CONTACTAR (SE MANTIENE)
+     PRODUCTOS + FLECHITA ▾ (IGUAL A LA CAPTURA)
+     ========================= */
+  .nav-item.has-dropdown > a{
+    position: relative !important;
+  }
+  .nav-item.has-dropdown > a::after{
+    content: "▾" !important;
+    font-size: 12px !important;
+    opacity: .7 !important;
+    margin-left: 10px !important;
+  }
+
+  /* =========================
+     DROPDOWN (SIN SANGRÍA, IGUAL QUE LOS LINKS)
+     ========================= */
+  .dropdown{
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: none !important;
+    background: transparent !important;
+  }
+
+  .nav-item.open .dropdown{
+    display: block !important;
+  }
+
+  .dropdown a{
+    padding: 14px 14px !important; /* <- sin sangría */
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color:#fff !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    text-decoration: none !important;
+  }
+
+  /* =========================
+     CTA CONTACTAR (SI TENÉS)
      ========================= */
   .nav-cta{
     margin-top: 16px;
@@ -931,7 +961,6 @@
   .detail-arrow-left{ left: 4px; }
   .detail-arrow-right{ right: 4px; }
 }
-
 
 
 @media (max-width: 520px){
