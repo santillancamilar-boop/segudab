@@ -911,38 +911,40 @@
   .section-subtitle{ margin-bottom: 12px; }
 
 
+/* ====== MOBILE: filtros arriba, productos en el medio, carrito abajo ====== */
 .catalog-layout{
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  grid-template-areas:
-    "filters"
-    "products"
-    "cart";
+  display: flex !important;
+  flex-direction: column !important;
   gap: 14px !important;
   padding: 0 !important;
 }
 
-
-.product-grid{
-  grid-area: products !important;
-  width: 100% !important;
+.sidebar{
+  display: contents !important;
 }
 
+
 .filters{
-  grid-area: filters !important;
+  order: 1 !important;
   width: 100% !important;
   max-width: 520px !important;
   margin: 0 auto !important;
 }
 
+.product-grid{
+  order: 2 !important;
+  width: 100% !important;
+}
+
 .cart-panel{
-  grid-area: cart !important;
+  order: 3 !important;
   position: static !important;
   width: 100% !important;
   max-width: 520px !important;
   margin: 0 auto !important;
   top: auto !important;
 }
+
 
 
 .sidebar{
@@ -2260,34 +2262,46 @@
     return true;
   }
 
-  function applyFilters(){
-    const cards = getAllCards();
-    visibleProductCards = [];
+function applyFilters(){
 
-    cards.forEach(card => {
-      const cat = (card.dataset.category || '').toLowerCase();
-      const price = parsePriceFromCard(card);
+  const cards = getAllCards();
+  visibleProductCards = [];
 
-      const name = (card.querySelector('.product-name')?.textContent || '').toLowerCase();
-      const desc = (card.querySelector('.product-desc')?.textContent || '').toLowerCase();
-      const text = (name + ' ' + desc).trim();
+  const calzadoCats = new Set(['borcegos','zapatos','botines','calzado']);
 
-      const okCategory = (activeCategory === 'all') ? true : (cat === activeCategory);
-      const okSearch = !searchTerm ? true : text.includes(searchTerm);
-      const okPrice = matchesPriceFilter(price);
+  cards.forEach(card => {
+    const cat = (card.dataset.category || '').toLowerCase();
+    const price = parsePriceFromCard(card);
 
-      const show = okCategory && okSearch && okPrice;
-      card.style.display = show ? '' : 'none';
+    const name = (card.querySelector('.product-name')?.textContent || '').toLowerCase();
+    const desc = (card.querySelector('.product-desc')?.textContent || '').toLowerCase();
+    const text = (name + ' ' + desc).trim();
 
-      if (show) visibleProductCards.push(card);
-    });
+    const okCategory =
+      activeCategory === 'all'
+        ? true
+        : activeCategory === 'calzado'
+          ? calzadoCats.has(cat)
+          : cat === activeCategory;
 
-    const countEl = document.getElementById('product-count-text');
-    if (countEl) {
-      const n = visibleProductCards.length;
-      countEl.textContent = n === 1 ? '1 producto visible' : `${n} productos visibles`;
-    }
+    const okSearch = !searchTerm ? true : text.includes(searchTerm);
+    const okPrice = matchesPriceFilter(price);
+
+    const show = okCategory && okSearch && okPrice;
+    card.style.display = show ? '' : 'none';
+
+    if (show) visibleProductCards.push(card);
+  });
+
+  const countEl = document.getElementById('product-count-text');
+  if (countEl) {
+    const n = visibleProductCards.length;
+    countEl.textContent = n === 1
+      ? '1 producto visible'
+      : `${n} productos visibles`;
   }
+}
+
 
   function setupFilters(){
 
@@ -2589,13 +2603,35 @@
 
 
   document.addEventListener('DOMContentLoaded', () => {
-    loadCart();
-    renderCart();
-    setupCartEvents();
-    setupFilters();
+  loadCart();
+  renderCart();
+  setupCartEvents();
+  setupFilters();
+  applyFilters();
+  setupProductDetailEvents();
+  applyCategoryFromURL(); 
+});
+
+ function applyCategoryFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const raw = (params.get("cat") || "").trim().toLowerCase();
+  if (!raw) return;
+
+  const map = { correaje: "correajes" };
+  const normalized = map[raw] || raw;
+
+  const btn = document.querySelector(`.filter-btn[data-category="${normalized}"]`);
+  if (btn) {
+    btn.click();
+  } else {
+    activeCategory = normalized;
     applyFilters();
-    setupProductDetailEvents();
-  });
+  }
+
+  const anchor = document.querySelector(".filters") || document.querySelector(".product-grid");
+  if (anchor) anchor.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 </script>
 
   
