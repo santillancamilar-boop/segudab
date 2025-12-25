@@ -286,7 +286,7 @@
       margin-bottom: 10px;
     }
 
-    /* --- CATÁLOGO & CARRITO --- */
+
     .catalog-layout {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -774,24 +774,32 @@
   .mobile-toggle svg{ display: none !important; }
 
 
-  nav{
-    position: fixed;
-    top: 0;
-    right: -92vw;
-    width: 92vw;
-    max-width: 420px;
-    height: 100vh;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    padding: 14px 0 22px; 
-    border-left: 1px solid rgba(255,255,255,0.10);
-    z-index: 9999;
-    transition: right .18s ease;
-    overflow-y: auto;
-  }
+nav{
+  position: fixed;
+  top: 0;
+  right: 0;                
+  width: 92vw;
+  max-width: 420px;
+  height: 100vh;
+  background: #000;
 
-  header.nav-open nav{ right: 0; }
+  display: flex;
+  flex-direction: column;
+  padding: 14px 0 22px;
+
+  border-left: 1px solid rgba(255,255,255,0.10);
+  z-index: 9999;
+
+  transform: translateX(100%);
+  transition: transform .18s ease;
+  overflow-y: auto;
+  will-change: transform;
+}
+
+header.nav-open nav{
+  transform: translateX(0);
+}
+
   header.nav-open .nav-overlay{ display: block; }
 
 
@@ -909,7 +917,7 @@
   .section-subtitle{ margin-bottom: 12px; }
 
 
-/* ====== MOBILE: filtros arriba, productos en el medio, carrito abajo ====== */
+
 .catalog-layout{
   display: flex !important;
   flex-direction: column !important;
@@ -1017,7 +1025,7 @@
 
 <body>
 
-  <!-- TOP BAR -->
+ 
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
@@ -1034,14 +1042,14 @@
         </div>
       </a>
 
-      <!-- ✅ Botón mobile -->
+   
     <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">
         <span class="bar" aria-hidden="true"></span>
         <span class="bar" aria-hidden="true"></span>
         <span class="bar" aria-hidden="true"></span>
       </button>
 
-      <!-- ✅ Overlay -->
+     
       <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
       <nav id="main-nav" aria-label="Navegación principal">
@@ -2105,7 +2113,6 @@
       }
     });
 
-    /* ====== TU SCRIPT ORIGINAL DE CATALOGO (SIN CAMBIOS) ====== */
     const CART_KEY = 'segudab_cart';
     let cart = [];
     let currentProduct = null;
@@ -2895,7 +2902,7 @@
       updateGalleryArrows();
     });
   </script>
-<script>
+
   
   const header = document.getElementById('site-header');
   const toggle = document.getElementById('mobile-toggle');
