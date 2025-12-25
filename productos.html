@@ -1056,44 +1056,86 @@ cursor: default;
   margin-top: 6px;
 }
 
+/* ===== Panel “Comprar/Consultar” más prolijo ===== */
 .detail-price-row{
+  display:flex;
+  align-items:flex-end;
+  justify-content: space-between;
+  gap: 10px;
   border-top: 1px dashed #ddd;
-  padding-top: 10px;
-  margin-top: 8px;
+  padding-top: 12px;
+  margin-top: 10px;
+}
+
+.detail-price{
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.detail-info{
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 14px 14px 16px;
+}
+
+.detail-form-title{
+  margin: 10px 0 6px;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  font-size: 13px;
+}
+
+/* Grid de selects/inputs */
+.detail-form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .detail-form label{
-  width: 100%;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color:#333;
 }
 
 .detail-form select,
 .detail-form input[type="number"]{
+  height: 40px;
   width: 100%;
   min-width: 0;
-  height: 38px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  border: 1px solid #d7d7d7;
+  background: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.detail-form select:focus,
+.detail-form input[type="number"]:focus{
+  border-color: rgba(224,0,0,0.45);
+  box-shadow: 0 0 0 4px rgba(224,0,0,0.10);
 }
 
 .detail-actions{
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .detail-add-btn{
   width: 100%;
-  height: 42px;
+  height: 44px;
+  border-radius: 999px;
   font-size: 14px;
-  letter-spacing: .6px;
-  box-shadow: 0 8px 18px rgba(224,0,0,0.22);
+  letter-spacing: .7px;
+  box-shadow: 0 10px 22px rgba(224,0,0,0.22);
 }
-
-/* Highlight cuando cerrás y vuelve al producto */
-.product-card.pulse-focus{
-  outline: 3px solid rgba(244,197,66,0.75);
-  box-shadow: 0 0 0 6px rgba(244,197,66,0.18), 0 10px 26px rgba(0,0,0,0.12);
-  transform: translateY(-2px);
-  transition: .18s ease;
-}
-
-
   </style>
 </head>
 
@@ -2091,31 +2133,35 @@ cursor: default;
           <span class="detail-price" id="detail-price"></span>
         </div>
 
-       <label id="detail-model-wrap" style="display:none;">
-  Modelo
-  <select id="detail-model"></select>
-</label>
+<div class="detail-form-title">Consultar</div>
 
-          <label>
-            <span id="detail-size-label">Talle</span>
-            <select id="detail-size"></select>
-          </label>
+<div class="detail-form">
+  <label id="detail-model-wrap" style="display:none;">
+    Modelo
+    <select id="detail-model"></select>
+  </label>
 
-          <label id="detail-talle-wrap" style="display:none;">
-            Talle
-            <select id="detail-talle"></select>
-          </label>
+  <label>
+    <span id="detail-size-label">Talle</span>
+    <select id="detail-size"></select>
+  </label>
 
-          <label id="detail-color-wrap" style="display:none;">
-            Color
-            <select id="detail-color"></select>
-          </label>
+  <label id="detail-talle-wrap" style="display:none;">
+    Talle
+    <select id="detail-talle"></select>
+  </label>
 
-          <label>
-            Cantidad
-            <input type="number" id="detail-qty" min="1" value="1" />
-          </label>
-        </div>
+  <label id="detail-color-wrap" style="display:none;">
+    Color
+    <select id="detail-color"></select>
+  </label>
+
+  <label>
+    Cantidad
+    <input type="number" id="detail-qty" min="1" value="1" />
+  </label>
+</div>
+
 
         <div class="detail-actions">
           <button class="detail-add-btn" type="button" id="detail-add-btn">
@@ -2148,12 +2194,12 @@ const productsLink = document.getElementById('products-link');
 function isMobile(){ return window.matchMedia('(max-width: 980px)').matches; }
 
 function openMenu(){
-  header.classList.add('nav-open');
+  header?.classList.add('nav-open');
   toggle?.setAttribute('aria-expanded','true');
   overlayNav?.setAttribute('aria-hidden','false');
 }
 function closeMenu(){
-  header.classList.remove('nav-open');
+  header?.classList.remove('nav-open');
   toggle?.setAttribute('aria-expanded','false');
   overlayNav?.setAttribute('aria-hidden','true');
   productsItem?.classList.remove('open');
@@ -2161,7 +2207,7 @@ function closeMenu(){
 }
 
 toggle?.addEventListener('click',()=>{
-  header.classList.contains('nav-open') ? closeMenu() : openMenu();
+  header?.classList.contains('nav-open') ? closeMenu() : openMenu();
 });
 overlayNav?.addEventListener('click', closeMenu);
 
@@ -2239,12 +2285,10 @@ function setGalleryIndex(i){
   // Si estamos recorriendo "modelos", sincronizamos el select
   if(galleryMode === "models" && modelSelectRef){
     modelSelectRef.value = String(galleryIndex);
-    // aplica precio + imagen según modelo
     if(typeof applyModelRef === 'function') applyModelRef(galleryIndex);
-    return; // applyModel ya setea la imagen
+    return; // applyModel ya setea imagen + precio
   }
 
-  // modo normal: solo cambia imagen
   const url = currentGallery[galleryIndex];
   const img = document.getElementById('detail-image');
   if(!img) return;
@@ -2364,8 +2408,13 @@ function setupModelsForCard(card){
 
     // ⭐ Softshell arena con frente/espalda (galería real)
     if(selectedName === 'arena' && card.dataset.galleryArena){
-      galleryMode = "gallery";
-      currentGallery = card.dataset.galleryArena.split('|').map(s=>s.trim()).filter(Boolean);
+    if(galleryMode !== "models"){
+  currentGallery = imgUrl ? [imgUrl] : getGalleryFromCard(card).images;
+  galleryIndex = 0;
+  updateGalleryArrows();
+  setGalleryIndex(0);
+}
+
       galleryIndex = 0;
       updateGalleryArrows();
       setGalleryIndex(0);
@@ -2387,14 +2436,6 @@ function setupModelsForCard(card){
 
   modelSelect.onchange = ()=>applyModel(Number(modelSelect.value));
   applyModel(0);
-
-  // ✅ Si NO es softshell-arena y hay varios model-images, permitimos flechas para recorrer modelos
-  // (esto hace que las flechas funcionen “en todos” los que tengan varias imágenes por modelos)
-  if(images.length > 1 && !card.dataset.galleryArena){
-    // prepará galería “modelos”
-    // Ojo: esto NO reemplaza el select: solo habilita flechas y mantiene todo sincronizado
-    // El modo se activa al abrir el modal (más abajo), pero dejamos listo el array
-  }
 }
 
 /* =========================================================
@@ -2409,18 +2450,19 @@ function openProductDetail(card){
   overlay.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 
-  document.getElementById('detail-name').textContent =
-    card.querySelector('.product-name')?.textContent || '';
-  document.getElementById('detail-desc').textContent =
-    card.querySelector('.product-desc')?.textContent || '';
-  document.getElementById('detail-tag').textContent =
-    card.querySelector('.product-tag')?.textContent || '';
-  document.getElementById('detail-article').textContent =
-    card.dataset.article ? `Artículo: ${card.dataset.article}` : '';
-  document.getElementById('detail-stock').textContent =
-    card.dataset.stock || 'Stock a confirmar.';
+  const nameEl = document.getElementById('detail-name');
+  const descEl = document.getElementById('detail-desc');
+  const tagEl  = document.getElementById('detail-tag');
+  const artEl  = document.getElementById('detail-article');
+  const stockEl= document.getElementById('detail-stock');
 
-  // Primero seteo una galería base
+  if(nameEl) nameEl.textContent = card.querySelector('.product-name')?.textContent || '';
+  if(descEl) descEl.textContent = card.querySelector('.product-desc')?.textContent || '';
+  if(tagEl)  tagEl.textContent  = card.querySelector('.product-tag')?.textContent || '';
+  if(artEl)  artEl.textContent  = card.dataset.article ? `Artículo: ${card.dataset.article}` : '';
+  if(stockEl)stockEl.textContent= card.dataset.stock || 'Stock a confirmar.';
+
+  // Galería base
   const g = getGalleryFromCard(card);
   galleryMode = g.mode;
   currentGallery = g.images;
@@ -2431,28 +2473,24 @@ function openProductDetail(card){
   // Modelos (pueden cambiar imagen/precio)
   setupModelsForCard(card);
 
-  // ✅ Habilitar flechas “para todos”:
-  // Si NO hay data-gallery-default pero hay varias model-images,
-  // las flechas recorren los modelos (sincroniza el select).
-  const modelImages = (card.dataset.modelImages || '').split('|').map(s=>s.trim()).filter(Boolean);
+  // ✅ Habilitar flechas “en todos”:
+  // Si NO hay galería real pero hay varias imágenes por modelo,
+  // las flechas recorren modelos (sincroniza el select).
+  const modelImages  = (card.dataset.modelImages || '').split('|').map(s=>s.trim()).filter(Boolean);
   const modelOptions = (card.dataset.modelOptions || '').split('|').map(s=>s.trim()).filter(Boolean);
-
-  // Si existe una galería real (galleryDefault o galleryArena activo), ya está.
-  // Si no, pero hay muchos modelos con imágenes, usamos modo "models".
   const hasRealGallery = !!card.dataset.galleryDefault;
-  const isArenaGalleryActive = false; // se gestiona en applyModel al elegir "arena"
 
-  if(!hasRealGallery && !isArenaGalleryActive && modelImages.length > 1 && modelOptions.length > 1){
-    galleryMode = "models";
-    currentGallery = modelImages;
-    galleryIndex = Number(modelSelectRef?.value || 0) || 0;
-    updateGalleryArrows();
-    // No llamamos setGalleryIndex(0) porque eso forzaría modelo 0;
-    // dejamos el seleccionado actual:
-    if(typeof applyModelRef === 'function') applyModelRef(galleryIndex);
-  }
+if(!hasRealGallery && modelImages.length > 1 && modelOptions.length > 1){
+  galleryMode = "models";
+  currentGallery = modelImages;
+  galleryIndex = Number(modelSelectRef?.value || 0) || 0;
 
-  // precio base (si no hay modelos y no hay precio)
+  updateGalleryArrows();
+  setGalleryIndex(galleryIndex); // ← SOLO esto
+}
+
+
+  // precio base si quedó vacío
   const basePrice = Number(card.dataset.price || 0);
   const priceEl = document.getElementById('detail-price');
   if(priceEl && !priceEl.textContent){
@@ -2480,7 +2518,7 @@ function closeProductDetail({focusCard=true}={}){
 }
 
 /* =========================================================
-   EVENTOS
+   EVENTOS: abrir/cerrar modal + galería
 ========================================================= */
 document.querySelector('.product-grid')?.addEventListener('click', (e)=>{
   const card = e.target.closest('.product-card');
@@ -2506,14 +2544,66 @@ document.getElementById('product-detail-overlay')?.addEventListener('click', (e)
 });
 document.querySelector('.product-detail')?.addEventListener('click', (e)=>e.stopPropagation());
 
-// Teclas
+/* =========================================================
+   CAMBIO DE PRODUCTO (flechas grandes + teclado)
+========================================================= */
+function gotoProduct(delta){
+  if(!visibleProductCards.length) return;
+
+  // Recalcula índice si algo cambió
+  if(currentProductIndex < 0 || currentProductIndex >= visibleProductCards.length){
+    visibleProductCards = getAllCards().filter(c => c.style.display !== 'none');
+    currentProductIndex = visibleProductCards.indexOf(lastOpenedCard);
+  }
+  if(!visibleProductCards.length) return;
+
+  currentProductIndex = (currentProductIndex + delta + visibleProductCards.length) % visibleProductCards.length;
+  const nextCard = visibleProductCards[currentProductIndex];
+  lastOpenedCard = nextCard;
+
+  // reabrimos modal con el nuevo producto
+  openProductDetail(nextCard);
+}
+
+/* Flechas grandes del modal: cambian PRODUCTO */
+document.getElementById('detail-prev-btn')?.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  gotoProduct(-1);
+});
+document.getElementById('detail-next-btn')?.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  gotoProduct(1);
+});
+
+/* Teclado:
+   - Izq/Der => cambia IMAGEN (galería)
+   - Shift + Izq/Der => cambia PRODUCTO
+   - Escape => cerrar
+*/
 document.addEventListener('keydown', (e)=>{
-  const isOpen = document.getElementById('product-detail-overlay')?.style.display === 'flex';
+  const overlay = document.getElementById('product-detail-overlay');
+  const isOpen = overlay?.style.display === 'flex';
   if(!isOpen) return;
 
-  if(e.key === 'Escape') closeProductDetail({focusCard:true});
-  if(e.key === 'ArrowLeft') setGalleryIndex(galleryIndex - 1);
-  if(e.key === 'ArrowRight') setGalleryIndex(galleryIndex + 1);
+  const tag = document.activeElement?.tagName?.toLowerCase();
+  const typing = ['input','select','textarea'].includes(tag);
+
+  if(e.key === 'Escape'){
+    closeProductDetail({focusCard:true});
+    return;
+  }
+  if(typing) return;
+
+  if(e.key === 'ArrowLeft'){
+    e.preventDefault();
+    if(e.shiftKey) gotoProduct(-1);
+    else setGalleryIndex(galleryIndex - 1);
+  }
+  if(e.key === 'ArrowRight'){
+    e.preventDefault();
+    if(e.shiftKey) gotoProduct(1);
+    else setGalleryIndex(galleryIndex + 1);
+  }
 });
 </script>
 
