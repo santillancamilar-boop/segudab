@@ -2178,260 +2178,13 @@ cursor: default;
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
-
 <script>
-/* =========================================================
-   MENÚ (MÓVIL) + DROPDOWN
-========================================================= */
-const header = document.getElementById('site-header');
-const toggle = document.getElementById('mobile-toggle');
-const nav = document.getElementById('main-nav');
-const overlayNav = document.getElementById('nav-overlay');
-const productsItem = document.getElementById('nav-products');
-const productsLink = document.getElementById('products-link');
-
-function isMobile(){ return window.matchMedia('(max-width: 980px)').matches; }
-
-function openMenu(){
-  header?.classList.add('nav-open');
-  toggle?.setAttribute('aria-expanded','true');
-  overlayNav?.setAttribute('aria-hidden','false');
-}
-function closeMenu(){
-  header?.classList.remove('nav-open');
-  toggle?.setAttribute('aria-expanded','false');
-  overlayNav?.setAttribute('aria-hidden','true');
-  productsItem?.classList.remove('open');
-  productsLink?.setAttribute('aria-expanded','false');
-}
-
-toggle?.addEventListener('click',()=>{
-  header?.classList.contains('nav-open') ? closeMenu() : openMenu();
-});
-overlayNav?.addEventListener('click', closeMenu);
-
-// Dropdown “Productos” en móvil: abre/cierra, no navega
-productsLink?.addEventListener('click',(e)=>{
-  if(!isMobile()) return;
-  e.preventDefault();
-  const open = productsItem.classList.toggle('open');
-  productsLink.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
-
-// Cierra menú si tocás un link común en móvil
-nav?.addEventListener('click',(e)=>{
-  if(!isMobile()) return;
-  const a = e.target.closest('a');
-  if(!a) return;
-  if(a.id === 'products-link') return;
-  closeMenu();
-});
-
-/* =========================================================
-   VARIABLES MODAL / GALERÍA
-========================================================= */
-let visibleProductCards = [];
-let currentProductIndex = -1;
-
-let currentGallery = [];
-let galleryIndex = 0;
-
-// Para saber de dónde sale la galería:
-// - "gallery": data-gallery-default / galleryArena
-// - "models": data-model-images (recorre modelos)
-let galleryMode = "gallery";
-
-let lastOpenedCard = null;
-
-// refs para sincronizar flechas con selects
-let currentCardRef = null;
-let modelSelectRef = null;
-let applyModelRef = null;
-
-/* =========================================================
-   UTILIDADES
-========================================================= */
-function formatPrice(v){ return Number(v).toLocaleString('es-AR'); }
-function getAllCards(){ return Array.from(document.querySelectorAll('.product-card')); }
-
-function pulseCard(card){
-  if(!card) return;
-  card.classList.add('pulse-focus');
-  setTimeout(()=>card.classList.remove('pulse-focus'), 1200);
-}
-function scrollToCard(card){
-  if(!card) return;
-  card.scrollIntoView({behavior:'smooth', block:'center'});
-  pulseCard(card);
-}
-
-/* =========================================================
-   GALERÍA
-========================================================= */
-function updateGalleryArrows(){
-  const show = currentGallery.length > 1;
-  const prev = document.getElementById('gallery-prev-btn');
-  const next = document.getElementById('gallery-next-btn');
-  if(prev) prev.style.display = show ? 'flex' : 'none';
-  if(next) next.style.display = show ? 'flex' : 'none';
-}
-
-function setGalleryIndex(i){
-  if(!currentGallery.length) return;
-
-  galleryIndex = (i + currentGallery.length) % currentGallery.length;
-
-  // Si estamos recorriendo "modelos", sincronizamos el select
-  if(galleryMode === "models" && modelSelectRef){
-    modelSelectRef.value = String(galleryIndex);
-    if(typeof applyModelRef === 'function') applyModelRef(galleryIndex);
-    return; // applyModel ya setea imagen + precio
-  }
-
-  const url = currentGallery[galleryIndex];
-  const img = document.getElementById('detail-image');
-  if(!img) return;
-  img.style.backgroundImage = `url('${url}')`;
-  img.dataset.currentUrl = url;
-}
-
-function parseBgUrl(el){
-  const bg = el?.style?.backgroundImage || '';
-  const url = bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-  return url && url !== 'none' ? url : '';
-}
-
-function getGalleryFromCard(card){
-  // 1) data-gallery-default (si existe)
-  const g = card.dataset.galleryDefault;
-  if(g){
-    const arr = g.split('|').map(s=>s.trim()).filter(Boolean);
-    if(arr.length) return { mode:"gallery", images: arr };
-  }
-
-  // 2) fallback: imagen principal de la card
-  const url = parseBgUrl(card.querySelector('.product-image'));
-  return url ? { mode:"gallery", images:[url] } : { mode:"gallery", images:[] };
-}
-function parseList(value, delimiter){
-  if(!value) return [];
-  return value.split(delimiter).map(item => item.trim()).filter(Boolean);
-}
-
-function normalizeKey(value){
-  return value
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]/g, '');
-}
-
-function toDatasetKey(prefix, value){
-  const key = normalizeKey(value);
-  if(!key) return '';
-  return `${prefix}${key.charAt(0).toUpperCase()}${key.slice(1)}`;
-}
-
-function fillSelect(select, options, useIndex = false){
-  if(!select) return;
-  select.innerHTML = '';
-  options.forEach((opt, index)=>{
-    const option = document.createElement('option');
-    option.value = useIndex ? String(index) : opt;
-    option.textContent = opt;
-    select.appendChild(option);
-  });
-}
-
-function setDetailImage(url){
-  const img = document.getElementById('detail-image');
-  if(!img) return;
-  img.style.backgroundImage = url ? `url('${url}')` : '';
-  img.dataset.currentUrl = url || '';
-}
-
-/* =========================================================
-   ZOOM (SOLO SI SE PIDE: botón "Ampliar")
-========================================================= */
-function ensureZoomButton(){
-  const img = document.getElementById('detail-image');
-  if(!img) return;
-
-  // Evita zoom por click
-  img.style.cursor = 'default';
-
-  // Si ya existe, no duplicar
-  if(document.getElementById('zoom-btn')) return;
-
-  const btn = document.createElement('button');
-  btn.id = 'zoom-btn';
-  btn.type = 'button';
-  btn.textContent = 'Ampliar';
-  btn.style.position = 'absolute';
-  btn.style.right = '10px';
-  btn.style.bottom = '10px';
-  btn.style.padding = '8px 12px';
-  btn.style.borderRadius = '999px';
-  btn.style.border = 'none';
-  btn.style.cursor = 'pointer';
-  btn.style.fontWeight = '700';
-  btn.style.fontSize = '12px';
-  btn.style.background = 'rgba(0,0,0,0.60)';
-  btn.style.color = '#fff';
-
-  btn.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    const url = img.dataset.currentUrl || '';
-    if(!url) return;
-
-    const zo = document.getElementById('image-zoom-overlay');
-    const zi = document.getElementById('zoom-image');
-    if(!zo || !zi) return;
-
-    zi.src = url;
-    zo.style.display = 'flex';
-  });
-
-  img.appendChild(btn);
-}
-
-document.getElementById('image-zoom-overlay')?.addEventListener('click', ()=>{
-  const zo = document.getElementById('image-zoom-overlay');
-  if(zo) zo.style.display = 'none';
-});
-
-function setupSizeOptions(card){
-  const sizeWrap  = document.getElementById('detail-size-wrap');
-  const sizeLabel = document.getElementById('detail-size-label');
-  const sizeSelect= document.getElementById('detail-size');
-
-  if(!sizeWrap || !sizeLabel || !sizeSelect) return;
-
-  const sizes = parseList(card.dataset.sizeOptions, ',');
-  sizeSelect.innerHTML = '';
-
-  if(!sizes.length){
-    sizeWrap.style.display = 'none';
-    return;
-  }
-
-  const isRegularSize = sizes.every((size)=>{
-    return /^(x{0,2}s|s|m|l|xl|2xl|3xl|4xl|5xl|6xl|\d+|unico|único)$/i.test(size);
-  });
-
-  sizeLabel.textContent = isRegularSize ? 'Talle' : 'Variante';
-  sizeWrap.style.display = 'flex';
-  fillSelect(sizeSelect, sizes);
-}
-
 function setupColorModelsForCard(card){
-  const colorWrap  = document.getElementById('detail-color-wrap');
-  const colorSelect= document.getElementById('detail-color');
-  const modelWrap  = document.getElementById('detail-model-wrap');
-  const modelSelect= document.getElementById('detail-model');
-    const colorWrap   = document.getElementById('detail-color-wrap');
+  const colorWrap   = document.getElementById('detail-color-wrap');
   const colorSelect = document.getElementById('detail-color');
-  const priceEl    = document.getElementById('detail-price');
+  const modelWrap   = document.getElementById('detail-model-wrap');
+  const modelSelect = document.getElementById('detail-model');
+  const priceEl     = document.getElementById('detail-price');
 
   if(!colorWrap || !colorSelect || !modelWrap || !modelSelect || !priceEl) return false;
 
@@ -2499,7 +2252,8 @@ function setupModelsForCard(card){
   const modelWrap   = document.getElementById('detail-model-wrap');
   const modelSelect = document.getElementById('detail-model');
   const priceEl     = document.getElementById('detail-price');
-
+  const colorWrap   = document.getElementById('detail-color-wrap');
+  const colorSelect = document.getElementById('detail-color');
 
   modelSelectRef = modelSelect;
   currentCardRef = card;
@@ -2509,23 +2263,22 @@ function setupModelsForCard(card){
 
   modelWrap.style.display = 'none';
   modelSelect.innerHTML = '';
-   colorWrap.style.display = 'none';
+  colorWrap.style.display = 'none';
   colorSelect.innerHTML = '';
 
-const models = parseList(card.dataset.modelOptions, '|');
+  const models = parseList(card.dataset.modelOptions, '|');
   const images = parseList(card.dataset.modelImages, '|');
   const prices = parseList(card.dataset.modelPrices, '|');
   const modelColors = parseList(card.dataset.modelColors, '|');
 
   if(!models.length){
- 
     const basePrice = Number(card.dataset.price || 0);
     priceEl.textContent = basePrice ? `$${formatPrice(basePrice)}` : 'Consultar';
     return;
   }
 
   modelWrap.style.display = 'flex';
-   fillSelect(modelSelect, models, true);
+  fillSelect(modelSelect, models, true);
 
   const hasRealGallery = !!card.dataset.galleryDefault;
   if(!hasRealGallery && images.length > 1){
@@ -2550,19 +2303,16 @@ const models = parseList(card.dataset.modelOptions, '|');
   function applyModel(index){
     const selectedName = (modelSelect.options[index]?.textContent || '').toLowerCase();
 
- 
     if(selectedName === 'arena' && card.dataset.galleryArena){
-   currentGallery = parseList(card.dataset.galleryArena, '|');
+      currentGallery = parseList(card.dataset.galleryArena, '|');
       galleryMode = 'gallery';
-
       galleryIndex = 0;
       updateGalleryArrows();
       setGalleryIndex(0);
-        }else if(galleryMode === 'models'){
+    }else if(galleryMode === 'models'){
       const imgUrl = images[index] || images[0] || '';
       setDetailImage(imgUrl);
     }else{
-    
       const imgUrl = images[index] || images[0] || '';
       currentGallery = imgUrl ? [imgUrl] : getGalleryFromCard(card).images;
       galleryIndex = 0;
@@ -2581,165 +2331,7 @@ const models = parseList(card.dataset.modelOptions, '|');
   modelSelect.onchange = ()=>applyModel(Number(modelSelect.value));
   applyModel(0);
 }
-function setupProductOptions(card){
-  setupSizeOptions(card);
-  const handledByColors = setupColorModelsForCard(card);
-  if(!handledByColors){
-    setupModelsForCard(card);
-  }
-}
-function openProductDetail(card){
-  const overlay = document.getElementById('product-detail-overlay');
-  if(!overlay) return;
-
-  lastOpenedCard = card;
-
-  overlay.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-
-  const nameEl = document.getElementById('detail-name');
-  const descEl = document.getElementById('detail-desc');
-  const tagEl  = document.getElementById('detail-tag');
-  const artEl  = document.getElementById('detail-article');
-  const stockEl= document.getElementById('detail-stock');
-  const priceEl = document.getElementById('detail-price');
-
-  if(nameEl) nameEl.textContent = card.querySelector('.product-name')?.textContent || '';
-  if(descEl) descEl.textContent = card.querySelector('.product-desc')?.textContent || '';
-  if(tagEl)  tagEl.textContent  = card.querySelector('.product-tag')?.textContent || '';
-  if(artEl)  artEl.textContent  = card.dataset.article ? `Artículo: ${card.dataset.article}` : '';
-  if(stockEl)stockEl.textContent= card.dataset.stock || 'Stock a confirmar.';
-  if(priceEl) priceEl.textContent = '';
-
-  // Galería base
-  const g = getGalleryFromCard(card);
-  galleryMode = g.mode;
-  currentGallery = g.images;
-  galleryIndex = 0;
-  updateGalleryArrows();
-  setGalleryIndex(0);
-
-  // Modelos/colores/talles (pueden cambiar imagen/precio)
-  setupProductOptions(card);
-
-
-  // precio base si quedó vacío
-  const basePrice = Number(card.dataset.price || 0);
-  if(priceEl && !priceEl.textContent){
-    priceEl.textContent = basePrice ? `$${formatPrice(basePrice)}` : 'Consultar';
-  }
-
-  // Zoom: solo por botón
-  ensureZoomButton();
-
-  // visibles (por filtros)
-  visibleProductCards = getAllCards().filter(c => c.style.display !== 'none');
-  currentProductIndex = visibleProductCards.indexOf(card);
-}
-
-function closeProductDetail({focusCard=true}={}){
-  const overlay = document.getElementById('product-detail-overlay');
-  if(!overlay) return;
-
-  overlay.style.display = 'none';
-  document.body.style.overflow = '';
-
-  if(focusCard && lastOpenedCard){
-    setTimeout(()=>scrollToCard(lastOpenedCard), 60);
-  }
-}
-
-/* =========================================================
-   EVENTOS: abrir/cerrar modal + galería
-========================================================= */
-document.querySelector('.product-grid')?.addEventListener('click', (e)=>{
-  const card = e.target.closest('.product-card');
-  if(card) openProductDetail(card);
-});
-
-document.getElementById('detail-close-btn')?.addEventListener('click', ()=>closeProductDetail({focusCard:true}));
-
-document.getElementById('gallery-prev-btn')?.addEventListener('click', (e)=>{
-  e.stopPropagation();
-  setGalleryIndex(galleryIndex - 1);
-});
-document.getElementById('gallery-next-btn')?.addEventListener('click', (e)=>{
-  e.stopPropagation();
-  setGalleryIndex(galleryIndex + 1);
-});
-
-// Cerrar tocando el fondo oscuro (afuera)
-document.getElementById('product-detail-overlay')?.addEventListener('click', (e)=>{
-  if(e.target.id === 'product-detail-overlay'){
-    closeProductDetail({focusCard:true});
-  }
-});
-document.querySelector('.product-detail')?.addEventListener('click', (e)=>e.stopPropagation());
-
-/* =========================================================
-   CAMBIO DE PRODUCTO (flechas grandes + teclado)
-========================================================= */
-function gotoProduct(delta){
-  if(!visibleProductCards.length) return;
-
-  // Recalcula índice si algo cambió
-  if(currentProductIndex < 0 || currentProductIndex >= visibleProductCards.length){
-    visibleProductCards = getAllCards().filter(c => c.style.display !== 'none');
-    currentProductIndex = visibleProductCards.indexOf(lastOpenedCard);
-  }
-  if(!visibleProductCards.length) return;
-
-  currentProductIndex = (currentProductIndex + delta + visibleProductCards.length) % visibleProductCards.length;
-  const nextCard = visibleProductCards[currentProductIndex];
-  lastOpenedCard = nextCard;
-
-  // reabrimos modal con el nuevo producto
-  openProductDetail(nextCard);
-}
-
-/* Flechas grandes del modal: cambian PRODUCTO */
-document.getElementById('detail-prev-btn')?.addEventListener('click', (e)=>{
-  e.stopPropagation();
-  gotoProduct(-1);
-});
-document.getElementById('detail-next-btn')?.addEventListener('click', (e)=>{
-  e.stopPropagation();
-  gotoProduct(1);
-});
-
-/* Teclado:
-   - Izq/Der => cambia IMAGEN (galería)
-   - Shift + Izq/Der => cambia PRODUCTO
-   - Escape => cerrar
-*/
-document.addEventListener('keydown', (e)=>{
-  const overlay = document.getElementById('product-detail-overlay');
-  const isOpen = overlay?.style.display === 'flex';
-  if(!isOpen) return;
-
-  const tag = document.activeElement?.tagName?.toLowerCase();
-  const typing = ['input','select','textarea'].includes(tag);
-
-  if(e.key === 'Escape'){
-    closeProductDetail({focusCard:true});
-    return;
-  }
-  if(typing) return;
-
-  if(e.key === 'ArrowLeft'){
-    e.preventDefault();
-    if(e.shiftKey) gotoProduct(-1);
-    else setGalleryIndex(galleryIndex - 1);
-  }
-  if(e.key === 'ArrowRight'){
-    e.preventDefault();
-    if(e.shiftKey) gotoProduct(1);
-    else setGalleryIndex(galleryIndex + 1);
-  }
-});
 </script>
 
-
-  
 </body>
 </html>
