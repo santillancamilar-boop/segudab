@@ -2133,15 +2133,14 @@ cursor: default;
           <span class="detail-price" id="detail-price"></span>
         </div>
 
-<div class="detail-form-title">Consultar</div>
-
+<div class="detail-form-title">Opciones</div>
 <div class="detail-form">
   <label id="detail-model-wrap" style="display:none;">
     Modelo
     <select id="detail-model"></select>
   </label>
 
-  <label>
+ <label id="detail-size-wrap">
     <span id="detail-size-label">Talle</span>
     <select id="detail-size"></select>
   </label>
@@ -2314,6 +2313,42 @@ function getGalleryFromCard(card){
   const url = parseBgUrl(card.querySelector('.product-image'));
   return url ? { mode:"gallery", images:[url] } : { mode:"gallery", images:[] };
 }
+function parseList(value, delimiter){
+  if(!value) return [];
+  return value.split(delimiter).map(item => item.trim()).filter(Boolean);
+}
+
+function normalizeKey(value){
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]/g, '');
+}
+
+function toDatasetKey(prefix, value){
+  const key = normalizeKey(value);
+  if(!key) return '';
+  return `${prefix}${key.charAt(0).toUpperCase()}${key.slice(1)}`;
+}
+
+function fillSelect(select, options, useIndex = false){
+  if(!select) return;
+  select.innerHTML = '';
+  options.forEach((opt, index)=>{
+    const option = document.createElement('option');
+    option.value = useIndex ? String(index) : opt;
+    option.textContent = opt;
+    select.appendChild(option);
+  });
+}
+
+function setDetailImage(url){
+  const img = document.getElementById('detail-image');
+  if(!img) return;
+  img.style.backgroundImage = url ? `url('${url}')` : '';
+  img.dataset.currentUrl = url || '';
+}
 
 /* =========================================================
    ZOOM (SOLO SI SE PIDE: botón "Ampliar")
@@ -2365,62 +2400,169 @@ document.getElementById('image-zoom-overlay')?.addEventListener('click', ()=>{
   if(zo) zo.style.display = 'none';
 });
 
-/* =========================================================
-   MODELOS (con sincronización para flechas)
-========================================================= */
+function setupSizeOptions(card){
+  const sizeWrap  = document.getElementById('detail-size-wrap');
+  const sizeLabel = document.getElementById('detail-size-label');
+  const sizeSelect= document.getElementById('detail-size');
+
+  if(!sizeWrap || !sizeLabel || !sizeSelect) return;
+
+  const sizes = parseList(card.dataset.sizeOptions, ',');
+  sizeSelect.innerHTML = '';
+
+  if(!sizes.length){
+    sizeWrap.style.display = 'none';
+    return;
+  }
+
+  const isRegularSize = sizes.every((size)=>{
+    return /^(x{0,2}s|s|m|l|xl|2xl|3xl|4xl|5xl|6xl|\d+|unico|único)$/i.test(size);
+  });
+
+  sizeLabel.textContent = isRegularSize ? 'Talle' : 'Variante';
+  sizeWrap.style.display = 'flex';
+  fillSelect(sizeSelect, sizes);
+}
+
+function setupColorModelsForCard(card){
+  const colorWrap  = document.getElementById('detail-color-wrap');
+  const colorSelect= document.getElementById('detail-color');
+  const modelWrap  = document.getElementById('detail-model-wrap');
+  const modelSelect= document.getElementById('detail-model');
+    const colorWrap   = document.getElementById('detail-color-wrap');
+  const colorSelect = document.getElementById('detail-color');
+  const priceEl    = document.getElementById('detail-price');
+
+  if(!colorWrap || !colorSelect || !modelWrap || !modelSelect || !priceEl) return false;
+
+  const colors = parseList(card.dataset.colorOptions, '|');
+  if(!colors.length){
+    colorWrap.style.display = 'none';
+    return false;
+  }
+
+  colorWrap.style.display = 'flex';
+  fillSelect(colorSelect, colors);
+
+  function applyModel(index, images, prices){
+    const imgUrl = images[index] || images[0] || '';
+    if(galleryMode === 'models'){
+      setDetailImage(imgUrl);
+    }else{
+      currentGallery = imgUrl ? [imgUrl] : getGalleryFromCard(card).images;
+      galleryIndex = 0;
+      updateGalleryArrows();
+      setGalleryIndex(0);
+    }
+
+    const rawPrice = prices[index] ?? prices[0] ?? '';
+    const numericPrice = Number(rawPrice);
+    priceEl.textContent = numericPrice ? `$${formatPrice(numericPrice)}` : 'Consultar';
+  }
+
+  function applyColor(color){
+    const modelsKey = toDatasetKey('colorModels', color);
+    const imagesKey = toDatasetKey('colorImages', color);
+    const pricesKey = toDatasetKey('colorPrices', color);
+
+    const models = parseList(card.dataset[modelsKey], '|');
+    const images = parseList(card.dataset[imagesKey], '|');
+    const prices = parseList(card.dataset[pricesKey], '|');
+
+    modelWrap.style.display = models.length ? 'flex' : 'none';
+    fillSelect(modelSelect, models, true);
+
+    modelSelectRef = modelSelect;
+    currentCardRef = card;
+    applyModelRef = (idx)=>applyModel(idx, images, prices);
+
+    const hasRealGallery = !!card.dataset.galleryDefault;
+    if(!hasRealGallery && images.length > 1){
+      galleryMode = 'models';
+      currentGallery = images;
+      updateGalleryArrows();
+    }else{
+      galleryMode = 'gallery';
+    }
+
+    modelSelect.onchange = ()=>applyModelRef(Number(modelSelect.value));
+    applyModelRef(0);
+  }
+
+  colorSelect.onchange = ()=>applyColor(colorSelect.value);
+  applyColor(colors[0]);
+
+  return true;
+}
+
 function setupModelsForCard(card){
   const modelWrap   = document.getElementById('detail-model-wrap');
   const modelSelect = document.getElementById('detail-model');
   const priceEl     = document.getElementById('detail-price');
 
-  // guardar refs globales
+
   modelSelectRef = modelSelect;
   currentCardRef = card;
   applyModelRef = null;
 
-  if(!modelWrap || !modelSelect || !priceEl) return;
+  if(!modelWrap || !modelSelect || !priceEl || !colorWrap || !colorSelect) return;
 
   modelWrap.style.display = 'none';
   modelSelect.innerHTML = '';
+   colorWrap.style.display = 'none';
+  colorSelect.innerHTML = '';
 
-  const models = (card.dataset.modelOptions || '').split('|').map(s=>s.trim()).filter(Boolean);
-  const images = (card.dataset.modelImages || '').split('|').map(s=>s.trim()).filter(Boolean);
-  const prices = (card.dataset.modelPrices || '').split('|').map(p=>Number(p)||0);
+const models = parseList(card.dataset.modelOptions, '|');
+  const images = parseList(card.dataset.modelImages, '|');
+  const prices = parseList(card.dataset.modelPrices, '|');
+  const modelColors = parseList(card.dataset.modelColors, '|');
 
   if(!models.length){
-    // Sin modelos -> precio base
+ 
     const basePrice = Number(card.dataset.price || 0);
     priceEl.textContent = basePrice ? `$${formatPrice(basePrice)}` : 'Consultar';
     return;
   }
 
   modelWrap.style.display = 'flex';
+   fillSelect(modelSelect, models, true);
 
-  models.forEach((m,i)=>{
-    const opt = document.createElement('option');
-    opt.value = String(i);
-    opt.textContent = m;
-    modelSelect.appendChild(opt);
-  });
+  const hasRealGallery = !!card.dataset.galleryDefault;
+  if(!hasRealGallery && images.length > 1){
+    galleryMode = 'models';
+    currentGallery = images;
+    updateGalleryArrows();
+  }else{
+    galleryMode = 'gallery';
+  }
+
+  function updateColorsForModel(index){
+    const colorList = parseList(modelColors[index], ',');
+    if(!colorList.length){
+      colorWrap.style.display = 'none';
+      colorSelect.innerHTML = '';
+      return;
+    }
+    colorWrap.style.display = 'flex';
+    fillSelect(colorSelect, colorList);
+  }
 
   function applyModel(index){
     const selectedName = (modelSelect.options[index]?.textContent || '').toLowerCase();
 
-    // ⭐ Softshell arena con frente/espalda (galería real)
+ 
     if(selectedName === 'arena' && card.dataset.galleryArena){
-    if(galleryMode !== "models"){
-  currentGallery = imgUrl ? [imgUrl] : getGalleryFromCard(card).images;
-  galleryIndex = 0;
-  updateGalleryArrows();
-  setGalleryIndex(0);
-}
+   currentGallery = parseList(card.dataset.galleryArena, '|');
+      galleryMode = 'gallery';
 
       galleryIndex = 0;
       updateGalleryArrows();
       setGalleryIndex(0);
+        }else if(galleryMode === 'models'){
+      const imgUrl = images[index] || images[0] || '';
+      setDetailImage(imgUrl);
     }else{
-      // por defecto: muestra imagen del modelo (una)
-      galleryMode = "gallery";
+    
       const imgUrl = images[index] || images[0] || '';
       currentGallery = imgUrl ? [imgUrl] : getGalleryFromCard(card).images;
       galleryIndex = 0;
@@ -2428,19 +2570,24 @@ function setupModelsForCard(card){
       setGalleryIndex(0);
     }
 
-    const p = prices[index] || Number(card.dataset.price || 0);
-    priceEl.textContent = p ? `$${formatPrice(p)}` : 'Consultar';
+    updateColorsForModel(index);
+
+    const rawPrice = prices[index] ?? prices[0] ?? '';
+    const numericPrice = Number(rawPrice);
+    priceEl.textContent = numericPrice ? `$${formatPrice(numericPrice)}` : 'Consultar';
   }
 
   applyModelRef = applyModel;
-
   modelSelect.onchange = ()=>applyModel(Number(modelSelect.value));
   applyModel(0);
 }
-
-/* =========================================================
-   PRODUCT DETAIL: OPEN / CLOSE
-========================================================= */
+function setupProductOptions(card){
+  setupSizeOptions(card);
+  const handledByColors = setupColorModelsForCard(card);
+  if(!handledByColors){
+    setupModelsForCard(card);
+  }
+}
 function openProductDetail(card){
   const overlay = document.getElementById('product-detail-overlay');
   if(!overlay) return;
@@ -2455,12 +2602,14 @@ function openProductDetail(card){
   const tagEl  = document.getElementById('detail-tag');
   const artEl  = document.getElementById('detail-article');
   const stockEl= document.getElementById('detail-stock');
+  const priceEl = document.getElementById('detail-price');
 
   if(nameEl) nameEl.textContent = card.querySelector('.product-name')?.textContent || '';
   if(descEl) descEl.textContent = card.querySelector('.product-desc')?.textContent || '';
   if(tagEl)  tagEl.textContent  = card.querySelector('.product-tag')?.textContent || '';
   if(artEl)  artEl.textContent  = card.dataset.article ? `Artículo: ${card.dataset.article}` : '';
   if(stockEl)stockEl.textContent= card.dataset.stock || 'Stock a confirmar.';
+  if(priceEl) priceEl.textContent = '';
 
   // Galería base
   const g = getGalleryFromCard(card);
@@ -2470,29 +2619,12 @@ function openProductDetail(card){
   updateGalleryArrows();
   setGalleryIndex(0);
 
-  // Modelos (pueden cambiar imagen/precio)
-  setupModelsForCard(card);
-
-  // ✅ Habilitar flechas “en todos”:
-  // Si NO hay galería real pero hay varias imágenes por modelo,
-  // las flechas recorren modelos (sincroniza el select).
-  const modelImages  = (card.dataset.modelImages || '').split('|').map(s=>s.trim()).filter(Boolean);
-  const modelOptions = (card.dataset.modelOptions || '').split('|').map(s=>s.trim()).filter(Boolean);
-  const hasRealGallery = !!card.dataset.galleryDefault;
-
-if(!hasRealGallery && modelImages.length > 1 && modelOptions.length > 1){
-  galleryMode = "models";
-  currentGallery = modelImages;
-  galleryIndex = Number(modelSelectRef?.value || 0) || 0;
-
-  updateGalleryArrows();
-  setGalleryIndex(galleryIndex); // ← SOLO esto
-}
+  // Modelos/colores/talles (pueden cambiar imagen/precio)
+  setupProductOptions(card);
 
 
   // precio base si quedó vacío
   const basePrice = Number(card.dataset.price || 0);
-  const priceEl = document.getElementById('detail-price');
   if(priceEl && !priceEl.textContent){
     priceEl.textContent = basePrice ? `$${formatPrice(basePrice)}` : 'Consultar';
   }
