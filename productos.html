@@ -1,4 +1,4 @@
-@DOCTYPE html
+arreglalo en este: @DOCTYPE html
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -153,6 +153,11 @@
 
 
     .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+     .nav-item.open .dropdown {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
@@ -636,10 +641,18 @@
       .section-title{ font-size: 22px; }
       .section-subtitle{ margin-bottom: 12px; }
 
-      .catalog-layout { grid-template-columns: 1fr; padding: 0; }
-      .cart-panel { position: static; max-width: none; top:auto; }
-      .sidebar { max-width: 520px; width: 100%; margin: 0 auto; }
-    }
+     .catalog-layout {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+      }
+      .sidebar { display: contents; }
+      .filters { order: 1; }
+      .product-grid { order: 2; }
+      .cart-panel { order: 3; position: static; max-width: none; top:auto; }
+      .filters,
+      .cart-panel { max-width: 520px; width: 100%; margin: 0 auto; }
+      }
 
     @media (max-width: 520px){
       .logo-text span{ display:none; }
@@ -676,7 +689,7 @@
         <a href="index.html" class="nav-link">Inicio</a>
 
         <div class="nav-item" id="nav-products">
-          <a href="productos.html" class="nav-link" id="products-link">
+        <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
             Productos <span class="caret">▼</span>
           </a>
 
@@ -1626,13 +1639,17 @@
 
     const productsItem = document.getElementById('nav-products');
     const productsLink = document.getElementById('products-link');
-
-    function closeMenu(){
+    
+ function setProductsExpanded(isExpanded) {
+      productsItem.classList.toggle('open', isExpanded);
+      productsLink.setAttribute('aria-expanded', String(isExpanded));
+    }
+   function closeMenu(){
       header.classList.remove('nav-open');
       toggle.textContent = '☰';
       toggle.setAttribute('aria-expanded','false');
       overlay.setAttribute('aria-hidden','true');
-      productsItem.classList.remove('open');
+      setProductsExpanded(false);
     }
 
     function openMenu(){
@@ -1640,7 +1657,12 @@
       toggle.textContent = '✕';
       toggle.setAttribute('aria-expanded','true');
       overlay.setAttribute('aria-hidden','false');
-    }
+
+  productsLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setProductsExpanded(!productsItem.classList.contains('open'));
+    });
 
     toggle.addEventListener('click', () => {
       const isOpen = header.classList.contains('nav-open');
@@ -1655,14 +1677,7 @@
 
       const isMobile = window.matchMedia('(max-width: 980px)').matches;
 
-
-      if (isMobile && a === productsLink) {
-        e.preventDefault();
-        productsItem.classList.toggle('open');
-        return;
-      }
-
-    
+        if (a === productsLink) return;
       if (isMobile) {
         closeMenu();
       }
@@ -1671,6 +1686,11 @@
     window.addEventListener('resize', () => {
 
       if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
+    });
+  document.addEventListener('click', (e) => {
+      if (!productsItem.classList.contains('open')) return;
+      if (productsItem.contains(e.target)) return;
+      setProductsExpanded(false);
     });
 
 
@@ -1920,8 +1940,7 @@
     });
 
     function setupProductCardClicks() {
-      // Para que “Ver detalle” no intente abrir modal (si después lo agregás),
-      // por ahora solo agrega al carrito como demo si querés.
+
       const cards = document.querySelectorAll('.product-card');
       cards.forEach(card => {
         const btn = card.querySelector('.btn-small');
