@@ -588,7 +588,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #fff;
-  cursor: zoom-in;
+cursor: default;
   position: relative;
 }
 
@@ -1022,6 +1022,77 @@
     font-size: 20px;
   }
 }
+    /* Panel derecho más “tienda” */
+.detail-info{
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 14px 14px 16px;
+}
+
+.detail-tag{
+  background: #111;
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 10px;
+  letter-spacing: .6px;
+}
+
+.detail-name{
+  font-size: 22px;
+  margin: 2px 0 0;
+}
+
+.detail-desc{
+  line-height: 1.35;
+}
+
+.detail-stock{
+  background: #eaf7ea;
+  border: 1px solid #cfe9cf;
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+
+.detail-price-row{
+  border-top: 1px dashed #ddd;
+  padding-top: 10px;
+  margin-top: 8px;
+}
+
+.detail-form label{
+  width: 100%;
+}
+
+.detail-form select,
+.detail-form input[type="number"]{
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+}
+
+.detail-actions{
+  margin-top: 10px;
+}
+
+.detail-add-btn{
+  width: 100%;
+  height: 42px;
+  font-size: 14px;
+  letter-spacing: .6px;
+  box-shadow: 0 8px 18px rgba(224,0,0,0.22);
+}
+
+/* Highlight cuando cerrás y vuelve al producto */
+.product-card.pulse-focus{
+  outline: 3px solid rgba(244,197,66,0.75);
+  box-shadow: 0 0 0 6px rgba(244,197,66,0.18), 0 10px 26px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  transition: .18s ease;
+}
+
 
   </style>
 </head>
@@ -2064,288 +2135,223 @@
   </footer>
 
 <script>
-
-const $  = (s, root=document) => root.querySelector(s);
-const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
-
-function formatPrice(v){
-  const n = Number(v || 0);
-  return n.toLocaleString('es-AR');
-}
-function safeText(el){ return (el?.textContent || '').trim(); }
-function isMobileNav(){
-  return window.matchMedia && window.matchMedia('(max-width: 980px)').matches;
-}
-
-
+/* =========================================================
+   MENÚ (MÓVIL) + DROPDOWN
+========================================================= */
 const header = document.getElementById('site-header');
 const toggle = document.getElementById('mobile-toggle');
-const overlay = document.getElementById('nav-overlay');
+const nav = document.getElementById('main-nav');
+const overlayNav = document.getElementById('nav-overlay');
 const productsItem = document.getElementById('nav-products');
 const productsLink = document.getElementById('products-link');
 
+function isMobile(){ return window.matchMedia('(max-width: 980px)').matches; }
+
 function openMenu(){
-  header?.classList.add('nav-open');
+  header.classList.add('nav-open');
   toggle?.setAttribute('aria-expanded','true');
-  overlay?.setAttribute('aria-hidden','false');
+  overlayNav?.setAttribute('aria-hidden','false');
 }
 function closeMenu(){
-  header?.classList.remove('nav-open');
+  header.classList.remove('nav-open');
   toggle?.setAttribute('aria-expanded','false');
-  overlay?.setAttribute('aria-hidden','true');
+  overlayNav?.setAttribute('aria-hidden','true');
   productsItem?.classList.remove('open');
   productsLink?.setAttribute('aria-expanded','false');
 }
-toggle?.addEventListener('click', () => {
-  header?.classList.contains('nav-open') ? closeMenu() : openMenu();
+
+toggle?.addEventListener('click',()=>{
+  header.classList.contains('nav-open') ? closeMenu() : openMenu();
 });
-overlay?.addEventListener('click', closeMenu);
+overlayNav?.addEventListener('click', closeMenu);
 
-
-productsLink?.addEventListener('click', (e) => {
-  if(!isMobileNav()) return;     
+// Dropdown “Productos” en móvil: abre/cierra, no navega
+productsLink?.addEventListener('click',(e)=>{
+  if(!isMobile()) return;
   e.preventDefault();
-  const isOpen = productsItem?.classList.toggle('open');
-  productsLink.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  const open = productsItem.classList.toggle('open');
+  productsLink.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
 
-
-$('#main-nav')?.addEventListener('click', (e)=>{
-  if(!isMobileNav()) return;
+// Cierra menú si tocás un link común en móvil
+nav?.addEventListener('click',(e)=>{
+  if(!isMobile()) return;
   const a = e.target.closest('a');
   if(!a) return;
   if(a.id === 'products-link') return;
   closeMenu();
 });
 
-const CART_KEY = 'segudab_cart';
-let cart = [];
-
-let activeCategory = 'all';
-let activePrice = 'all';
-let activeSearch = '';
-
+/* =========================================================
+   VARIABLES MODAL / GALERÍA
+========================================================= */
 let visibleProductCards = [];
 let currentProductIndex = -1;
 
 let currentGallery = [];
 let galleryIndex = 0;
 
-let currentCard = null;          
-let currentModelIndex = 0;     
-let currentColorValue = '';      
+// Para saber de dónde sale la galería:
+// - "gallery": data-gallery-default / galleryArena
+// - "models": data-model-images (recorre modelos)
+let galleryMode = "gallery";
 
+let lastOpenedCard = null;
 
-const grid = $('.product-grid');
-const countText = $('#product-count-text');
+// refs para sincronizar flechas con selects
+let currentCardRef = null;
+let modelSelectRef = null;
+let applyModelRef = null;
 
-const detailOverlay = $('#product-detail-overlay');
-const detailCloseBtn = $('#detail-close-btn');
-const detailPrevBtn = $('#detail-prev-btn');
-const detailNextBtn = $('#detail-next-btn');
+/* =========================================================
+   UTILIDADES
+========================================================= */
+function formatPrice(v){ return Number(v).toLocaleString('es-AR'); }
+function getAllCards(){ return Array.from(document.querySelectorAll('.product-card')); }
 
-const detailImage = $('#detail-image');
-const galleryPrevBtn = $('#gallery-prev-btn');
-const galleryNextBtn = $('#gallery-next-btn');
-
-const zoomOverlay = $('#image-zoom-overlay');
-const zoomImg = $('#zoom-image');
-
-const detailTag = $('#detail-tag');
-const detailName = $('#detail-name');
-const detailArticle = $('#detail-article');
-const detailDesc = $('#detail-desc');
-const detailStock = $('#detail-stock');
-const detailPrice = $('#detail-price');
-
-const modelWrap = $('#detail-model-wrap');
-const modelSelect = $('#detail-model');
-
-const colorWrap = $('#detail-color-wrap');
-const colorSelect = $('#detail-color');
-
-const sizeLabel = $('#detail-size-label');
-const sizeSelect = $('#detail-size');
-
-const qtyInput = $('#detail-qty');
-const addBtn = $('#detail-add-btn');
-
-const cartCountEl = $('#cart-count');
-const cartItemsEl = $('#cart-items');
-const cartTotalEl = $('#cart-total');
-
-const nameInput = $('#checkout-nombre');
-const phoneInput = $('#checkout-telefono');
-const emailInput = $('#checkout-email');
-
-
-function getAllCards(){ return $$('.product-card'); }
-
-function getCardBaseImage(card){
-  const bg = card.querySelector('.product-image')?.style.backgroundImage || '';
-  const url = bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-  return url || '';
+function pulseCard(card){
+  if(!card) return;
+  card.classList.add('pulse-focus');
+  setTimeout(()=>card.classList.remove('pulse-focus'), 1200);
+}
+function scrollToCard(card){
+  if(!card) return;
+  card.scrollIntoView({behavior:'smooth', block:'center'});
+  pulseCard(card);
 }
 
-function getGalleryFromCard(card){
-  const g = card.dataset.galleryDefault;
-  if(g) return g.split('|').map(s=>s.trim()).filter(Boolean);
-  const url = getCardBaseImage(card);
-  return url ? [url] : [];
-}
-
+/* =========================================================
+   GALERÍA
+========================================================= */
 function updateGalleryArrows(){
   const show = currentGallery.length > 1;
-  if(galleryPrevBtn) galleryPrevBtn.style.display = show ? 'flex' : 'none';
-  if(galleryNextBtn) galleryNextBtn.style.display = show ? 'flex' : 'none';
+  const prev = document.getElementById('gallery-prev-btn');
+  const next = document.getElementById('gallery-next-btn');
+  if(prev) prev.style.display = show ? 'flex' : 'none';
+  if(next) next.style.display = show ? 'flex' : 'none';
 }
 
 function setGalleryIndex(i){
   if(!currentGallery.length) return;
+
   galleryIndex = (i + currentGallery.length) % currentGallery.length;
+
+  // Si estamos recorriendo "modelos", sincronizamos el select
+  if(galleryMode === "models" && modelSelectRef){
+    modelSelectRef.value = String(galleryIndex);
+    // aplica precio + imagen según modelo
+    if(typeof applyModelRef === 'function') applyModelRef(galleryIndex);
+    return; // applyModel ya setea la imagen
+  }
+
+  // modo normal: solo cambia imagen
   const url = currentGallery[galleryIndex];
-  if(detailImage){
-    detailImage.style.backgroundImage = `url('${url}')`;
-    detailImage.dataset.currentUrl = url;
+  const img = document.getElementById('detail-image');
+  if(!img) return;
+  img.style.backgroundImage = `url('${url}')`;
+  img.dataset.currentUrl = url;
+}
+
+function parseBgUrl(el){
+  const bg = el?.style?.backgroundImage || '';
+  const url = bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+  return url && url !== 'none' ? url : '';
+}
+
+function getGalleryFromCard(card){
+  // 1) data-gallery-default (si existe)
+  const g = card.dataset.galleryDefault;
+  if(g){
+    const arr = g.split('|').map(s=>s.trim()).filter(Boolean);
+    if(arr.length) return { mode:"gallery", images: arr };
   }
+
+  // 2) fallback: imagen principal de la card
+  const url = parseBgUrl(card.querySelector('.product-image'));
+  return url ? { mode:"gallery", images:[url] } : { mode:"gallery", images:[] };
 }
 
-function setPriceText(n){
-  const v = Number(n || 0);
-  detailPrice.textContent = v ? `$${formatPrice(v)}` : 'Consultar';
-}
+/* =========================================================
+   ZOOM (SOLO SI SE PIDE: botón "Ampliar")
+========================================================= */
+function ensureZoomButton(){
+  const img = document.getElementById('detail-image');
+  if(!img) return;
 
-function parsePipeList(str){
-  return (str || '').split('|').map(s=>s.trim()).filter(Boolean);
-}
-function parseCommaList(str){
-  return (str || '').split(',').map(s=>s.trim()).filter(Boolean);
-}
+  // Evita zoom por click
+  img.style.cursor = 'default';
 
+  // Si ya existe, no duplicar
+  if(document.getElementById('zoom-btn')) return;
 
-function setupSizes(card){
-  const raw = card.dataset.sizeOptions || '';
-  const sizes = raw ? raw.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const btn = document.createElement('button');
+  btn.id = 'zoom-btn';
+  btn.type = 'button';
+  btn.textContent = 'Ampliar';
+  btn.style.position = 'absolute';
+  btn.style.right = '10px';
+  btn.style.bottom = '10px';
+  btn.style.padding = '8px 12px';
+  btn.style.borderRadius = '999px';
+  btn.style.border = 'none';
+  btn.style.cursor = 'pointer';
+  btn.style.fontWeight = '700';
+  btn.style.fontSize = '12px';
+  btn.style.background = 'rgba(0,0,0,0.60)';
+  btn.style.color = '#fff';
 
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const url = img.dataset.currentUrl || '';
+    if(!url) return;
 
-  const finalSizes = sizes.length ? sizes : ['Único'];
+    const zo = document.getElementById('image-zoom-overlay');
+    const zi = document.getElementById('zoom-image');
+    if(!zo || !zi) return;
 
-  sizeSelect.innerHTML = '';
-  finalSizes.forEach(s=>{
-    const opt = document.createElement('option');
-    opt.value = s;
-    opt.textContent = s;
-    sizeSelect.appendChild(opt);
+    zi.src = url;
+    zo.style.display = 'flex';
   });
 
-  sizeLabel.textContent = sizes.length ? 'Talle' : 'Opción';
+  img.appendChild(btn);
 }
 
-function hideModelAndColor(){
+document.getElementById('image-zoom-overlay')?.addEventListener('click', ()=>{
+  const zo = document.getElementById('image-zoom-overlay');
+  if(zo) zo.style.display = 'none';
+});
+
+/* =========================================================
+   MODELOS (con sincronización para flechas)
+========================================================= */
+function setupModelsForCard(card){
+  const modelWrap   = document.getElementById('detail-model-wrap');
+  const modelSelect = document.getElementById('detail-model');
+  const priceEl     = document.getElementById('detail-price');
+
+  // guardar refs globales
+  modelSelectRef = modelSelect;
+  currentCardRef = card;
+  applyModelRef = null;
+
+  if(!modelWrap || !modelSelect || !priceEl) return;
+
   modelWrap.style.display = 'none';
-  colorWrap.style.display = 'none';
   modelSelect.innerHTML = '';
-  colorSelect.innerHTML = '';
-  currentModelIndex = 0;
-  currentColorValue = '';
-}
 
-function showColorOptions(colors){
-  const unique = Array.from(new Set((colors || []).filter(Boolean)));
-  if(unique.length <= 1){
-    colorWrap.style.display = 'none';
-    colorSelect.innerHTML = '';
-    currentColorValue = unique[0] || '';
+  const models = (card.dataset.modelOptions || '').split('|').map(s=>s.trim()).filter(Boolean);
+  const images = (card.dataset.modelImages || '').split('|').map(s=>s.trim()).filter(Boolean);
+  const prices = (card.dataset.modelPrices || '').split('|').map(p=>Number(p)||0);
+
+  if(!models.length){
+    // Sin modelos -> precio base
+    const basePrice = Number(card.dataset.price || 0);
+    priceEl.textContent = basePrice ? `$${formatPrice(basePrice)}` : 'Consultar';
     return;
   }
-  colorWrap.style.display = 'flex';
-  colorSelect.innerHTML = '';
-  unique.forEach(c=>{
-    const opt = document.createElement('option');
-    opt.value = c;
-    opt.textContent = c;
-    colorSelect.appendChild(opt);
-  });
-  currentColorValue = colorSelect.value || unique[0] || '';
-}
-
-function setupModelsAndColors(card){
-  hideModelAndColor();
-
-  const models = parsePipeList(card.dataset.modelOptions);
-  const modelImages = parsePipeList(card.dataset.modelImages);
-  const modelPrices = parsePipeList(card.dataset.modelPrices).map(x => Number(x) || 0);
-
-  const modelColorsByIndex = parsePipeList(card.dataset.modelColors); 
-  const hasModels = models.length > 0;
-
-  const primaryColors = parsePipeList(card.dataset.colorOptions); 
-  const hasColorDrivenModels =
-    primaryColors.length > 0 &&
-    !hasModels &&
-    (card.dataset.colorModelsArena || card.dataset.colorModelsNegro);
-
-  if(hasColorDrivenModels){
-    colorWrap.style.display = 'flex';
-    colorSelect.innerHTML = '';
-    primaryColors.forEach(c=>{
-      const opt = document.createElement('option');
-      opt.value = c.toLowerCase();
-      opt.textContent = c;
-      colorSelect.appendChild(opt);
-    });
-
-    modelWrap.style.display = 'flex';
-
-    function applyColorDriven(){
-      const c = (colorSelect.value || '').toLowerCase();
-      currentColorValue = colorSelect.options[colorSelect.selectedIndex]?.textContent || '';
-
-      const modelsStr = (c === 'arena') ? card.dataset.colorModelsArena : card.dataset.colorModelsNegro;
-      const imgsStr   = (c === 'arena') ? card.dataset.colorImagesArena : card.dataset.colorImagesNegro;
-
-      const m = parsePipeList(modelsStr);
-      const imgs = parsePipeList(imgsStr);
-
-      modelSelect.innerHTML = '';
-      m.forEach((name, i)=>{
-        const opt = document.createElement('option');
-        opt.value = String(i);
-        opt.textContent = name;
-        modelSelect.appendChild(opt);
-      });
-
-   
-      currentModelIndex = 0;
-      const firstImg = imgs[0] || getCardBaseImage(card);
-      currentGallery = firstImg ? [firstImg] : getGalleryFromCard(card);
-      galleryIndex = 0;
-      updateGalleryArrows();
-      setGalleryIndex(0);
-
- 
-      setPriceText(Number(card.dataset.price || 0));
-      
-      
-      modelSelect.onchange = ()=>{
-        const idx = Number(modelSelect.value || 0);
-        currentModelIndex = idx;
-        const img = imgs[idx] || imgs[0] || firstImg;
-        currentGallery = img ? [img] : getGalleryFromCard(card);
-        galleryIndex = 0;
-        updateGalleryArrows();
-        setGalleryIndex(0);
-      };
-    }
-
-    colorSelect.onchange = applyColorDriven;
-    applyColorDriven();
-    return;
-  }
-
-  if(!hasModels) return;
 
   modelWrap.style.display = 'flex';
+
   models.forEach((m,i)=>{
     const opt = document.createElement('option');
     opt.value = String(i);
@@ -2353,416 +2359,163 @@ function setupModelsAndColors(card){
     modelSelect.appendChild(opt);
   });
 
-  function applyModel(idx){
-    currentModelIndex = idx;
+  function applyModel(index){
+    const selectedName = (modelSelect.options[index]?.textContent || '').toLowerCase();
 
-    const modelName = (modelSelect.options[idx]?.textContent || '').toLowerCase();
-
- 
-    if(modelName === 'arena' && card.dataset.galleryArena){
-      currentGallery = parsePipeList(card.dataset.galleryArena);
-    } else {
-      const img = modelImages[idx] || modelImages[0] || getCardBaseImage(card);
-      currentGallery = img ? [img] : getGalleryFromCard(card);
+    // ⭐ Softshell arena con frente/espalda (galería real)
+    if(selectedName === 'arena' && card.dataset.galleryArena){
+      galleryMode = "gallery";
+      currentGallery = card.dataset.galleryArena.split('|').map(s=>s.trim()).filter(Boolean);
+      galleryIndex = 0;
+      updateGalleryArrows();
+      setGalleryIndex(0);
+    }else{
+      // por defecto: muestra imagen del modelo (una)
+      galleryMode = "gallery";
+      const imgUrl = images[index] || images[0] || '';
+      currentGallery = imgUrl ? [imgUrl] : getGalleryFromCard(card).images;
+      galleryIndex = 0;
+      updateGalleryArrows();
+      setGalleryIndex(0);
     }
 
-    galleryIndex = 0;
-    updateGalleryArrows();
-    setGalleryIndex(0);
-
-    const priceForModel = modelPrices[idx] || Number(card.dataset.price || 0);
-    setPriceText(priceForModel);
-
-    if(modelColorsByIndex.length){
-      const colorsForThis = parseCommaList(modelColorsByIndex[idx] || modelColorsByIndex[0] || '');
-      showColorOptions(colorsForThis);
-    } else if(card.dataset.colorOptions){
-      showColorOptions(parsePipeList(card.dataset.colorOptions));
-    } else {
-      showColorOptions([]);
-    }
+    const p = prices[index] || Number(card.dataset.price || 0);
+    priceEl.textContent = p ? `$${formatPrice(p)}` : 'Consultar';
   }
 
-  modelSelect.onchange = ()=>applyModel(Number(modelSelect.value || 0));
+  applyModelRef = applyModel;
+
+  modelSelect.onchange = ()=>applyModel(Number(modelSelect.value));
   applyModel(0);
+
+  // ✅ Si NO es softshell-arena y hay varios model-images, permitimos flechas para recorrer modelos
+  // (esto hace que las flechas funcionen “en todos” los que tengan varias imágenes por modelos)
+  if(images.length > 1 && !card.dataset.galleryArena){
+    // prepará galería “modelos”
+    // Ojo: esto NO reemplaza el select: solo habilita flechas y mantiene todo sincronizado
+    // El modo se activa al abrir el modal (más abajo), pero dejamos listo el array
+  }
 }
 
-
+/* =========================================================
+   PRODUCT DETAIL: OPEN / CLOSE
+========================================================= */
 function openProductDetail(card){
-  currentCard = card;
+  const overlay = document.getElementById('product-detail-overlay');
+  if(!overlay) return;
 
-  detailOverlay.style.display = 'flex';
+  lastOpenedCard = card;
+
+  overlay.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 
-  detailName.textContent = safeText(card.querySelector('.product-name'));
-  detailDesc.textContent = safeText(card.querySelector('.product-desc'));
-  detailTag.textContent = safeText(card.querySelector('.product-tag'));
+  document.getElementById('detail-name').textContent =
+    card.querySelector('.product-name')?.textContent || '';
+  document.getElementById('detail-desc').textContent =
+    card.querySelector('.product-desc')?.textContent || '';
+  document.getElementById('detail-tag').textContent =
+    card.querySelector('.product-tag')?.textContent || '';
+  document.getElementById('detail-article').textContent =
+    card.dataset.article ? `Artículo: ${card.dataset.article}` : '';
+  document.getElementById('detail-stock').textContent =
+    card.dataset.stock || 'Stock a confirmar.';
 
-  detailArticle.textContent = card.dataset.article ? `Artículo: ${card.dataset.article}` : '';
-  detailStock.textContent = card.dataset.stock || 'Stock a confirmar.';
-
-  setPriceText(Number(card.dataset.price || 0));
-
-
-  currentGallery = getGalleryFromCard(card);
+  // Primero seteo una galería base
+  const g = getGalleryFromCard(card);
+  galleryMode = g.mode;
+  currentGallery = g.images;
   galleryIndex = 0;
   updateGalleryArrows();
   setGalleryIndex(0);
 
-  setupSizes(card);
-  setupModelsAndColors(card);
+  // Modelos (pueden cambiar imagen/precio)
+  setupModelsForCard(card);
 
+  // ✅ Habilitar flechas “para todos”:
+  // Si NO hay data-gallery-default pero hay varias model-images,
+  // las flechas recorren los modelos (sincroniza el select).
+  const modelImages = (card.dataset.modelImages || '').split('|').map(s=>s.trim()).filter(Boolean);
+  const modelOptions = (card.dataset.modelOptions || '').split('|').map(s=>s.trim()).filter(Boolean);
 
-  qtyInput.value = 1;
+  // Si existe una galería real (galleryDefault o galleryArena activo), ya está.
+  // Si no, pero hay muchos modelos con imágenes, usamos modo "models".
+  const hasRealGallery = !!card.dataset.galleryDefault;
+  const isArenaGalleryActive = false; // se gestiona en applyModel al elegir "arena"
 
+  if(!hasRealGallery && !isArenaGalleryActive && modelImages.length > 1 && modelOptions.length > 1){
+    galleryMode = "models";
+    currentGallery = modelImages;
+    galleryIndex = Number(modelSelectRef?.value || 0) || 0;
+    updateGalleryArrows();
+    // No llamamos setGalleryIndex(0) porque eso forzaría modelo 0;
+    // dejamos el seleccionado actual:
+    if(typeof applyModelRef === 'function') applyModelRef(galleryIndex);
+  }
+
+  // precio base (si no hay modelos y no hay precio)
+  const basePrice = Number(card.dataset.price || 0);
+  const priceEl = document.getElementById('detail-price');
+  if(priceEl && !priceEl.textContent){
+    priceEl.textContent = basePrice ? `$${formatPrice(basePrice)}` : 'Consultar';
+  }
+
+  // Zoom: solo por botón
+  ensureZoomButton();
+
+  // visibles (por filtros)
   visibleProductCards = getAllCards().filter(c => c.style.display !== 'none');
   currentProductIndex = visibleProductCards.indexOf(card);
 }
 
-function closeProductDetail(){
-  detailOverlay.style.display = 'none';
+function closeProductDetail({focusCard=true}={}){
+  const overlay = document.getElementById('product-detail-overlay');
+  if(!overlay) return;
+
+  overlay.style.display = 'none';
   document.body.style.overflow = '';
-  currentCard = null;
+
+  if(focusCard && lastOpenedCard){
+    setTimeout(()=>scrollToCard(lastOpenedCard), 60);
+  }
 }
 
-detailCloseBtn?.addEventListener('click', closeProductDetail);
+/* =========================================================
+   EVENTOS
+========================================================= */
+document.querySelector('.product-grid')?.addEventListener('click', (e)=>{
+  const card = e.target.closest('.product-card');
+  if(card) openProductDetail(card);
+});
 
-function goToRelativeProduct(delta){
-  if(!visibleProductCards.length) return;
-  let nextIndex = currentProductIndex + delta;
-  if(nextIndex < 0) nextIndex = visibleProductCards.length - 1;
-  if(nextIndex >= visibleProductCards.length) nextIndex = 0;
-  openProductDetail(visibleProductCards[nextIndex]);
-}
-detailPrevBtn?.addEventListener('click', ()=>goToRelativeProduct(-1));
-detailNextBtn?.addEventListener('click', ()=>goToRelativeProduct(1));
+document.getElementById('detail-close-btn')?.addEventListener('click', ()=>closeProductDetail({focusCard:true}));
 
-galleryPrevBtn?.addEventListener('click', ()=>setGalleryIndex(galleryIndex - 1));
-galleryNextBtn?.addEventListener('click', ()=>setGalleryIndex(galleryIndex + 1));
+document.getElementById('gallery-prev-btn')?.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  setGalleryIndex(galleryIndex - 1);
+});
+document.getElementById('gallery-next-btn')?.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  setGalleryIndex(galleryIndex + 1);
+});
 
+// Cerrar tocando el fondo oscuro (afuera)
+document.getElementById('product-detail-overlay')?.addEventListener('click', (e)=>{
+  if(e.target.id === 'product-detail-overlay'){
+    closeProductDetail({focusCard:true});
+  }
+});
+document.querySelector('.product-detail')?.addEventListener('click', (e)=>e.stopPropagation());
+
+// Teclas
 document.addEventListener('keydown', (e)=>{
-  if(detailOverlay?.style.display !== 'flex') return;
-  if(e.key === 'Escape') closeProductDetail();
+  const isOpen = document.getElementById('product-detail-overlay')?.style.display === 'flex';
+  if(!isOpen) return;
+
+  if(e.key === 'Escape') closeProductDetail({focusCard:true});
   if(e.key === 'ArrowLeft') setGalleryIndex(galleryIndex - 1);
   if(e.key === 'ArrowRight') setGalleryIndex(galleryIndex + 1);
 });
-
-detailImage?.addEventListener('click', ()=>{
-  if(!detailImage.dataset.currentUrl) return;
-  zoomImg.src = detailImage.dataset.currentUrl;
-  zoomOverlay.style.display = 'flex';
-});
-zoomOverlay?.addEventListener('click', ()=>{
-  zoomOverlay.style.display = 'none';
-  zoomImg.src = '';
-});
-
-
-grid?.addEventListener('click', (e)=>{
-  const card = e.target.closest('.product-card');
-  if(!card) return;
-  openProductDetail(card);
-});
-
-
-const filterBtns = $$('.filter-btn[data-category]');
-const searchInput = $('#filter-search');
-const priceSelect = $('#filter-price');
-const clearBtn = $('#clear-filters');
-
-function categoryMatches(cardCat, activeCat){
-  if(activeCat === 'all') return true;
-
-
-  if(activeCat === 'calzado'){
-    return ['calzado','borcegos','zapatos','botines'].includes(cardCat);
-  }
-  return cardCat === activeCat;
-}
-
-function priceMatches(cardPrice, rule){
-  const p = Number(cardPrice || 0);
-  if(rule === 'all') return true;
-
-
-  if(p === 0) return true;
-
-  if(rule === 'low') return p < 20000;
-  if(rule === 'mid') return p >= 20000 && p <= 40000;
-  if(rule === 'high') return p > 40000;
-  return true;
-}
-
-function searchMatches(card, term){
-  if(!term) return true;
-  const t = term.toLowerCase();
-  const name = safeText(card.querySelector('.product-name')).toLowerCase();
-  const desc = safeText(card.querySelector('.product-desc')).toLowerCase();
-  return name.includes(t) || desc.includes(t);
-}
-
-function applyFilters(){
-  const cards = getAllCards();
-  let shown = 0;
-
-  cards.forEach(card=>{
-    const cat = (card.dataset.category || '').toLowerCase();
-    const okCat = categoryMatches(cat, activeCategory);
-    const okPrice = priceMatches(card.dataset.price, activePrice);
-    const okSearch = searchMatches(card, activeSearch);
-
-    const show = okCat && okPrice && okSearch;
-    card.style.display = show ? '' : 'none';
-    if(show) shown++;
-  });
-
-  if(countText){
-    countText.textContent = `${shown} producto(s) visibles`;
-  }
-
- 
-  visibleProductCards = getAllCards().filter(c => c.style.display !== 'none');
-  if(currentCard){
-    currentProductIndex = visibleProductCards.indexOf(currentCard);
-  }
-}
-
-filterBtns.forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    filterBtns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    activeCategory = (btn.dataset.category || 'all').toLowerCase();
-    applyFilters();
-  });
-});
-
-searchInput?.addEventListener('input', ()=>{
-  activeSearch = (searchInput.value || '').trim();
-  applyFilters();
-});
-
-priceSelect?.addEventListener('change', ()=>{
-  activePrice = priceSelect.value || 'all';
-  applyFilters();
-});
-
-clearBtn?.addEventListener('click', ()=>{
-  activeCategory = 'all';
-  activePrice = 'all';
-  activeSearch = '';
-
-  filterBtns.forEach(b=>b.classList.remove('active'));
-  const allBtn = $('.filter-btn[data-category="all"]');
-  allBtn?.classList.add('active');
-
-  if(searchInput) searchInput.value = '';
-  if(priceSelect) priceSelect.value = 'all';
-
-  applyFilters();
-});
-
-
-applyFilters();
-
-
-function loadCart(){
-  try{
-    const raw = localStorage.getItem(CART_KEY);
-    cart = raw ? JSON.parse(raw) : [];
-    if(!Array.isArray(cart)) cart = [];
-  }catch(e){
-    cart = [];
-  }
-}
-function saveCart(){
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-}
-
-function calcCartTotal(){
-  return cart.reduce((acc, it)=> acc + (Number(it.unitPrice||0) * Number(it.qty||0)), 0);
-}
-
-function renderCart(){
-  const count = cart.reduce((a,it)=>a + Number(it.qty||0), 0);
-  if(cartCountEl) cartCountEl.textContent = String(count);
-
-  if(!cartItemsEl) return;
-
-  if(!cart.length){
-    cartItemsEl.innerHTML = `<div class="cart-empty">Todavía no agregaste productos.</div>`;
-    if(cartTotalEl) cartTotalEl.textContent = '$0';
-    return;
-  }
-
-  cartItemsEl.innerHTML = '';
-  cart.forEach((it, idx)=>{
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-
-    const subtotal = Number(it.unitPrice||0) * Number(it.qty||0);
-    const subtitleParts = [];
-    if(it.model) subtitleParts.push(`Modelo: ${it.model}`);
-    if(it.color) subtitleParts.push(`Color: ${it.color}`);
-    if(it.size) subtitleParts.push(`Talle: ${it.size}`);
-
-    div.innerHTML = `
-      <div class="cart-item-main">
-        <div class="cart-item-name">${it.name}</div>
-        <div class="cart-item-subtotal">${it.unitPrice ? `$${formatPrice(subtotal)}` : 'Consultar'}</div>
-      </div>
-      <div class="cart-item-meta">${subtitleParts.join(' • ')}</div>
-      <div class="cart-item-actions">
-        <button class="qty-btn" type="button" data-act="dec" data-idx="${idx}">−</button>
-        <span class="cart-item-qty">${it.qty}</span>
-        <button class="qty-btn" type="button" data-act="inc" data-idx="${idx}">+</button>
-        <button class="remove-btn" type="button" data-act="rm" data-idx="${idx}">Quitar</button>
-      </div>
-    `;
-    cartItemsEl.appendChild(div);
-  });
-
-  const total = calcCartTotal();
-  if(cartTotalEl) cartTotalEl.textContent = `$${formatPrice(total)}`;
-}
-
-cartItemsEl?.addEventListener('click', (e)=>{
-  const btn = e.target.closest('button');
-  if(!btn) return;
-  const idx = Number(btn.dataset.idx);
-  const act = btn.dataset.act;
-  if(Number.isNaN(idx) || !cart[idx]) return;
-
-  if(act === 'inc'){
-    cart[idx].qty += 1;
-  }else if(act === 'dec'){
-    cart[idx].qty -= 1;
-    if(cart[idx].qty <= 0) cart.splice(idx,1);
-  }else if(act === 'rm'){
-    cart.splice(idx,1);
-  }
-  saveCart();
-  renderCart();
-});
-
-function getSelectedModelText(){
-  if(modelWrap.style.display === 'none') return '';
-  return modelSelect.options[modelSelect.selectedIndex]?.textContent || '';
-}
-function getSelectedColorText(){
-  if(colorWrap.style.display === 'none') return currentColorValue || '';
-  return colorSelect.options[colorSelect.selectedIndex]?.textContent || '';
-}
-function getUnitPriceFromCurrent(){
-
-  if(!currentCard) return 0;
-
-  const models = parsePipeList(currentCard.dataset.modelOptions);
-  const modelPrices = parsePipeList(currentCard.dataset.modelPrices).map(x => Number(x) || 0);
-
-  if(models.length && modelPrices.length){
-    const idx = Number(modelSelect.value || 0);
-    return modelPrices[idx] || Number(currentCard.dataset.price || 0);
-  }
-  return Number(currentCard.dataset.price || 0);
-}
-
-function addCurrentToCart(){
-  if(!currentCard) return;
-
-  const name = safeText(currentCard.querySelector('.product-name'));
-  const category = safeText(currentCard.querySelector('.product-tag'));
-  const article = currentCard.dataset.article || '';
-
-  const model = getSelectedModelText();
-  const color = getSelectedColorText();
-  const size = sizeSelect?.value || '';
-
-  const qty = Math.max(1, Number(qtyInput.value || 1));
-  const unitPrice = getUnitPriceFromCurrent();
-
-
-  const key = [name, article, model, color, size].join('|').toLowerCase();
-
-  const existing = cart.find(x => x.key === key);
-  if(existing){
-    existing.qty += qty;
-  }else{
-    cart.push({
-      key,
-      name,
-      category,
-      article,
-      model,
-      color,
-      size,
-      qty,
-      unitPrice
-    });
-  }
-
-  saveCart();
-  renderCart();
-  closeProductDetail();
-}
-
-addBtn?.addEventListener('click', addCurrentToCart);
-
-
-loadCart();
-renderCart();
-
-
-window.finalizarCompraWhatsApp = function(){
-  if(!cart.length){
-    alert('Tu carrito está vacío.');
-    return;
-  }
-
-  const nombre = (nameInput?.value || '').trim();
-  const tel = (phoneInput?.value || '').trim();
-  const email = (emailInput?.value || '').trim();
-
-  if(!nombre || !tel){
-    alert('Completá Nombre y Teléfono para enviar el pedido.');
-    return;
-  }
-
-  const lines = [];
-  lines.push('Hola Segudab 👋');
-  lines.push('Quisiera enviar este pedido:');
-  lines.push('');
-  lines.push(`Nombre: ${nombre}`);
-  lines.push(`Teléfono: ${tel}`);
-  if(email) lines.push(`Email: ${email}`);
-  lines.push('');
-  lines.push('🧾 Detalle:');
-
-  cart.forEach((it, i)=>{
-    const meta = [];
-    if(it.model) meta.push(`Modelo: ${it.model}`);
-    if(it.color) meta.push(`Color: ${it.color}`);
-    if(it.size)  meta.push(`Talle: ${it.size}`);
-    const metaTxt = meta.length ? ` (${meta.join(' • ')})` : '';
-    const priceTxt = it.unitPrice ? `$${formatPrice(it.unitPrice)}` : 'Consultar';
-    lines.push(`${i+1}) ${it.name}${metaTxt} — x${it.qty} — ${priceTxt}`);
-  });
-
-  const total = calcCartTotal();
-  lines.push('');
-  lines.push(`Total estimado (solo items con precio): $${formatPrice(total)}`);
-  lines.push('');
-  lines.push('Gracias 🙌');
-
-  const msg = encodeURIComponent(lines.join('\n'));
-  const url = `https://wa.me/5491137286846?text=${msg}`;
-  window.open(url, '_blank', 'noopener');
-};
-
-window.pagarConMercadoPago = function(){
-  alert('Mercado Pago: todavía no está configurado el link/checkout. Si querés, te lo dejo listo para pegar tu link de pago o integrar un botón.');
-};
 </script>
-
 
 
   
