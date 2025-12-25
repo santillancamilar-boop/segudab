@@ -1034,6 +1034,38 @@ header.nav-open nav{
     font-size: 20px;
   }
 }
+:root{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: dark){
+
+  :root{ color-scheme: light; }
+
+  html, body{
+    background: #f5f5f5 !important;
+    color: #111 !important;
+  }
+
+
+  .product-card,
+  .filters,
+  .cart-panel,
+  .product-detail{
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+
+  .filters input,
+  .filters select,
+  .checkout-inputs input{
+    background: #fff !important;
+    color: #111 !important;
+    border-color: #ccc !important;
+  }
+}
 
   </style>
 </head>
