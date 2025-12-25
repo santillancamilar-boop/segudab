@@ -723,15 +723,8 @@
   header{ padding: 10px 14px; }
 
 
-  .top-bar{
-    display:flex !important;
-    justify-content:center !important;
-    align-items:center !important;
-    flex-wrap: nowrap !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    gap: 10px;
+.top-bar{
+    gap: 8px 14px;
     padding: 8px 10px;
     font-size: 12px;
   }
@@ -2901,13 +2894,11 @@ header.nav-open nav{
       setupProductDetailEvents();
       updateGalleryArrows();
     });
-  </script>
 
-  
   const header = document.getElementById('site-header');
   const toggle = document.getElementById('mobile-toggle');
   const overlay = document.getElementById('nav-overlay');
- const productsItem = document.getElementById('nav-products');
+  const productsItem = document.getElementById('nav-products');
   const productsLink = document.getElementById('products-link');
 
      function isMobile() {
