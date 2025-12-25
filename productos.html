@@ -1,4 +1,6 @@
-@DOCTYPE html
+en este, en la versión movil, quiero que los filtros queden arriba del primer producto y el carrito abajo del ultimo, solo eso:
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -39,7 +41,7 @@
     }
     .top-bar span{ white-space: nowrap; }
 
-
+    
     header {
       background: #000;
       color: #fff;
@@ -132,6 +134,7 @@
     }
     .nav-cta:hover { background: var(--color-primary-dark); color:#fff; }
 
+
     .nav-item { position: relative; }
     .nav-link .caret { font-size: 10px; margin-left: 4px; }
 
@@ -150,7 +153,6 @@
       z-index: 9999;
       border-top: 2px solid var(--color-accent);
     }
-
 
     .nav-item:hover .dropdown {
       opacity: 1;
@@ -196,7 +198,7 @@
       z-index: 9998;
     }
 
-
+    
     .hero {
       background: radial-gradient(circle at top left, #333 0, #000 45%, #111 100%);
       color: #fff;
@@ -255,6 +257,7 @@
     .btn-primary:hover { background: var(--color-primary-dark); }
     .hero-buttons { margin-top: 12px; }
 
+   
     .notice-bar {
       background: var(--color-primary);
       color: #fff;
@@ -264,24 +267,28 @@
       margin-bottom: 20px;
     }
 
+
     .section { padding: 50px 20px; }
+
     .section-inner {
       max-width: var(--max-width);
       margin: 0 auto;
       text-align: left;
     }
+
     .section-title {
       font-size: 26px;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
+
     .section-subtitle {
       font-size: 14px;
       color: #777;
       margin-bottom: 10px;
     }
 
-  
+    /* --- CATÁLOGO & CARRITO --- */
     .catalog-layout {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -425,6 +432,7 @@
       max-width: 220px;
     }
 
+  
     .cart-panel {
       background: #fff;
       border-radius: 14px;
@@ -441,6 +449,7 @@
     }
 
     .cart-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+
     .cart-items {
       max-height: 220px;
       overflow-y: auto;
@@ -462,9 +471,11 @@
     }
 
     .cart-item-name { font-weight: 600; }
+
     .cart-item-subtotal { font-weight: 600; color: var(--color-primary); }
 
     .cart-item-meta { font-size: 12px; color: #555; margin-bottom: 4px; }
+
     .cart-item-actions { display: flex; align-items: center; gap: 6px; font-size: 12px; }
 
     .qty-btn, .remove-btn {
@@ -540,6 +551,167 @@
     .btn-mp { background: #009ee3; margin-top: 6px; }
     .btn-mp:hover { background: #007bb8; }
 
+
+    .product-detail-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .product-detail {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 880px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 24px;
+      padding: 22px 24px 24px;
+      position: relative;
+    }
+
+    .detail-image {
+      border-radius: 14px;
+      background-size: cover;
+      background-position: center;
+      min-height: 260px;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .detail-image.detail-image-contain {
+      background-size: contain;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-color: #fff;
+    }
+
+    .gallery-arrow{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: rgba(0,0,0,0.35);
+      color:#fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      z-index: 2;
+    }
+    .gallery-arrow-left{ left: 10px; }
+    .gallery-arrow-right{ right: 10px; }
+    .gallery-arrow:hover{ background: rgba(0,0,0,0.55); }
+
+    .detail-info { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+
+    .detail-tag {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #eee;
+      align-self: flex-start;
+    }
+
+    .detail-name { font-size: 20px; margin: 0; }
+    .detail-article { margin: 0; font-size: 12px; color: #777; }
+    .detail-desc { margin: 4px 0 0; color: #555; font-size: 14px; }
+    .detail-stock { font-size: 13px; color: #008000; }
+
+    .detail-price-row { margin-top: 8px; margin-bottom: 6px; }
+    .detail-price { font-size: 20px; font-weight: 700; color: var(--color-primary); }
+
+    .detail-form { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 4px; }
+    .detail-form label { font-size: 13px; display: flex; flex-direction: column; gap: 4px; }
+
+    .detail-form select,
+    .detail-form input[type="number"] {
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      min-width: 160px;
+    }
+
+    .detail-actions { margin-top: 4px; }
+
+    .detail-add-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 20px;
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .detail-add-btn:hover { background: var(--color-primary-dark); }
+
+    .detail-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .detail-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      z-index: 3;
+    }
+
+    .detail-arrow-left { left: -18px; }
+    .detail-arrow-right { right: -18px; }
+    .detail-arrow:hover { background: rgba(0,0,0,0.6); }
+
+    .image-zoom-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+
+    .image-zoom-overlay img {
+      max-width: 95vw;
+      max-height: 95vh;
+      object-fit: contain;
+      display: block;
+    }
+
     footer {
       padding: 22px 20px;
       text-align: center;
@@ -547,124 +719,282 @@
       color: #666;
     }
 
+@media (max-width: 980px){
 
-    @media (max-width: 980px){
-      header{ padding: 10px 14px; }
+  /* =========================
+     HEADER
+     ========================= */
+  header{ padding: 10px 14px; }
 
-      .logo-img{ width:40px; height:40px; }
-      .logo-text strong{ font-size:16px; }
-      .logo-text span{ font-size:11px; max-width: 220px; }
+  /* =========================
+     TOP BAR – UNA SOLA LÍNEA
+     ========================= */
+  .top-bar{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    gap: 10px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .top-bar span{ white-space: nowrap !important; }
 
-      .mobile-toggle{ display:inline-flex; align-items:center; justify-content:center; }
+  /* =========================
+     LOGO
+     ========================= */
+  .logo-img{ width: 40px; height: 40px; }
+  .logo-text strong{ font-size: 16px; }
+  .logo-text span{ font-size: 11px; max-width: 220px; }
 
-      nav{
-        position: fixed;
-        top: 0;
-        right: -92vw;
-        width: 92vw;
-        max-width: 420px;
-        height: 100vh;
-        background: #000;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        padding: 14px 14px 22px;
-        border-left: 1px solid rgba(255,255,255,0.10);
-        z-index: 9999;
-        transition: right .18s ease;
-        overflow-y: auto;
-      }
+  /* =========================
+     HAMBURGUESA (SIN CUADRADO)
+     ========================= */
+  .mobile-toggle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 6px !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+  }
 
-      header.nav-open .nav-overlay{ display:block; }
-      header.nav-open nav{ right: 0; }
+  .mobile-toggle .bar{
+    display: block;
+    width: 26px !important;
+    height: 2px !important;
+    margin: 6px 0 !important;
+    background: #fff !important;
+    border-radius: 2px !important;
+  }
 
-      nav a{
-        padding: 14px 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.10);
-        border-left: 3px solid transparent;
-      }
+  .mobile-toggle svg{ display: none !important; }
 
-      .nav-cta{
-        margin-top: 12px;
-        width:100%;
-        text-align:center;
-        padding: 12px 16px;
-      }
+  /* =========================
+     NAV MOBILE (PANEL)
+     ========================= */
+  nav{
+    position: fixed;
+    top: 0;
+    right: -92vw;
+    width: 92vw;
+    max-width: 420px;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 0 22px; /* <- sin padding lateral para que las líneas lleguen al borde */
+    border-left: 1px solid rgba(255,255,255,0.10);
+    z-index: 9999;
+    transition: right .18s ease;
+    overflow-y: auto;
+  }
 
-  
-      .nav-item:hover .dropdown{
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(8px);
-      }
+  header.nav-open nav{ right: 0; }
+  header.nav-open .nav-overlay{ display: block; }
+
+  /* =========================
+     RESET LISTAS (CLAVE PARA QUE SE VEA COMO CAPTURA)
+     ========================= */
+  nav ul, nav li{
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Todo alineado a la izquierda */
+  nav, nav *{ text-align: left !important; }
+
+  /* =========================
+     LINKS DEL MENÚ (COMO EN LA CAPTURA)
+     ========================= */
+  nav a{
+    display:flex !important;
+    align-items:center !important;
+    justify-content: space-between !important;
+
+    width:100% !important;
+    margin:0 !important;
+    padding: 14px 14px !important;
+
+    color:#fff !important;
+    background: transparent !important;
+    text-decoration: none !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+
+    box-shadow: none !important;
+    outline: none !important;
+
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: .3px;
+  }
+
+  nav a:hover,
+  nav a:active,
+  nav a:focus,
+  nav a:focus-visible{
+    background: transparent !important;
+    color:#fff !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: none !important;
+  }
+
+  /* Elimina decoraciones raras con pseudo-elementos */
+  nav a::before,
+  nav a::after{
+    content: none !important;
+    display: none !important;
+  }
+
+  /* =========================
+     PRODUCTOS + FLECHITA ▾ (IGUAL A LA CAPTURA)
+     ========================= */
+  .nav-item.has-dropdown > a{
+    position: relative !important;
+  }
+  .nav-item.has-dropdown > a::after{
+    content: "▾" !important;
+    font-size: 12px !important;
+    opacity: .7 !important;
+    margin-left: 10px !important;
+  }
+
+  /* =========================
+     DROPDOWN (SIN SANGRÍA, IGUAL QUE LOS LINKS)
+     ========================= */
+  .dropdown{
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: none !important;
+    background: transparent !important;
+  }
+
+  .nav-item.open .dropdown{
+    display: block !important;
+  }
+
+  .dropdown a{
+    padding: 14px 14px !important; /* <- sin sangría */
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color:#fff !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    text-decoration: none !important;
+  }
+
+  /* =========================
+     CTA CONTACTAR (SI TENÉS)
+     ========================= */
+  .nav-cta{
+    margin-top: 16px;
+    padding: 14px 16px !important;
+    border-bottom: none !important;
+  }
+
+  /* =========================
+     HERO
+     ========================= */
+  .hero{ padding: 46px 14px 42px; }
+  .hero-inner{ grid-template-columns: 1fr; gap: 16px; }
+  .hero-title{ font-size: 30px; line-height: 1.05; }
+  .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
+  .hero-text{ font-size: 14px; max-width: 100%; }
+  .btn{ width: 100%; justify-content: center; }
+
+  /* =========================
+     SECTIONS
+     ========================= */
+  .section{ padding: 36px 14px; }
+  .section-title{ font-size: 22px; }
+  .section-subtitle{ margin-bottom: 12px; }
+
+  /* =========================
+     CATÁLOGO – ORDEN MOBILE
+     ========================= */
+  .catalog-layout{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 0;
+  }
+
+  .sidebar{
+    order: 1 !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+  }
+
+  .products-grid,
+  .catalog-grid,
+  .products,
+  .product-grid{
+    order: 2 !important;
+  }
+
+  .cart-panel{
+    order: 3 !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    top: auto !important;
+  }
+
+  /* =========================
+     DETALLE PRODUCTO
+     ========================= */
+  .product-detail{ grid-template-columns: 1fr; }
+  .detail-image{ min-height: 200px; }
+  .detail-arrow-left{ left: 4px; }
+  .detail-arrow-right{ right: 4px; }
+}
 
 
-      .dropdown{
-        position: static;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        box-shadow: none;
-        border-top: none;
-        padding: 0;
-        margin: 0;
-        display: none; 
-      }
-      .nav-item.open .dropdown{ display:block; }
+@media (max-width: 520px){
 
-      .dropdown a{
-        padding: 12px 12px 12px 22px;
-        font-size: 13px;
-        border-bottom: 1px solid rgba(255,255,255,0.10);
-      }
+  .logo-text span{
+    display: none;
+  }
 
-      .top-bar{
-        gap: 8px 14px;
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-      .top-bar span{ white-space: normal; }
+  .hero-title{
+    font-size: 28px;
+  }
 
-      .hero{ padding: 46px 14px 42px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 16px; }
-      .hero-title{ font-size: 30px; line-height: 1.05; }
-      .hero-subtitle{ font-size: 14px; margin-bottom: 12px; }
-      .hero-text{ font-size: 14px; max-width: 100%; }
-      .btn{ width: 100%; justify-content:center; }
+  .hero-text{
+    font-size: 13px;
+  }
 
-      .section{ padding: 36px 14px; }
-      .section-title{ font-size: 22px; }
-      .section-subtitle{ margin-bottom: 12px; }
+  .section-title{
+    font-size: 20px;
+  }
+}
 
-     .catalog-layout {
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-      }
-      .sidebar { display: contents; }
-      .filters { order: 1; }
-      .product-grid { order: 2; }
-      .cart-panel { order: 3; position: static; max-width: none; top:auto; }
-      .filters,
-      .cart-panel { max-width: 520px; width: 100%; margin: 0 auto; }
-      }
-
-    @media (max-width: 520px){
-      .logo-text span{ display:none; }
-      .hero-title{ font-size: 28px; }
-      .hero-text{ font-size: 13px; }
-      .section-title{ font-size: 20px; }
-    }
   </style>
 </head>
 
 <body>
 
-
+  <!-- TOP BAR -->
   <div class="top-bar">
     <span>WhatsApp 11 3728-6846</span>
     <span>Industria argentina • Venta mayorista y minorista</span>
   </div>
+
 
   <header id="site-header">
     <div class="nav-inner">
@@ -676,14 +1006,20 @@
         </div>
       </a>
 
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <!-- ✅ Botón mobile -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+      </button>
 
+      <!-- ✅ Overlay -->
       <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
       <nav id="main-nav" aria-label="Navegación principal">
         <a href="index.html" class="nav-link">Inicio</a>
 
-        <div class="nav-item" id="nav-products">
+        <div class="nav-item has-dropdown" id="nav-products">
         <a href="productos.html" class="nav-link" id="products-link" aria-expanded="false" aria-controls="products-dropdown">
             Productos <span class="caret">▼</span>
           </a>
@@ -727,7 +1063,9 @@
     </div>
   </section>
 
+
   <div class="notice-bar">Insignias policiales se venden únicamente a personal de fuerzas con identificación.</div>
+
 
   <section class="section">
     <div class="section-inner">
@@ -1533,17 +1871,20 @@
 
       </div>
 
- <div class="sidebar">
+
+      <div class="sidebar">
 
         <div class="filters">
           <h3>Filtrar productos</h3>
 
           <div class="filter-buttons">
             <button class="filter-btn active" data-category="all">Todos</button>
+
             <button class="filter-btn" data-category="calzado">Calzado</button>
             <button class="filter-btn" data-category="zapatos">Zapatos</button>
             <button class="filter-btn" data-category="borcegos">Borcegos</button>
             <button class="filter-btn" data-category="botines">Botines</button>
+
             <button class="filter-btn" data-category="correajes">Correajes</button>
             <button class="filter-btn" data-category="accesorios">Accesorios</button>
             <button class="filter-btn" data-category="indumentaria">Indumentaria</button>
@@ -1568,6 +1909,7 @@
             </button>
           </div>
         </div>
+
 
         <aside class="cart-panel">
           <div class="cart-title">Carrito de compras (<span id="cart-count">0</span>)</div>
@@ -1620,12 +1962,69 @@
     </div>
   </section>
 
+
+  <div class="product-detail-overlay" id="product-detail-overlay">
+    <div class="product-detail">
+      <button class="detail-close" type="button" id="detail-close-btn">×</button>
+      <button class="detail-arrow detail-arrow-left" type="button" id="detail-prev-btn">‹</button>
+      <button class="detail-arrow detail-arrow-right" type="button" id="detail-next-btn">›</button>
+
+      <div class="detail-image" id="detail-image">
+        <button class="gallery-arrow gallery-arrow-left" type="button" id="gallery-prev-btn">‹</button>
+        <button class="gallery-arrow gallery-arrow-right" type="button" id="gallery-next-btn">›</button>
+      </div>
+
+      <div class="detail-info">
+        <div class="detail-tag" id="detail-tag"></div>
+        <h3 class="detail-name" id="detail-name"></h3>
+        <p class="detail-article" id="detail-article"></p>
+        <p class="detail-desc" id="detail-desc"></p>
+        <p class="detail-stock" id="detail-stock">Stock a confirmar según talle y cantidad.</p>
+
+        <div class="detail-price-row">
+          <span class="detail-price" id="detail-price"></span>
+        </div>
+
+        <div class="detail-form">
+          <label>
+            <span id="detail-size-label">Talle</span>
+            <select id="detail-size"></select>
+          </label>
+
+          <label id="detail-talle-wrap" style="display:none;">
+            Talle
+            <select id="detail-talle"></select>
+          </label>
+
+          <label id="detail-color-wrap" style="display:none;">
+            Color
+            <select id="detail-color"></select>
+          </label>
+
+          <label>
+            Cantidad
+            <input type="number" id="detail-qty" min="1" value="1" />
+          </label>
+        </div>
+
+        <div class="detail-actions">
+          <button class="detail-add-btn" type="button" id="detail-add-btn">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-zoom-overlay" id="image-zoom-overlay">
+    <img id="zoom-image" alt="Vista ampliada del producto" />
+  </div>
+
   <footer>
     © 2025 Segudab — Todos los derechos reservados.
   </footer>
 
   <script>
- 
 
     const header = document.getElementById('site-header');
     const toggle = document.getElementById('mobile-toggle');
@@ -1634,68 +2033,63 @@
 
     const productsItem = document.getElementById('nav-products');
     const productsLink = document.getElementById('products-link');
-    
- function setProductsExpanded(isExpanded) {
-      productsItem.classList.toggle('open', isExpanded);
-      productsLink.setAttribute('aria-expanded', String(isExpanded));
-    }
-   function closeMenu(){
+
+    function closeMenu(){
       header.classList.remove('nav-open');
-      toggle.textContent = '☰';
       toggle.setAttribute('aria-expanded','false');
       overlay.setAttribute('aria-hidden','true');
-      setProductsExpanded(false);
+      productsItem.classList.remove('open');
     }
 
     function openMenu(){
       header.classList.add('nav-open');
-      toggle.textContent = '✕';
       toggle.setAttribute('aria-expanded','true');
       overlay.setAttribute('aria-hidden','false');
-       if (window.matchMedia('(max-width: 980px)').matches) {
-        setProductsExpanded(true);
-      }
     }
 
-    toggle.addEventListener('click', () => {
-      const isOpen = header.classList.contains('nav-open');
-      isOpen ? closeMenu() : openMenu();
-    });
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const isOpen = header.classList.contains('nav-open');
+        isOpen ? closeMenu() : openMenu();
+      });
+    }
 
-    overlay.addEventListener('click', closeMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
 
-    nav.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (!a) return;
+    if (nav) {
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (!a) return;
 
-      const isMobile = window.matchMedia('(max-width: 980px)').matches;
+        if (a === productsLink && window.matchMedia('(max-width: 980px)').matches) {
+          e.preventDefault();
+          productsItem.classList.toggle('open');
+          return;
+        }
 
+        closeMenu();
+      });
+    }
 
-      if (isMobile && a === productsLink) {
-        e.preventDefault();
-         setProductsExpanded(!productsItem.classList.contains('true'));
-        return;
-      }
-
-    
-      if (isMobile) {
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia('(max-width: 980px)').matches) {
         closeMenu();
       }
     });
 
-    window.addEventListener('resize', () => {
-
-      if (!window.matchMedia('(max-width: 980px)').matches) closeMenu();
-    });
-
-
+    /* ====== TU SCRIPT ORIGINAL DE CATALOGO (SIN CAMBIOS) ====== */
     const CART_KEY = 'segudab_cart';
     let cart = [];
+    let currentProduct = null;
+
     const MP_LINK = 'https://mpago.la/tu_link_de_pago';
 
     let visibleProductCards = [];
+    let currentProductIndex = -1;
     let searchTerm = '';
-    let currentCategory = 'all';
+
+    let currentGallery = [];
+    let galleryIndex = 0;
 
     function loadCart() {
       const stored = localStorage.getItem(CART_KEY);
@@ -1704,7 +2098,7 @@
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed)) cart = parsed;
       } catch (e) {
-        console.error('Error leyendo carrito', e);
+        console.error('Error leyendo carrito de localStorage', e);
       }
     }
 
@@ -1782,6 +2176,423 @@
       }
     }
 
+    const sizeOptionsByCategory = {
+      botas: ['38','39','40','41','42','43','44','45'],
+      correajes: ['S','M','L','XL'],
+      accesorios: ['Único'],
+      indumentaria: ['S','M','L','XL','XXL'],
+      zapatos: ['38','39','40','41','42','43','44','45'],
+      borcegos: ['38','39','40','41','42','43','44','45'],
+      botines: ['38','39','40','41','42','43','44','45'],
+    };
+
+    function updateGalleryArrows() {
+      const prev = document.getElementById('gallery-prev-btn');
+      const next = document.getElementById('gallery-next-btn');
+      const show = currentGallery && currentGallery.length > 1;
+
+      if (prev) prev.style.display = show ? 'flex' : 'none';
+      if (next) next.style.display = show ? 'flex' : 'none';
+    }
+
+    function setGalleryIndex(idx) {
+      const detailImage = document.getElementById('detail-image');
+      if (!currentGallery || !currentGallery.length) return;
+
+      galleryIndex = (idx + currentGallery.length) % currentGallery.length;
+      const url = currentGallery[galleryIndex];
+
+      if (detailImage && url) {
+        detailImage.style.backgroundImage = `url('${url}')`;
+        if (currentProduct) currentProduct.imageUrl = url;
+      }
+    }
+
+    function showNextGallery() { setGalleryIndex(galleryIndex + 1); }
+    function showPrevGallery() { setGalleryIndex(galleryIndex - 1); }
+
+    function openProductDetail(card) {
+      const overlay = document.getElementById('product-detail-overlay');
+      const nameEl = card.querySelector('.product-name');
+      const descEl = card.querySelector('.product-desc');
+      const tagEl  = card.querySelector('.product-tag');
+      const imgEl  = card.querySelector('.product-image');
+
+      const name = nameEl ? nameEl.textContent.trim() : '';
+      const desc = descEl ? descEl.textContent.trim() : '';
+      const tag  = tagEl ? tagEl.textContent.trim() : '';
+      const cat  = card.dataset.category || '';
+      const basePrice = Number(card.dataset.price || 0);
+      const article = card.dataset.article || '';
+      const stockTextFromCard = card.dataset.stock;
+
+      let bg = imgEl ? imgEl.style.backgroundImage : '';
+      let imageUrl = '';
+      if (bg && bg.startsWith('url')) {
+        imageUrl = bg.slice(4, -1).replace(/["']/g, '');
+      }
+
+      const modelOptionsRaw = card.dataset.modelOptions;
+      const modelImagesRaw  = card.dataset.modelImages;
+      const modelPricesRaw  = card.dataset.modelPrices;
+      const modelColorsRaw  = card.dataset.modelColors;
+
+      const modelOptions = modelOptionsRaw ? modelOptionsRaw.split('|').map(s => s.trim()).filter(Boolean) : null;
+      const modelImages  = modelImagesRaw  ? modelImagesRaw.split('|').map(s => s.trim()).filter(Boolean) : null;
+      const modelPrices  = modelPricesRaw  ? modelPricesRaw.split('|').map(s => Number(String(s).trim() || 0)) : null;
+      const modelColors  = modelColorsRaw  ? modelColorsRaw.split('|').map(s => s.trim()) : null;
+
+      const colorOptionsRaw = card.dataset.colorOptions;
+      const colorOptions = colorOptionsRaw ? colorOptionsRaw.split('|').map(s => s.trim()).filter(Boolean) : null;
+
+      function readColorBundle(colorName) {
+        const key = (colorName || '').toLowerCase();
+        const modelsRaw = card.dataset['colorModels' + key.charAt(0).toUpperCase() + key.slice(1)] || card.getAttribute('data-color-models-' + key);
+        const pricesRaw = card.dataset['colorPrices' + key.charAt(0).toUpperCase() + key.slice(1)] || card.getAttribute('data-color-prices-' + key);
+        const imagesRaw = card.dataset['colorImages' + key.charAt(0).toUpperCase() + key.slice(1)] || card.getAttribute('data-color-images-' + key);
+
+        const models = modelsRaw ? String(modelsRaw).split('|').map(s => s.trim()).filter(Boolean) : [];
+        const prices = pricesRaw ? String(pricesRaw).split('|').map(s => Number(String(s).trim() || 0)) : [];
+        const images = imagesRaw ? String(imagesRaw).split('|').map(s => s.trim()).filter(Boolean) : [];
+        return { models, prices, images };
+      }
+
+      currentProduct = {
+        name,
+        price: basePrice,
+        category: cat,
+        imageUrl,
+        tag,
+        desc,
+        article,
+        modelOptions,
+        modelImages,
+        modelPrices,
+        modelColors,
+        colorOptions,
+        readColorBundle
+      };
+
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      currentProductIndex = visibleProductCards.indexOf(card);
+      if (currentProductIndex === -1) {
+        buildVisibleProductCards();
+        currentProductIndex = visibleProductCards.indexOf(card);
+      }
+
+      const detailImage   = document.getElementById('detail-image');
+      const detailTag     = document.getElementById('detail-tag');
+      const detailName    = document.getElementById('detail-name');
+      const detailDesc    = document.getElementById('detail-desc');
+      const detailPrice   = document.getElementById('detail-price');
+      const detailSize    = document.getElementById('detail-size');
+      const detailQty     = document.getElementById('detail-qty');
+      const detailArticle = document.getElementById('detail-article');
+      const detailStock   = document.getElementById('detail-stock');
+      const sizeLabelEl   = document.getElementById('detail-size-label');
+
+      const colorWrap   = document.getElementById('detail-color-wrap');
+      const colorSelect = document.getElementById('detail-color');
+
+      const talleWrap   = document.getElementById('detail-talle-wrap');
+      const talleSelect = document.getElementById('detail-talle');
+
+      if (colorWrap) colorWrap.style.display = 'none';
+      if (colorSelect) colorSelect.innerHTML = '';
+
+      if (talleWrap) talleWrap.style.display = 'none';
+      if (talleSelect) talleSelect.innerHTML = '';
+
+      detailSize.innerHTML = '';
+
+      currentGallery = imageUrl ? [imageUrl] : [];
+      detailImage.style.backgroundImage = imageUrl ? `url('${imageUrl}')` : 'none';
+      updateGalleryArrows();
+
+      if (imgEl && imgEl.classList.contains('product-image-contain')) {
+        detailImage.classList.add('detail-image-contain');
+      } else {
+        detailImage.classList.remove('detail-image-contain');
+      }
+
+      detailTag.textContent = tag;
+      detailName.textContent = name;
+      detailDesc.textContent = desc;
+
+      if (detailStock) {
+        detailStock.textContent = stockTextFromCard
+          ? stockTextFromCard
+          : 'Stock a confirmar según talle y cantidad.';
+      }
+
+      if (detailArticle) {
+        if (article) {
+          detailArticle.textContent = 'Artículo: ' + article;
+          detailArticle.style.display = 'block';
+        } else {
+          detailArticle.style.display = 'none';
+        }
+      }
+
+      function setDetailPrice(p) {
+        const n = Number(p || 0);
+        currentProduct.price = n;
+        detailPrice.textContent = n > 0 ? ('$' + formatPrice(n)) : 'Consultar';
+      }
+
+      function setDetailImage(url) {
+        if (!url) return;
+        detailImage.style.backgroundImage = `url('${url}')`;
+        currentProduct.imageUrl = url;
+      }
+
+      function fillTallesIfAny() {
+        if (!talleWrap || !talleSelect) return;
+
+        const customSizes = card.dataset.sizeOptions;
+        if (!customSizes) {
+          talleWrap.style.display = 'none';
+          talleSelect.innerHTML = '';
+          return;
+        }
+
+        const talles = customSizes.split(',').map(s => s.trim()).filter(Boolean);
+        if (!talles.length) {
+          talleWrap.style.display = 'none';
+          talleSelect.innerHTML = '';
+          return;
+        }
+
+        talleWrap.style.display = 'flex';
+        talleWrap.style.flexDirection = 'column';
+        talleSelect.innerHTML = '';
+
+        talles.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t;
+          opt.textContent = t;
+          talleSelect.appendChild(opt);
+        });
+
+        talleSelect.selectedIndex = 0;
+      }
+
+      if (colorSelect) colorSelect.onchange = null;
+      detailSize.onchange = null;
+
+      if (Array.isArray(currentProduct.colorOptions) && currentProduct.colorOptions.length) {
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
+        fillTallesIfAny();
+
+        if (colorWrap) {
+          colorWrap.style.display = 'flex';
+          colorWrap.style.flexDirection = 'column';
+        }
+
+        colorSelect.innerHTML = '';
+        currentProduct.colorOptions.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c;
+          opt.textContent = c;
+          colorSelect.appendChild(opt);
+        });
+
+        function applySelectedModelFromSize() {
+          const opt = detailSize.options[detailSize.selectedIndex];
+          if (!opt) return;
+
+          const img = opt.dataset.img || '';
+          const prc = opt.dataset.price ? Number(opt.dataset.price) : 0;
+
+          currentGallery = img ? [img] : [];
+          galleryIndex = 0;
+          if (currentGallery[0]) setDetailImage(currentGallery[0]);
+          updateGalleryArrows();
+
+          setDetailPrice(prc);
+        }
+
+        function fillModelsForColor(colorName) {
+          const bundle = currentProduct.readColorBundle(colorName);
+
+          detailSize.innerHTML = '';
+          bundle.models.forEach((m, idx) => {
+            const opt = document.createElement('option');
+            opt.value = m;
+            opt.textContent = m;
+            opt.dataset.price = String(bundle.prices[idx] ?? 0);
+            opt.dataset.img = bundle.images[idx] ?? '';
+            detailSize.appendChild(opt);
+          });
+
+          if (!detailSize.options.length) {
+            currentGallery = currentProduct.imageUrl ? [currentProduct.imageUrl] : [];
+            galleryIndex = 0;
+            if (currentGallery[0]) setDetailImage(currentGallery[0]);
+            updateGalleryArrows();
+            setDetailPrice(currentProduct.price);
+            return;
+          }
+
+          detailSize.selectedIndex = 0;
+          applySelectedModelFromSize();
+        }
+
+        fillModelsForColor(colorSelect.value);
+
+        colorSelect.onchange = () => fillModelsForColor(colorSelect.value);
+        detailSize.onchange  = () => applySelectedModelFromSize();
+      }
+      else if (Array.isArray(currentProduct.modelOptions) && currentProduct.modelOptions.length) {
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Modelo';
+        fillTallesIfAny();
+
+        currentProduct.modelOptions.forEach((m, idx) => {
+          const opt = document.createElement('option');
+          opt.value = m;
+          opt.textContent = m;
+
+          const prc = currentProduct.modelPrices && currentProduct.modelPrices[idx] != null
+            ? Number(currentProduct.modelPrices[idx] || 0)
+            : currentProduct.price;
+
+          const img = currentProduct.modelImages && currentProduct.modelImages[idx]
+            ? currentProduct.modelImages[idx]
+            : currentProduct.imageUrl;
+
+          opt.dataset.price = String(prc);
+          opt.dataset.img = img || '';
+          detailSize.appendChild(opt);
+        });
+
+        function setColorsForModel(modelIndex) {
+          if (!colorWrap || !colorSelect) return;
+
+          const colorsStr = currentProduct.modelColors && currentProduct.modelColors[modelIndex]
+            ? currentProduct.modelColors[modelIndex]
+            : '';
+
+          const colors = String(colorsStr).split(',').map(c => c.trim()).filter(Boolean);
+
+          if (colors.length <= 1) {
+            colorWrap.style.display = 'none';
+            colorSelect.innerHTML = '';
+            if (colors[0]) {
+              const o = document.createElement('option');
+              o.value = colors[0];
+              o.textContent = colors[0];
+              colorSelect.appendChild(o);
+            }
+            return;
+          }
+
+          colorWrap.style.display = 'flex';
+          colorWrap.style.flexDirection = 'column';
+          colorSelect.innerHTML = '';
+          colors.forEach(c => {
+            const o = document.createElement('option');
+            o.value = c;
+            o.textContent = c;
+            colorSelect.appendChild(o);
+          });
+        }
+
+        function applySelectedModel() {
+          const opt = detailSize.options[detailSize.selectedIndex];
+          if (!opt) return;
+
+          const img = opt.dataset.img || '';
+          const prc = opt.dataset.price ? Number(opt.dataset.price) : 0;
+          const model = (opt.value || '').trim().toLowerCase();
+
+          if (model === 'arena' && card.dataset.galleryArena) {
+            currentGallery = card.dataset.galleryArena.split('|').map(s => s.trim()).filter(Boolean);
+          } else if (card.dataset.galleryDefault) {
+            currentGallery = card.dataset.galleryDefault.split('|').map(s => s.trim()).filter(Boolean);
+          } else {
+            currentGallery = img ? [img] : [];
+          }
+          galleryIndex = 0;
+
+          if (currentGallery[0]) setDetailImage(currentGallery[0]);
+          updateGalleryArrows();
+
+          setDetailPrice(prc);
+          setColorsForModel(detailSize.selectedIndex);
+        }
+
+        applySelectedModel();
+        detailSize.onchange = () => applySelectedModel();
+      }
+      else {
+        if (sizeLabelEl) sizeLabelEl.textContent = 'Talle';
+        if (talleWrap) talleWrap.style.display = 'none';
+        if (talleSelect) talleSelect.innerHTML = '';
+
+        const customSizes = card.dataset.sizeOptions;
+        const options = customSizes
+          ? customSizes.split(',').map(s => s.trim()).filter(Boolean)
+          : (sizeOptionsByCategory[cat] || ['A coordinar']);
+
+        options.forEach(talle => {
+          const opt = document.createElement('option');
+          opt.value = talle;
+          opt.textContent = talle;
+          detailSize.appendChild(opt);
+        });
+
+        currentGallery = imageUrl ? [imageUrl] : [];
+        galleryIndex = 0;
+
+        if (currentGallery[0]) setDetailImage(currentGallery[0]);
+        updateGalleryArrows();
+
+        setDetailPrice(currentProduct.price);
+      }
+
+      detailQty.value = 1;
+      overlay.style.display = 'flex';
+    }
+
+    function closeProductDetail() {
+      const overlay = document.getElementById('product-detail-overlay');
+      overlay.style.display = 'none';
+      currentProduct = null;
+      currentProductIndex = -1;
+      currentGallery = [];
+      galleryIndex = 0;
+      updateGalleryArrows();
+    }
+
+    function buildVisibleProductCards() {
+      visibleProductCards = Array.from(document.querySelectorAll('.product-card'))
+        .filter(card => card.style.display !== 'none');
+    }
+
+    function showNextProduct() {
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      if (!visibleProductCards.length) return;
+
+      if (currentProductIndex < 0) currentProductIndex = 0;
+
+      let newIndex = currentProductIndex + 1;
+      if (newIndex >= visibleProductCards.length) newIndex = 0;
+
+      openProductDetail(visibleProductCards[newIndex]);
+    }
+
+    function showPrevProduct() {
+      if (!visibleProductCards.length) buildVisibleProductCards();
+      if (!visibleProductCards.length) return;
+
+      if (currentProductIndex < 0) currentProductIndex = 0;
+
+      let newIndex = currentProductIndex - 1;
+      if (newIndex < 0) newIndex = visibleProductCards.length - 1;
+
+      openProductDetail(visibleProductCards[newIndex]);
+    }
+
     document.getElementById('cart-items').addEventListener('click', (e) => {
       const btn = e.target.closest('button');
       if (!btn) return;
@@ -1847,6 +2658,7 @@
       if (confirm(msg)) window.open(MP_LINK, '_blank');
     }
 
+    let currentCategory = 'all';
     const filterButtons = document.querySelectorAll('.filter-btn');
     const filterPrice = document.getElementById('filter-price');
     const clearFiltersBtn = document.getElementById('clear-filters');
@@ -1920,34 +2732,121 @@
 
     filterPrice.addEventListener('change', applyFilters);
 
-    clearFiltersBtn.addEventListener('click', () => {
-      currentCategory = 'all';
-      const allBtn = document.querySelector('.filter-btn[data-category="all"]');
-      if (allBtn) {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        allBtn.classList.add('active');
-      }
-      filterPrice.value = 'all';
-      const filterSearch = document.getElementById('filter-search');
-      searchTerm = '';
-      if (filterSearch) filterSearch.value = '';
-      applyFilters();
-    });
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', () => {
+        currentCategory = 'all';
+        const allBtn = document.querySelector('.filter-btn[data-category="all"]');
+        if (allBtn) {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          allBtn.classList.add('active');
+        }
+        filterPrice.value = 'all';
+        const filterSearch = document.getElementById('filter-search');
+        searchTerm = '';
+        if (filterSearch) filterSearch.value = '';
+        applyFilters();
+      });
+    }
 
-    function setupProductCardClicks() {
-
+    function setupProductDetailEvents() {
       const cards = document.querySelectorAll('.product-card');
+
       cards.forEach(card => {
+        card.addEventListener('click', () => openProductDetail(card));
+
         const btn = card.querySelector('.btn-small');
         if (btn) {
           btn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const name = card.querySelector('.product-name')?.textContent.trim() || 'Producto';
-            const price = Number(card.dataset.price || 0);
-            addToCart(name, price, 'A coordinar', 1);
+            openProductDetail(card);
           });
         }
       });
+
+      const overlay = document.getElementById('product-detail-overlay');
+      const closeBtn = document.getElementById('detail-close-btn');
+      const addBtn = document.getElementById('detail-add-btn');
+      const prevBtn = document.getElementById('detail-prev-btn');
+      const nextBtn = document.getElementById('detail-next-btn');
+
+      const gPrev = document.getElementById('gallery-prev-btn');
+      const gNext = document.getElementById('gallery-next-btn');
+
+      if (closeBtn) closeBtn.addEventListener('click', closeProductDetail);
+
+      if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevProduct(); });
+      if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextProduct(); });
+
+      if (gPrev) gPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevGallery(); });
+      if (gNext) gNext.addEventListener('click', (e) => { e.stopPropagation(); showNextGallery(); });
+
+      if (overlay) {
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeProductDetail();
+        });
+      }
+
+      const detailImage = document.getElementById('detail-image');
+      const zoomOverlay = document.getElementById('image-zoom-overlay');
+      const zoomImage = document.getElementById('zoom-image');
+
+      if (detailImage && zoomOverlay && zoomImage) {
+        detailImage.addEventListener('click', () => {
+          if (!currentProduct || !currentProduct.imageUrl) return;
+          zoomImage.src = currentProduct.imageUrl;
+          zoomOverlay.style.display = 'flex';
+        });
+
+        zoomOverlay.addEventListener('click', () => {
+          zoomOverlay.style.display = 'none';
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        const overlayEl = document.getElementById('product-detail-overlay');
+        const isDetailOpen = overlayEl && overlayEl.style.display === 'flex';
+
+        if (e.key === 'Escape') {
+          closeProductDetail();
+          const zoomOverlayEl = document.getElementById('image-zoom-overlay');
+          if (zoomOverlayEl) zoomOverlayEl.style.display = 'none';
+        }
+
+        if (isDetailOpen && e.key === 'ArrowRight') { e.preventDefault(); showNextProduct(); }
+        if (isDetailOpen && e.key === 'ArrowLeft')  { e.preventDefault(); showPrevProduct(); }
+      });
+
+      if (addBtn) {
+        addBtn.addEventListener('click', () => {
+          if (!currentProduct) return;
+
+          const detailSizeEl = document.getElementById('detail-size');
+          const detailQtyEl  = document.getElementById('detail-qty');
+          const colorEl = document.getElementById('detail-color');
+
+          const modelOrSize = detailSizeEl ? (detailSizeEl.value || 'A coordinar') : 'A coordinar';
+
+          const talleEl = document.getElementById('detail-talle');
+          const talleWrapEl = document.getElementById('detail-talle-wrap');
+          const talle = (talleWrapEl && talleWrapEl.style.display !== 'none' && talleEl && talleEl.options.length)
+            ? (talleEl.value || '')
+            : '';
+
+          const color = (colorEl && colorEl.options.length) ? (colorEl.value || '') : '';
+
+          let labelParts = [];
+          if (modelOrSize) labelParts.push(modelOrSize);
+          if (talle) labelParts.push(talle);
+          if (color) labelParts.push(color);
+
+          const sizeLabel = labelParts.join(' / ');
+
+          const qty = detailQtyEl ? Math.max(1, parseInt(detailQtyEl.value || '1', 10)) : 1;
+
+          addToCart(currentProduct.name, currentProduct.price, sizeLabel || 'A coordinar', qty);
+          closeProductDetail();
+        });
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -1964,9 +2863,91 @@
       }
 
       applyFilters();
-      setupProductCardClicks();
+      setupProductDetailEvents();
+      updateGalleryArrows();
     });
   </script>
+<script>
+  
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('mobile-toggle');
+  const overlay = document.getElementById('nav-overlay');
+ const productsItem = document.getElementById('nav-products');
+  const productsLink = document.getElementById('products-link');
 
+     function isMobile() {
+    return window.matchMedia('(max-width: 980px)').matches;
+  }
+
+ function setProductsExpanded(expanded) {
+    productsItem.classList.toggle('open', expanded);
+    productsLink.setAttribute('aria-expanded', String(expanded));
+  }
+
+    function openMenu() {
+    header.classList.add('nav-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    header.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    setProductsExpanded(false);
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+
+
+    toggle.addEventListener('click', () => {
+    header.classList.contains('nav-open') ? closeMenu() : openMenu();
+    });
+  });
+ 
+  overlay.addEventListener('click', closeMenu);
+
+  productsLink.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setProductsExpanded(!productsItem.classList.contains('open'));
+  });
+
+   document.getElementById('main-nav').addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link || !isMobile()) return;
+    if (link === productsLink) return;
+    closeMenu();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    if (!productsItem.classList.contains('open')) return;
+    if (productsItem.contains(e.target)) return;
+    setProductsExpanded(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (!isMobile()) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('nav-open')) closeMenu();
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const categoria = params.get('categoria');
+
+  if (categoria) {
+    const boton = document.querySelector(
+      `[data-filter="${categoria}"]`
+    );
+    if (boton) boton.click();
+  }
+</script>
+  
 </body>
 </html>
