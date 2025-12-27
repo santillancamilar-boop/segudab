@@ -966,12 +966,6 @@ header.nav-open nav{
   top: auto !important;
 }
 
-
-
-.sidebar{
-  display: contents !important;
-}
-
   .product-detail{ grid-template-columns: 1fr; }
   .detail-image{ min-height: 200px; }
   .detail-arrow-left{ left: 4px; }
@@ -1037,6 +1031,33 @@ header.nav-open nav{
 :root{
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+.detail-price-row{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-related-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.detail-related-actions button{
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.detail-related-actions button:hover{
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(224,0,0,.12);
 }
 
 
@@ -1589,13 +1610,7 @@ header.nav-open nav{
 
     <div class="product-footer">
       <span class="product-price">$69.000</span>
-
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="eco-btn" type="button" data-eco-link="ART-BOR-APOLO-ECO" aria-label="Ver versión ecológica">
-          ♻️ Eco
-        </button>
         <button class="btn-small" type="button">Ver detalle</button>
-      </div>
     </div>
   </div>
 </div>
@@ -1681,14 +1696,8 @@ header.nav-open nav{
 
     <div class="product-footer">
       <span class="product-price">$49.000</span>
-
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="eco-btn" type="button" data-original-target="ART-BOR-APOLO" aria-label="Ver versión original del Apolo">
-          Ver versión original
-        </button>
         <button class="btn-small" type="button">Ver detalle</button>
       </div>
-    </div>
   </div>
 </div>
 
@@ -2087,9 +2096,12 @@ header.nav-open nav{
         <p class="detail-desc" id="detail-desc"></p>
         <p class="detail-stock" id="detail-stock">Stock a confirmar según talle y cantidad.</p>
 
-        <div class="detail-price-row">
-          <span class="detail-price" id="detail-price"></span>
-        </div>
+       <div class="detail-price-row">
+  <span class="detail-price" id="detail-price"></span>
+
+  <div class="detail-related-actions" id="detail-related-actions">
+  </div>
+</div>
 
         <div class="detail-form">
           <label>
@@ -2424,6 +2436,39 @@ header.nav-open nav{
       detailName.textContent = name;
       detailDesc.textContent = desc;
 
+
+const relatedWrap = document.getElementById('detail-related-actions');
+if (relatedWrap) {
+  relatedWrap.innerHTML = '';
+
+  if (article === 'ART-BOR-APOLO') {
+    const btnEco = document.createElement('button');
+    btnEco.type = 'button';
+    btnEco.textContent = '♻️ Ver versión ecológica';
+    btnEco.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const target = document.querySelector('.product-card[data-article="ART-BOR-APOLO-ECO"]');
+      if (target) openProductDetail(target);
+    });
+    relatedWrap.appendChild(btnEco);
+  }
+
+  if (article === 'ART-BOR-APOLO-ECO') {
+    const btnOrig = document.createElement('button');
+    btnOrig.type = 'button';
+    btnOrig.textContent = 'Ver versión estándar';
+    btnOrig.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const target = document.querySelector('.product-card[data-article="ART-BOR-APOLO"]');
+      if (target) openProductDetail(target);
+    });
+    relatedWrap.appendChild(btnOrig);
+  }
+}
+
+      
       if (detailStock) {
         detailStock.textContent = stockTextFromCard
           ? stockTextFromCard
@@ -2461,6 +2506,7 @@ header.nav-open nav{
           return;
         }
 
+        
         const talles = customSizes.split(',').map(s => s.trim()).filter(Boolean);
         if (!talles.length) {
           talleWrap.style.display = 'none';
