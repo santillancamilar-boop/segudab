@@ -2076,6 +2076,7 @@ Sus características son las mismas que las del borcego estándar, con excepció
           <div class="cart-note" style="margin-top:8px; color:#900; font-weight:600;">
             ⚠️ Envíos al interior del país:<br>
             Se realizan únicamente por <strong>Vía Cargo</strong> y son a cargo del comprador.
+            <strong>Sólo envíos a compras MAYORISTAS</strong>
             El costo de envío se abona al retirar la mercadería.
           </div>
 
@@ -2089,9 +2090,6 @@ Sus características son las mismas que las del borcego estándar, con excepció
             Enviar pedido por WhatsApp
           </button>
 
-          <button class="btn-cart btn-mp" type="button" onclick="pagarConMercadoPago()">
-            Pagar con Mercado Pago
-          </button>
         </aside>
       </div>
 
@@ -2813,22 +2811,6 @@ if (relatedWrap) {
       window.open('https://wa.me/' + numero + '?text=' + texto, '_blank');
     }
 
-    function pagarConMercadoPago() {
-      if (cart.length === 0) {
-        alert('Primero agregá productos al carrito.');
-        return;
-      }
-
-      let total = 0;
-      cart.forEach(item => total += item.price * item.qty);
-
-      const msg =
-        'El total estimado de tu carrito es $' + formatPrice(total) +
-        '.\n\nEste botón te llevará a un link de pago de Mercado Pago configurado por Segudab. ' +
-        'Si el monto no coincide exactamente, se ajustará manualmente con el comercio.\n\n¿Querés continuar?';
-
-      if (confirm(msg)) window.open(MP_LINK, '_blank');
-    }
 
     let currentCategory = 'all';
     const filterButtons = document.querySelectorAll('.filter-btn');
