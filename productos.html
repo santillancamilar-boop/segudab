@@ -2219,6 +2219,17 @@ Sus características son las mismas que las del borcego estándar, con excepció
       });
     }
 
+let sizeSelectHTML = '';
+
+if (sizeOptions.length) {
+  sizeSelectHTML = `
+    <label class="detail-label" for="detail-size">Medida</label>
+    <select id="detail-size" class="detail-select">
+      ${sizeOptions.map(size => `<option value="${size}">${size}</option>`).join('')}
+    </select>
+  `;
+}
+    
     if (overlay) overlay.addEventListener('click', closeMenu);
 
     if (nav) {
