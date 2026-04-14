@@ -1935,7 +1935,7 @@ Sus características son las mismas que las del borcego estándar, con excepció
      data-stock="Stock a confirmar según color y talle."
      data-model-options="Negro|Arena|Verde|Gris"
      data-model-images="productos/correajes/negro.jpeg|productos/correajes/arena.jpeg|productos/correajes/verde.jpeg|productos/correajes/gris.jpeg"
-     data-size-options="100 cm|110 cm|120 cm">
+    data-size-options="100 cm,120 cm,140 cm"
   <div class="product-image product-image-contain"
        style="background-image:url('productos/correajes/cintos-todos.jpeg');"></div>
   <div class="product-body">
@@ -2219,16 +2219,6 @@ Sus características son las mismas que las del borcego estándar, con excepció
       });
     }
 
-let sizeSelectHTML = '';
-
-if (sizeOptions.length) {
-  sizeSelectHTML = `
-    <label class="detail-label" for="detail-size">Medida</label>
-    <select id="detail-size" class="detail-select">
-      ${sizeOptions.map(size => `<option value="${size}">${size}</option>`).join('')}
-    </select>
-  `;
-}
     
     if (overlay) overlay.addEventListener('click', closeMenu);
 
